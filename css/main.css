@@ -1,5 +1,10 @@
-body{
+body {
+  position: relative;
   margin: 0;
   padding: 0;
- /* background-color: black; */
+  background-color: black;
+}
+
+div {
+  position: absolute;
 }
