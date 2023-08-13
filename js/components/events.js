@@ -9,7 +9,6 @@ export let eventLeft = "";
 export let eventRight = "";
 
 export const keyPress = document.addEventListener("keydown", function (e) {
-  console.log(e.key);
   if (e.key === "ArrowUp") {
     eventUp = "up";
   } else if (e.key === "ArrowDown") {

@@ -6,6 +6,9 @@ body {
   background-color: black;
   overflow: hidden;
 }
+#BattleCity{
+  overflow: hidden;
+}
 
 div {
   position: absolute;
