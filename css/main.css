@@ -1,10 +1,21 @@
 body {
-  position: relative;
+  position: fixed;
+  top: 0;
   margin: 0;
   padding: 0;
   background-color: black;
+  overflow: hidden;
 }
 
 div {
   position: absolute;
+}
+
+div img{
+  position: absolute;
+  display: none;
+}
+
+div .active{
+  display: block;
 }
