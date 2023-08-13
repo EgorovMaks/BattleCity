@@ -15,7 +15,7 @@ export let loopStart = setInterval(function () {
 
 export function createTank1User() {
   createElement(
-    ["tank", map, "93.5%", "15.46%", "tank1User"],
+    ["tank", map, "93.5%", "30.8%", "tank1User"],
     ["6.26%", "6.26%"],
     [
       "./img/tank1/tank1-up.png",
