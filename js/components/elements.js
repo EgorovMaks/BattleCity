@@ -19,34 +19,34 @@ export function createElement(
   div.id = `${id}`;
   if (type === "tank") {
     div.innerHTML = `
-  <img src=${urlUp} alt=${type} class="active up ${type}" style="width: ${width}; height: ${height};"> 
-  <img src=${urlUp2} alt=${type} class="up ${type}" style="width: ${width}; height: ${height};">
-  <img src=${urlDown} alt=${type} class="down ${type}" style="width: ${width}; height: ${height};">
-  <img src=${urlDown2} alt=${type} class="down ${type}" style="width: ${width}; height: ${height};">
-  <img src=${urlLeft} alt=${type} class="left ${type}" style="width: ${width}; height: ${height};">
-  <img src=${urlLeft2} alt=${type} class="left ${type}" style="width: ${width}; height: ${height};">
-  <img src=${urlRight} alt=${type} class="right ${type}" style="width: ${width}; height: ${height};">
-  <img src=${urlRight2} alt=${type} class="right ${type}" style="width: ${width}; height: ${height};">`;
+  <img src=${urlUp} alt=${type} class="active up ${type}" style="width: 100%; height:  100%;"> 
+  <img src=${urlUp2} alt=${type} class="up ${type}" style="width: 100%; height:  100%;">
+  <img src=${urlDown} alt=${type} class="down ${type}" style="width: 100%; height:  100%;">
+  <img src=${urlDown2} alt=${type} class="down ${type}" style="width: 100%; height:  100%;">
+  <img src=${urlLeft} alt=${type} class="left ${type}" style="width: 100%; height:  100%;">
+  <img src=${urlLeft2} alt=${type} class="left ${type}" style="width: 100%; height:  100%;">
+  <img src=${urlRight} alt=${type} class="right ${type}" style="width: 100%; height:  100%;">
+  <img src=${urlRight2} alt=${type} class="right ${type}" style="width: 100%; height:  100%;">`;
   } else if (type === "block") {
     div.innerHTML = `
   <img src=${urlBrick16x16} alt=${type} class="${
       num === 1 ? "active" : null
-    } up ${type}" style="width: ${width}; height: ${height};">
+    } up ${type}" style="width: 100%; height: 100%;">
   <img src=${urlBrick16x8} alt=${type} class="${
       num === 2 ? "active" : null
-    } up ${type}" style="width: ${width}; height: ${height};">
+    } up ${type}" style="width: 100%; height: 100%;">
     <img src=${urlBrick8x16} alt=${type} class="${
       num === 4 ? "active" : null
-    } up ${type}" style="width: ${width}; height: ${height};">
+    } up ${type}" style="width: 100%; height: 100%;">
     <img src=${urlBrick8x8} alt=${type} class="${
       num === 6 ? "active" : null
-    } up ${type}" style="width: ${width}; height: ${height};">
+    } up ${type}" style="width: 100%; height: 100%;">
     <img src=${urlConcrete16x8} alt=${type} class="${
       num === 12 ? "active" : null
-    } up ${type}" style="width: ${width}; height: ${height};">
+    } up ${type}" style="width: 100%; height: 100%;">
     <img src=${eagle} alt=${type} class="${
       num === 111 ? "active" : null
-    } up ${type}" style="width: ${width}; height: ${height};"> `;
+    } up ${type}" style="width: 100%; height: 100%;"> `;
   }
 
   const newDiv = canvas.appendChild(div);

@@ -16,19 +16,31 @@ function gameLoop() {
     if (eventUp === "up") {
       let up = tank1.style.top;
       let up1 = parseInt(up.match(/\d+/)) - 1;
-      tank1.style.top = `${up1}px`;
+      if (up1 < 0) {
+        up1 = 0;
+      }
+      tank1.style.top = `${up1}%`;
     } else if (eventDown === "down") {
       let up = tank1.style.top;
       let up1 = parseInt(up.match(/\d+/)) + 1;
-      tank1.style.top = `${up1}px`;
+      if (up1 > 94) {
+        up1 = 94;
+      }
+      tank1.style.top = `${up1}%`;
     } else if (eventLeft === "left") {
       let up = tank1.style.left;
       let up1 = parseInt(up.match(/\d+/)) - 1;
-      tank1.style.left = `${up1}px`;
+      if (up1 <0) {
+        up1 = 0;
+      }
+      tank1.style.left = `${up1}%`;
     } else if (eventRight === "right") {
       let up = tank1.style.left;
       let up1 = parseInt(up.match(/\d+/)) + 1;
-      tank1.style.left = `${up1}px`;
+      if (up1 > 93.5) {
+        up1 = 93.5;
+      }
+      tank1.style.left = `${up1}%`;
     }
-  }, 16);
+  }, 55);
 }
