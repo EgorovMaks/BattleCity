@@ -1,27 +1,36 @@
 export const map = document.querySelector("#BattleCity");
 
-export function createElement(el, canvas, urlUp, urlUp2, top, left, id) {
+export function createElement(
+  el,
+  type,
+  canvas,
+  top,
+  left,
+  id,
+  width,
+  height,
+  urlUp,
+  urlUp2,
+  urlDown,
+  urlDown2,
+  urlLeft,
+  urlLeft2,
+  urlRight,
+  urlRight2
+) {
   const div = document.createElement(el);
-  div.style.width = "16px";
-  div.style.height = "16px";
-  div.style.top = top;
-  div.style.left = left;
-  div.setAttribute("id", id);
-  const img = document.createElement("img");
-  const img2 = document.createElement("img");
-  img.setAttribute("src", urlUp);
-  img2.setAttribute("src", urlUp2);
-  img.style.width = "16px";
-  img.style.height = "16px";
-  img2.style.width = "16px";
-  img2.style.height = "16px";
-  img.setAttribute("alt", "Tank");
-  img2.setAttribute("alt", "Tank");
-  img.setAttribute("class", "active up tank");
-  img2.setAttribute("class", "up tank");
+  div.style.cssText = `width: ${width}; height: ${height}; top: ${top}; left: ${left}`;
+  div.id = `${id}`;
+  div.innerHTML = `
+  <img src=${urlUp} alt=${type} class="active up ${type}" style="width: ${width}; height: ${height};"> 
+  <img src=${urlUp2} alt=${type} class="up ${type}" style="width: ${width}; height: ${height};">
+  <img src=${urlDown} alt=${type} class="down ${type}" style="width: ${width}; height: ${height};">
+  <img src=${urlDown2} alt=${type} class="down ${type}" style="width: ${width}; height: ${height};">
+  <img src=${urlLeft} alt=${type} class="left ${type}" style="width: ${width}; height: ${height};">
+  <img src=${urlLeft2} alt=${type} class="left ${type}" style="width: ${width}; height: ${height};">
+  <img src=${urlRight} alt=${type} class="right ${type}" style="width: ${width}; height: ${height};">
+  <img src=${urlRight2} alt=${type} class="right ${type}" style="width: ${width}; height: ${height};">`;
   const newDiv = canvas.appendChild(div);
-  newDiv.appendChild(img);
-  newDiv.appendChild(img2);
 }
 
 export function id(i) {
