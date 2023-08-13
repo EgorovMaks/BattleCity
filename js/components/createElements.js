@@ -15,7 +15,7 @@ export let loopStart = setInterval(function () {
 
 export function createTank1User() {
   createElement(
-    ["tank", map, "195px", "65px", "tank1User"],
+    ["tank", map, "19px", "64px", "tank1User"],
     ["13px", "13px"],
     [
       "./img/tank1/tank1-up.png",
@@ -43,27 +43,55 @@ export function levelLoad() {
         let height = 16;
         createBlocks(top, left, width, height, 1);
       } else if (el === 2) {
-        // console.log(key, k);
         let top = key * 16;
         let left = k * 16;
         let width = 16;
         let height = 8;
         createBlocks(top, left, width, height, 2);
       } else if (el === 3) {
-        // console.log(key, k);
         let top = key * 16 + 8;
         let left = k * 16;
         let width = 16;
         let height = 8;
         createBlocks(top, left, width, height, 2);
+      } else if (el === 4) {
+        let top = key * 16;
+        let left = k * 16 + 8;
+        let width = 8;
+        let height = 16;
+        createBlocks(top, left, width, height, 4);
+      } else if (el === 5) {
+        let top = key * 16;
+        let left = k * 16;
+        let width = 8;
+        let height = 16;
+        createBlocks(top, left, width, height, 4);
+      } else if (el === 6) {
+        let top = key * 16 + 8;
+        let left = k * 16 + 8;
+        let width = 8;
+        let height = 16;
+        createBlocks(top, left, width, height, 6);
+      } else if (el === 7) {
+        let top = key * 16 + 8;
+        let left = k * 16;
+        let width = 8;
+        let height = 16;
+        createBlocks(top, left, width, height, 6);
       } else if (el === 12) {
-        // console.log(key, k);
         let top = key * 16;
         let left = k * 16;
         let width = 16;
         let height = 8;
         createBlocks(top, left, width, height, 12);
+      } else if (el === 111) {
+        let top = key * 16;
+        let left = k * 16;
+        let width = 16;
+        let height = 8;
+        createBlocks(top, left, width, height, 111);
       }
+      
     });
   });
 }
@@ -73,7 +101,14 @@ export function createBlocks(top, left, width, height, num) {
     ["block", map, `${top}px`, `${left}px`, "block"],
     [`${width}px`, `${height}`],
     [],
-    ["./img/block/brick(16x16).png", "./img/block/brick(16x8).png","./img/block/concrete(16x8).png"],
+    [
+      "./img/block/brick(16x16).png",
+      "./img/block/brick(16x8).png",
+      "./img/block/brick(8x16).png",
+      "./img/block/brick(8x8).png",
+      "./img/block/concrete(16x8).png",
+      "./img/block/eagle.png"
+    ],
     [num]
   );
 }

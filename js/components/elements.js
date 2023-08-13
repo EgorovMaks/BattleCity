@@ -4,9 +4,16 @@ export function createElement(
   [type, canvas, top, left, id],
   [width, height],
   [urlUp, urlUp2, urlDown, urlDown2, urlLeft, urlLeft2, urlRight, urlRight2],
-  [urlBrick16x16, urlBrick16x8, urlConcrete16x8],[num]
+  [
+    urlBrick16x16,
+    urlBrick16x8,
+    urlBrick8x16,
+    urlBrick8x8,
+    urlConcrete16x8,
+    eagle,
+  ],
+  [num]
 ) {
-  
   const div = document.createElement("div");
   div.style.cssText = `width: ${width}; height: ${height}; top: ${top}; left: ${left}`;
   div.id = `${id}`;
@@ -28,8 +35,17 @@ export function createElement(
   <img src=${urlBrick16x8} alt=${type} class="${
       num === 2 ? "active" : null
     } up ${type}" style="width: ${width}; height: ${height};">
+    <img src=${urlBrick8x16} alt=${type} class="${
+      num === 4 ? "active" : null
+    } up ${type}" style="width: ${width}; height: ${height};">
+    <img src=${urlBrick8x8} alt=${type} class="${
+      num === 6 ? "active" : null
+    } up ${type}" style="width: ${width}; height: ${height};">
     <img src=${urlConcrete16x8} alt=${type} class="${
       num === 12 ? "active" : null
+    } up ${type}" style="width: ${width}; height: ${height};">
+    <img src=${eagle} alt=${type} class="${
+      num === 111 ? "active" : null
     } up ${type}" style="width: ${width}; height: ${height};"> `;
   }
 
