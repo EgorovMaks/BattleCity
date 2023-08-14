@@ -1,9 +1,11 @@
 import { keyPress } from "./components/events.js";
 import { createTank1User, levelLoad } from "./components/createElements.js";
+// import { surveillance } from "./components/surveillance.js";
 import "./components/game.js";
 
-function gameStart() {
+async function gameStart() {
   createTank1User();
+  // surveillance()
   levelLoad();
   // gameLoop()
 }

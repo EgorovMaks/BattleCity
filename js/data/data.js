@@ -8,7 +8,7 @@ export function movementUp(date, className) {
     const left = e.getBoundingClientRect().left;
     date[`${id}`] = { top, left };
   });
-  console.log(date)
+  // console.log(date)
 }
 
   // console.log(datedocument.elementFromPoint());
