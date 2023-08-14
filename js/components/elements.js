@@ -19,13 +19,28 @@ export function createElement(
   div.id = `${id}`;
   if (type === "tank") {
     div.innerHTML = `
+    <div id="trackTopLeftTank" class=" trackUpTank track1tank"></div>
+    <div id="trackTopCenterTank" class="  trackUpTank track2tank"></div>
+    <div id="trackTopRightTank" class=" trackUpTank track3tank"></div>
+    <div id="trackDownLeftTank" class=" trackDownTank track4tank"></div>
+    <div id="trackDownCenterTank" class=" trackDownTank track5tank"></div>
+    <div id="trackDownRightTank" class=" trackDownTank track6tank"></div>
+    <div id="trackLeftTopTank" class=" trackLeftTank track7tank"></div>
+    <div id="trackLeftCenteTank" class=" trackLeftTank track8tank"></div>
+    <div id="trackLeftDownTank" class=" trackLeftTank track9tank"></div>
+
+    <div id="trackRightTopTank" class="trackRightTank track10tank"></div>
+
+    <div id="trackRightCenteTank" class="trackRightTank track11tank"></div>
+
+    <div id="trackRightDownTank" class="trackRightTank track12tank"></div>
   <img src=${urlUp} alt=${type} class="active up ${type}" style="width: 100%; height:  100%;"> 
   <img src=${urlUp2} alt=${type} class="up ${type}" style="width: 100%; height:  100%;">
-  <img src=${urlDown} alt=${type} class="down ${type}" style="width: 100%; height:  100%;">
+  <img src=${urlDown} alt=${type} class=" down ${type}" style="width: 100%; height:  100%;">
   <img src=${urlDown2} alt=${type} class="down ${type}" style="width: 100%; height:  100%;">
-  <img src=${urlLeft} alt=${type} class="left ${type}" style="width: 100%; height:  100%;">
+  <img src=${urlLeft} alt=${type} class=" left ${type}" style="width: 100%; height:  100%;">
   <img src=${urlLeft2} alt=${type} class="left ${type}" style="width: 100%; height:  100%;">
-  <img src=${urlRight} alt=${type} class="right ${type}" style="width: 100%; height:  100%;">
+  <img src=${urlRight} alt=${type} class=" right ${type}" style="width: 100%; height:  100%;">
   <img src=${urlRight2} alt=${type} class="right ${type}" style="width: 100%; height:  100%;">`;
   } else if (type === "block") {
     div.innerHTML = `
