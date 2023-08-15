@@ -17,7 +17,7 @@ export function createTank1User() {
   createElement(
     ["tank", map, "93.5%", "31%", "tank1User"],
 
-    // ["tank", map, "1%", "31%", "tank1User"],
+    // ["tank", map, "6%", "40%", "tank1User"],
     ["39px", "39px"],
     // ["40%", "40%"],
     [
@@ -101,7 +101,7 @@ export function levelLoad() {
 
 export function createBlocks(top, left, width, height, num) {
   createElement(
-    ["block", map, `${top}px`, `${left}px`, "block"],
+    ["block", map, `${top}px`, `${left}px`, null, "block"],
     [`${width}px`, `${height}px`],
     [],
     [

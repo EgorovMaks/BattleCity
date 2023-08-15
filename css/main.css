@@ -15,7 +15,7 @@ body {
   overflow: hidden;
   position: absolute;
   left: 50%;
-  transform: translateX(-50%) scale(0.8);
+  transform: translateX(-50%) scale(0.9)translateY(-5%);
   border: 10px solid #636363;
 }
 
@@ -90,27 +90,27 @@ div .active {
 .track10tank,
 .track11tank,
 .track12tank {
-  width: 1px;
-  height: 1px;
+  /* width: 1px; */
+  /* height: 1px; */
   position: absolute;
-  background: #fff;
+  /* background: #fff; */
   z-index: 3;
   left: 1%;
 }
 
 .track11tank {
   top: 50%;
-  left: 100%;
+  left: 39px;
 }
 
 .track12tank {
   top: 100%;
-  left: 88%;
+  left: 43px;
 }
 
 .track10tank {
   top: 0%;
-  left: 88%;
+  left: 43px;
 }
 
 .track8tank {
@@ -120,21 +120,21 @@ div .active {
 
 .track9tank {
   top: 100%;
-  left: 0%;
+  left: -4px;
 }
 
 .track7tank {
   top: 0%;
-  left: 0%;
+  left: -4px;
 }
 
 .track4tank {
-  top: 100%;
+  top: 43px;
   left: 0;
 }
 
 .track6tank {
-  top: 100%;
+  top: 43px;
   left: 100%;
 }
 
@@ -155,7 +155,7 @@ div .active {
 
 .track3tank {
   top: -5px;
-  left: 100%;
+  left: 39px;
 }
 
 .none {

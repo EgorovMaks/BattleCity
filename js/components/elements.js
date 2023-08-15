@@ -1,7 +1,7 @@
 export const map = document.querySelector("#BattleCity");
 
 export function createElement(
-  [type, canvas, top, left, id],
+  [type, canvas, top, left, id, className],
   [width, height],
   [urlUp, urlUp2, urlDown, urlDown2, urlLeft, urlLeft2, urlRight, urlRight2],
   [
@@ -17,6 +17,7 @@ export function createElement(
   const div = document.createElement("div");
   div.style.cssText = `width: ${width}; height: ${height}; top: ${top}; left: ${left}`;
   div.id = `${id}`;
+  div.classList.add(className)
   if (type === "tank") {
     div.innerHTML = `
     <div id="trackTopLeftTank" class=" trackUpTank track1tank"></div>
@@ -46,7 +47,7 @@ export function createElement(
     div.innerHTML = `
   <img src=${urlBrick16x16} alt=${type} class="${
       num === 1 ? "active" : null
-    } up ${type}" style="width: 100%; height: 100%;">
+    }  up ${type}" style="width: 100%; height: 100%;">
   <img src=${urlBrick16x8} alt=${type} class="${
       num === 2 ? "active" : null
     } up ${type}" style="width: 100%; height: 100%;">
