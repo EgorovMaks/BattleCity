@@ -23,24 +23,37 @@ export const keyup = document.addEventListener("keyup", function (e) {
     eventUp = "";
     adjustmentUp([dataAdjustment, ".adjustmentUpLEFT"], [true, true]);
     adjustmentUp([dataAdjustment, ".adjustmentUpRIGHT"], [true, true]);
+    adjustmentUp([dataAdjustment, ".adjustmentDounlLEFT"], [false, true]);
+    adjustmentUp([dataAdjustment, ".adjustmentDounRIGHT"], [false, true]);
   } else if (e.key === "ArrowDown") {
     eventDown = "";
+    adjustmentUp([dataAdjustment, ".adjustmentUpLEFT"], [true, true]);
+    adjustmentUp([dataAdjustment, ".adjustmentUpRIGHT"], [true, true]);
     adjustmentUp([dataAdjustment, ".adjustmentDounlLEFT"], [false, true]);
     adjustmentUp([dataAdjustment, ".adjustmentDounRIGHT"], [false, true]);
   } else if (e.key === "ArrowLeft") {
     eventLeft = "";
+    adjustmentUp([dataAdjustment, ".adjustmentRightUP"], [false, false]);
+    adjustmentUp([dataAdjustment, ".adjustmentRightDOWN"], [false, false]);
     adjustmentUp([dataAdjustment, ".adjustmentLeftUP"], [true, false]);
     adjustmentUp([dataAdjustment, ".adjustmentLeftDOWN"], [true, false]);
   } else if (e.key === "ArrowRight") {
     eventRight = "";
+    
     adjustmentUp([dataAdjustment, ".adjustmentRightUP"], [false, false]);
     adjustmentUp([dataAdjustment, ".adjustmentRightDOWN"], [false, false]);
+    adjustmentUp([dataAdjustment, ".adjustmentLeftUP"], [true, false]);
+    adjustmentUp([dataAdjustment, ".adjustmentLeftDOWN"], [true, false]);
+    
   }
+  setInterval(function(){
 
       startUp();
       startDown();
       startLeft();
       startRight();
+  },15)
+
 });
 
 // movementUp(dataDown, ".trackDownTank");
