@@ -15,15 +15,11 @@ import {
 
 let tank1 = "";
 
-let dataUp = {};
-let dataDown = {};
-let dataLeft = {};
-let dataRight = {};
+export let topLeft = {};
 
 export let loopStart = setInterval(function () {
   if (id("#tank1User") !== null) {
     tank1 = id("#tank1User");
-    console.log(1)
     gameLoop();
     clearInterval(loopStart);
   }
@@ -33,42 +29,53 @@ async function gameLoop() {
   setInterval(function () {
     let up = parseFloat(tank1.style.top);
     let left = parseFloat(tank1.style.left);
-    surveillance();
+    topLeft = { up: up, left: left };
+    surveillance(
+    );
+    console.log(
+      surveillanceUp,
+      surveillanceDown,
+      surveillanceLeft,
+      surveillanceright)
     if (eventUp === "up" && surveillanceUp === false) {
-      up = up - 1;
+      console.log("up")
+      up = up - 6;
       if (up < 0) {
         up = 0;
       }
-      tank1.style.top = `${up}%`;
+      tank1.style.top = `${up}px`;
       startDown();
       startLeft();
       startRight();
     } else if (eventDown === "down" && surveillanceDown === false) {
-      up = up + 1;
-      if (up > 94) {
-        up = 94;
+      console.log("down");
+      up = up + 6;
+      if (up > 585) {
+        up = 585;
       }
-      tank1.style.top = `${up}%`;
+      tank1.style.top = `${up}px`;
 
       startUp();
       startLeft();
       startRight();
     } else if (eventLeft === "left" && surveillanceLeft === false) {
-      let up1 = left - 1;
+      console.log("left");
+      let up1 = left - 6;
       if (up1 < 0) {
         up1 = 0;
       }
-      tank1.style.left = `${up1}%`;
+      tank1.style.left = `${up1}px`;
 
       startUp();
       startDown();
       startRight();
     } else if (eventRight === "right" && surveillanceright === false) {
-      let up1 = left + 1;
-      if (up1 > 93.5) {
-        up1 = 93.5;
+      console.log("right");
+      let up1 = left + 6;
+      if (up1 > 585) {
+        up1 = 585;
       }
-      tank1.style.left = `${up1}%`;
+      tank1.style.left = `${up1}px`;
       startUp();
       startDown();
       startLeft();

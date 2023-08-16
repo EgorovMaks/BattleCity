@@ -29,12 +29,45 @@ export function createElement(
     <div id="trackLeftTopTank" class=" trackLeftTank track7tank"></div>
     <div id="trackLeftCenteTank" class=" trackLeftTank track8tank"></div>
     <div id="trackLeftDownTank" class=" trackLeftTank track9tank"></div>
-
     <div id="trackRightTopTank" class="trackRightTank track10tank"></div>
-
     <div id="trackRightCenteTank" class="trackRightTank track11tank"></div>
-
     <div id="trackRightDownTank" class="trackRightTank track12tank"></div>
+
+    <div id="elCheckBottom" class=" adjustmentUpLEFT track13tank"></div>
+    <div id="elCheckCenter" class=" adjustmentUpLEFT track14tank"></div>
+    <div id="elCheckTop" class=" adjustmentUpLEFT track15tank"></div>
+
+    <div id="elCheckTop" class=" adjustmentUpRIGHT track16tank"></div>
+    <div id="elCheckCenter" class=" adjustmentUpRIGHT track17tank"></div>
+    <div id="elCheckBottom" class=" adjustmentUpRIGHT track18tank"></div>
+
+
+    <div id="elCheckTop" class=" adjustmentDounlLEFT track19tank"></div>
+    <div id="elCheckCenter" class=" adjustmentDounlLEFT track20tank"></div>
+    <div id="elCheckBottom" class=" adjustmentDounlLEFT track21tank"></div>
+
+
+    <div id="elCheckTop" class=" adjustmentDounRIGHT track22tank"></div>
+    <div id="elCheckCenter" class=" adjustmentDounRIGHT track23tank"></div>
+    <div id="elCheckBottom" class=" adjustmentDounRIGHT track24tank"></div>
+
+    <div id="elCheckTop" class=" adjustmentLeftUP track25tank"></div>
+    <div id="elCheckCenter" class=" adjustmentLeftUP track26tank"></div>
+    <div id="elCheckBottom" class=" adjustmentLeftUP track27tank"></div>
+
+
+    <div id="elCheckTop" class=" adjustmentLeftDOWN track28tank"></div>
+    <div id="elCheckCenter" class=" adjustmentLeftDOWN track29tank"></div>
+    <div id="elCheckBottom" class=" adjustmentLeftDOWN track30tank"></div>
+
+    <div id="elCheckTop" class=" adjustmentRightUP track31tank"></div>
+    <div id="elCheckCenter" class=" adjustmeRightftUP track32tank"></div>
+    <div id="elCheckBottom" class=" adjustmeRightftUP track33tank"></div>
+
+    <div id="elCheckTop" class=" adjustmentRightDOWN track34tank"></div>
+    <div id="elCheckCenter" class=" adjustmeRightftDOWN track35tank"></div>
+    <div id="elCheckBottom" class=" adjustmeRightftDOWN track36tank"></div>
+
   <img src=${urlUp} alt=${type} class="active up ${type}" style="width: 100%; height:  100%;"> 
   <img src=${urlUp2} alt=${type} class="up ${type}" style="width: 100%; height:  100%;">
   <img src=${urlDown} alt=${type} class=" down ${type}" style="width: 100%; height:  100%;">

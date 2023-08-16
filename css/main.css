@@ -89,13 +89,129 @@ div .active {
 .track9tank,
 .track10tank,
 .track11tank,
-.track12tank {
-  /* width: 1px; */
-  /* height: 1px; */
+.track12tank,
+.track13tank,
+.track14tank,
+.track15tank,
+.track16tank,
+.track17tank,
+.track18tank,
+.track19tank,
+.track20tank,
+.track21tank,
+.track22tank,
+.track23tank,
+.track24tank,
+.track25tank,
+.track26tank,
+.track27tank,
+.track28tank,
+.track29tank,
+.track30tank,
+.track31tank,
+.track32tank,
+.track33tank,
+.track34tank,
+.track35tank,
+.track36tank {
+  width: 1px;
+  height: 1px;
   position: absolute;
-  /* background: #fff; */
+  background: #fff;
   z-index: 3;
   left: 1%;
+}
+
+.track25tank {
+  left: 0;
+  top: -4px;
+}
+
+.track26tank {
+  left: 3px;
+  top: -4px;
+}
+
+.track27tank {
+  left: 6px;
+  top: -4px;
+}
+
+.track28tank {
+  left: 0;
+  top: 42px;
+}
+
+.track29tank {
+  left: 3px;
+  top: 42px;
+}
+
+.track30tank {
+  left: 6px;
+  top: 42px;
+}
+
+.track31tank {
+  left: 39px;
+  top: -4px;
+}
+
+.track32tank {
+
+  left: 36px;
+  top: -4px;
+}
+
+.track33tank {
+
+  left: 33px;
+  top: -4px;
+}
+
+.track34tank {
+  left: 39px;
+  top: 42px;
+}
+
+.track35tank {
+  left: 36px;
+  top: 42px;
+}
+
+.track36tank {
+  left: 33px;
+  top: 42px;
+}
+
+.track19tank {
+  top: 39px;
+  left: -4px;
+}
+
+.track20tank {
+  top: 36px;
+  left: -4px;
+}
+
+.track21tank {
+  top: 33px;
+  left: -4px;
+}
+
+.track22tank {
+  top: 39px;
+  left: 43px;
+}
+
+.track23tank {
+  top: 36px;
+  left: 43px;
+}
+
+.track24tank {
+  top: 33px;
+  left: 43px;
 }
 
 .track11tank {
@@ -105,12 +221,42 @@ div .active {
 
 .track12tank {
   top: 100%;
-  left: 43px;
+  left: 42px;
 }
 
 .track10tank {
   top: 0%;
+  left: 42px;
+}
+
+.track13tank {
+  top: 6px;
   left: 43px;
+}
+
+.track14tank {
+  top: 3px;
+  left: 43px;
+}
+
+.track15tank {
+  top: 0%;
+  left: 43px;
+}
+
+.track16tank {
+  top: 0%;
+  left: -4px;
+}
+
+.track17tank {
+  top: 3px;
+  left: -4px;
+}
+
+.track18tank {
+  top: 6px;
+  left: -4px;
 }
 
 .track8tank {
@@ -120,22 +266,24 @@ div .active {
 
 .track9tank {
   top: 100%;
-  left: -4px;
+  left: -3px;
 }
 
 .track7tank {
   top: 0%;
-  left: -4px;
+  left: -3px;
 }
 
+
+
 .track4tank {
-  top: 43px;
+  top: 41px;
   left: 0;
 }
 
 .track6tank {
-  top: 43px;
-  left: 100%;
+  top: 41px;
+  left: 38px;
 }
 
 .track5tank {
@@ -144,7 +292,7 @@ div .active {
 }
 
 .track1tank {
-  top: -5px;
+  top: -3px;
   left: 0;
 }
 
@@ -154,8 +302,8 @@ div .active {
 }
 
 .track3tank {
-  top: -5px;
-  left: 39px;
+  top: -3px;
+  left: 38px;
 }
 
 .none {
