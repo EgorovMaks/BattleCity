@@ -1,20 +1,13 @@
 import { movementUp } from "../data/data.js";
 import { id } from "./elements.js";
-import { topLeft } from "./game.js";
+import { topLeft } from "./movement.js";
+import { tank1 } from "./game.js";
 
 let dataUp = {};
 let dataDown = {};
 let dataLeft = {};
 let dataRight = {};
 
-let tank1 = "";
-
-export let loopStart = setInterval(function () {
-  if (id("#tank1User") !== null) {
-    tank1 = id("#tank1User");
-    clearInterval(loopStart);
-  }
-}, 10);
 export let surveillanceUp = false;
 export let surveillanceDown = false;
 export let surveillanceLeft = false;
@@ -116,7 +109,6 @@ export function adjustmentUp([object, className], [sign, direction]) {
       .elementFromPoint(object.elCheckBottom.left, object.elCheckBottom.top)
       .classList.contains("block"),
   };
-  // console.log(adjustment)
   if (direction === true) {
     if (
       adjustment.up === true &&

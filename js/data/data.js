@@ -1,5 +1,3 @@
-
-
 export function movementUp(date, className) {
   const dataElem = document.querySelectorAll(className);
   dataElem.forEach((e) => {
@@ -10,6 +8,6 @@ export function movementUp(date, className) {
   });
 }
 
-
-
-
+export function randomNumber() {
+  return parseInt(Math.random() * (999999999999 - 1) + 1);
+}

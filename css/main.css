@@ -19,6 +19,13 @@ body {
   border: 10px solid #636363;
 }
 
+#missile{
+  position: fixed;
+  z-index: 10;
+  background-color: red;
+  transform: translateX(-50%) translateY(-100%);
+}
+
 div {
   position: absolute;
   transition: top .1s ease, left .1s ease;

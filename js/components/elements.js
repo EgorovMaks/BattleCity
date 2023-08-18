@@ -21,7 +21,7 @@ export function createElement(
   if (type === "tank") {
     div.innerHTML = `
     <div id="trackTopLeftTank" class=" trackUpTank track1tank"></div>
-    <div id="trackTopCenterTank" class="  trackUpTank track2tank"></div>
+    <div id="aGunTop" class="  trackUpTank track2tank"></div>
     <div id="trackTopRightTank" class=" trackUpTank track3tank"></div>
     <div id="trackDownLeftTank" class=" trackDownTank track4tank"></div>
     <div id="trackDownCenterTank" class=" trackDownTank track5tank"></div>
@@ -99,6 +99,14 @@ export function createElement(
   }
 
   const newDiv = canvas.appendChild(div);
+}
+
+export function missile(canvas, [x, y]) {
+  const div = document.createElement("div");
+  div.id = "missile"
+  div.style.cssText = `width: 4px; height: 4px; top: ${y}px; left: ${x}px;`;
+  const body = document.querySelector("body")
+  const newDiv = body.appendChild(div);
 }
 
 export function id(i) {

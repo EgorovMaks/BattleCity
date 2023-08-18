@@ -1,4 +1,5 @@
 import { movementUp } from "../data/data.js";
+import { shooting } from "./shooting.js";
 import {
   adjustmentUp,
   dataAdjustment,
@@ -38,6 +39,7 @@ function movement2() {
 }
 
 export const keyPress = document.addEventListener("keydown", function (e) {
+  // console.log(e)
   if (e.key === "ArrowUp" || e.key === "w" || e.key === "ц") {
     movement();
     eventUp = "up";
@@ -51,10 +53,12 @@ export const keyPress = document.addEventListener("keydown", function (e) {
     movement();
     eventRight = "right";
   }
+  else if(e.key===" "){
+    shooting()
+  }
 });
 
 export const keyup = document.addEventListener("keyup", function (e) {
-  console.log(e.key);
   if (e.key === "ArrowUp" || e.key === "w" || e.key === "ц") {
     eventUp = "";
     movement2();

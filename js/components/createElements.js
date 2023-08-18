@@ -1,17 +1,11 @@
 import { map, createElement } from "./elements.js";
 import { id } from "./elements.js";
-import { animation } from "./createElFunc.js";
+import { animation } from "./movement.js";
 import { level1 } from "../data/levels.js";
+import { randomNumber } from "../data/data.js";
 
-let tank1 = "";
 
-export let loopStart = setInterval(function () {
-  if (id("#tank1User") !== null) {
-    tank1 = id("#tank1User");
-    clearInterval(loopStart);
-    animation(tank1);
-  }
-}, 10);
+
 
 export function createTank1User() {
   createElement(
@@ -101,7 +95,7 @@ export function levelLoad() {
 
 export function createBlocks(top, left, width, height, num) {
   createElement(
-    ["block", map, `${top}px`, `${left}px`, null, "block"],
+    ["block", map, `${top}px`, `${left}px`, randomNumber(), "block"],
     [`${width}px`, `${height}px`],
     [],
     [
