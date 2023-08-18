@@ -1,5 +1,5 @@
 import { id } from "./elements.js";
-import { eventDown, eventLeft, eventRight, eventUp } from "./events.js";
+import {  eventDown, eventLeft, eventRight, eventUp } from "./events.js";
 import { movementUp } from "./../data/data.js";
 import {
   surveillance,
@@ -32,13 +32,7 @@ async function gameLoop() {
     topLeft = { up: up, left: left };
     surveillance(
     );
-    console.log(
-      surveillanceUp,
-      surveillanceDown,
-      surveillanceLeft,
-      surveillanceright)
     if (eventUp === "up" && surveillanceUp === false) {
-      console.log("up")
       up = up - 6;
       if (up < 0) {
         up = 0;
@@ -48,7 +42,6 @@ async function gameLoop() {
       startLeft();
       startRight();
     } else if (eventDown === "down" && surveillanceDown === false) {
-      console.log("down");
       up = up + 6;
       if (up > 585) {
         up = 585;
@@ -59,7 +52,6 @@ async function gameLoop() {
       startLeft();
       startRight();
     } else if (eventLeft === "left" && surveillanceLeft === false) {
-      console.log("left");
       let up1 = left - 6;
       if (up1 < 0) {
         up1 = 0;
@@ -70,7 +62,6 @@ async function gameLoop() {
       startDown();
       startRight();
     } else if (eventRight === "right" && surveillanceright === false) {
-      console.log("right");
       let up1 = left + 6;
       if (up1 > 585) {
         up1 = 585;
