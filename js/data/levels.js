@@ -1,3 +1,54 @@
+export const block1 = [
+  [2, 2],
+  [1, 1],
+  [2, 2],
+  [1, 1],
+];
+export const block2 = [
+  [2,2],
+  [1,1],
+  [0,0],
+  [0,0]
+]
+export const block3 = [
+  [0, 0],
+  [0, 0],
+  [2, 2],
+  [1, 1],
+];
+export const block4 = [
+  [0, 2],
+  [0, 1],
+  [0, 2],
+  [0, 1],
+];
+export const block5 = [
+  [2, 0],
+  [1, 0],
+  [2, 0],
+  [1, 0],
+];
+export const block6 = [
+  [0, 0],
+  [0, 0],
+  [0, 2],
+  [0, 1],
+];
+export const block7 = [
+  [0, 0],
+  [0, 0],
+  [2, 0],
+  [1, 0],
+];
+
+export const block12 = [
+  [1,1],
+  [0,0]
+]
+export const block111 = [
+  [1]
+];
+
 export let level1 = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
@@ -14,7 +65,4 @@ export let level1 = [
   [0, 0, 0, 0, 0, 4, 111, 5, 0, 0, 0, 0, 0],
 ];
 
-
-export let levelConstruktor=[{
-  
-}]
+export let levelConstruktor = [{}];

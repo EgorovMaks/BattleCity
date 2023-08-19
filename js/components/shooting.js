@@ -1,4 +1,3 @@
-import { movementUp } from "../data/data.js";
 import { id, map, missile } from "./elements.js";
 import { tank1 } from "./game.js";
 

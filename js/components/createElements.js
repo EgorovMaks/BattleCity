@@ -1,11 +1,19 @@
-import { map, createElement } from "./elements.js";
+import { map, createElement, createBlocks } from "./elements.js";
 import { id } from "./elements.js";
 import { animation } from "./movement.js";
-import { level1 } from "../data/levels.js";
+import {
+  block1,
+  block111,
+  block12,
+  block2,
+  block3,
+  block4,
+  block5,
+  block6,
+  block7,
+  level1,
+} from "../data/levels.js";
 import { randomNumber } from "../data/data.js";
-
-
-
 
 export function createTank1User() {
   createElement(
@@ -23,89 +31,105 @@ export function createTank1User() {
       "./img/tank1/tank2-left.png",
       "./img/tank1/tank1-right.png",
       "./img/tank1/tank2-right.png",
-    ],
-    [],
-    []
+    ]
   );
 }
 
-let topBlok = 48
+let topBlok = 48;
 
 export function levelLoad() {
   level1.forEach((element, key) => {
     element.forEach((el, k) => {
       if (el === 1) {
-        let top = key * topBlok;
-        let left = k * topBlok;
-        let width = topBlok;
-        let height = topBlok;
-        createBlocks(top, left, width, height, 1);
+        createBlocks(
+          block1,
+          map,
+          [24, 12],
+          [key, k, el],
+          ["./img/block/brick(8*4)-1.png", "./img/block/brick(8*4)-2.png"]
+        );
       } else if (el === 2) {
-        let top = key * topBlok;
-        let left = k * topBlok;
-        let width = topBlok;
-        let height = topBlok/2;
-        createBlocks(top, left, width, height, 2);
+        createBlocks(
+          block2,
+          map,
+          [24, 12],
+          [key, k, el],
+          ["./img/block/brick(8*4)-1.png", "./img/block/brick(8*4)-2.png"]
+        );
       } else if (el === 3) {
-        let top = key * topBlok + topBlok/2;
-        let left = k * topBlok;
-        let width = topBlok;
-        let height = topBlok/2;
-        createBlocks(top, left, width, height, 2);
+        createBlocks(
+          block3,
+          map,
+          [24, 12],
+          [key, k, el],
+          ["./img/block/brick(8*4)-1.png", "./img/block/brick(8*4)-2.png"]
+        );
       } else if (el === 4) {
-        let top = key * topBlok;
-        let left = k * topBlok + topBlok/2;
-        let width = topBlok/2;
-        let height = topBlok;
-        createBlocks(top, left, width, height, 4);
+        createBlocks(
+          block4,
+          map,
+          [24, 12],
+          [key, k, el],
+          ["./img/block/brick(8*4)-1.png", "./img/block/brick(8*4)-2.png"]
+        );
       } else if (el === 5) {
-        let top = key * topBlok;
-        let left = k * topBlok;
-        let width = topBlok/2;
-        let height = topBlok;
-        createBlocks(top, left, width, height, 4);
+        createBlocks(
+          block5,
+          map,
+          [24, 12],
+          [key, k, el],
+          ["./img/block/brick(8*4)-1.png", "./img/block/brick(8*4)-2.png"]
+        );
       } else if (el === 6) {
-        let top = key * topBlok + topBlok/2;
-        let left = k * topBlok + topBlok/2;
-        let width = topBlok/2;
-        let height = topBlok/2;
-        createBlocks(top, left, width, height, 6);
+        createBlocks(
+          block6,
+          map,
+          [24, 12],
+          [key, k, el],
+          ["./img/block/brick(8*4)-1.png", "./img/block/brick(8*4)-2.png"]
+        );
       } else if (el === 7) {
-        let top = key * topBlok + topBlok/2;
-        let left = k * topBlok;
-        let width = topBlok/2;
-        let height = topBlok/2;
-        createBlocks(top, left, width, height, 6);
+        createBlocks(
+          block7,
+          map,
+          [24, 12],
+          [key, k, el],
+          ["./img/block/brick(8*4)-1.png", "./img/block/brick(8*4)-2.png"]
+        );
       } else if (el === 12) {
-        let top = key * topBlok;
-        let left = k * topBlok;
-        let width = topBlok;
-        let height = topBlok/2;
-        createBlocks(top, left, width, height, 12);
+        createBlocks(
+          block12,
+          map,
+          [24, 24],
+          [key, k, el],
+          ["../img/block/concrete(8x8).png"]
+        );
       } else if (el === 111) {
-        let top = key * topBlok;
-        let left = k * topBlok;
-        let width = topBlok;
-        let height = topBlok;
-        createBlocks(top, left, width, height, 111);
+        createBlocks(
+          block111,
+          map,
+          [48, 48],
+          [key, k, el],
+          ["./img/block/eagle.png"]
+        );
       }
     });
   });
 }
 
-export function createBlocks(top, left, width, height, num) {
-  createElement(
-    ["block", map, `${top}px`, `${left}px`, randomNumber(), "block"],
-    [`${width}px`, `${height}px`],
-    [],
-    [
-      "./img/block/brick(16x16).png",
-      "./img/block/brick(16x8).png",
-      "./img/block/brick(8x16).png",
-      "./img/block/brick(8x8).png",
-      "./img/block/concrete(16x8).png",
-      "./img/block/eagle.png",
-    ],
-    [num]
-  );
-}
+// export function createBlocks(top, left, width, height, num) {
+//   createElement(
+//     ["block", map, `${top}px`, `${left}px`, randomNumber(), "block"],
+//     [`${width}px`, `${height}px`],
+//     [],
+//     [
+//       "./img/block/brick(16x16).png",
+//       "./img/block/brick(16x8).png",
+//       "./img/block/brick(8x16).png",
+//       "./img/block/brick(8x8).png",
+//       "./img/block/concrete(16x8).png",
+//       "./img/block/eagle.png",
+//     ],
+//     [num]
+//   );
+// }
