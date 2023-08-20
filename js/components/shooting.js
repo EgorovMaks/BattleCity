@@ -16,7 +16,7 @@ export function fire() {
   if (fireGun === true) {
     let bullet = id("#missile");
     console.log(parseInt(bullet.style.top));
-    bullet.style.top = `${parseInt(bullet.style.top) - 8}px`;
+    bullet.style.top = `${parseInt(bullet.style.top) - 24}px`;
     if (parseInt(bullet.style.top) < 0) {
       console.log("fdhfdhdhdfhdfh");
       fireGun = false;

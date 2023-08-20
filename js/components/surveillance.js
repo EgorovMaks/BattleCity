@@ -7,6 +7,7 @@ export let topPoz = 0;
 export let bottomPoz = 585;
 export let leftPoz = 0;
 export let rightPoz = 585;
+let widthCanvas = topBlok * 13 - topBlok / 1.14;
 
 export function pointTracking(data) {
   block = [];
@@ -28,8 +29,8 @@ export function upStop(className) {
     }
   });
   leftPoz = 0;
-  bottomPoz = 585;
-  rightPoz = 585;
+  bottomPoz = widthCanvas;
+  rightPoz = widthCanvas;
 }
 export function searchStopUp(className) {
   block.forEach((e) => {
@@ -42,26 +43,26 @@ export function searchStopUp(className) {
     }
   });
   leftPoz = 0;
-  bottomPoz = 585;
-  rightPoz = 585;
+  bottomPoz = widthCanvas;
+  rightPoz = widthCanvas;
 }
 
 export function searchStopDown(className) {
   block.forEach((e) => {
     let stop = e.classList.contains(className);
     if (stop === true) {
-      console.log(e)
+      console.log(e);
       let topParent = parseFloat(e.parentElement.style.top);
       let child = parseFloat(e.style.top);
-      console.log(topParent, child)
-      console.log(e.parentElement)
+      console.log(topParent, child);
+      console.log(e.parentElement);
 
       bottomPoz = topParent + child - topBlok / 1.14;
     }
   });
   leftPoz = 0;
   topPoz = 0;
-  rightPoz = 585;
+  rightPoz = widthCanvas;
 }
 
 export function DownStop(className) {
@@ -79,7 +80,7 @@ export function DownStop(className) {
   });
   leftPoz = 0;
   topPoz = 0;
-  rightPoz = 585;
+  rightPoz = widthCanvas;
 }
 
 export function searchStopLeft(className) {
@@ -92,9 +93,9 @@ export function searchStopLeft(className) {
       leftPoz = topParent + child + width;
     }
   });
-  bottomPoz = 585;
+  bottomPoz = widthCanvas;
   topPoz = 0;
-  rightPoz = 585;
+  rightPoz = widthCanvas;
 }
 
 export function LeftStop(className) {
@@ -109,9 +110,9 @@ export function LeftStop(className) {
       tank1.style.left = `${leftPoz}px`;
     }
   });
-  bottomPoz = 585;
+  bottomPoz = widthCanvas;
   topPoz = 0;
-  rightPoz = 585;
+  rightPoz = widthCanvas;
 }
 
 export function searchStopRight(className) {
@@ -126,7 +127,7 @@ export function searchStopRight(className) {
     }
   });
   topPoz = 0;
-  bottomPoz = 585;
+  bottomPoz = widthCanvas;
   leftPoz = 0;
 }
 
@@ -138,11 +139,11 @@ export function rightStop(className) {
       let child = parseFloat(e.style.left);
       let width2 = parseFloat(e.style.width);
       let width = parseFloat(e.parentElement.style.width);
-      leftPoz = topParent + child -width ;
-      tank1.style.left = `${leftPoz+1}px`;
+      leftPoz = topParent + child - width;
+      tank1.style.left = `${leftPoz + 1}px`;
     }
   });
   topPoz = 0;
-  bottomPoz = 585;
+  bottomPoz = widthCanvas;
   leftPoz = 0;
 }
