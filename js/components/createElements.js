@@ -44,57 +44,57 @@ export function levelLoad() {
         createBlocks(
           block1,
           map,
-          [24, 12],
+          [12, 12],
           [key, k, el],
-          ["./img/block/brick(8*4)-1.png", "./img/block/brick(8*4)-2.png"]
+          ["./img/block/brick(4*4)-1.png", "./img/block/brick(4*4)-2.png"]
         );
       } else if (el === 2) {
         createBlocks(
           block2,
           map,
-          [24, 12],
+          [12, 12],
           [key, k, el],
-          ["./img/block/brick(8*4)-1.png", "./img/block/brick(8*4)-2.png"]
+          ["./img/block/brick(4*4)-1.png", "./img/block/brick(4*4)-2.png"]
         );
       } else if (el === 3) {
         createBlocks(
           block3,
           map,
-          [24, 12],
+          [12, 12],
           [key, k, el],
-          ["./img/block/brick(8*4)-1.png", "./img/block/brick(8*4)-2.png"]
+          ["./img/block/brick(4*4)-1.png", "./img/block/brick(4*4)-2.png"]
         );
       } else if (el === 4) {
         createBlocks(
           block4,
           map,
-          [24, 12],
+          [12, 12],
           [key, k, el],
-          ["./img/block/brick(8*4)-1.png", "./img/block/brick(8*4)-2.png"]
+          ["./img/block/brick(4*4)-1.png", "./img/block/brick(4*4)-2.png"]
         );
       } else if (el === 5) {
         createBlocks(
           block5,
           map,
-          [24, 12],
+          [12, 12],
           [key, k, el],
-          ["./img/block/brick(8*4)-1.png", "./img/block/brick(8*4)-2.png"]
+          ["./img/block/brick(4*4)-1.png", "./img/block/brick(4*4)-2.png"]
         );
       } else if (el === 6) {
         createBlocks(
           block6,
           map,
-          [24, 12],
+          [12, 12],
           [key, k, el],
-          ["./img/block/brick(8*4)-1.png", "./img/block/brick(8*4)-2.png"]
+          ["./img/block/brick(4*4)-1.png", "./img/block/brick(4*4)-2.png"]
         );
       } else if (el === 7) {
         createBlocks(
           block7,
           map,
-          [24, 12],
+          [12, 12],
           [key, k, el],
-          ["./img/block/brick(8*4)-1.png", "./img/block/brick(8*4)-2.png"]
+          ["./img/block/brick(4*4)-1.png", "./img/block/brick(4*4)-2.png"]
         );
       } else if (el === 12) {
         createBlocks(
@@ -102,7 +102,7 @@ export function levelLoad() {
           map,
           [24, 24],
           [key, k, el],
-          ["../img/block/concrete(8x8).png"]
+          ["./img/block/concrete(8x8).png"]
         );
       } else if (el === 111) {
         createBlocks(

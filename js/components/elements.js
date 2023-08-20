@@ -12,8 +12,41 @@ export function createElement(
   div.id = `${id}`;
   div.classList.add(className);
   div.innerHTML = `
-    <div id="aGunTop" class="  trackUpTank track2tank"></div>
-    
+    <div id="aGunTop" class="  trackUpTank track2tank trackTank"></div>
+    <div class="trackTankWrapTop">
+      <div class="trackTop"></div>
+      <div class="trackTop"></div>
+      <div class="trackTop"></div>
+      <div class="trackTop"></div>
+      <div class="trackTop"></div>
+      <div class="trackTop"></div>
+    </div>
+    <div class="trackTankWrapBottom">
+      <div class="trackBottom"></div>
+      <div class="trackBottom"></div>
+      <div class="trackBottom"></div>
+      <div class="trackBottom"></div>
+      <div class="trackBottom"></div>
+      <div class="trackBottom"></div>
+    </div>
+
+    <div class="trackTankWrapleft">
+      <div class="trackLeft"></div>
+      <div class="trackLeft"></div>
+      <div class="trackLeft"></div>
+      <div class="trackLeft"></div>
+      <div class="trackLeft"></div>
+      <div class="trackLeft"></div>
+    </div>
+    <div class="trackTankWrapRight">
+      <div class="trackRight"></div>
+      <div class="trackRight"></div>
+      <div class="trackRight"></div>
+      <div class="trackRight"></div>
+      <div class="trackRight"></div>
+      <div class="trackRight"></div>
+    </div>
+
 
   <img src=${urlUp} alt=${type} class="active up ${type}" style="width: 100%; height:  100%;"> 
   <img src=${urlUp2} alt=${type} class="up ${type}" style="width: 100%; height:  100%;">
@@ -51,8 +84,8 @@ export function createBlocks(
         <img src=${url} alt="img" class="active style="width: 100%; height:  100%;">
         </div>`;
       } else if (e === 2) {
-        let topPoz = (key * topBlok) / 4;
-        let leftPoz = (k * topBlok) / 2;
+        let topPoz = key * height;
+        let leftPoz = k * width;
         div.innerHTML += `<div id=${randomNumber()} class="block" style=" left:${leftPoz}px; top:${topPoz}px; width:${width}px; height:${height}px">
         <img src=${url2} alt="img" class="active style="width: 100%; height:  100%;">
         </div>`;

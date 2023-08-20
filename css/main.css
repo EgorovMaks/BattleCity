@@ -86,13 +86,62 @@ div .active {
 }
 
 
-.track2tank {
+.trackTank {
   width: 1px;
   height: 1px;
   position: absolute;
   background: #fff;
   z-index: 3;
   left: 1%;
+}
+
+.trackTankWrapTop {
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  display: flex;
+  justify-content: space-between;
+  top: -1%;
+}
+
+.trackTankWrapBottom {
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  display: flex;
+  justify-content: space-between;
+  bottom: -1%;
+}
+
+.trackTankWrapleft {
+  position: absolute;
+  width: 1px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  top: 0;
+  left: -1%;
+}
+
+.trackTankWrapRight{
+  position: absolute;
+    width: 1px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    top: 0;
+    left: 100%;
+}
+.trackRight,
+.trackLeft,
+.trackBottom,
+.trackTop {
+  position: static;
+  width: 1px;
+  height: 1px;
+  background-color: #fff;
 }
 
 .track2tank {
