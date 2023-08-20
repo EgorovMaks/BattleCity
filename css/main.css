@@ -15,7 +15,7 @@ body {
   overflow: hidden;
   position: absolute;
   left: 50%;
-  transform: translateX(-50%) scale(0.9)translateY(-5%);
+  transform: translateX(-50%) scale(2.5)translateY(28%);
   border: 10px solid #636363;
 }
 

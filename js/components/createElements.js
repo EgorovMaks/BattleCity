@@ -13,14 +13,14 @@ import {
   block7,
   level1,
 } from "../data/levels.js";
-import { randomNumber } from "../data/data.js";
+import { randomNumber, topBlok } from "../data/data.js";
 
 export function createTank1User() {
   createElement(
-    ["tank", map, "584px", "194px", "tank1User"],
+    ["tank", map, "194px", "64px", "tank1User"],
 
     // ["tank", map, "6%", "40%", "tank1User"],
-    ["39px", "39px"],
+    [`${topBlok / 1.14}px`, `${topBlok / 1.14}px`],
     // ["40%", "40%"],
     [
       "./img/tank1/tank1-up.png",
@@ -35,8 +35,6 @@ export function createTank1User() {
   );
 }
 
-let topBlok = 48;
-
 export function levelLoad() {
   level1.forEach((element, key) => {
     element.forEach((el, k) => {
@@ -44,7 +42,7 @@ export function levelLoad() {
         createBlocks(
           block1,
           map,
-          [12, 12],
+          [topBlok / 4, topBlok / 4],
           [key, k, el],
           ["./img/block/brick(4*4)-1.png", "./img/block/brick(4*4)-2.png"]
         );
@@ -52,7 +50,7 @@ export function levelLoad() {
         createBlocks(
           block2,
           map,
-          [12, 12],
+          [topBlok / 4, topBlok / 4],
           [key, k, el],
           ["./img/block/brick(4*4)-1.png", "./img/block/brick(4*4)-2.png"]
         );
@@ -60,7 +58,7 @@ export function levelLoad() {
         createBlocks(
           block3,
           map,
-          [12, 12],
+          [topBlok / 4, topBlok / 4],
           [key, k, el],
           ["./img/block/brick(4*4)-1.png", "./img/block/brick(4*4)-2.png"]
         );
@@ -68,7 +66,7 @@ export function levelLoad() {
         createBlocks(
           block4,
           map,
-          [12, 12],
+          [topBlok / 4, topBlok / 4],
           [key, k, el],
           ["./img/block/brick(4*4)-1.png", "./img/block/brick(4*4)-2.png"]
         );
@@ -76,7 +74,7 @@ export function levelLoad() {
         createBlocks(
           block5,
           map,
-          [12, 12],
+          [topBlok / 4, topBlok / 4],
           [key, k, el],
           ["./img/block/brick(4*4)-1.png", "./img/block/brick(4*4)-2.png"]
         );
@@ -84,7 +82,7 @@ export function levelLoad() {
         createBlocks(
           block6,
           map,
-          [12, 12],
+          [topBlok / 4, topBlok / 4],
           [key, k, el],
           ["./img/block/brick(4*4)-1.png", "./img/block/brick(4*4)-2.png"]
         );
@@ -92,7 +90,7 @@ export function levelLoad() {
         createBlocks(
           block7,
           map,
-          [12, 12],
+          [topBlok / 4, topBlok / 4],
           [key, k, el],
           ["./img/block/brick(4*4)-1.png", "./img/block/brick(4*4)-2.png"]
         );
@@ -100,7 +98,7 @@ export function levelLoad() {
         createBlocks(
           block12,
           map,
-          [24, 24],
+          [topBlok / 2, topBlok / 2],
           [key, k, el],
           ["./img/block/concrete(8x8).png"]
         );
@@ -108,7 +106,7 @@ export function levelLoad() {
         createBlocks(
           block111,
           map,
-          [48, 48],
+          [topBlok, topBlok],
           [key, k, el],
           ["./img/block/eagle.png"]
         );

@@ -57,40 +57,40 @@ export function movement(tanks) {
   let left = parseFloat(tanks.style.left);
   topLeft = { up: up, left: left };
   if (eventUp === "up") {
-    up = up - 6;
+    up = up - 2;
     track(".trackTop", trackDataTop);
     pointTracking(trackDataTop);
     searchStopUp("block");
-    if (up < topPoz) {
-      up = topPoz + 1;
+    if (up <= topPoz) {
+      up = topPoz +1 ;
     }
     tanks.style.top = `${up}px`;
   } else if (eventDown === "down") {
-    up = up + 6;
+    up = up + 2;
     track(".trackBottom", trackDataBottom);
     pointTracking(trackDataBottom);
     searchStopDown("block");
-    if (up > bottomPoz) {
-      up = bottomPoz - 1;
+    if (up >= bottomPoz) {
+      up = bottomPoz ;
     }
     tanks.style.top = `${up}px`;
   } else if (eventLeft === "left") {
-    let up1 = left - 6;
+    let up1 = left - 2;
 
     track(".trackLeft", trackDataLeft);
     pointTracking(trackDataLeft);
     searchStopLeft("block");
-    if (up1 < leftPoz) {
-      up1 = leftPoz + 1;
+    if (up1 <= leftPoz) {
+      up1 = leftPoz;
     }
     tanks.style.left = `${up1}px`;
   } else if (eventRight === "right") {
     track(".trackRight", trackDataRight);
     pointTracking(trackDataRight);
     searchStopRight("block");
-    let up1 = left + 6;
-    if (up1 > rightPoz) {
-      up1 = rightPoz - 1;
+    let up1 = left + 2;
+    if (up1 >= rightPoz) {
+      up1 = rightPoz+1 ;
     }
     tanks.style.left = `${up1}px`;
   }
@@ -101,7 +101,7 @@ export function movementUpStop(params) {
     track(".trackTop", trackDataTopStop);
     pointTracking(trackDataTopStop);
     upStop("block");
-  }, 100);
+  }, 15);
 }
 
 export function movementDownStop(params) {
@@ -109,7 +109,7 @@ export function movementDownStop(params) {
     track(".trackBottom", trackDataBottomStop);
     pointTracking(trackDataBottomStop);
     DownStop("block");
-  }, 100);
+  }, 15);
 }
 
 export function movementLeftStop(params) {
@@ -117,7 +117,7 @@ export function movementLeftStop(params) {
     track(".trackLeft", trackDataLeftStop);
     pointTracking(trackDataLeftStop);
     LeftStop("block");
-  }, 100);
+  }, 15);
 }
 
 export function movementRightStop(params) {
@@ -125,7 +125,7 @@ export function movementRightStop(params) {
     track(".trackRight", trackDataRightStop);
     pointTracking(trackDataRightStop);
     rightStop("block");
-  }, 100);
+  }, 15);
 }
 
 export function track(classList, array) {

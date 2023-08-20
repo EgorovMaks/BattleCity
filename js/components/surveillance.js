@@ -1,3 +1,4 @@
+import { topBlok } from "../data/data.js";
 import { tank1 } from "./game.js";
 import { trackDataTop } from "./movement.js";
 
@@ -23,7 +24,7 @@ export function upStop(className) {
       let child = parseFloat(e.style.top);
       let height = parseFloat(e.style.height);
       topPoz = topParent + child + height;
-      tank1.style.top = `${topPoz + 2}px`;
+      tank1.style.top = `${topPoz + 1}px`;
     }
   });
   leftPoz = 0;
@@ -49,9 +50,13 @@ export function searchStopDown(className) {
   block.forEach((e) => {
     let stop = e.classList.contains(className);
     if (stop === true) {
+      console.log(e)
       let topParent = parseFloat(e.parentElement.style.top);
       let child = parseFloat(e.style.top);
-      bottomPoz = topParent + child - 39;
+      console.log(topParent, child)
+      console.log(e.parentElement)
+
+      bottomPoz = topParent + child - topBlok / 1.14;
     }
   });
   leftPoz = 0;
@@ -65,9 +70,11 @@ export function DownStop(className) {
     if (stop === true) {
       let topParent = parseFloat(e.parentElement.style.top);
       let child = parseFloat(e.style.top);
-      let height = parseFloat(e.style.height);
-      topPoz = topParent + child + height;
-      tank1.style.top = `${topPoz  -52}px`;
+      console.log(topParent, child);
+      console.log(e.parentElement);
+
+      bottomPoz = topParent + child - topBlok / 1.14;
+      tank1.style.top = `${bottomPoz}px`;
     }
   });
   leftPoz = 0;
@@ -99,7 +106,7 @@ export function LeftStop(className) {
       let width = parseFloat(e.style.width);
       leftPoz = topParent + child + width;
 
-      tank1.style.left = `${leftPoz+2}px`;
+      tank1.style.left = `${leftPoz}px`;
     }
   });
   bottomPoz = 585;
@@ -113,8 +120,9 @@ export function searchStopRight(className) {
     if (stop === true) {
       let topParent = parseFloat(e.parentElement.style.left);
       let child = parseFloat(e.style.left);
-      let width = parseFloat(e.style.width);
-      rightPoz = topParent + child - 39;
+      let width = parseFloat(e.parentElement.style.width);
+      let width2 = parseFloat(e.style.width);
+      rightPoz = topParent + child - width;
     }
   });
   topPoz = 0;
@@ -128,11 +136,10 @@ export function rightStop(className) {
     if (stop === true) {
       let topParent = parseFloat(e.parentElement.style.left);
       let child = parseFloat(e.style.left);
-      let width = parseFloat(e.style.width);
-      leftPoz = topParent + child - 39;
-      console.log(leftPoz)
-
-      tank1.style.left = `${leftPoz - 2}px`;
+      let width2 = parseFloat(e.style.width);
+      let width = parseFloat(e.parentElement.style.width);
+      leftPoz = topParent + child -width ;
+      tank1.style.left = `${leftPoz+1}px`;
     }
   });
   topPoz = 0;
