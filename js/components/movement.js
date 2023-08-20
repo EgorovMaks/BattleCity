@@ -1,22 +1,30 @@
 import { eventDown, eventLeft, eventRight, eventUp } from "./events.js";
 import { animationDirection } from "./elements.js";
 import {
+  DownStop,
+  LeftStop,
   bottomPoz,
   leftPoz,
   pointTracking,
   rightPoz,
+  rightStop,
   searchStopDown,
   searchStopLeft,
   searchStopRight,
   searchStopUp,
   topPoz,
+  upStop,
 } from "./surveillance.js";
 
+export let stop = false;
 export let trackDataTop = {};
 export let trackDataBottom = {};
 export let trackDataLeft = {};
-
 export let trackDataRight = {};
+export let trackDataTopStop = {};
+export let trackDataBottomStop = {};
+export let trackDataLeftStop = {};
+export let trackDataRightStop = {};
 
 export function animation(el) {
   const anim = el.querySelectorAll(".tank");
@@ -54,7 +62,7 @@ export function movement(tanks) {
     pointTracking(trackDataTop);
     searchStopUp("block");
     if (up < topPoz) {
-      up = topPoz+1;
+      up = topPoz + 1;
     }
     tanks.style.top = `${up}px`;
   } else if (eventDown === "down") {
@@ -63,18 +71,17 @@ export function movement(tanks) {
     pointTracking(trackDataBottom);
     searchStopDown("block");
     if (up > bottomPoz) {
-      up = bottomPoz-1;
+      up = bottomPoz - 1;
     }
     tanks.style.top = `${up}px`;
   } else if (eventLeft === "left") {
-    console.log(bottomPoz);
     let up1 = left - 6;
 
     track(".trackLeft", trackDataLeft);
     pointTracking(trackDataLeft);
     searchStopLeft("block");
     if (up1 < leftPoz) {
-      up1 = leftPoz+1;
+      up1 = leftPoz + 1;
     }
     tanks.style.left = `${up1}px`;
   } else if (eventRight === "right") {
@@ -83,13 +90,45 @@ export function movement(tanks) {
     searchStopRight("block");
     let up1 = left + 6;
     if (up1 > rightPoz) {
-      up1 = rightPoz -1;
+      up1 = rightPoz - 1;
     }
     tanks.style.left = `${up1}px`;
   }
 }
 
-function track(classList, array) {
+export function movementUpStop(params) {
+  setTimeout(() => {
+    track(".trackTop", trackDataTopStop);
+    pointTracking(trackDataTopStop);
+    upStop("block");
+  }, 100);
+}
+
+export function movementDownStop(params) {
+  setTimeout(() => {
+    track(".trackBottom", trackDataBottomStop);
+    pointTracking(trackDataBottomStop);
+    DownStop("block");
+  }, 100);
+}
+
+export function movementLeftStop(params) {
+  setTimeout(() => {
+    track(".trackLeft", trackDataLeftStop);
+    pointTracking(trackDataLeftStop);
+    LeftStop("block");
+  }, 100);
+}
+
+export function movementRightStop(params) {
+  setTimeout(() => {
+    track(".trackRight", trackDataRightStop);
+    pointTracking(trackDataRightStop);
+    rightStop("block");
+  }, 100);
+}
+
+export function track(classList, array) {
   const track = document.querySelectorAll(classList);
   track.forEach((e, k) => {
     const x = e.getBoundingClientRect().x;

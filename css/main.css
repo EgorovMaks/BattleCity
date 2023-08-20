@@ -141,7 +141,7 @@ div .active {
   position: static;
   width: 1px;
   height: 1px;
-  background-color: #fff;
+  /* background-color: #fff; */
 }
 
 .track2tank {

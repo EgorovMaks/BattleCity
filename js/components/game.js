@@ -7,6 +7,7 @@ import { fire } from "./shooting.js";
 export let tank1 = "";
 
 export let loopStart = setInterval(function () {
+
   if (id("#tank1User") !== null) {
     tank1 = id("#tank1User");
     gameLoop();
