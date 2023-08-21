@@ -17,10 +17,16 @@ import { randomNumber, topBlok } from "../data/data.js";
 
 export function createTank1User() {
   createElement(
-    ["tank", map, "194px", "64px", "tank1User"],
+    [
+      "tank",
+      map,
+      `${topBlok * 12}px`,
+      `${topBlok * 4}px`,
+      "tank1User",
+    ],
 
     // ["tank", map, "6%", "40%", "tank1User"],
-    [`${topBlok }px`, `${topBlok }px`],
+    [`${topBlok}px`, `${topBlok}px`],
     // ["40%", "40%"],
     [
       "./img/tank1/tank1-up.png",

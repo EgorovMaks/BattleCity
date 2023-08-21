@@ -150,7 +150,7 @@ function levelMapConstructor(array) {
     d = [[]];
     a = [[]];
   });
-  console.log(levelMap);
+  // console.log(levelMap);
 }
 levelMapConstructor(level1);
 // export let levelConstruktor = [{}];

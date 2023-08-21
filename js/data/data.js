@@ -1,4 +1,9 @@
+
+
 export let topBlok = 16;
+
+export let tankSpeed = topBlok/8
+
 // 48
 
 
