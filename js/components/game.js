@@ -20,7 +20,7 @@ async function gameLoop() {
   setInterval(function () {
     movement(tank1);
     fire()
-  }, 58);
+  }, 220);
 }
 
 // 58

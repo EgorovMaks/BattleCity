@@ -57,16 +57,16 @@ export function movement(tanks) {
   let left = parseFloat(tanks.style.left);
   topLeft = { up: up, left: left };
   if (eventUp === "up") {
-    up = up - 2;
+    up = up - 8;
     track(".trackTop", trackDataTop);
     pointTracking(trackDataTop);
     searchStopUp("block");
     if (up <= topPoz) {
-      up = topPoz +1 ;
+      up = topPoz  ;
     }
     tanks.style.top = `${up}px`;
   } else if (eventDown === "down") {
-    up = up + 2;
+    up = up + 8;
     track(".trackBottom", trackDataBottom);
     pointTracking(trackDataBottom);
     searchStopDown("block");
@@ -75,7 +75,7 @@ export function movement(tanks) {
     }
     tanks.style.top = `${up}px`;
   } else if (eventLeft === "left") {
-    let up1 = left - 2;
+    let up1 = left -8;
 
     track(".trackLeft", trackDataLeft);
     pointTracking(trackDataLeft);
@@ -88,9 +88,9 @@ export function movement(tanks) {
     track(".trackRight", trackDataRight);
     pointTracking(trackDataRight);
     searchStopRight("block");
-    let up1 = left + 2;
+    let up1 = left + 8;
     if (up1 >= rightPoz) {
-      up1 = rightPoz+1 ;
+      up1 = rightPoz;
     }
     tanks.style.left = `${up1}px`;
   }

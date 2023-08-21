@@ -20,7 +20,7 @@ export function createTank1User() {
     ["tank", map, "194px", "64px", "tank1User"],
 
     // ["tank", map, "6%", "40%", "tank1User"],
-    [`${topBlok / 1.14}px`, `${topBlok / 1.14}px`],
+    [`${topBlok }px`, `${topBlok }px`],
     // ["40%", "40%"],
     [
       "./img/tank1/tank1-up.png",
