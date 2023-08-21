@@ -1,4 +1,5 @@
 
+import { adjustment } from "./movement.js";
 import { shooting } from "./shooting.js";
 
 export let eventUp = "";
@@ -52,14 +53,18 @@ export const keyup = document.addEventListener("keyup", function (e) {
   if (e.key === "ArrowUp" || e.key === "w" || e.key === "ц") {
     reassignment();
     eventUp = "";
+    adjustment("top")
   } else if (e.key === "ArrowDown" || e.key === "s" || e.key === "ы") {
     reassignment();
     eventDown = "";
+    adjustment("top");
   } else if (e.key === "ArrowLeft" || e.key === "a" || e.key === "ф") {
     reassignment();
     eventLeft = "";
+    adjustment("left");
   } else if (e.key === "ArrowRight" || e.key === "d" || e.key === "в") {
     reassignment();
     eventRight = "";
+    adjustment("left");
   }
 });

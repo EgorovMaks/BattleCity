@@ -1,6 +1,7 @@
 import { eventDown, eventLeft, eventRight, eventUp } from "./events.js";
 import { animationDirection } from "./elements.js";
-import { tankSpeed } from "../data/data.js";
+import { tankSpeed, topBlok } from "../data/data.js";
+import { tank1 } from "./game.js";
 
 export function animation(el) {
   const anim = el.querySelectorAll(".tank");
@@ -31,7 +32,7 @@ export let topLeft = {};
 export function movement(tanks) {
   let up = parseFloat(tanks.style.top);
   let left = parseFloat(tanks.style.left);
-  console.log(up,left)
+  // console.log(up,left)
   topLeft = { up: up, left: left };
   if (eventUp === "up") {
     up = up - tankSpeed;
@@ -48,6 +49,13 @@ export function movement(tanks) {
   }
 }
 
-
-
-
+export function adjustment(pozition) {
+  if (pozition === "top") {
+    const up = parseFloat(tank1.style.top);
+    console.log((Math.round((up / topBlok) * 2) * topBlok) / 2);
+    tank1.style.top = `${(Math.round((up / topBlok) * 2) * topBlok) / 2}px`;
+  } else if(pozition === "left"){
+    const left = parseFloat(tank1.style.left);
+    tank1.style.left = `${(Math.round((left / topBlok) * 2) * topBlok) / 2}px`;
+  }
+}
