@@ -70,7 +70,7 @@ export let level1 = [
   [0, 0, 0, 0, 0, 4, 111, 5, 0, 0, 0, 0, 0],
 ];
 
-const levelMap = [];
+export const levelMap = [];
 
 function levelMapConstructor(array) {
   function arrayCopy(array, num) {
