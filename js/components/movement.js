@@ -49,30 +49,29 @@ export function movement(tanks) {
 export function adjustment(pozition) {
   if (pozition === "top") {
     const up = parseFloat(tank1.style.top);
-    tank1.style.top = `${(Math.round((up / topBlok) * 2) * topBlok) / 2}px`;
+    tank1.style.top = `${(Math.round((up / topBlok) * 4) * topBlok) / 4}px`;
   } else if (pozition === "left") {
     const left = parseFloat(tank1.style.left);
-    tank1.style.left = `${(Math.round((left / topBlok) * 2) * topBlok) / 2}px`;
+    tank1.style.left = `${(Math.round((left / topBlok) * 4) * topBlok) / 4}px`;
+  } else if (pozition === "right") {
+    const left = parseFloat(tank1.style.left);
+    tank1.style.left = `${(Math.ceil((left / topBlok) * 2) * topBlok) / 2}px`;
+  } else if (pozition === "down") {
+    const up = parseFloat(tank1.style.top);
+    tank1.style.top = `${(Math.ceil((up / topBlok) * 2) * topBlok) / 2}px`;
   }
 }
 
 function movementUp(up, left, topPozition, leftPozition, tanks) {
   let a = [];
   let b = true;
-  if (topPozition % 2 === 0) {
-    if (up > 0) {
-      a = [
-        levelMap[topPozition - 1][leftPozition],
-        levelMap[topPozition - 1][leftPozition + 1],
-        levelMap[topPozition - 1][leftPozition + 2],
-        levelMap[topPozition - 1][leftPozition + 3],
-
-        levelMap[topPozition - 2][leftPozition],
-        levelMap[topPozition - 2][leftPozition + 1],
-        levelMap[topPozition - 2][leftPozition + 2],
-        levelMap[topPozition - 2][leftPozition + 3],
-      ];
-    }
+  if (up > 0) {
+    a = [
+      levelMap[topPozition - 1][leftPozition],
+      levelMap[topPozition - 1][leftPozition + 1],
+      levelMap[topPozition - 1][leftPozition + 2],
+      levelMap[topPozition - 1][leftPozition + 3],
+    ];
 
     a.forEach((e) => {
       if (e === 1 || e === 2) {
@@ -94,26 +93,19 @@ function movementUp(up, left, topPozition, leftPozition, tanks) {
 function movementDown(up, left, topPozition, leftPozition, tanks) {
   let a = [];
   let b = true;
-  if (topPozition % 2 === 0) {
-    if (up < topBlok * 12-topBlok/8) {
-      a = [
-        levelMap[topPozition + 4][leftPozition],
-        levelMap[topPozition + 4][leftPozition + 1],
-        levelMap[topPozition + 4][leftPozition + 2],
-        levelMap[topPozition + 4][leftPozition + 3],
-
-        levelMap[topPozition + 5][leftPozition],
-        levelMap[topPozition + 5][leftPozition + 1],
-        levelMap[topPozition + 5][leftPozition + 2],
-        levelMap[topPozition + 5][leftPozition + 3],
-      ];
-      a.forEach((e) => {
-        if (e === 1 || e === 2) {
-          b = false;
-          return;
-        }
-      });
-    }
+  if (up < topBlok * 12 - topBlok / 8) {
+    a = [
+      levelMap[topPozition + 4][leftPozition],
+      levelMap[topPozition + 4][leftPozition + 1],
+      levelMap[topPozition + 4][leftPozition + 2],
+      levelMap[topPozition + 4][leftPozition + 3],
+    ];
+    a.forEach((e) => {
+      if (e === 1 || e === 2) {
+        b = false;
+        return;
+      }
+    });
   }
   if (b === true) {
     up = up + tankSpeed;
@@ -128,28 +120,20 @@ function movementDown(up, left, topPozition, leftPozition, tanks) {
 function movementLeft(up, left, topPozition, leftPozition, tanks) {
   let a = [];
   let b = true;
-  if (leftPozition % 2 === 0) {
-    if (left > 0) {
-      a = [
-        levelMap[topPozition - 0][leftPozition - 1],
-        levelMap[topPozition + 1][leftPozition - 1],
-        levelMap[topPozition + 2][leftPozition - 1],
-        levelMap[topPozition + 3][leftPozition - 1],
-
-        levelMap[topPozition - 0][leftPozition - 2],
-        levelMap[topPozition + 1][leftPozition - 2],
-        levelMap[topPozition + 2][leftPozition - 2],
-        levelMap[topPozition + 3][leftPozition - 2],
-      ];
-    }
-
-    a.forEach((e) => {
-      if (e === 1 || e === 2) {
-        b = false;
-        return;
-      }
-    });
+  if (left > 0) {
+    a = [
+      levelMap[topPozition - 0][leftPozition - 1],
+      levelMap[topPozition + 1][leftPozition - 1],
+      levelMap[topPozition + 2][leftPozition - 1],
+      levelMap[topPozition + 3][leftPozition - 1],
+    ];
   }
+  a.forEach((e) => {
+    if (e === 1 || e === 2) {
+      b = false;
+      return;
+    }
+  });
   if (b === true) {
     left = left - tankSpeed;
     if (left <= 0) {
@@ -163,26 +147,19 @@ function movementLeft(up, left, topPozition, leftPozition, tanks) {
 function movementRight(up, left, topPozition, leftPozition, tanks) {
   let a = [];
   let b = true;
-  if (leftPozition % 2 === 0) {
-    if (left < topBlok * 12) {
-      a = [
-        levelMap[topPozition - 0][leftPozition + 4],
-        levelMap[topPozition + 1][leftPozition + 4],
-        levelMap[topPozition + 2][leftPozition + 4],
-        levelMap[topPozition + 3][leftPozition + 4],
-
-        levelMap[topPozition - 0][leftPozition + 5],
-        levelMap[topPozition + 1][leftPozition + 5],
-        levelMap[topPozition + 2][leftPozition + 5],
-        levelMap[topPozition + 3][leftPozition + 5],
-      ];
-      a.forEach((e) => {
-        if (e === 1 || e === 2) {
-          b = false;
-          return;
-        }
-      });
-    }
+  if (left < topBlok * 12) {
+    a = [
+      levelMap[topPozition - 0][leftPozition + 4],
+      levelMap[topPozition + 1][leftPozition + 4],
+      levelMap[topPozition + 2][leftPozition + 4],
+      levelMap[topPozition + 3][leftPozition + 4],
+    ];
+    a.forEach((e) => {
+      if (e === 1 || e === 2) {
+        b = false;
+        return;
+      }
+    });
   }
   if (b === true) {
     left = left + tankSpeed;

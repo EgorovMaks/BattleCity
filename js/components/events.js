@@ -1,6 +1,5 @@
 
 import { adjustment } from "./movement.js";
-import { shooting } from "./shooting.js";
 
 export let eventUp = "";
 export let eventDown = "";
@@ -45,7 +44,6 @@ export const keyPress = document.addEventListener("keydown", function (e) {
     reassignment(true);
     eventRight = "right";
   } else if (e.key === " ") {
-    shooting();
   }
 });
 

@@ -2,7 +2,6 @@ import { id } from "./elements.js";
 import { animation } from "./movement.js";
 
 import { movement } from "./movement.js";
-import { fire } from "./shooting.js";
 
 export let tank1 = "";
 
@@ -19,7 +18,6 @@ export let loopStart = setInterval(function () {
 async function gameLoop() {
   setInterval(function () {
     movement(tank1);
-    fire()
   }, 50);
 }
 
