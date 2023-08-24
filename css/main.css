@@ -15,7 +15,7 @@ body {
   overflow: hidden;
   position: absolute;
   left: 50%;
-  transform: translateX(-50%) scale(2.5)translateY(28%);
+  transform: translateX(-50%) scale(2.5)translateY(70px);
   border: 10px solid #636363;
 }
 
@@ -24,6 +24,11 @@ body {
   z-index: 10;
   background-color: red;
   transform: translateX(-50%) translateY(-100%);
+}
+#missileTrack{
+
+  pointer-events: none;
+  background: #fff;
 }
 
 div {

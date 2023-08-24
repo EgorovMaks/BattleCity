@@ -50,7 +50,8 @@ export function levelLoad() {
           map,
           [topBlok / 4, topBlok / 4],
           [key, k, el],
-          ["./img/block/brick(4*4)-1.png", "./img/block/brick(4*4)-2.png"]
+          ["./img/block/brick(4*4)-1.png", "./img/block/brick(4*4)-2.png"],
+          ["shooting"]
         );
       } else if (el === 2) {
         createBlocks(
@@ -58,7 +59,8 @@ export function levelLoad() {
           map,
           [topBlok / 4, topBlok / 4],
           [key, k, el],
-          ["./img/block/brick(4*4)-1.png", "./img/block/brick(4*4)-2.png"]
+          ["./img/block/brick(4*4)-1.png", "./img/block/brick(4*4)-2.png"],
+          ["shooting"]
         );
       } else if (el === 3) {
         createBlocks(
@@ -66,7 +68,8 @@ export function levelLoad() {
           map,
           [topBlok / 4, topBlok / 4],
           [key, k, el],
-          ["./img/block/brick(4*4)-1.png", "./img/block/brick(4*4)-2.png"]
+          ["./img/block/brick(4*4)-1.png", "./img/block/brick(4*4)-2.png"],
+          ["shooting"]
         );
       } else if (el === 4) {
         createBlocks(
@@ -74,7 +77,8 @@ export function levelLoad() {
           map,
           [topBlok / 4, topBlok / 4],
           [key, k, el],
-          ["./img/block/brick(4*4)-1.png", "./img/block/brick(4*4)-2.png"]
+          ["./img/block/brick(4*4)-1.png", "./img/block/brick(4*4)-2.png"],
+          ["shooting"]
         );
       } else if (el === 5) {
         createBlocks(
@@ -82,7 +86,8 @@ export function levelLoad() {
           map,
           [topBlok / 4, topBlok / 4],
           [key, k, el],
-          ["./img/block/brick(4*4)-1.png", "./img/block/brick(4*4)-2.png"]
+          ["./img/block/brick(4*4)-1.png", "./img/block/brick(4*4)-2.png"],
+          ["shooting"]
         );
       } else if (el === 6) {
         createBlocks(
@@ -90,7 +95,8 @@ export function levelLoad() {
           map,
           [topBlok / 4, topBlok / 4],
           [key, k, el],
-          ["./img/block/brick(4*4)-1.png", "./img/block/brick(4*4)-2.png"]
+          ["./img/block/brick(4*4)-1.png", "./img/block/brick(4*4)-2.png"],
+          ["shooting"]
         );
       } else if (el === 7) {
         createBlocks(
@@ -98,7 +104,8 @@ export function levelLoad() {
           map,
           [topBlok / 4, topBlok / 4],
           [key, k, el],
-          ["./img/block/brick(4*4)-1.png", "./img/block/brick(4*4)-2.png"]
+          ["./img/block/brick(4*4)-1.png", "./img/block/brick(4*4)-2.png"],
+          ["shooting"]
         );
       } else if (el === 12) {
         createBlocks(
@@ -106,7 +113,8 @@ export function levelLoad() {
           map,
           [topBlok / 2, topBlok / 2],
           [key, k, el],
-          ["./img/block/concrete(8x8).png"]
+          ["./img/block/concrete(8x8).png"],
+          []
         );
       } else if (el === 111) {
         createBlocks(
@@ -114,26 +122,11 @@ export function levelLoad() {
           map,
           [topBlok, topBlok],
           [key, k, el],
-          ["./img/block/eagle.png"]
+          ["./img/block/eagle.png"],
+          []
         );
       }
     });
   });
 }
 
-// export function createBlocks(top, left, width, height, num) {
-//   createElement(
-//     ["block", map, `${top}px`, `${left}px`, randomNumber(), "block"],
-//     [`${width}px`, `${height}px`],
-//     [],
-//     [
-//       "./img/block/brick(16x16).png",
-//       "./img/block/brick(16x8).png",
-//       "./img/block/brick(8x16).png",
-//       "./img/block/brick(8x8).png",
-//       "./img/block/concrete(16x8).png",
-//       "./img/block/eagle.png",
-//     ],
-//     [num]
-//   );
-// }

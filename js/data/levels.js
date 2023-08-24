@@ -1,3 +1,5 @@
+import { topBlok } from "./data.js";
+
 export const block0 = [
   [0, 0, 0, 0],
   [0, 0, 0, 0],
@@ -111,7 +113,7 @@ function levelMapConstructor(array) {
     d[0].push(d3);
   }
 
-  array.forEach((element, key) => {
+  array.forEach((element) => {
     let a = [[]];
     let b = [[]];
     let c = [[]];
@@ -150,7 +152,11 @@ function levelMapConstructor(array) {
     d = [[]];
     a = [[]];
   });
-  // console.log(levelMap);
 }
 levelMapConstructor(level1);
-// export let levelConstruktor = [{}];
+
+export let arrayId = [];
+
+export function shootingIdMap() {
+  
+}
