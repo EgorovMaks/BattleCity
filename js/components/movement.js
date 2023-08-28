@@ -35,7 +35,7 @@ export function movement(tanks) {
   let left = parseFloat(tanks.style.left);
   let topPozition = Math.round(((up / topBlok) * topBlok) / 4);
   let leftPozition = Math.round(((left / topBlok) * topBlok) / 4);
-  console.log(topPozition,leftPozition)
+  // console.log(topPozition,leftPozition)
   if (eventUp === "up") {
     movementUp(up, left, topPozition, leftPozition, tanks);
   } else if (eventDown === "down") {

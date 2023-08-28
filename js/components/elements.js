@@ -12,7 +12,6 @@ export function createElement(
   div.id = `${id}`;
   div.classList.add(className);
   div.innerHTML = `
-    <div id="aGunTop" class="  trackUpTank track2tank trackTank"></div>    
   <img src=${urlUp} alt=${type} class="active up ${type}" style="width: 100%; height:  100%;"> 
   <img src=${urlUp2} alt=${type} class="up ${type}" style="width: 100%; height:  100%;">
   <img src=${urlDown} alt=${type} class=" down ${type}" style="width: 100%; height:  100%;">
@@ -63,9 +62,9 @@ export function createBlocks(
 export function missile(canvas, [x, y]) {
   const div = document.createElement("div");
   div.id = "missile";
-  div.style.cssText = `width: 4px; height: 4px; top: ${y}px; left: ${x}px;`;
-  const body = document.querySelector("body");
-  const newDiv = body.appendChild(div);
+  div.style.cssText = `width: 3px; height: 4px; top: ${y}px; left: ${x}px;`;
+  // const body = document.querySelector("body");
+  const newDiv = canvas.appendChild(div);
 }
 export let divId = "";
 

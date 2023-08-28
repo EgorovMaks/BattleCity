@@ -6,6 +6,7 @@ export let eventUp = "";
 export let eventDown = "";
 export let eventLeft = "";
 export let eventRight = "";
+export let shootingDirection = "up"
 
 function reassignment(e) {
   if (e === true) {
@@ -33,15 +34,19 @@ function reassignment(e) {
 
 export const keyPress = document.addEventListener("keydown", function (e) {
   if (e.key === "ArrowUp" || e.key === "w" || e.key === "ц") {
+    shootingDirection="up"
     reassignment(true);
     eventUp = "up";
   } else if (e.key === "ArrowDown" || e.key === "s" || e.key === "ы") {
+    shootingDirection = "down";
     reassignment(true);
     eventDown = "down";
   } else if (e.key === "ArrowLeft" || e.key === "a" || e.key === "ф") {
+    shootingDirection = "left";
     reassignment(true);
     eventLeft = "left";
   } else if (e.key === "ArrowRight" || e.key === "d" || e.key === "в") {
+    shootingDirection = "right";
     reassignment(true);
     eventRight = "right";
   } else if (e.key === " ") {
