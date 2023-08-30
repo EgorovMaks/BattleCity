@@ -1,4 +1,5 @@
 // import { shootingIdMap } from "../data/levels.js";
+import { levelMapConstructorId } from "../data/levels.js";
 import { id } from "./elements.js";
 import { animation } from "./movement.js";
 
@@ -14,6 +15,7 @@ export let loopStart = setInterval(function () {
     gameLoop();
     animation(tank1);
     clearInterval(loopStart);
+    // levelMapConstructorId()
     // shootingIdMap();
   }
 }, 10);

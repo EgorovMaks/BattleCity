@@ -1,3 +1,4 @@
+import { missileTrack } from "../components/elements.js";
 import { topBlok } from "./data.js";
 
 export const block0 = [
@@ -155,8 +156,27 @@ function levelMapConstructor(array) {
 }
 levelMapConstructor(level1);
 
-export let arrayId = [];
-
-export function shootingIdMap() {
-  
+export let levelMapId = [];
+export function levelMapConstructorId() {
+  // console.log(levelMap);
+  levelMap.forEach((e, k) => {
+    levelMapId.push(...[[]]);
+    e.forEach((el, key) => {
+      if (el === 0) {
+        levelMapId[k].push(el);
+      } else if (el === 1) {
+        missileTrack((k * topBlok) / 4, (key * topBlok) / 4);
+        let div = document.querySelector("#missileTrack");
+        let x = div.getBoundingClientRect().x;
+        let y = div.getBoundingClientRect().y;
+        let divBlock = document.elementFromPoint(x, y);
+        // console.log(divBlock);
+        levelMapId[k].push(divBlock.id);
+        div.remove();
+      } else {
+        levelMapId[k].push(el);
+      }
+    });
+  });
+  // console.log(levelMapId);
 }
