@@ -1,4 +1,5 @@
 import { randomNumber, topBlok } from "../data/data.js";
+import { levelMapMovement } from "../data/levels.js";
 
 export const map = document.querySelector("#BattleCity");
 
@@ -9,6 +10,10 @@ export function createElement(
 ) {
   const div = document.createElement("div");
   div.style.cssText = `width: ${width}; height: ${height}; top: ${top}; left: ${left}`;
+  levelMapMovement(
+    parseFloat(top) / (topBlok / 4),
+    parseFloat(left) / (topBlok / 4)
+  );
   div.id = `${id}`;
   div.classList.add(className);
   div.innerHTML = `
@@ -59,11 +64,15 @@ export function createBlocks(
   });
 }
 
-export function missile(canvas, [x, y]) {
+export function missile(canvas, [x, y], poz) {
   const div = document.createElement("div");
-  div.id = "missile";
   div.style.cssText = `width: 3px; height: 4px; top: ${y}px; left: ${x}px;`;
   // const body = document.querySelector("body");
+  if (poz === "left") {
+    div.id = "missileLeft";
+  } else {
+    div.id = "missile";
+  }
   const newDiv = canvas.appendChild(div);
 }
 export let divId = "";

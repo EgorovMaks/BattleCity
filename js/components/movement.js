@@ -2,7 +2,7 @@ import { eventDown, eventLeft, eventRight, eventUp } from "./events.js";
 import { animationDirection } from "./elements.js";
 import { tankSpeed, topBlok } from "../data/data.js";
 import { tank1 } from "./game.js";
-import { levelMap } from "../data/levels.js";
+import { levelMap, levelMapMovement } from "../data/levels.js";
 
 export function animation(el) {
   const anim = el.querySelectorAll(".tank");
@@ -90,6 +90,8 @@ function movementUp(up, left, topPozition, leftPozition, tanks) {
   } else if (b === false) {
     adjustment("top");
   }
+  levelMapMovement(topPozition, leftPozition, "up");
+  console.log(1);
 }
 function movementDown(up, left, topPozition, leftPozition, tanks) {
   let a = [];

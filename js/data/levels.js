@@ -178,5 +178,32 @@ export function levelMapConstructorId() {
       }
     });
   });
-  // console.log(levelMapId);
+}
+export function levelMapMovement(top, left, eraser) {
+  if (eraser === "up") {
+    console.log(top);
+    if (top < 48) {
+      levelMap[top + 4][left + 0] = 0;
+      levelMap[top + 4][left + 1] = 0;
+      levelMap[top + 4][left + 2] = 0;
+      levelMap[top + 4][left + 3] = 0;
+    }
+  }
+  let num = 1;
+  levelMap[top + 0][left + 0] = num;
+  levelMap[top + 1][left + 0] = num;
+  levelMap[top + 2][left + 0] = num;
+  levelMap[top + 3][left + 0] = num;
+  levelMap[top + 0][left + 1] = num;
+  levelMap[top + 1][left + 1] = num;
+  levelMap[top + 2][left + 1] = num;
+  levelMap[top + 3][left + 1] = num;
+  levelMap[top + 0][left + 2] = num;
+  levelMap[top + 1][left + 2] = num;
+  levelMap[top + 2][left + 2] = num;
+  levelMap[top + 3][left + 2] = num;
+  levelMap[top + 0][left + 3] = num;
+  levelMap[top + 1][left + 3] = num;
+  levelMap[top + 2][left + 3] = num;
+  levelMap[top + 3][left + 3] = num;
 }

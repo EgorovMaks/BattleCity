@@ -1,10 +1,13 @@
 import { topBlok } from "../data/data.js";
-import { levelMap, levelMapId } from "../data/levels.js";
+import { levelMap } from "../data/levels.js";
 import { divId, map, missile, missileTrack } from "./elements.js";
 import { shootingDirection } from "./events.js";
 import { tank1 } from "./game.js";
 let stop = false;
-let top = 0;
+let top = 4;
+let left = 0;
+let right = (52 * topBlok) / 4;
+let down = (52 * topBlok) / 4;
 let pozitionTop = false;
 let pozitionDown = false;
 let pozitionLeft = false;
@@ -48,148 +51,72 @@ function shotDescription(shootingDirection) {
     ((parseFloat(tank1.style.left) / topBlok) * topBlok) / 4
   );
 
-  if (shootingDirection === "up") {
-    while (topPozCenter >= 0) {
-      if (
-        levelMap[topPozCenter - 1][leftPozCenter + 1] === 1 ||
-        levelMap[topPozCenter - 1][leftPozCenter + 2] === 1
-      ) {
-        shotMap = [
-          [
-            [topPozCenter - 2, leftPozCenter],
-            [topPozCenter - 2, leftPozCenter + 1],
-            [topPozCenter - 2, leftPozCenter + 2],
-            [topPozCenter - 2, leftPozCenter + 3],
-          ],
-          [
-            [topPozCenter - 1, leftPozCenter],
-            [topPozCenter - 1, leftPozCenter + 1],
-            [topPozCenter - 1, leftPozCenter + 2],
-            [topPozCenter - 1, leftPozCenter + 3],
-          ],
-          [
-            [topPozCenter, leftPozCenter],
-            [topPozCenter, leftPozCenter + 1],
-            [topPozCenter, leftPozCenter + 2],
-            [topPozCenter, leftPozCenter + 3],
-          ],
-        ];
-        shotMap.forEach((e) =>
-          e.forEach((el) => {
-            missileTrack((el[0] * topBlok) / 4, (el[1] * topBlok) / 4);
-          })
-        );
+  if (shootingDirection === "up" && stop === false) {
+    stop = true;
+    missile(map, [
+      ((leftPozCenter + 2) * topBlok) / 4,
+      (topPozCenter * topBlok) / 4,
+    ]);
+    while (topPozCenter > 0) {
+      // if (
+      //   levelMap[topPozCenter - 1][leftPozCenter + 1] === 1 ||
+      //   levelMap[topPozCenter - 1][leftPozCenter + 2] === 1
+      // ) 
+      {
+        // top = ((topPozCenter - 1) * topBlok) / 4;
         break;
       }
-      topPozCenter--;
+      // topPozCenter--;
     }
     pozitionTop = true;
-  } else if (shootingDirection === "down") {
-    while (topPozCenter <= 52) {
+  } else if (shootingDirection === "down" && stop === false) {
+    stop = true;
+    missile(map, [
+      ((leftPozCenter + 2) * topBlok) / 4,
+      ((topPozCenter + 5) * topBlok) / 4,
+    ]);
+    while (topPozCenter <= 48) {
       if (
         levelMap[topPozCenter + 3][leftPozCenter + 1] === 1 ||
         levelMap[topPozCenter + 3][leftPozCenter + 2] === 1
       ) {
-        shotMap = [
-          [
-            [topPozCenter + 2, leftPozCenter],
-            [topPozCenter + 2, leftPozCenter + 1],
-            [topPozCenter + 2, leftPozCenter + 2],
-            [topPozCenter + 2, leftPozCenter + 3],
-          ],
-          [
-            [topPozCenter + 3, leftPozCenter],
-            [topPozCenter + 3, leftPozCenter + 1],
-            [topPozCenter + 3, leftPozCenter + 2],
-            [topPozCenter + 3, leftPozCenter + 3],
-          ],
-          [
-            [topPozCenter + 4, leftPozCenter],
-            [topPozCenter + 4, leftPozCenter + 1],
-            [topPozCenter + 4, leftPozCenter + 2],
-            [topPozCenter + 4, leftPozCenter + 3],
-          ],
-        ];
-        shotMap.forEach((e) =>
-          e.forEach((el) => {
-            missileTrack((el[0] * topBlok) / 4, (el[1] * topBlok) / 4);
-          })
-        );
+        down = ((topPozCenter + 3) * topBlok) / 4;
         break;
       }
       topPozCenter++;
     }
     pozitionDown = true;
-  } else if (shootingDirection === "left") {
+  } else if (shootingDirection === "left" && stop === false) {
+    stop = true;
+    missile(
+      map,
+      [((leftPozCenter - 1) * topBlok) / 4, ((topPozCenter + 2) * topBlok) / 4],
+      "left"
+    );
     while (leftPozCenter >= 0) {
-      console.log(leftPozCenter);
       if (
         levelMap[topPozCenter + 1][leftPozCenter] === 1 ||
         levelMap[topPozCenter + 2][leftPozCenter] === 1
       ) {
-        console.log();
-        shotMap = [
-          [
-            [topPozCenter, leftPozCenter + 1],
-            [topPozCenter + 1, leftPozCenter + 1],
-            [topPozCenter + 2, leftPozCenter + 1],
-            [topPozCenter + 3, leftPozCenter + 1],
-          ],
-          [
-            [topPozCenter, leftPozCenter],
-            [topPozCenter + 1, leftPozCenter],
-            [topPozCenter + 2, leftPozCenter],
-            [topPozCenter + 3, leftPozCenter],
-          ],
-          [
-            [topPozCenter, leftPozCenter - 1],
-            [topPozCenter + 1, leftPozCenter - 1],
-            [topPozCenter + 2, leftPozCenter - 1],
-            [topPozCenter + 3, leftPozCenter - 1],
-          ],
-        ];
-        shotMap.forEach((e) =>
-          e.forEach((el) => {
-            missileTrack((el[0] * topBlok) / 4, (el[1] * topBlok) / 4);
-          })
-        );
+        left = ((leftPozCenter + 1) * topBlok) / 4;
         break;
       }
       leftPozCenter--;
     }
     pozitionLeft = true;
   } else if (shootingDirection === "right") {
+    stop = true;
+    missile(
+      map,
+      [((leftPozCenter +3) * topBlok) / 4, ((topPozCenter + 2) * topBlok) / 4],
+      "left"
+    );
     while (leftPozCenter <= 54) {
       if (
         levelMap[topPozCenter + 1][leftPozCenter + 4] === 1 ||
         levelMap[topPozCenter + 2][leftPozCenter + 4] === 1
       ) {
-        console.log();
-        shotMap = [
-          [
-            [topPozCenter, leftPozCenter + 3],
-            [topPozCenter + 1, leftPozCenter + 3],
-            [topPozCenter + 2, leftPozCenter + 3],
-            [topPozCenter + 3, leftPozCenter + 3],
-          ],
-          [
-            [topPozCenter, leftPozCenter + 4],
-            [topPozCenter + 1, leftPozCenter + 4],
-            [topPozCenter + 2, leftPozCenter + 4],
-            [topPozCenter + 3, leftPozCenter + 4],
-          ],
-          [
-            [topPozCenter, leftPozCenter + 5],
-            [topPozCenter + 1, leftPozCenter + 5],
-            [topPozCenter + 2, leftPozCenter + 5],
-            [topPozCenter + 3, leftPozCenter + 5],
-          ],
-        ];
-        shotMap.forEach((e) =>
-          e.forEach((el) => {
-            missileTrack((el[0] * topBlok) / 4, (el[1] * topBlok) / 4);
-          })
-        );
+        right = ((leftPozCenter + 4) * topBlok) / 4;
         break;
       }
       leftPozCenter++;
@@ -200,9 +127,82 @@ function shotDescription(shootingDirection) {
 
 function shotIntersection(shootingDirection) {
   if (pozitionTop === true) {
+    let missile = document.querySelector("#missile");
+    if (missile !== null) {
+      let missilePoz = parseFloat(missile.style.top);
+      let missilePozNew = missilePoz - 8;
+      if (missilePoz <= top) {
+        missilePozNew = top;
+        missile.style.top = `${missilePozNew}px`;
+        missile.remove();
+        top = 4;
+        stop = false;
+        pozitionTop = false;
+        pozitionDown = false;
+        pozitionLeft = false;
+        pozitionRight = false;
+      } else {
+        missile.style.top = `${missilePozNew}px`;
+      }
+    }
   } else if (pozitionDown === true) {
+    let missile = document.querySelector("#missile");
+    if (missile !== null) {
+      let missilePoz = parseFloat(missile.style.top);
+      let missilePozNew = missilePoz + 8;
+      if (missilePoz >= down) {
+        missilePozNew = down;
+        missile.style.top = `${missilePozNew}px`;
+        missile.remove();
+        down = (52 * topBlok) / 4;
+        stop = false;
+        pozitionTop = false;
+        pozitionDown = false;
+        pozitionLeft = false;
+        pozitionRight = false;
+      } else {
+        missile.style.top = `${missilePozNew}px`;
+      }
+    }
   } else if (pozitionLeft === true) {
+    let missile = document.querySelector("#missileLeft");
+    if (missile !== null) {
+      let missilePoz = parseFloat(missile.style.left);
+      let missilePozNew = missilePoz - 8;
+      if (missilePoz <= left) {
+        missilePozNew = left;
+        missile.style.left = `${missilePozNew}px`;
+        missile.remove();
+        left = 0;
+        stop = false;
+        pozitionTop = false;
+        pozitionDown = false;
+        pozitionLeft = false;
+        pozitionRight = false;
+      } else {
+        missile.style.left = `${missilePozNew}px`;
+      }
+    }
   } else if (pozitionRight === true) {
+    let missile = document.querySelector("#missileLeft");
+    if (missile !== null) {
+      let missilePoz = parseFloat(missile.style.left);
+      let missilePozNew = missilePoz + 8;
+    console.log(missilePoz)
+      if (missilePoz >= right) {
+        missilePozNew = right;
+        missile.style.left = `${missilePozNew}px`;
+        missile.remove();
+        right = (52 * topBlok) / 4;
+        stop = false;
+        pozitionTop = false;
+        pozitionDown = false;
+        pozitionLeft = false;
+        pozitionRight = false;
+      } else {
+        missile.style.left = `${missilePozNew}px`;
+      }
+    }
   }
 
   // pozitionTop = false;

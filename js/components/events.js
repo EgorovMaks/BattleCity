@@ -1,4 +1,5 @@
 
+import { levelMap } from "../data/levels.js";
 import { adjustment } from "./movement.js";
 import { shooting } from "./shooting.js";
 
@@ -50,6 +51,7 @@ export const keyPress = document.addEventListener("keydown", function (e) {
     reassignment(true);
     eventRight = "right";
   } else if (e.key === " ") {
+    console.log(levelMap);
     shooting()
   }
 });

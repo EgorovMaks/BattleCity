@@ -25,7 +25,15 @@ body {
   background-color: red;
   transform: translateX(-50%) translateY(-100%);
 }
-#missileTrack{
+
+#missileLeft {
+  position: fixed;
+  z-index: 10;
+  background-color: red;
+  transform: translateX(50%) translateY(-50%) rotate(90deg);
+}
+
+#missileTrack {
 
   pointer-events: none;
   background: #fff;
@@ -49,7 +57,7 @@ div img {
 }
 
 #tank1User {
-  pointer-events: none;
+  /* pointer-events: none; */
 }
 
 div .active {
@@ -129,16 +137,17 @@ div .active {
   left: -1%;
 }
 
-.trackTankWrapRight{
+.trackTankWrapRight {
   position: absolute;
-    width: 1px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    top: 0;
-    left: 100%;
+  width: 1px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  top: 0;
+  left: 100%;
 }
+
 .trackRight,
 .trackLeft,
 .trackBottom,
