@@ -60,6 +60,8 @@ div img {
   /* pointer-events: none; */
 }
 
+
+
 div .active {
   display: block;
   width: 100%;
@@ -161,6 +163,14 @@ div .active {
 .track2tank {
   top: 0%;
   left: 50%;
+}
+
+.bcgr img {
+  display: none;
+}
+
+.bcgr {
+  background: #636363;
 }
 
 

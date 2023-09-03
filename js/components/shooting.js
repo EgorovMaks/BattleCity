@@ -4,7 +4,7 @@ import { divId, map, missile, missileTrack } from "./elements.js";
 import { shootingDirection } from "./events.js";
 import { tank1 } from "./game.js";
 let stop = false;
-let top = 4;
+let top = 0;
 let left = 0;
 let right = (52 * topBlok) / 4;
 let down = (52 * topBlok) / 4;
@@ -57,17 +57,6 @@ function shotDescription(shootingDirection) {
       ((leftPozCenter + 2) * topBlok) / 4,
       (topPozCenter * topBlok) / 4,
     ]);
-    while (topPozCenter > 0) {
-      // if (
-      //   levelMap[topPozCenter - 1][leftPozCenter + 1] === 1 ||
-      //   levelMap[topPozCenter - 1][leftPozCenter + 2] === 1
-      // ) 
-      {
-        // top = ((topPozCenter - 1) * topBlok) / 4;
-        break;
-      }
-      // topPozCenter--;
-    }
     pozitionTop = true;
   } else if (shootingDirection === "down" && stop === false) {
     stop = true;
@@ -108,7 +97,7 @@ function shotDescription(shootingDirection) {
     stop = true;
     missile(
       map,
-      [((leftPozCenter +3) * topBlok) / 4, ((topPozCenter + 2) * topBlok) / 4],
+      [((leftPozCenter + 3) * topBlok) / 4, ((topPozCenter + 2) * topBlok) / 4],
       "left"
     );
     while (leftPozCenter <= 54) {
@@ -129,20 +118,30 @@ function shotIntersection(shootingDirection) {
   if (pozitionTop === true) {
     let missile = document.querySelector("#missile");
     if (missile !== null) {
-      let missilePoz = parseFloat(missile.style.top);
-      let missilePozNew = missilePoz - 8;
-      if (missilePoz <= top) {
-        missilePozNew = top;
+      let missilePozTop = parseFloat(missile.style.top);
+      let missilePozLeft = parseFloat(missile.style.left);
+      let missilePozNew = missilePozTop - 8;
+      let topPoz = missilePozTop / (topBlok / 4) - 1;
+      let topLeft = missilePozLeft / (topBlok / 4);
+      let arrPoz = levelMap[topPoz][topLeft];
+      let arrPoz2 = levelMap[topPoz + 1][topLeft];
+      console.log(arrPoz,arrPoz2);
+      if (levelMap[topPoz][topLeft] === 0) {
         missile.style.top = `${missilePozNew}px`;
+      } else if (levelMap[topPoz][topLeft] === 19) {
         missile.remove();
-        top = 4;
         stop = false;
         pozitionTop = false;
         pozitionDown = false;
         pozitionLeft = false;
         pozitionRight = false;
-      } else {
-        missile.style.top = `${missilePozNew}px`;
+      } else if (levelMap[topPoz][topLeft] === 1) {
+        missile.remove();
+        stop = false;
+        pozitionTop = false;
+        pozitionDown = false;
+        pozitionLeft = false;
+        pozitionRight = false;
       }
     }
   } else if (pozitionDown === true) {
@@ -188,7 +187,7 @@ function shotIntersection(shootingDirection) {
     if (missile !== null) {
       let missilePoz = parseFloat(missile.style.left);
       let missilePozNew = missilePoz + 8;
-    console.log(missilePoz)
+      console.log(missilePoz);
       if (missilePoz >= right) {
         missilePozNew = right;
         missile.style.left = `${missilePozNew}px`;

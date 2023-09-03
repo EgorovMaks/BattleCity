@@ -6,7 +6,7 @@ import { randomNumber, topBlok } from "../data/data.js";
 
 export function createTank1User() {
   createElement(
-    ["tank", map, `${topBlok * 12}px`, `${topBlok * 4}px`, "tank1User"],
+    ["tank", map, `${topBlok * 13}px`, `${topBlok * 5}px`, "tank1User"],
 
     // ["tank", map, "6%", "40%", "tank1User"],
     [`${topBlok}px`, `${topBlok}px`],
@@ -107,6 +107,15 @@ export function levelLoad() {
           [key, k, el],
           ["./img/block/eagle.png"],
           []
+        );
+      } else if (el === 19) {
+        createBlocks(
+          blocks.block111,
+          map,
+          [topBlok, topBlok],
+          [key, k, el],
+          ["./img/block/eagle.png"],
+          ["bcgr"]
         );
       }
     });

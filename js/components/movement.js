@@ -83,8 +83,8 @@ function movementUp(up, left, topPozition, leftPozition, tanks) {
   }
   if (b === true) {
     up = up - tankSpeed;
-    if (up < +0) {
-      up = 0;
+    if (up < 16) {
+      up = 16;
     }
     tanks.style.top = `${up}px`;
   } else if (b === false) {
@@ -95,7 +95,8 @@ function movementUp(up, left, topPozition, leftPozition, tanks) {
 function movementDown(up, left, topPozition, leftPozition, tanks) {
   let a = [];
   let b = true;
-  if (up < topBlok * 12 - topBlok / 8) {
+  console.log(topBlok * 13 - topBlok / 8);
+  if (up < topBlok * 13 - topBlok / 8) {
     a = [
       levelMap[topPozition + 4][leftPozition],
       levelMap[topPozition + 4][leftPozition + 1],
@@ -103,7 +104,7 @@ function movementDown(up, left, topPozition, leftPozition, tanks) {
       levelMap[topPozition + 4][leftPozition + 3],
     ];
     a.forEach((e) => {
-      if (e === 1 || e === 2) {
+      if (e === 1 || e === 2 || e == 19) {
         b = false;
         return;
       }
@@ -111,8 +112,8 @@ function movementDown(up, left, topPozition, leftPozition, tanks) {
   }
   if (b === true) {
     up = up + tankSpeed;
-    if (up >= topBlok * 12) {
-      up = topBlok * 12;
+    if (up >= topBlok * 13) {
+      up = topBlok * 13;
     }
     tanks.style.top = `${up}px`;
   } else if (b === false) {
@@ -132,15 +133,15 @@ function movementLeft(up, left, topPozition, leftPozition, tanks) {
     ];
   }
   a.forEach((e) => {
-    if (e === 1 || e === 2) {
+    if (e === 1 || e === 2 || e === 19) {
       b = false;
       return;
     }
   });
   if (b === true) {
     left = left - tankSpeed;
-    if (left <= 0) {
-      left = 0;
+    if (left <= 16) {
+      left = 16;
     }
     tanks.style.left = `${left}px`;
   } else if (b === false) {
@@ -167,8 +168,8 @@ function movementRight(up, left, topPozition, leftPozition, tanks) {
   }
   if (b === true) {
     left = left + tankSpeed;
-    if (left >= topBlok * 12) {
-      left = topBlok * 12;
+    if (left >= topBlok * 13) {
+      left = topBlok * 13;
     }
     tanks.style.left = `${left}px`;
   } else if (b === false) {
