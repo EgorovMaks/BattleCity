@@ -1,29 +1,12 @@
 import { map, createElement, createBlocks } from "./elements.js";
 import { id } from "./elements.js";
 import { animation } from "./movement.js";
-import {
-  block1,
-  block111,
-  block12,
-  block2,
-  block3,
-  block4,
-  block5,
-  block6,
-  block7,
-  level1,
-} from "../data/levels.js";
+import { blocks, level1 } from "../data/levels.js";
 import { randomNumber, topBlok } from "../data/data.js";
 
 export function createTank1User() {
   createElement(
-    [
-      "tank",
-      map,
-      `${topBlok * 12}px`,
-      `${topBlok * 4}px`,
-      "tank1User",
-    ],
+    ["tank", map, `${topBlok * 12}px`, `${topBlok * 4}px`, "tank1User"],
 
     // ["tank", map, "6%", "40%", "tank1User"],
     [`${topBlok}px`, `${topBlok}px`],
@@ -46,7 +29,7 @@ export function levelLoad() {
     element.forEach((el, k) => {
       if (el === 1) {
         createBlocks(
-          block1,
+          blocks.block1,
           map,
           [topBlok / 4, topBlok / 4],
           [key, k, el],
@@ -55,7 +38,7 @@ export function levelLoad() {
         );
       } else if (el === 2) {
         createBlocks(
-          block2,
+          blocks.block2,
           map,
           [topBlok / 4, topBlok / 4],
           [key, k, el],
@@ -64,7 +47,7 @@ export function levelLoad() {
         );
       } else if (el === 3) {
         createBlocks(
-          block3,
+          blocks.block3,
           map,
           [topBlok / 4, topBlok / 4],
           [key, k, el],
@@ -73,7 +56,7 @@ export function levelLoad() {
         );
       } else if (el === 4) {
         createBlocks(
-          block4,
+          blocks.block4,
           map,
           [topBlok / 4, topBlok / 4],
           [key, k, el],
@@ -82,7 +65,7 @@ export function levelLoad() {
         );
       } else if (el === 5) {
         createBlocks(
-          block5,
+          blocks.block5,
           map,
           [topBlok / 4, topBlok / 4],
           [key, k, el],
@@ -91,7 +74,7 @@ export function levelLoad() {
         );
       } else if (el === 6) {
         createBlocks(
-          block6,
+          blocks.block6,
           map,
           [topBlok / 4, topBlok / 4],
           [key, k, el],
@@ -100,7 +83,7 @@ export function levelLoad() {
         );
       } else if (el === 7) {
         createBlocks(
-          block7,
+          blocks.block7,
           map,
           [topBlok / 4, topBlok / 4],
           [key, k, el],
@@ -109,7 +92,7 @@ export function levelLoad() {
         );
       } else if (el === 12) {
         createBlocks(
-          block12,
+          blocks.block12,
           map,
           [topBlok / 2, topBlok / 2],
           [key, k, el],
@@ -118,7 +101,7 @@ export function levelLoad() {
         );
       } else if (el === 111) {
         createBlocks(
-          block111,
+          blocks.block111,
           map,
           [topBlok, topBlok],
           [key, k, el],
@@ -129,4 +112,3 @@ export function levelLoad() {
     });
   });
 }
-

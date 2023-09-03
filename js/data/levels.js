@@ -1,61 +1,60 @@
-import { missileTrack } from "../components/elements.js";
-import { topBlok } from "./data.js";
 
-export const block0 = [
-  [0, 0, 0, 0],
-  [0, 0, 0, 0],
-  [0, 0, 0, 0],
-  [0, 0, 0, 0],
-];
 
-export const block1 = [
-  [1, 2, 1, 2],
-  [2, 1, 2, 1],
-  [1, 2, 1, 2],
-  [2, 1, 2, 1],
-];
-export const block2 = [
-  [1, 2, 1, 2],
-  [2, 1, 2, 1],
-  [0, 0, 0, 0],
-  [0, 0, 0, 0],
-];
-export const block3 = [
-  [0, 0, 0, 0],
-  [0, 0, 0, 0],
-  [1, 2, 1, 2],
-  [2, 1, 2, 1],
-];
-export const block4 = [
-  [0, 0, 1, 2],
-  [0, 0, 2, 1],
-  [0, 0, 1, 2],
-  [0, 0, 2, 1],
-];
-export const block5 = [
-  [1, 2, 0, 0],
-  [2, 1, 0, 0],
-  [1, 2, 0, 0],
-  [2, 1, 0, 0],
-];
-export const block6 = [
-  [0, 0, 0, 0],
-  [0, 0, 0, 0],
-  [0, 0, 1, 2],
-  [0, 0, 2, 1],
-];
-export const block7 = [
-  [0, 0, 0, 0],
-  [0, 0, 0, 0],
-  [1, 2, 0, 0],
-  [2, 1, 0, 0],
-];
-
-export const block12 = [
-  [1, 1],
-  [0, 0],
-];
-export const block111 = [[1]];
+export const blocks = {
+  block0: [
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+  ],
+  block1: [
+    [1, 2, 1, 2],
+    [2, 1, 2, 1],
+    [1, 2, 1, 2],
+    [2, 1, 2, 1],
+  ],
+  block2: [
+    [1, 2, 1, 2],
+    [2, 1, 2, 1],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+  ],
+  block3: [
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [1, 2, 1, 2],
+    [2, 1, 2, 1],
+  ],
+  block4: [
+    [0, 0, 1, 2],
+    [0, 0, 2, 1],
+    [0, 0, 1, 2],
+    [0, 0, 2, 1],
+  ],
+  block5: [
+    [1, 2, 0, 0],
+    [2, 1, 0, 0],
+    [1, 2, 0, 0],
+    [2, 1, 0, 0],
+  ],
+  block6: [
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 1, 2],
+    [0, 0, 2, 1],
+  ],
+  block7: [
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [1, 2, 0, 0],
+    [2, 1, 0, 0],
+  ],
+  block12: [
+    [1, 1],
+    [0, 0],
+  ],
+  block111: [[1]],
+};
 
 export let level1 = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -121,28 +120,27 @@ function levelMapConstructor(array) {
     let d = [[]];
     element.forEach((e) => {
       if (e === 0) {
-        arrayConstructor(a, b, c, d, arrayCopy(block0, 1));
+        arrayConstructor(a, b, c, d, arrayCopy(blocks.block0, 1));
       } else if (e === 1) {
-        arrayConstructor(a, b, c, d, arrayCopy(block1, 1));
+        arrayConstructor(a, b, c, d, arrayCopy(blocks.block1, 1));
       } else if (e === 2) {
-        arrayConstructor(a, b, c, d, arrayCopy(block2, 1));
+        arrayConstructor(a, b, c, d, arrayCopy(blocks.block2, 1));
       } else if (e === 3) {
-        arrayConstructor(a, b, c, d, arrayCopy(block3, 1));
+        arrayConstructor(a, b, c, d, arrayCopy(blocks.block3, 1));
       } else if (e === 4) {
-        arrayConstructor(a, b, c, d, arrayCopy(block4, 1));
+        arrayConstructor(a, b, c, d, arrayCopy(blocks.block4, 1));
       } else if (e === 5) {
-        arrayConstructor(a, b, c, d, arrayCopy(block5, 1));
+        arrayConstructor(a, b, c, d, arrayCopy(blocks.block5, 1));
       } else if (e === 6) {
-        arrayConstructor(a, b, c, d, arrayCopy(block6, 1));
+        arrayConstructor(a, b, c, d, arrayCopy(blocks.block6, 1));
       } else if (e === 7) {
-        arrayConstructor(a, b, c, d, arrayCopy(block7, 1));
+        arrayConstructor(a, b, c, d, arrayCopy(blocks.block7, 1));
       } else if (e === 12) {
-        arrayConstructor(a, b, c, d, arrayCopy(block2, 2));
+        arrayConstructor(a, b, c, d, arrayCopy(blocks.block2, 2));
       } else if (e === 111) {
-        arrayConstructor(a, b, c, d, arrayCopy(block1, 3));
+        arrayConstructor(a, b, c, d, arrayCopy(blocks.block1, 3));
       }
     });
-    // console.log(a,b,c,d);
     levelMap.push(...a);
     levelMap.push(...b);
     levelMap.push(...c);
@@ -156,54 +154,67 @@ function levelMapConstructor(array) {
 }
 levelMapConstructor(level1);
 
-export let levelMapId = [];
-export function levelMapConstructorId() {
-  // console.log(levelMap);
-  levelMap.forEach((e, k) => {
-    levelMapId.push(...[[]]);
-    e.forEach((el, key) => {
-      if (el === 0) {
-        levelMapId[k].push(el);
-      } else if (el === 1) {
-        missileTrack((k * topBlok) / 4, (key * topBlok) / 4);
-        let div = document.querySelector("#missileTrack");
-        let x = div.getBoundingClientRect().x;
-        let y = div.getBoundingClientRect().y;
-        let divBlock = document.elementFromPoint(x, y);
-        // console.log(divBlock);
-        levelMapId[k].push(divBlock.id);
-        div.remove();
-      } else {
-        levelMapId[k].push(el);
-      }
-    });
-  });
-}
+// export let levelMapId = [];
+// export function levelMapConstructorId() {
+//   // console.log(levelMap);
+//   levelMap.forEach((e, k) => {
+//     levelMapId.push(...[[]]);
+//     e.forEach((el, key) => {
+//       if (el === 0) {
+//         levelMapId[k].push(el);
+//       } else if (el === 1) {
+//         missileTrack((k * topBlok) / 4, (key * topBlok) / 4);
+//         let div = document.querySelector("#missileTrack");
+//         let x = div.getBoundingClientRect().x;
+//         let y = div.getBoundingClientRect().y;
+//         let divBlock = document.elementFromPoint(x, y);
+//         // console.log(divBlock);
+//         levelMapId[k].push(divBlock.id);
+//         div.remove();
+//       } else {
+//         levelMapId[k].push(el);
+//       }
+//     });
+//   });
+// }
 export function levelMapMovement(top, left, eraser) {
+  let num = 100;
+  const nums = [0, 1, 2, 3];
   if (eraser === "up") {
-    console.log(top);
     if (top < 48) {
-      levelMap[top + 4][left + 0] = 0;
-      levelMap[top + 4][left + 1] = 0;
-      levelMap[top + 4][left + 2] = 0;
-      levelMap[top + 4][left + 3] = 0;
+      nums.forEach((e) => {
+        if (levelMap[top + 4][left + e] === 100) {
+          levelMap[top + 4][left + e] = 0;
+        }
+      });
+    }
+  } else if (eraser === "down") {
+    if (top > 0) {
+      nums.forEach((e) => {
+        if (levelMap[top - 1][left + e] === 100) {
+          levelMap[top - 1][left + e] = 0;
+        }
+      });
+    }
+  } else if (eraser === "left") {
+    if (left < 48) {
+      nums.forEach((e) => {
+        if (levelMap[top + e][left + 4] === 100) {
+          levelMap[top + e][left + 4] = 0;
+        }
+      });
+    }
+  } else if (eraser === "right") {
+    if (left > 0) {
+      nums.forEach((e) => {
+        if (levelMap[top + e][left - 1] === 100) {
+          levelMap[top + e][left - 1] = 0;
+        }
+      });
     }
   }
-  let num = 1;
-  levelMap[top + 0][left + 0] = num;
-  levelMap[top + 1][left + 0] = num;
-  levelMap[top + 2][left + 0] = num;
-  levelMap[top + 3][left + 0] = num;
-  levelMap[top + 0][left + 1] = num;
-  levelMap[top + 1][left + 1] = num;
-  levelMap[top + 2][left + 1] = num;
-  levelMap[top + 3][left + 1] = num;
-  levelMap[top + 0][left + 2] = num;
-  levelMap[top + 1][left + 2] = num;
-  levelMap[top + 2][left + 2] = num;
-  levelMap[top + 3][left + 2] = num;
-  levelMap[top + 0][left + 3] = num;
-  levelMap[top + 1][left + 3] = num;
-  levelMap[top + 2][left + 3] = num;
-  levelMap[top + 3][left + 3] = num;
+  nums.forEach((e) => (levelMap[top + e][left + 0] = num));
+  nums.forEach((e) => (levelMap[top + e][left + 1] = num));
+  nums.forEach((e) => (levelMap[top + e][left + 2] = num));
+  nums.forEach((e) => (levelMap[top + e][left + 3] = num));
 }
