@@ -183,37 +183,29 @@ export function levelMapMovement(top, left, eraser) {
   let num = 100;
   const nums = [0, 1, 2, 3];
   if (eraser === "up") {
-    if (top < 48) {
       nums.forEach((e) => {
         if (levelMap[top + 4][left + e] === 100) {
           levelMap[top + 4][left + e] = 0;
         }
       });
-    }
   } else if (eraser === "down") {
-    if (top > 0) {
       nums.forEach((e) => {
         if (levelMap[top - 1][left + e] === 100) {
           levelMap[top - 1][left + e] = 0;
         }
       });
-    }
   } else if (eraser === "left") {
-    if (left < 48) {
       nums.forEach((e) => {
         if (levelMap[top + e][left + 4] === 100) {
           levelMap[top + e][left + 4] = 0;
         }
       });
-    }
   } else if (eraser === "right") {
-    if (left > 0) {
       nums.forEach((e) => {
         if (levelMap[top + e][left - 1] === 100) {
           levelMap[top + e][left - 1] = 0;
         }
       });
-    }
   }
   nums.forEach((e) => (levelMap[top + e][left + 0] = num));
   nums.forEach((e) => (levelMap[top + e][left + 1] = num));

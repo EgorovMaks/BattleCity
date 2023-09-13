@@ -51,7 +51,9 @@ export const keyPress = document.addEventListener("keydown", function (e) {
     reassignment(true);
     eventRight = "right";
   } else if (e.key === " ") {
-    console.log(levelMap);
+    // console.log(levelMap);
+
+  document.querySelectorAll("#missileTrack").forEach((e) => e.remove());
     shooting()
   }
 });
@@ -60,7 +62,7 @@ export const keyup = document.addEventListener("keyup", function (e) {
   if (e.key === "ArrowUp" || e.key === "w" || e.key === "ц") {
     reassignment();
     eventUp = "";
-    adjustment("top")
+    adjustment("top");
   } else if (e.key === "ArrowDown" || e.key === "s" || e.key === "ы") {
     reassignment();
     eventDown = "";
@@ -73,5 +75,7 @@ export const keyup = document.addEventListener("keyup", function (e) {
     reassignment();
     eventRight = "";
     adjustment("left");
+  } else if ( e.key === "f" || e.key === "а") {
+    // console.log(levelMap)
   }
 });

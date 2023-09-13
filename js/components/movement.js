@@ -91,11 +91,10 @@ function movementUp(up, left, topPozition, leftPozition, tanks) {
     adjustment("top");
   }
   levelMapMovement(topPozition, leftPozition, "up");
-}
+};
 function movementDown(up, left, topPozition, leftPozition, tanks) {
   let a = [];
   let b = true;
-  console.log(topBlok * 13 - topBlok / 8);
   if (up < topBlok * 13 - topBlok / 8) {
     a = [
       levelMap[topPozition + 4][leftPozition],
