@@ -210,18 +210,18 @@ function deletingBlocks(arr) {
   const point13 = arr[1][3][1];
 
   if (
-    levelMap[point11.top][point12.left] === 1 ||
-    levelMap[point12.top][point11.left] === 1
+    levelMap[point11.top][point11.left] === 1 ||
+    levelMap[point12.top][point12.left] === 1
   ) {
-      delArrBlock(point11);
-      delArrBlock(point10);
-      delArrBlock(point12);
-      delArrBlock(point13);
+    delArrBlock(point11);
+    delArrBlock(point10);
+    delArrBlock(point12);
+    delArrBlock(point13);
   } else {
-      delArrBlock(point01);
-      delArrBlock(point00);
-      delArrBlock(point02);
-      delArrBlock(point03);
+    delArrBlock(point01);
+    delArrBlock(point00);
+    delArrBlock(point02);
+    delArrBlock(point03);
   }
 
   const track = document.querySelectorAll("#missileTrack");
@@ -236,9 +236,11 @@ function deletingBlocks(arr) {
   });
 }
 
-function delArrBlock (const1){
-      missileTrack(const1.top, const1.left);
-      levelMap[const1.top][const1.left] = 0;
+function delArrBlock(const1) {
+  if (levelMap[const1.top][const1.left] === 1) {
+    missileTrack(const1.top, const1.left);
+    levelMap[const1.top][const1.left] = 0;
+  }
 }
 
 // elementFromPoint(x, y);
