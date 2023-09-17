@@ -76,6 +76,6 @@ export const keyup = document.addEventListener("keyup", function (e) {
     eventRight = "";
     adjustment("left");
   } else if ( e.key === "f" || e.key === "а") {
-    // console.log(levelMap)
+    console.log(levelMap)
   }
 });

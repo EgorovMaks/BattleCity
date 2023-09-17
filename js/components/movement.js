@@ -90,7 +90,7 @@ function movementUp(up, left, topPozition, leftPozition, tanks) {
   } else if (b === false) {
     adjustment("top");
   }
-  levelMapMovement(topPozition, leftPozition, "up");
+  levelMapMovement(topPozition, leftPozition, eventUp);
 };
 function movementDown(up, left, topPozition, leftPozition, tanks) {
   let a = [];
@@ -118,7 +118,7 @@ function movementDown(up, left, topPozition, leftPozition, tanks) {
   } else if (b === false) {
     adjustment("top");
   }
-  levelMapMovement(topPozition, leftPozition, "down");
+  levelMapMovement(topPozition, leftPozition, eventDown);
 }
 function movementLeft(up, left, topPozition, leftPozition, tanks) {
   let a = [];
@@ -146,7 +146,7 @@ function movementLeft(up, left, topPozition, leftPozition, tanks) {
   } else if (b === false) {
     adjustment("left");
   }
-  levelMapMovement(topPozition, leftPozition, "left");
+  levelMapMovement(topPozition, leftPozition, eventLeft);
 }
 function movementRight(up, left, topPozition, leftPozition, tanks) {
   let a = [];
@@ -174,5 +174,5 @@ function movementRight(up, left, topPozition, leftPozition, tanks) {
   } else if (b === false) {
     adjustment("left");
   }
-  levelMapMovement(topPozition, leftPozition, "right");
+  levelMapMovement(topPozition, leftPozition, eventRight);
 }

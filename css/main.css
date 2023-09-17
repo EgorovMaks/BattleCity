@@ -22,15 +22,16 @@ body {
 #missile {
   position: fixed;
   z-index: 10;
-  background-color: red;
+  background-color: #fff;
   transform: translateX(-50%) translateY(-100%);
+  pointer-events: none;
 }
 
 #missileLeft {
   position: fixed;
   z-index: 10;
   background-color: red;
-  transform: translateX(50%) translateY(-50%) rotate(90deg);
+  transform: translateX(50%) translateY(-50%) rotate(90deg);pointer-events: none;
 }
 
 #missileTrack {

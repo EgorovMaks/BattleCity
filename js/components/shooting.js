@@ -8,13 +8,7 @@ let pozitionTop = false;
 let pozitionDown = false;
 let pozitionLeft = false;
 let pozitionRight = false;
-let explosion = null;
-let arr = [
-  [[], [], [], []],
-  [[], [], [], []],
-  [[], [], [], []],
-  [[], [], [], []],
-];
+let arr = [];
 
 export function shooting() {
   if (shootingDirection === "up") {
@@ -88,7 +82,7 @@ function shotIntersection() {
   } else if (pozitionLeft === true) {
     shot(true, false, "left");
   } else if (pozitionRight === true) {
-    shot(false, false,"right");
+    shot(false, false, "right");
   }
 }
 
@@ -112,12 +106,12 @@ function shot(plusTrueFalse, topLeftPoz, desc) {
     arrey(desc, topPoz, topLeft);
     // console.log(arr)
     if (
-      arr[0][1] === 1 ||
-      arr[0][2] === 1 ||
-      arr[1][1] === 1 ||
-      arr[1][2] === 1
+      arr[0][1][0] === 1 ||
+      arr[0][2][0] === 1 ||
+      arr[1][1][0] === 1 ||
+      arr[1][2][0] === 1
     ) {
-      console.log(arr);
+      deletingBlocks(arr);
       missile.remove();
       stop = false;
       pozitionTop = false;
@@ -125,10 +119,10 @@ function shot(plusTrueFalse, topLeftPoz, desc) {
       pozitionLeft = false;
       pozitionRight = false;
     } else if (
-      arr[0][1] === 19 ||
-      arr[0][2] === 19 ||
-      arr[1][1] === 19 ||
-      arr[1][2] === 19
+      arr[0][1][0] === 19 ||
+      arr[0][2][0] === 19 ||
+      arr[1][1][0] === 19 ||
+      arr[1][2][0] === 19
     ) {
       missile.remove();
       topLeftPoz
@@ -152,114 +146,99 @@ function shot(plusTrueFalse, topLeftPoz, desc) {
 }
 
 function arrey(desc, topPoz, topLeft) {
+  const numsArr = [0, 1, 2, 3, 4];
   if (desc === "up") {
-    arr = [
-      [
-        levelMap[topPoz][topLeft - 1],
-        levelMap[topPoz][topLeft - 0],
-        levelMap[topPoz][topLeft + 1],
-        levelMap[topPoz][topLeft + 2],
-      ],
-      [
-        levelMap[topPoz + 1][topLeft - 1],
-        levelMap[topPoz + 1][topLeft - 0],
-        levelMap[topPoz + 1][topLeft + 1],
-        levelMap[topPoz + 1][topLeft + 2],
-      ],
-      [
-        levelMap[topPoz + 2][topLeft - 1],
-        levelMap[topPoz + 2][topLeft + 0],
-        levelMap[topPoz + 2][topLeft + 1],
-        levelMap[topPoz + 2][topLeft + 2],
-      ],
-      [
-        levelMap[topPoz + 3][topLeft - 1],
-        levelMap[topPoz + 3][topLeft + 0],
-        levelMap[topPoz + 3][topLeft + 1],
-        levelMap[topPoz + 3][topLeft + 2],
-      ],
-    ];
+    const nums = [-1, 0, 1, 2];
+    const num = [0, 1, 2, 3, -1];
+    arr = [[], [], [], [], [], [], [], []];
+    numsArr.forEach((el, k) => {
+      nums.forEach((e) =>
+        arr[el].push([
+          levelMap[topPoz + num[k]][topLeft + e],
+          { top: topPoz + num[k], left: topLeft + e },
+        ])
+      );
+    });
   } else if (desc === "down") {
-    arr = [
-      [
-        levelMap[topPoz][topLeft + 2],
-        levelMap[topPoz][topLeft + 1],
-        levelMap[topPoz][topLeft + 0],
-        levelMap[topPoz][topLeft - 1],
-      ],
-      [
-        levelMap[topPoz - 1][topLeft + 2],
-        levelMap[topPoz - 1][topLeft + 1],
-        levelMap[topPoz - 1][topLeft + 0],
-        levelMap[topPoz - 1][topLeft - 1],
-      ],
-      [
-        levelMap[topPoz - 2][topLeft + 2],
-        levelMap[topPoz - 2][topLeft + 1],
-        levelMap[topPoz - 2][topLeft + 0],
-        levelMap[topPoz - 2][topLeft - 1],
-      ],
-      [
-        levelMap[topPoz - 3][topLeft + 2],
-        levelMap[topPoz - 3][topLeft + 1],
-        levelMap[topPoz - 3][topLeft + 0],
-        levelMap[topPoz - 3][topLeft - 1],
-      ],
-    ];
+    const nums = [2, 1, 0, -1];
+    const num = [0, -1, -2, -3, 1];
+    arr = [[], [], [], [], [], [], [], []];
+    numsArr.forEach((el, k) => {
+      nums.forEach((e) =>
+        arr[el].push([
+          levelMap[topPoz + num[k]][topLeft + e],
+          { top: topPoz + num[k], left: topLeft + e },
+        ])
+      );
+    });
   } else if (desc === "left") {
-    arr = [
-      [
-        levelMap[topPoz + 2][topLeft],
-        levelMap[topPoz + 1][topLeft],
-        levelMap[topPoz + 0][topLeft],
-        levelMap[topPoz - 1][topLeft],
-      ],
-      [
-        levelMap[topPoz + 2][topLeft + 1],
-        levelMap[topPoz + 1][topLeft + 1],
-        levelMap[topPoz + 0][topLeft + 1],
-        levelMap[topPoz - 1][topLeft + 1],
-      ],
-      [
-        levelMap[topPoz + 2][topLeft + 2],
-        levelMap[topPoz + 1][topLeft + 2],
-        levelMap[topPoz - 0][topLeft + 2],
-        levelMap[topPoz - 1][topLeft + 2],
-      ],
-      [
-        levelMap[topPoz + 2][topLeft + 3],
-        levelMap[topPoz + 1][topLeft + 3],
-        levelMap[topPoz - 0][topLeft + 3],
-        levelMap[topPoz - 1][topLeft + 3],
-      ],
-    ];
+    const nums = [2, 1, 0, -1];
+    const num = [0, 1, 2, 3, -1];
+    arr = [[], [], [], [], [], [], [], []];
+    numsArr.forEach((el, k) => {
+      nums.forEach((e) =>
+        arr[el].push([
+          levelMap[topPoz + e][topLeft + num[k]],
+          { top: topPoz + e, left: topLeft + num[k] },
+        ])
+      );
+    });
   } else if (desc === "right") {
-    arr = [
-      [
-        levelMap[topPoz -1][topLeft+1],
-        levelMap[topPoz + 0][topLeft+1],
-        levelMap[topPoz + 1][topLeft+1],
-        levelMap[topPoz +2][topLeft+1],
-      ],
-      [
-        levelMap[topPoz -1][topLeft + 0],
-        levelMap[topPoz + 0][topLeft + 0],
-        levelMap[topPoz + 1][topLeft + 0],
-        levelMap[topPoz +2][topLeft + 0],
-      ],
-      [
-        levelMap[topPoz -1][topLeft -1],
-        levelMap[topPoz + 0][topLeft -1],
-        levelMap[topPoz - 1][topLeft -1],
-        levelMap[topPoz +2][topLeft -1],
-      ],
-      [
-        levelMap[topPoz -1][topLeft -2],
-        levelMap[topPoz + 0][topLeft -2],
-        levelMap[topPoz - 1][topLeft -2],
-        levelMap[topPoz +2][topLeft -2],
-      ],
-    ];
+    const nums = [-1, 0, 1, 2];
+    const num = [1, 0, -1, -2, 2];
+    arr = [[], [], [], [], [], [], [], []];
+    numsArr.forEach((el, k) => {
+      nums.forEach((e) =>
+        arr[el].push([
+          levelMap[topPoz + e][topLeft + num[k]],
+          { top: topPoz + e, left: topLeft + num[k] },
+        ])
+      );
+    });
   }
-  
 }
+
+function deletingBlocks(arr) {
+  // console.log(arr);
+  const point01 = arr[0][1][1];
+  const point02 = arr[0][2][1];
+  const point00 = arr[0][0][1];
+  const point03 = arr[0][3][1];
+  const point11 = arr[1][1][1];
+  const point12 = arr[1][2][1];
+  const point10 = arr[1][0][1];
+  const point13 = arr[1][3][1];
+
+  if (
+    levelMap[point11.top][point12.left] === 1 ||
+    levelMap[point12.top][point11.left] === 1
+  ) {
+      delArrBlock(point11);
+      delArrBlock(point10);
+      delArrBlock(point12);
+      delArrBlock(point13);
+  } else {
+      delArrBlock(point01);
+      delArrBlock(point00);
+      delArrBlock(point02);
+      delArrBlock(point03);
+  }
+
+  const track = document.querySelectorAll("#missileTrack");
+  track.forEach((e) => {
+    const x = e.getBoundingClientRect().x;
+    const y = e.getBoundingClientRect().y;
+    const delBlock = document.elementFromPoint(x, y);
+    // console.log(delBlock)
+    if (delBlock.classList.contains("block")) {
+      delBlock.remove();
+    }
+  });
+}
+
+function delArrBlock (const1){
+      missileTrack(const1.top, const1.left);
+      levelMap[const1.top][const1.left] = 0;
+}
+
+// elementFromPoint(x, y);

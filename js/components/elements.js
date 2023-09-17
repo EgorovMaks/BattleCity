@@ -80,7 +80,7 @@ export let divId = "";
 export function missileTrack(x, y) {
   const div = document.createElement("div");
   div.id = "missileTrack";
-  div.style.cssText = `width: 1px; height: 1px; top: ${x}px; left: ${y}px`;
+  div.style.cssText = `width: 1px; height: 1px; top: ${x*(topBlok/4)}px; left: ${y*(topBlok/4)}px`;
   let newDiv = map.appendChild(div);
   divId = document.elementFromPoint(
     div.getBoundingClientRect().x,
