@@ -106,6 +106,18 @@ function shot(plusTrueFalse, topLeftPoz, desc) {
     arrey(desc, topPoz, topLeft);
     // console.log(arr)
     if (
+      arr[0][1][0] === 2 ||
+      arr[0][2][0] === 2 ||
+      arr[1][1][0] === 2 ||
+      arr[1][2][0] === 2
+    ) {
+      missile.remove();
+      stop = false;
+      pozitionTop = false;
+      pozitionDown = false;
+      pozitionLeft = false;
+      pozitionRight = false;
+    } else if (
       arr[0][1][0] === 1 ||
       arr[0][2][0] === 1 ||
       arr[1][1][0] === 1 ||
@@ -222,6 +234,20 @@ function deletingBlocks(arr) {
     delArrBlock(point00);
     delArrBlock(point02);
     delArrBlock(point03);
+  }
+  if (
+    levelMap[point11.top][point11.left] === 3 ||
+    levelMap[point12.top][point12.left] === 3
+  ) {
+    //   delArrBlock(point11);
+    //   delArrBlock(point10);
+    //   delArrBlock(point12);
+    //   delArrBlock(point13);
+    // } else {
+    //   delArrBlock(point01);
+    //   delArrBlock(point00);
+    //   delArrBlock(point02);
+    //   delArrBlock(point03);
   }
 
   const track = document.querySelectorAll("#missileTrack");

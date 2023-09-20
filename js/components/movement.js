@@ -151,7 +151,7 @@ function movementLeft(up, left, topPozition, leftPozition, tanks) {
 function movementRight(up, left, topPozition, leftPozition, tanks) {
   let a = [];
   let b = true;
-  if (left < topBlok * 12) {
+  if (left < topBlok * 13) {
     a = [
       levelMap[topPozition - 0][leftPozition + 4],
       levelMap[topPozition + 1][leftPozition + 4],

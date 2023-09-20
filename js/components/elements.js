@@ -98,12 +98,12 @@ export function explosionAnimation(top, left) {
   const div = document.createElement("div");
   div.id = "explosion";
   div.style.cssText = `width: ${topBlok}px; height: ${topBlok}px; top: ${topPOz}px; left: ${leftPoz}px;`;
-  div.innerHTML = `<img src= "../../img/shot/shot-1.png" alt="img" class="active style="width: 100%; height:  100%;">`;
+  div.innerHTML = `<img src= "./img/shot/shot-1.png" alt="img" class="active style="width: 100%; height:  100%;">`;
   setTimeout(function () {
-    div.innerHTML = `<img src= "../../img/shot/shot-2.png" alt="img" class="active style="width: 100%; height:  100%;">`;
+    div.innerHTML = `<img src= "./img/shot/shot-2.png" alt="img" class="active style="width: 100%; height:  100%;">`;
   }, 80);
   setTimeout(function () {
-    div.innerHTML = `<img src= "../../img/shot/shot-3.png" alt="img" class="active style="width: 100%; height:  100%;">`;
+    div.innerHTML = `<img src= "./img/shot/shot-3.png" alt="img" class="active style="width: 100%; height:  100%;">`;
   }, 160);
   let newDiv = map.appendChild(div);
   setTimeout(function () {
