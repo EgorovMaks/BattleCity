@@ -80,7 +80,9 @@ export let divId = "";
 export function missileTrack(x, y) {
   const div = document.createElement("div");
   div.id = "missileTrack";
-  div.style.cssText = `width: 1px; height: 1px; top: ${x*(topBlok/4)}px; left: ${y*(topBlok/4)}px`;
+  div.style.cssText = `width: 1px; height: 1px; top: ${
+    x * (topBlok / 4)
+  }px; left: ${y * (topBlok / 4)}px`;
   let newDiv = map.appendChild(div);
   divId = document.elementFromPoint(
     div.getBoundingClientRect().x,
@@ -92,12 +94,22 @@ export function id(i) {
   return document.querySelector(i);
 }
 
-export function explosionAnimation(top, left) {
+export function explosionAnimation(top, left, desc) {
   let topPOz = top * (topBlok / 4);
   let leftPoz = left * (topBlok / 4);
   const div = document.createElement("div");
   div.id = "explosion";
+  if(desc==="up"){
+    div.classList.add("explosionUp");
+  }if (desc === "down") {
+    div.classList.add("explosionDown");
+  }if (desc === "left") {
+    div.classList.add("explosionLeft");
+  }if (desc === "right") {
+    div.classList.add("explosionRight");
+  }
   div.style.cssText = `width: ${topBlok}px; height: ${topBlok}px; top: ${topPOz}px; left: ${leftPoz}px;`;
+
   div.innerHTML = `<img src= "./img/shot/shot-1.png" alt="img" class="active style="width: 100%; height:  100%;">`;
   setTimeout(function () {
     div.innerHTML = `<img src= "./img/shot/shot-2.png" alt="img" class="active style="width: 100%; height:  100%;">`;

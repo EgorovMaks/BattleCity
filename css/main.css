@@ -27,17 +27,38 @@ body {
   pointer-events: none;
 }
 
+#explosion {
+  pointer-events: none;
+}
+
+.explosionUp {
+  transform: translateY(-25%);
+}
+
+.explosionDown {
+  transform: translateY(-50%);
+}
+
+.explosionLeft {
+  transform: translateX(-25%);
+}
+
+.explosionRight {
+  transform: translateX(-50%);
+}
+
 #missileLeft {
   position: fixed;
   z-index: 10;
-  background-color: red;
-  transform: translateX(50%) translateY(-50%) rotate(90deg);pointer-events: none;
+  background-color: #fff;
+  transform: translateX(50%) translateY(-50%) rotate(90deg);
+  pointer-events: none;
 }
 
 #missileTrack {
 
   pointer-events: none;
-  background: #fff;
+  background: transparent;
 }
 
 div {

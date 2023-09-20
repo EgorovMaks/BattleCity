@@ -123,7 +123,7 @@ function shot(plusTrueFalse, topLeftPoz, desc) {
       arr[1][1][0] === 1 ||
       arr[1][2][0] === 1
     ) {
-      deletingBlocks(arr);
+      deletingBlocks(arr,desc);
       missile.remove();
       stop = false;
       pozitionTop = false;
@@ -142,8 +142,8 @@ function shot(plusTrueFalse, topLeftPoz, desc) {
           ? explosionAnimation(4, topLeft - 1)
           : explosionAnimation(52, topLeft - 1)
         : plusTrueFalse
-        ? explosionAnimation(topPoz, 4)
-        : explosionAnimation(topPoz, 52);
+        ? explosionAnimation(topPoz - 1, 4)
+        : explosionAnimation(topPoz - 1, 52);
       stop = false;
       pozitionTop = false;
       pozitionDown = false;
@@ -172,7 +172,7 @@ function arrey(desc, topPoz, topLeft) {
       );
     });
   } else if (desc === "down") {
-    const nums = [2, 1, 0, -1];
+    const nums = [-1, 0, 1, 2];
     const num = [0, -1, -2, -3, 1];
     arr = [[], [], [], [], [], [], [], []];
     numsArr.forEach((el, k) => {
@@ -184,7 +184,7 @@ function arrey(desc, topPoz, topLeft) {
       );
     });
   } else if (desc === "left") {
-    const nums = [2, 1, 0, -1];
+    const nums = [-1, 0, 1, 2];
     const num = [0, 1, 2, 3, -1];
     arr = [[], [], [], [], [], [], [], []];
     numsArr.forEach((el, k) => {
@@ -210,7 +210,7 @@ function arrey(desc, topPoz, topLeft) {
   }
 }
 
-function deletingBlocks(arr) {
+function deletingBlocks(arr,desc) {
   // console.log(arr);
   const point01 = arr[0][1][1];
   const point02 = arr[0][2][1];
@@ -220,34 +220,21 @@ function deletingBlocks(arr) {
   const point12 = arr[1][2][1];
   const point10 = arr[1][0][1];
   const point13 = arr[1][3][1];
-
   if (
     levelMap[point11.top][point11.left] === 1 ||
     levelMap[point12.top][point12.left] === 1
   ) {
+    explosionAnimation(point10.top, point10.left,desc);
     delArrBlock(point11);
     delArrBlock(point10);
     delArrBlock(point12);
     delArrBlock(point13);
   } else {
+    explosionAnimation(point00.top, point00.left,desc);
     delArrBlock(point01);
     delArrBlock(point00);
     delArrBlock(point02);
     delArrBlock(point03);
-  }
-  if (
-    levelMap[point11.top][point11.left] === 3 ||
-    levelMap[point12.top][point12.left] === 3
-  ) {
-    //   delArrBlock(point11);
-    //   delArrBlock(point10);
-    //   delArrBlock(point12);
-    //   delArrBlock(point13);
-    // } else {
-    //   delArrBlock(point01);
-    //   delArrBlock(point00);
-    //   delArrBlock(point02);
-    //   delArrBlock(point03);
   }
 
   const track = document.querySelectorAll("#missileTrack");
