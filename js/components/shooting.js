@@ -239,7 +239,9 @@ function deletingBlocks(arr) {
 function delArrBlock(const1) {
   if (levelMap[const1.top][const1.left] === 1) {
     missileTrack(const1.top, const1.left);
-    levelMap[const1.top][const1.left] = 0;
+    if ((levelMap[const1.top][const1.left] = 1)) {
+      levelMap[const1.top][const1.left] = 0;
+    }
   }
 }
 
