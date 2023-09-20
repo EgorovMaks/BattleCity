@@ -67,7 +67,7 @@ export function createBlocks(
 
 export function missile(canvas, [x, y], poz) {
   const div = document.createElement("div");
-  div.style.cssText = `width: 3px; height: 4px; top: ${y}px; left: ${x}px;`;
+  div.style.cssText = `width: ${topBlok/5.3}px; height: ${topBlok/4}px; top: ${y}px; left: ${x}px;`;
   // const body = document.querySelector("body");
   if (poz === "left") {
     div.id = "missileLeft";

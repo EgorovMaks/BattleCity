@@ -99,7 +99,6 @@ function shot(plusTrueFalse, topLeftPoz, desc) {
       : missilePozLeft + topBlok / 2;
     let topPoz = Math.round(missilePozTop / (topBlok / 4) - 1);
     let topLeft = Math.round(missilePozLeft / (topBlok / 4) - 1);
-    console.log(Math.round(missilePozTop / 8));
     arrey(desc, topPoz, topLeft);
     // console.log(arr)
     if (
