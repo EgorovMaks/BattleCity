@@ -33,8 +33,8 @@ export let topLeft = {};
 export function movement(tanks) {
   let up = parseFloat(tanks.style.top);
   let left = parseFloat(tanks.style.left);
-  let topPozition = Math.round(((up / topBlok) * topBlok) / 4);
-  let leftPozition = Math.round(((left / topBlok) * topBlok) / 4);
+  let topPozition = Math.round(((up / topBlok) * 4));
+  let leftPozition = Math.round((left / topBlok) *  4);
   // console.log(topPozition,leftPozition)
   if (eventUp === "up") {
     movementUp(up, left, topPozition, leftPozition, tanks);
@@ -83,8 +83,8 @@ function movementUp(up, left, topPozition, leftPozition, tanks) {
   }
   if (b === true) {
     up = up - tankSpeed;
-    if (up < 16) {
-      up = 16;
+    if (up < topBlok) {
+      up = topBlok;
     }
     tanks.style.top = `${up}px`;
   } else if (b === false) {
@@ -139,8 +139,8 @@ function movementLeft(up, left, topPozition, leftPozition, tanks) {
   });
   if (b === true) {
     left = left - tankSpeed;
-    if (left <= 16) {
-      left = 16;
+    if (left <= topBlok) {
+      left = topBlok;
     }
     tanks.style.left = `${left}px`;
   } else if (b === false) {

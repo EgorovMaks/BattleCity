@@ -35,12 +35,8 @@ export function shotFlight() {
 }
 
 function shotDescription(shootingDirection) {
-  let topPozCenter = Math.floor(
-    ((parseFloat(tank1.style.top) / topBlok) * topBlok) / 4
-  );
-  let leftPozCenter = Math.floor(
-    ((parseFloat(tank1.style.left) / topBlok) * topBlok) / 4
-  );
+  let topPozCenter = Math.floor((parseFloat(tank1.style.top) / topBlok) * 4);
+  let leftPozCenter = Math.floor((parseFloat(tank1.style.left) / topBlok) * 4);
   if (shootingDirection === "up" && stop === false) {
     stop = true;
     missile(map, [
@@ -96,13 +92,14 @@ function shot(plusTrueFalse, topLeftPoz, desc) {
 
     let missilePozNew = topLeftPoz
       ? plusTrueFalse
-        ? missilePozTop - 8
-        : missilePozTop + 8
+        ? missilePozTop - topBlok / 2
+        : missilePozTop + topBlok / 2
       : plusTrueFalse
-      ? missilePozLeft - 8
-      : missilePozLeft + 8;
-    let topPoz = missilePozTop / (topBlok / 4) - 1;
-    let topLeft = missilePozLeft / (topBlok / 4) - 1;
+      ? missilePozLeft - topBlok / 2
+      : missilePozLeft + topBlok / 2;
+    let topPoz = Math.round(missilePozTop / (topBlok / 4) - 1);
+    let topLeft = Math.round(missilePozLeft / (topBlok / 4) - 1);
+    console.log(Math.round(missilePozTop / 8));
     arrey(desc, topPoz, topLeft);
     // console.log(arr)
     if (
@@ -123,7 +120,7 @@ function shot(plusTrueFalse, topLeftPoz, desc) {
       arr[1][1][0] === 1 ||
       arr[1][2][0] === 1
     ) {
-      deletingBlocks(arr,desc);
+      deletingBlocks(arr, desc);
       missile.remove();
       stop = false;
       pozitionTop = false;
@@ -137,13 +134,13 @@ function shot(plusTrueFalse, topLeftPoz, desc) {
       arr[1][2][0] === 19
     ) {
       missile.remove();
-      topLeftPoz
-        ? plusTrueFalse
-          ? explosionAnimation(4, topLeft - 1)
-          : explosionAnimation(52, topLeft - 1)
-        : plusTrueFalse
-        ? explosionAnimation(topPoz - 1, 4)
-        : explosionAnimation(topPoz - 1, 52);
+      // topLeftPoz
+      //   ? plusTrueFalse
+      //     ? explosionAnimation(4, topLeft - 1)
+      //     : explosionAnimation(52, topLeft - 1)
+      //   : plusTrueFalse
+      //   ? explosionAnimation(topPoz - 1, 4)
+      //   : explosionAnimation(topPoz - 1, 52);
       stop = false;
       pozitionTop = false;
       pozitionDown = false;
@@ -210,7 +207,7 @@ function arrey(desc, topPoz, topLeft) {
   }
 }
 
-function deletingBlocks(arr,desc) {
+function deletingBlocks(arr, desc) {
   // console.log(arr);
   const point01 = arr[0][1][1];
   const point02 = arr[0][2][1];
@@ -224,13 +221,13 @@ function deletingBlocks(arr,desc) {
     levelMap[point11.top][point11.left] === 1 ||
     levelMap[point12.top][point12.left] === 1
   ) {
-    explosionAnimation(point10.top, point10.left,desc);
+    explosionAnimation(point10.top, point10.left, desc);
     delArrBlock(point11);
     delArrBlock(point10);
     delArrBlock(point12);
     delArrBlock(point13);
   } else {
-    explosionAnimation(point00.top, point00.left,desc);
+    explosionAnimation(point00.top, point00.left, desc);
     delArrBlock(point01);
     delArrBlock(point00);
     delArrBlock(point02);

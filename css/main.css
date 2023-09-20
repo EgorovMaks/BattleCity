@@ -14,9 +14,9 @@ body {
   background: #000;
   overflow: hidden;
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%) scale(2.5)translateY(70px);
-  border: 10px solid #636363;
+  /* left: 50%; */
+  /* transform: translateX(-50%) scale(2.5)translateY(70px); */
+  /* border: 10px solid #636363; */
 }
 
 #missile {

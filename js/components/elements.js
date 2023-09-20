@@ -2,6 +2,7 @@ import { randomNumber, topBlok } from "../data/data.js";
 import { levelMapMovement } from "../data/levels.js";
 
 export const map = document.querySelector("#BattleCity");
+map.style.cssText = `width: ${topBlok * 15}px; height: ${topBlok * 15}px`;
 
 export function createElement(
   [type, canvas, top, left, id, className],
