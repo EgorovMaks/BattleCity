@@ -14,13 +14,16 @@ body {
   background: #000;
   overflow: hidden;
   position: relative;
+  /* left: 50%; */
+  /* transform: translateX(-50%); */
+  margin: 0 auto;
 }
 
 #missile {
   position: fixed;
   z-index: 10;
   background-color: #fff;
-  transform: translateX(-50%) translateY(-100%);
+  transition: top .1s ease,left .1s ease;
   pointer-events: none;
 }
 

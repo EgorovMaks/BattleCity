@@ -37,20 +37,19 @@ export function shotFlight() {
 function shotDescription(shootingDirection) {
   let topPozCenter = Math.floor((parseFloat(tank1.style.top) / topBlok) * 4);
   let leftPozCenter = Math.floor((parseFloat(tank1.style.left) / topBlok) * 4);
-  console.log(topPozCenter,leftPozCenter)
   if (shootingDirection === "up" && stop === false) {
     stop = true;
     missile(map, [
       ((leftPozCenter + 2) * topBlok) / 4,
       (topPozCenter * (topBlok / 4)),
-    ]);
+    ],"up");
     pozitionTop = true;
   } else if (shootingDirection === "down" && stop === false) {
     stop = true;
     missile(map, [
       ((leftPozCenter + 2) * topBlok) / 4,
       ((topPozCenter + 5) * topBlok) / 4,
-    ]);
+    ],"down");
     pozitionDown = true;
   } else if (shootingDirection === "left" && stop === false) {
     stop = true;
@@ -65,7 +64,7 @@ function shotDescription(shootingDirection) {
     missile(
       map,
       [((leftPozCenter + 4) * topBlok) / 4, ((topPozCenter + 2) * topBlok) / 4],
-      "left"
+      "right"
     );
     pozitionRight = true;
   }
@@ -84,9 +83,7 @@ function shotIntersection() {
 }
 
 function shot(plusTrueFalse, topLeftPoz, desc) {
-  let missile = topLeftPoz
-    ? document.querySelector("#missile")
-    : document.querySelector("#missileLeft");
+  let missile = document.querySelector("#missile")
   if (missile !== null) {
     let missilePozTop = parseFloat(missile.style.top);
     let missilePozLeft = parseFloat(missile.style.left);
