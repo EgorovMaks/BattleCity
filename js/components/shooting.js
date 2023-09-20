@@ -37,11 +37,12 @@ export function shotFlight() {
 function shotDescription(shootingDirection) {
   let topPozCenter = Math.floor((parseFloat(tank1.style.top) / topBlok) * 4);
   let leftPozCenter = Math.floor((parseFloat(tank1.style.left) / topBlok) * 4);
+  console.log(topPozCenter,leftPozCenter)
   if (shootingDirection === "up" && stop === false) {
     stop = true;
     missile(map, [
       ((leftPozCenter + 2) * topBlok) / 4,
-      (topPozCenter * topBlok) / 4,
+      (topPozCenter * (topBlok / 4)),
     ]);
     pozitionTop = true;
   } else if (shootingDirection === "down" && stop === false) {
@@ -98,7 +99,7 @@ function shot(plusTrueFalse, topLeftPoz, desc) {
       ? missilePozLeft - topBlok / 2
       : missilePozLeft + topBlok / 2;
     let topPoz = Math.round(missilePozTop / (topBlok / 4) - 1);
-    let topLeft = Math.round(missilePozLeft / (topBlok / 4) - 1);
+    let topLeft = Math.round(missilePozLeft / (topBlok / 4) -1);
     arrey(desc, topPoz, topLeft);
     // console.log(arr)
     if (

@@ -67,7 +67,10 @@ export function createBlocks(
 
 export function missile(canvas, [x, y], poz) {
   const div = document.createElement("div");
-  div.style.cssText = `width: ${topBlok/5.3}px; height: ${topBlok/4}px; top: ${y}px; left: ${x}px;`;
+  const canvasMargin = parseFloat(window.getComputedStyle(canvas).marginRight);
+  div.style.cssText = `width: ${topBlok / 5.3}px; height: ${
+    topBlok / 4
+  }px; top: ${y}px; left: ${x}px;`;
   // const body = document.querySelector("body");
   if (poz === "left") {
     div.id = "missileLeft";
@@ -100,13 +103,16 @@ export function explosionAnimation(top, left, desc) {
   let leftPoz = left * (topBlok / 4);
   const div = document.createElement("div");
   div.id = "explosion";
-  if(desc==="up"){
+  if (desc === "up") {
     div.classList.add("explosionUp");
-  }if (desc === "down") {
+  }
+  if (desc === "down") {
     div.classList.add("explosionDown");
-  }if (desc === "left") {
+  }
+  if (desc === "left") {
     div.classList.add("explosionLeft");
-  }if (desc === "right") {
+  }
+  if (desc === "right") {
     div.classList.add("explosionRight");
   }
   div.style.cssText = `width: ${topBlok}px; height: ${topBlok}px; top: ${topPOz}px; left: ${leftPoz}px;`;

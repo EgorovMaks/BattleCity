@@ -1,6 +1,8 @@
+import { windowWidth } from "../components/game.js";
 
 
-export let topBlok = 39;
+export let topBlok = windowWidth;
+
 
 export let tankSpeed = topBlok/8
 
