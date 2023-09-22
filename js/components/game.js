@@ -13,7 +13,7 @@ function window() {
   const windowInnerWidth = document.documentElement.clientWidth;
 
   const windowInnerHeight = document.documentElement.clientHeight;
-  if (windowInnerWidth < windowInnerHeight) {
+  if (windowInnerWidth <= windowInnerHeight) {
     windowWidth = windowInnerWidth / 15;
   } else {
     windowWidth = windowInnerHeight / 15;

@@ -12,9 +12,10 @@ export function createElement(
   const div = document.createElement("div");
   div.style.cssText = `width: ${width}; height: ${height}; top: ${top}; left: ${left}`;
   levelMapMovement(
-    parseFloat(top) / (topBlok / 4),
-    parseFloat(left) / (topBlok / 4)
+    Math.round(parseFloat(top) / (topBlok / 4)),
+    Math.round(parseFloat(left) / (topBlok / 4))
   );
+
   div.id = `${id}`;
   div.classList.add(className);
   div.innerHTML = `
