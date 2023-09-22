@@ -74,23 +74,19 @@ export function missile(canvas, [x, y], poz) {
   if (poz === "up") {
     div.style.cssText = `width: ${topBlok / 5.3}px; height: ${
       topBlok / 4
-    }px; top: ${y}px; left: ${x}px; transform: translateX(${
-      canvasMargin - height / 2.5
-    }px) translateY(-100%);`;
+    }px; top: ${y}px; left: ${x}px; transform: translateX(${-50}%) translateY(-100%);`;
   } else if (poz === "down") {
     div.style.cssText = `width: ${topBlok / 5.3}px; height: ${
       topBlok / 4
-    }px; top: ${y}px; left: ${x}px; transform: translateX(${
-      canvasMargin - height / 2.5
-    }px) translateY(-100%);`;
+    }px; top: ${y}px; left: ${x}px; transform: translateX(${-50}%) translateY(-100%);`;
   } else if (poz === "left") {
     div.style.cssText = `width: ${topBlok / 4}px; height: ${
       topBlok / 5.3
-    }px; top: ${y}px; left: ${x}px; transform: translateX(${canvasMargin}px) translateY(-50%);`;
+    }px; top: ${y}px; left: ${x}px; transform: translateX(${0}px) translateY(-50%);`;
   } else if (poz === "right") {
     div.style.cssText = `width: ${topBlok / 4}px; height: ${
       topBlok / 5.3
-    }px; top: ${y}px; left: ${x}px; transform: translateX(${canvasMargin}px) translateY(-50%);`;
+    }px; top: ${y}px; left: ${x}px; transform: translateX(${0}px) translateY(-50%);`;
   }
   const newDiv = canvas.appendChild(div);
 }

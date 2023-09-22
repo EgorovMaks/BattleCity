@@ -20,7 +20,7 @@ body {
 }
 
 #missile {
-  position: fixed;
+  position: absolute;
   z-index: 10;
   background-color: #fff;
   transition: top .1s ease,left .1s ease;
