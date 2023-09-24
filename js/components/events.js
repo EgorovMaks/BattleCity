@@ -16,7 +16,7 @@ let joystick = "";
 
 export let joystickFun = setInterval(function () {
   if (id("#joyDiv") !== null) {
-    joystick = new JoyStick(
+     new JoyStick(
       "joyDiv",
       {
         width: widthMrdgn,
@@ -36,6 +36,7 @@ export let joystickFun = setInterval(function () {
         } else if (stickData.x > 80) {
           joystick = "E";
         }
+        // console.log(stickData.x);
 
         if (joystick === "N") {
           shootingDirection = "up";
@@ -62,14 +63,22 @@ export let joystickFun = setInterval(function () {
       }
     );
 
-    if (stop === false) {
-      document
-        .querySelector("#joyDivBtn")
-        .addEventListener("touchstart", () => {
-          document.querySelectorAll("#missileTrack").forEach((e) => e.remove());
-          shooting();
-        });
-    }
+   let e = new JoyStick("joyDivBtn", {
+     width: widthMrdgn,
+     height: widthMrdgn,
+     internalStrokeColor: "#d9e4f5",
+     internalFillColor: "#C0C0C0",
+     externalStrokeColor: "#C0C0C0",
+   });
+
+    // if (stop === false) {
+    //   document
+    //     .querySelector("#joyDivBtn")
+    //     .addEventListener("touchstart", () => {
+    //       document.querySelectorAll("#missileTrack").forEach((e) => e.remove());
+    //       shooting();
+    //     });
+    // }
 
     clearInterval(joystickFun);
   }
