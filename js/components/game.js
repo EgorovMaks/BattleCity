@@ -30,6 +30,7 @@ export let loopStart = setInterval(function () {
     gameLoop();
     animation(tank1);
     clearInterval(loopStart);
+    
     // levelMapConstructorId()
     // shootingIdMap();
   }

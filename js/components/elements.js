@@ -1,5 +1,6 @@
 import { randomNumber, topBlok } from "../data/data.js";
 import { levelMapMovement } from "../data/levels.js";
+import { stopTrue } from "./shooting.js";
 
 export const map = document.querySelector("#BattleCity");
 map.style.cssText = `width: ${topBlok * 15}px; height: ${topBlok * 15}px`;
@@ -11,10 +12,12 @@ export function createElement(
 ) {
   const div = document.createElement("div");
   div.style.cssText = `width: ${width}; height: ${height}; top: ${top}; left: ${left}`;
-  levelMapMovement(
-    Math.round(parseFloat(top) / (topBlok / 4)),
-    Math.round(parseFloat(left) / (topBlok / 4))
-  );
+  setTimeout(() => {
+    levelMapMovement(
+      Math.round(parseFloat(top) / (topBlok / 4)),
+      Math.round(parseFloat(left) / (topBlok / 4))
+    );
+  }, 100);
 
   div.id = `${id}`;
   div.classList.add(className);
@@ -73,21 +76,18 @@ export function missile(canvas, [x, y], poz) {
   const height = topBlok / 4;
   div.id = "missile";
   if (poz === "up") {
-    div.style.cssText = `width: ${topBlok / 5.3}px; height: ${
-      topBlok / 4
-    }px; top: ${y}px; left: ${x}px; transform: translateX(${-50}%) translateY(-100%);`;
+    div.style.cssText = `width: ${width}px; height: ${height}px; top: ${y}px; left: ${x}px;`;
+    div.classList.add("missileLeft");
   } else if (poz === "down") {
-    div.style.cssText = `width: ${topBlok / 5.3}px; height: ${
-      topBlok / 4
-    }px; top: ${y}px; left: ${x}px; transform: translateX(${-50}%) translateY(-100%);`;
+    div.style.cssText = `width: ${width}px; height: ${height}px; top: ${y}px; left: ${x}px; transform: translateX(-50%) translateY(-100%);`;
   } else if (poz === "left") {
     div.style.cssText = `width: ${topBlok / 4}px; height: ${
       topBlok / 5.3
-    }px; top: ${y}px; left: ${x}px; transform: translateX(${0}px) translateY(-50%);`;
+    }px; top: ${y}px; left: ${x}px; transform: translateX(0px) translateY(-50%);`;
   } else if (poz === "right") {
     div.style.cssText = `width: ${topBlok / 4}px; height: ${
       topBlok / 5.3
-    }px; top: ${y}px; left: ${x}px; transform: translateX(${0}px) translateY(-50%);`;
+    }px; top: ${y}px; left: ${x}px; transform: translateX(0px) translateY(-50%);`;
   }
   const newDiv = canvas.appendChild(div);
 }
@@ -140,6 +140,7 @@ export function explosionAnimation(top, left, desc) {
   setTimeout(function () {
     div.remove();
   }, 200);
+  stopTrue()
 }
 
 export function animationDirection(globalArray, firstValue, arrayDirection) {
@@ -152,4 +153,8 @@ export function animationDirection(globalArray, firstValue, arrayDirection) {
       element.classList.toggle("active");
     });
   }, 30);
+}
+
+export function mobileManagement(){
+  // console.log(1)
 }

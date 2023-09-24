@@ -69,12 +69,36 @@ export let level1 = [
   [19, 0, 1, 0, 1, 0, 2, 0, 2, 0, 1, 0, 1, 0, 19],
   [19, 0, 1, 0, 1, 0, 6, 3, 7, 0, 1, 0, 1, 0, 19],
   [19, 0, 0, 0, 0, 0, 4, 111, 5, 0, 0, 0, 0, 0, 19],
-  [19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
+  [19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
 ];
+
+export function mobileMap() {
+  // console.log(blocks)
+
+  let arr = [];
+  level1.forEach((elem) => arr.push([]));
+  level1.forEach((e, k) => {
+    console.log(1);
+    e.forEach((el, key) => {
+      arr[key].push(el);
+    });
+  });
+  level1 = arr;
+  let arrObj = [];
+  for (var key in blocks) {
+    // blocks[key].forEach((e) => arrObj.push([]));
+    blocks[key].forEach((e) => arrObj.push([]));
+    blocks[key].forEach((e) => e.forEach((el, k) => arrObj[k].push(el)));
+    blocks[key] = arrObj;
+    arrObj = [];
+  }
+}
+
+function deg90(params) {}
 
 export const levelMap = [];
 
-function levelMapConstructor(array) {
+export function levelMapConstructor(array) {
   function arrayCopy(array, num) {
     const b = [[], [], [], []];
     array.forEach((element, key) => {
@@ -154,31 +178,10 @@ function levelMapConstructor(array) {
     a = [[]];
   });
 }
-levelMapConstructor(level1);
+setTimeout(() => {
+  levelMapConstructor(level1);
+}, 100);
 
-// export let levelMapId = [];
-// export function levelMapConstructorId() {
-//   // console.log(levelMap);
-//   levelMap.forEach((e, k) => {
-//     levelMapId.push(...[[]]);
-//     e.forEach((el, key) => {
-//       if (el === 0) {
-//         levelMapId[k].push(el);
-//       } else if (el === 1) {
-//         missileTrack((k * topBlok) / 4, (key * topBlok) / 4);
-//         let div = document.querySelector("#missileTrack");
-//         let x = div.getBoundingClientRect().x;
-//         let y = div.getBoundingClientRect().y;
-//         let divBlock = document.elementFromPoint(x, y);
-//         // console.log(divBlock);
-//         levelMapId[k].push(divBlock.id);
-//         div.remove();
-//       } else {
-//         levelMapId[k].push(el);
-//       }
-//     });
-//   });
-// }
 export function levelMapMovement(top, left, eraser) {
   let num = 100;
   const nums = [0, 1, 2, 3];
