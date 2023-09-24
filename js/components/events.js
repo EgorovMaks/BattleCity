@@ -77,7 +77,7 @@ export let joystickFun = setInterval(function () {
           document.querySelectorAll("#missileTrack").forEach((e) => e.remove());
           shooting();
         // }
-      }
+      } 
     );
 
     // if (stop === false) {
