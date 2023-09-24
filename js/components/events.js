@@ -26,14 +26,15 @@ export let joystickFun = setInterval(function () {
         externalStrokeColor: "#C0C0C0",
       },
       function (stickData) {
+        console.log(stickData);
         joystick = stickData.cardinalDirection;
-        if (stickData.y > 80) {
+        if (stickData.yPosition < 10) {
           joystick = "N";
-        } else if (stickData.y < -80) {
+        } else if (stickData.yPosition > 60) {
           joystick = "S";
-        } else if (stickData.x < -80) {
+        } else if (stickData.xPosition < 10) {
           joystick = "W";
-        } else if (stickData.x > 80) {
+        } else if (stickData.xPosition > 60) {
           joystick = "E";
         }
 
@@ -65,6 +66,7 @@ export let joystickFun = setInterval(function () {
     let e = new JoyStick(
       "joyDivBtn",
       {
+        title: "joystick2",
         width: 70,
         height: 70,
         internalStrokeColor: "#d9e4f5",
@@ -72,12 +74,11 @@ export let joystickFun = setInterval(function () {
         externalStrokeColor: "#C0C0C0",
       },
       function (stickData) {
-        console.log(stickData);
         // if (stickData.cardinalDirection !== "C") {
-          document.querySelectorAll("#missileTrack").forEach((e) => e.remove());
-          shooting();
+        document.querySelectorAll("#missileTrack").forEach((e) => e.remove());
+        shooting();
         // }
-      } 
+      }
     );
 
     // if (stop === false) {
