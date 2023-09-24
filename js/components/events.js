@@ -63,10 +63,15 @@ let joystickFun = setInterval(function () {
       }
     );
 
-    // eventClickJoystick();
+      document.querySelector("#joyDivBtn").addEventListener("touchstart",()=>{
+        document.querySelectorAll("#missileTrack").forEach((e) => e.remove());
+        shooting();
+      });
     clearInterval(joystickFun);
   }
 }, 10);
+
+
 
 function reassignment(e) {
   if (e === true) {
