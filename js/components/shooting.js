@@ -3,7 +3,7 @@ import { levelMap } from "../data/levels.js";
 import { explosionAnimation, map, missile, missileTrack } from "./elements.js";
 import { shootingDirection } from "./events.js";
 import { tank1 } from "./game.js";
-let stop = false;
+export let stop = false;
 let pozitionTop = false;
 let pozitionDown = false;
 let pozitionLeft = false;

@@ -1,7 +1,7 @@
 import { levelMap } from "../data/levels.js";
 import { id, widthMrdgn } from "./elements.js";
 import { adjustment } from "./movement.js";
-import { shooting } from "./shooting.js";
+import { shooting,stop } from "./shooting.js";
 import { JoyStick } from "./joy.js";
 
 export let eventUp = "";
@@ -14,7 +14,7 @@ export let shootingDirection = "up";
 
 let joystick = "";
 
-let joystickFun = setInterval(function () {
+export let joystickFun = setInterval(function () {
   if (id("#joyDiv") !== null) {
     joystick = new JoyStick(
       "joyDiv",
@@ -27,7 +27,6 @@ let joystickFun = setInterval(function () {
       },
       function (stickData) {
         joystick = stickData.cardinalDirection;
-        console.log(stickData.y);
         if (stickData.y > 80) {
           joystick = "N";
         } else if (stickData.y < -80) {
@@ -63,15 +62,18 @@ let joystickFun = setInterval(function () {
       }
     );
 
-      document.querySelector("#joyDivBtn").addEventListener("touchstart",()=>{
-        document.querySelectorAll("#missileTrack").forEach((e) => e.remove());
-        shooting();
-      });
+    if (stop === false) {
+      document
+        .querySelector("#joyDivBtn")
+        .addEventListener("touchstart", () => {
+          document.querySelectorAll("#missileTrack").forEach((e) => e.remove());
+          shooting();
+        });
+    }
+
     clearInterval(joystickFun);
   }
 }, 10);
-
-
 
 function reassignment(e) {
   if (e === true) {
