@@ -1,4 +1,5 @@
 import { levelMap } from "../data/levels.js";
+import { id } from "./elements.js";
 import { adjustment } from "./movement.js";
 import { shooting } from "./shooting.js";
 
@@ -7,6 +8,29 @@ export let eventDown = "";
 export let eventLeft = "";
 export let eventRight = "";
 export let shootingDirection = "up";
+
+let joystick = "";
+
+let joystickFun = setInterval(function () {
+  if (id("#joystick") !== null) {
+    joystick = id("#joystick");
+    eventClickJoystick()
+    clearInterval(joystickFun);
+  }
+}, 10);
+
+function eventClickJoystick (){
+  let body = document.querySelector("body")
+  document.addEventListener("touchmove", (e) => {
+    console.log(e.changedTouches[0].target.classList[0]);
+    document.querySelectorAll("h2").forEach((e) => e.remove());
+    let h2 = document.createElement("h2");
+    h2.innerHTML = `id: ${e.changedTouches[0].target.classList[0]}`;
+    document.querySelector("body").appendChild(h2);
+  });
+}
+
+
 
 function reassignment(e) {
   if (e === true) {

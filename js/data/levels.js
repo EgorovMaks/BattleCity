@@ -73,12 +73,9 @@ export let level1 = [
 ];
 
 export function mobileMap() {
-  // console.log(blocks)
-
   let arr = [];
   level1.forEach((elem) => arr.push([]));
   level1.forEach((e, k) => {
-    console.log(1);
     e.forEach((el, key) => {
       arr[key].push(el);
     });

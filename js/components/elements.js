@@ -159,7 +159,14 @@ export function animationDirection(globalArray, firstValue, arrayDirection) {
 }
 
 export function mobileManagement() {
+  let widthMrdgn = (heightMap - topBlok * 15) / 2;
   map.style.cssText = `width: ${topBlok * 15}px; height: ${
     topBlok * 15
-  }px;margin-top: ${(heightMap - topBlok * 15) / 2}px;`;
+  }px;margin-top: ${widthMrdgn}px;`;
+
+  let joystick = document.createElement("div");
+  joystick.classList.add("joystick");
+  joystick.id = "joystick";
+  joystick.style.cssText = `width: ${widthMrdgn}px; height: ${widthMrdgn}px; `;
+  document.querySelector("body").appendChild(joystick);
 }
