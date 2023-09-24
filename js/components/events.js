@@ -2,7 +2,7 @@ import { levelMap } from "../data/levels.js";
 import { id, widthMrdgn } from "./elements.js";
 import { adjustment } from "./movement.js";
 import { shooting } from "./shooting.js";
-import {JoyStick} from  "./joy.js"
+import { JoyStick } from "./joy.js";
 
 export let eventUp = "";
 export let eventDown = "";
@@ -16,40 +16,44 @@ let joystick = "";
 
 let joystickFun = setInterval(function () {
   if (id("#joyDiv") !== null) {
-    joystick = new JoyStick("joyDiv", {
-      width: widthMrdgn,
-      height: widthMrdgn,
-    });
+    joystick = new JoyStick(
+      "joyDiv",
+      {
+        width: widthMrdgn,
+        height: widthMrdgn,
+      },
+      function (stickData) {
+        joystick = stickData.cardinalDirection;
+        console.log(joystick);
+        if (joystick === "N") {
+          shootingDirection = "up";
+          reassignment(true);
+          eventUp = "up";
+        } else if (joystick === "S") {
+          shootingDirection = "down";
+          reassignment(true);
+          eventDown = "down";
+        } else if (joystick === "W") {
+          shootingDirection = "left";
+          reassignment(true);
+          eventLeft = "left";
+        } else if (joystick === "E") {
+          shootingDirection = "right";
+          reassignment(true);
+          eventRight = "right";
+        } else if (joystick === "C") {
+          eventUp = "";
+          eventDown = "";
+          eventLeft = "";
+          eventRight = "";
+        }
+      }
+    );
+
     // eventClickJoystick();
     clearInterval(joystickFun);
   }
 }, 10);
-
-// function eventClickJoystick() {
-
-
-//   console.log(joystick);
-//   joystick.addEventListener("touchend", (e) => {
-//     e.preventDefault();
-//     console.log(e);
-    
-//     // document.querySelectorAll("h2").forEach((e) => e.remove());
-//     // let h2 = document.createElement("h2");
-//     // h2.innerHTML = `id: ${e.changedTouches[0].target.classList[0]}`;
-//     // document.querySelector("body").appendChild(h2);
-//     // eventUp = "up";
-//   });
-//   joystick.addEventListener("touchleave", (e) => {
-//     e.preventDefault();
-//     console.log(1);
-//     eventUp = "";
-//   });
-// }
-
-// function multitouch(event){  
-//     event.preventDefault();
-//     console.log(event)
-// }
 
 function reassignment(e) {
   if (e === true) {
