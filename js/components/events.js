@@ -1,5 +1,5 @@
 import { levelMap } from "../data/levels.js";
-import { id } from "./elements.js";
+import { id, widthMrdgn } from "./elements.js";
 import { adjustment } from "./movement.js";
 import { shooting } from "./shooting.js";
 import {JoyStick} from  "./joy.js"
@@ -16,7 +16,10 @@ let joystick = "";
 
 let joystickFun = setInterval(function () {
   if (id("#joyDiv") !== null) {
-    joystick = new JoyStick("joyDiv");
+    joystick = new JoyStick("joyDiv", {
+      width: widthMrdgn,
+      height: widthMrdgn,
+    });
     // eventClickJoystick();
     clearInterval(joystickFun);
   }
