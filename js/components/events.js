@@ -2,6 +2,7 @@ import { levelMap } from "../data/levels.js";
 import { id } from "./elements.js";
 import { adjustment } from "./movement.js";
 import { shooting } from "./shooting.js";
+import {JoyStick} from  "./joy.js"
 
 export let eventUp = "";
 export let eventDown = "";
@@ -9,29 +10,43 @@ export let eventLeft = "";
 export let eventRight = "";
 export let shootingDirection = "up";
 
+// var joy = new JoyStick("joyDiv");
+
 let joystick = "";
 
 let joystickFun = setInterval(function () {
-  if (id("#joystick") !== null) {
-    joystick = id("#joystick");
-    eventClickJoystick()
+  if (id("#joyDiv") !== null) {
+    joystick = new JoyStick("joyDiv");
+    // eventClickJoystick();
     clearInterval(joystickFun);
   }
 }, 10);
 
-function eventClickJoystick (){
-  console.log(joystick)
-  joystick.addEventListener("touchmove", (e) => {
-    e.preventDefault()
-    eventUp = "up";
-    document.querySelectorAll("h2").forEach((e) => e.remove());
-    let h2 = document.createElement("h2");
-    h2.innerHTML = `id: ${e.changedTouches[0].target.classList[0]}`;
-    document.querySelector("body").appendChild(h2);
-  });
-}
+// function eventClickJoystick() {
 
 
+//   console.log(joystick);
+//   joystick.addEventListener("touchend", (e) => {
+//     e.preventDefault();
+//     console.log(e);
+    
+//     // document.querySelectorAll("h2").forEach((e) => e.remove());
+//     // let h2 = document.createElement("h2");
+//     // h2.innerHTML = `id: ${e.changedTouches[0].target.classList[0]}`;
+//     // document.querySelector("body").appendChild(h2);
+//     // eventUp = "up";
+//   });
+//   joystick.addEventListener("touchleave", (e) => {
+//     e.preventDefault();
+//     console.log(1);
+//     eventUp = "";
+//   });
+// }
+
+// function multitouch(event){  
+//     event.preventDefault();
+//     console.log(event)
+// }
 
 function reassignment(e) {
   if (e === true) {

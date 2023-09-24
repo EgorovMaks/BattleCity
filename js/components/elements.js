@@ -166,7 +166,8 @@ export function mobileManagement() {
 
   let joystick = document.createElement("div");
   joystick.classList.add("joystick");
-  joystick.id = "joystick";
+  joystick.id = "joyDiv";
+  // joystick.setAttribute("ontouchstart", "multitouch(event)");
   joystick.style.cssText = `width: ${widthMrdgn}px; height: ${widthMrdgn}px; `;
   document.querySelector("body").appendChild(joystick);
 }
