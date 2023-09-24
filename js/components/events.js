@@ -20,9 +20,10 @@ let joystickFun = setInterval(function () {
 }, 10);
 
 function eventClickJoystick (){
-  let body = document.querySelector("body")
-  document.addEventListener("touchmove", (e) => {
-    console.log(e.changedTouches[0].target.classList[0]);
+  console.log(joystick)
+  joystick.addEventListener("touchmove", (e) => {
+    e.preventDefault()
+    eventUp = "up";
     document.querySelectorAll("h2").forEach((e) => e.remove());
     let h2 = document.createElement("h2");
     h2.innerHTML = `id: ${e.changedTouches[0].target.classList[0]}`;
