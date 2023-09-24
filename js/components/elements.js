@@ -1,5 +1,6 @@
 import { randomNumber, topBlok } from "../data/data.js";
 import { levelMapMovement } from "../data/levels.js";
+import { heightMap } from "./game.js";
 import { stopTrue } from "./shooting.js";
 
 export const map = document.querySelector("#BattleCity");
@@ -140,7 +141,9 @@ export function explosionAnimation(top, left, desc) {
   setTimeout(function () {
     div.remove();
   }, 200);
-  stopTrue()
+  setTimeout(() => {
+    stopTrue();
+  }, 230);
 }
 
 export function animationDirection(globalArray, firstValue, arrayDirection) {
@@ -155,6 +158,8 @@ export function animationDirection(globalArray, firstValue, arrayDirection) {
   }, 30);
 }
 
-export function mobileManagement(){
-  // console.log(1)
+export function mobileManagement() {
+  map.style.cssText = `width: ${topBlok * 15}px; height: ${
+    topBlok * 15
+  }px;margin-top: ${(heightMap - topBlok * 15) / 2}px;`;
 }

@@ -8,6 +8,7 @@ import { movement } from "./movement.js";
 import { shotFlight } from "./shooting.js";
 
 export let windowWidth = 16;
+export let heightMap = 0
 
 function window() {
   const windowInnerWidth = document.documentElement.clientWidth;
@@ -18,6 +19,7 @@ function window() {
   } else {
     windowWidth = windowInnerHeight / 15;
   }
+  heightMap= windowInnerHeight
 }
 
 window();
