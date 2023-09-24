@@ -21,10 +21,23 @@ let joystickFun = setInterval(function () {
       {
         width: widthMrdgn,
         height: widthMrdgn,
+        internalStrokeColor: "#d9e4f5",
+        internalFillColor: "#C0C0C0",
+        externalStrokeColor: "#C0C0C0",
       },
       function (stickData) {
         joystick = stickData.cardinalDirection;
-        console.log(joystick);
+        console.log(stickData.y);
+        if (stickData.y > 80) {
+          joystick = "N";
+        } else if (stickData.y < -80) {
+          joystick = "S";
+        } else if (stickData.x < -80) {
+          joystick = "W";
+        } else if (stickData.x > 80) {
+          joystick = "E";
+        }
+
         if (joystick === "N") {
           shootingDirection = "up";
           reassignment(true);

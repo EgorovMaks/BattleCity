@@ -158,7 +158,7 @@ export function animationDirection(globalArray, firstValue, arrayDirection) {
   }, 30);
 }
 
-export  let widthMrdgn = (heightMap - topBlok * 15) / 2;
+export let widthMrdgn = (heightMap - topBlok * 15) / 2;
 export function mobileManagement() {
   map.style.cssText = `width: ${topBlok * 15}px; height: ${
     topBlok * 15
@@ -170,4 +170,9 @@ export function mobileManagement() {
   // joystick.setAttribute("ontouchstart", "multitouch(event)");
   // joystick.style.cssText = `width: ${widthMrdgn}px; height: ${widthMrdgn}px; `;
   document.querySelector("body").appendChild(joystick);
+  setTimeout(() => {
+    document
+      .querySelectorAll(".block")
+      .forEach((e) => e.classList.add("divMobil"));
+  }, 200);
 }
