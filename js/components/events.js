@@ -1,7 +1,7 @@
 import { levelMap } from "../data/levels.js";
 import { id, widthMrdgn } from "./elements.js";
 import { adjustment } from "./movement.js";
-import { shooting,stop } from "./shooting.js";
+import { shooting, stop } from "./shooting.js";
 import { JoyStick } from "./joy.js";
 
 export let eventUp = "";
@@ -16,7 +16,7 @@ let joystick = "";
 
 export let joystickFun = setInterval(function () {
   if (id("#joyDiv") !== null) {
-     new JoyStick(
+    new JoyStick(
       "joyDiv",
       {
         width: widthMrdgn,
@@ -36,7 +36,6 @@ export let joystickFun = setInterval(function () {
         } else if (stickData.x > 80) {
           joystick = "E";
         }
-        // console.log(stickData.x);
 
         if (joystick === "N") {
           shootingDirection = "up";
@@ -63,13 +62,23 @@ export let joystickFun = setInterval(function () {
       }
     );
 
-   let e = new JoyStick("joyDivBtn", {
-     width: widthMrdgn,
-     height: widthMrdgn,
-     internalStrokeColor: "#d9e4f5",
-     internalFillColor: "#C0C0C0",
-     externalStrokeColor: "#C0C0C0",
-   });
+    let e = new JoyStick(
+      "joyDivBtn",
+      {
+        width: 70,
+        height: 70,
+        internalStrokeColor: "#d9e4f5",
+        internalFillColor: "#C0C0C0",
+        externalStrokeColor: "#C0C0C0",
+      },
+      function (stickData) {
+        console.log(stickData);
+        // if (stickData.cardinalDirection !== "C") {
+          document.querySelectorAll("#missileTrack").forEach((e) => e.remove());
+          shooting();
+        // }
+      }
+    );
 
     // if (stop === false) {
     //   document
