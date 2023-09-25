@@ -63,23 +63,23 @@ export let joystickFun = setInterval(function () {
       }
     );
 
-    let e = new JoyStick(
-      "joyDivBtn",
-      {
-        title: "joystick2",
-        width: 70,
-        height: 70,
-        internalStrokeColor: "#d9e4f5",
-        internalFillColor: "#C0C0C0",
-        externalStrokeColor: "#C0C0C0",
-      },
-      function (stickData) {
-        // if (stickData.cardinalDirection !== "C") {
-        document.querySelectorAll("#missileTrack").forEach((e) => e.remove());
-        shooting();
-        // }
-      }
-    );
+    // let e = new JoyStick(
+    //   "joyDivBtn",
+    //   {
+    //     title: "joystick2",
+    //     width: 70,
+    //     height: 70,
+    //     internalStrokeColor: "#d9e4f5",
+    //     internalFillColor: "#C0C0C0",
+    //     externalStrokeColor: "#C0C0C0",
+    //   },
+    //   function (stickData) {
+    //     // if (stickData.cardinalDirection !== "C") {
+    //     document.querySelectorAll("#missileTrack").forEach((e) => e.remove());
+    //     shooting();
+    //     // }
+    //   }
+    // );
 
     // if (stop === false) {
     //   document
