@@ -48,7 +48,7 @@ h2 {
   pointer-events: none;
 }
 
-#joyDiv{
+/* #joyDiv{
   position: fixed;
   bottom: 0;
   right: 0;
@@ -59,11 +59,11 @@ h2 {
   /* width: 50px;
   height: 50px; */
   /* background: #C0C0C0; */
-  position: fixed;
+  /* position: fixed;
   top: 20px;
-  right: 20px;
+  right: 20px; */
   /* border-radius: 50%; */
-}
+/* } */
 
 
 
@@ -78,6 +78,28 @@ h2 {
   margin-top: 10px;
   border-radius: 50%;
 } */
+
+.joystick {
+  /* width: 100px;
+  height: 100px; */
+  background-color: #3498db;
+  border-radius: 50%;
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+}
+
+.joystick-handle {
+  width: 40%;
+  height: 40%;
+  background-color: #e74c3c;
+  border-radius: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  transition: transform 0.2s ease;
+  top: 50%;
+  left: 50%;
+}
 
 .explosionUp {
   -webkit-transform: translateY(-25%);

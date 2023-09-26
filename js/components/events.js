@@ -15,81 +15,85 @@ export let shootingDirection = "up";
 let joystick = "";
 
 export let joystickFun = setInterval(function () {
-  if (id("#joyDiv") !== null) {
-    new JoyStick(
-      "joyDiv",
-      {
-        width: widthMrdgn,
-        height: widthMrdgn,
-        internalStrokeColor: "#d9e4f5",
-        internalFillColor: "#C0C0C0",
-        externalStrokeColor: "#C0C0C0",
-      },
-      function (stickData) {
-        console.log(stickData);
-        joystick = stickData.cardinalDirection;
-        if (stickData.yPosition < 10) {
-          joystick = "N";
-        } else if (stickData.yPosition > 60) {
-          joystick = "S";
-        } else if (stickData.xPosition < 10) {
-          joystick = "W";
-        } else if (stickData.xPosition > 60) {
-          joystick = "E";
-        }
+  if (id("#joystickHandle") !== null) {
+    const joystick = document.querySelector(".joystick");
+    const joystickHandle = document.getElementById("joystickHandle");
 
-        if (joystick === "N") {
-          shootingDirection = "up";
-          reassignment(true);
-          eventUp = "up";
-        } else if (joystick === "S") {
-          shootingDirection = "down";
-          reassignment(true);
-          eventDown = "down";
-        } else if (joystick === "W") {
+    let isDragging = false;
+
+    // Рассчитываем центр `.joystick`
+    const joystickCenterX = joystick.offsetWidth / 2;
+    const joystickCenterY = joystick.offsetHeight / 2;
+
+    joystickHandle.style.left = `${joystickCenterX}px`;
+    joystickHandle.style.top = `${joystickCenterY}px`;
+
+    joystickHandle.addEventListener("touchstart", (e) => {
+      isDragging = true;
+      joystickHandle.style.transition = "none";
+    });
+
+    document.addEventListener("touchmove", (e) => {
+      if (isDragging) {
+        const touch = e.touches[0];
+
+        // Рассчитываем смещение относительно центра `.joystick`
+        const offsetX =
+          touch.clientX -
+          joystick.getBoundingClientRect().left -
+          joystickCenterX;
+        const offsetY =
+          touch.clientY -
+          joystick.getBoundingClientRect().top -
+          joystickCenterY;
+        console.log(offsetX, offsetY);
+
+        if (offsetX < -30) {
           shootingDirection = "left";
           reassignment(true);
           eventLeft = "left";
-        } else if (joystick === "E") {
+        } else if (offsetX > 30) {
           shootingDirection = "right";
           reassignment(true);
           eventRight = "right";
-        } else if (joystick === "C") {
-          eventUp = "";
-          eventDown = "";
-          eventLeft = "";
-          eventRight = "";
+        } else if (offsetY < -30) {
+          shootingDirection = "up";
+          reassignment(true);
+          eventUp = "up";
+        } else if (offsetY > 30) {
+          shootingDirection = "down";
+          reassignment(true);
+          eventDown = "down";
         }
+        const maxDistance = joystick.offsetWidth / 2;
+
+        // Ограничиваем расстояние
+        const distance = Math.min(
+          maxDistance,
+          Math.sqrt(offsetX ** 2 + offsetY ** 2)
+        );
+
+        // Рассчитываем угол
+        const angle = Math.atan2(offsetY, offsetX);
+
+        // Преобразуем координаты в пикселях от центра
+        const xPixels = distance * Math.cos(angle);
+        const yPixels = distance * Math.sin(angle);
+
+        joystickHandle.style.left = `${joystickCenterX + xPixels}px`;
+        joystickHandle.style.top = `${joystickCenterY + yPixels}px`;
       }
-    );
+    });
 
-    // let e = new JoyStick(
-    //   "joyDivBtn",
-    //   {
-    //     title: "joystick2",
-    //     width: 70,
-    //     height: 70,
-    //     internalStrokeColor: "#d9e4f5",
-    //     internalFillColor: "#C0C0C0",
-    //     externalStrokeColor: "#C0C0C0",
-    //   },
-    //   function (stickData) {
-    //     // if (stickData.cardinalDirection !== "C") {
-    //     document.querySelectorAll("#missileTrack").forEach((e) => e.remove());
-    //     shooting();
-    //     // }
-    //   }
-    // );
-
-    // if (stop === false) {
-    //   document
-    //     .querySelector("#joyDivBtn")
-    //     .addEventListener("touchstart", () => {
-    //       document.querySelectorAll("#missileTrack").forEach((e) => e.remove());
-    //       shooting();
-    //     });
-    // }
-
+    document.addEventListener("touchend", () => {
+      if (isDragging) {
+        isDragging = false;
+        reassignment(true);
+        joystickHandle.style.transition = "left 0.2s ease, top 0.2s ease";
+        joystickHandle.style.left = `${joystickCenterX}px`;
+        joystickHandle.style.top = `${joystickCenterY}px`;
+      }
+    });
     clearInterval(joystickFun);
   }
 }, 10);

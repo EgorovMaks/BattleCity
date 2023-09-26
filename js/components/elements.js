@@ -165,11 +165,14 @@ export function mobileManagement() {
   }px;margin-top: ${widthMrdgn}px;`;
 
   let joystick = document.createElement("div");
-  joystick.id = "joyDiv";
+  // joystick.id = "joyDiv";
   document.querySelector("body").appendChild(joystick);
-  let joystickBtn = document.createElement("div");
-  joystickBtn.id = "joyDivBtn";
-  document.querySelector("body").appendChild(joystickBtn);
+  // let joystickBtn = document.createElement("div");
+  // joystickBtn.id = "joyDivBtn";
+  joystick.classList.add("joystick");
+  joystick.innerHTML = `<div class="joystick-handle" id="joystickHandle"></div>`;
+  joystick.style.cssText = `width : ${widthMrdgn}px; height: ${widthMrdgn}px`;
+  // document.querySelector("body").appendChild(joystickBtn);
   setTimeout(() => {
     document
       .querySelectorAll(".block")
