@@ -167,12 +167,12 @@ export function mobileManagement() {
   let joystick = document.createElement("div");
   // joystick.id = "joyDiv";
   document.querySelector("body").appendChild(joystick);
-  // let joystickBtn = document.createElement("div");
-  // joystickBtn.id = "joyDivBtn";
+  let joystickBtn = document.createElement("div");
+  joystickBtn.id = "joyDivBtn";
   joystick.classList.add("joystick");
   joystick.innerHTML = `<div class="joystick-handle" id="joystickHandle"></div>`;
   joystick.style.cssText = `width : ${widthMrdgn}px; height: ${widthMrdgn}px`;
-  // document.querySelector("body").appendChild(joystickBtn);
+  document.querySelector("body").appendChild(joystickBtn);
   setTimeout(() => {
     document
       .querySelectorAll(".block")

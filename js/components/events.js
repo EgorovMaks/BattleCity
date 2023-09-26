@@ -2,7 +2,7 @@ import { levelMap } from "../data/levels.js";
 import { id, widthMrdgn } from "./elements.js";
 import { adjustment } from "./movement.js";
 import { shooting, stop } from "./shooting.js";
-import { JoyStick } from "./joy.js";
+// import { JoyStick } from "./joy.js";
 
 export let eventUp = "";
 export let eventDown = "";
@@ -48,19 +48,19 @@ export let joystickFun = setInterval(function () {
           joystickCenterY;
         console.log(offsetX, offsetY);
 
-        if (offsetX < -30) {
+        if (offsetX < -20) {
           shootingDirection = "left";
           reassignment(true);
           eventLeft = "left";
-        } else if (offsetX > 30) {
+        } else if (offsetX > 20) {
           shootingDirection = "right";
           reassignment(true);
           eventRight = "right";
-        } else if (offsetY < -30) {
+        } else if (offsetY < -20) {
           shootingDirection = "up";
           reassignment(true);
           eventUp = "up";
-        } else if (offsetY > 30) {
+        } else if (offsetY > 20) {
           shootingDirection = "down";
           reassignment(true);
           eventDown = "down";
@@ -93,6 +93,11 @@ export let joystickFun = setInterval(function () {
         joystickHandle.style.left = `${joystickCenterX}px`;
         joystickHandle.style.top = `${joystickCenterY}px`;
       }
+    });
+    let shot = document.querySelector("#joyDivBtn");
+    shot.addEventListener("click", (e) => {
+      document.querySelectorAll("#missileTrack").forEach((e) => e.remove());
+      shooting();
     });
     clearInterval(joystickFun);
   }
