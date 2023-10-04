@@ -1,6 +1,6 @@
 import { randomNumber, topBlok } from "../data/data.js";
 import { levelMapMovement } from "../data/levels.js";
-import { heightMap } from "./game.js";
+import { heightMap, tank1 } from "./game.js";
 import { stopTrue } from "./shooting.js";
 
 export const map = document.querySelector("#BattleCity");
@@ -12,6 +12,7 @@ export function createElement(
   [urlUp, urlUp2, urlDown, urlDown2, urlLeft, urlLeft2, urlRight, urlRight2]
 ) {
   const div = document.createElement("div");
+  createTankAnim(top, left, div);
   div.style.cssText = `width: ${width}; height: ${height}; top: ${top}; left: ${left}`;
   setTimeout(() => {
     levelMapMovement(
@@ -22,6 +23,7 @@ export function createElement(
 
   div.id = `${id}`;
   div.classList.add(className);
+  div.classList.add("none");
   div.innerHTML = `
   <img src=${urlUp} alt=${type} class="active up ${type}" style="width: 100%; height:  100%;"> 
   <img src=${urlUp2} alt=${type} class="up ${type}" style="width: 100%; height:  100%;">
@@ -35,6 +37,75 @@ export function createElement(
   const newDiv = canvas.appendChild(div);
 }
 
+const div = document.createElement("div");
+div.id = "createTank";
+div.classList.add("createTank");
+
+div.innerHTML = `
+  <img src= "./img/createTankAnim/img-1.png" alt="img" class="createTankAnim activeAnim" style="width: 100%; height:  100%;">
+  <img src= "./img/createTankAnim/img-2.png" alt="img" class="createTankAnim noneAnim" style="width: 100%; height:  100%;">
+  <img src= "./img/createTankAnim/img-3.png" alt="img" class="createTankAnim noneAnim" style="width: 100%; height:  100%;">
+  <img src= "./img/createTankAnim/img-4.png" alt="img" class="createTankAnim noneAnim" style="width: 100%; height:  100%;">`;
+
+export function createTankAnim(top, left, tank) {
+
+const num = 80;
+  div.style.cssText = `width: ${topBlok}px; height: ${topBlok}px; top: ${top}; left: ${left};`;
+  let newDiv = map.appendChild(div);
+  const anim = document.querySelectorAll(".createTankAnim");
+  setTimeout(function () {
+    setTimeout(function () {
+      anim[0].classList.remove("activeAnim");
+      // anim[0].classList.add("noneAnim");
+      anim[1].classList.add("activeAnim");
+    }, num);
+    setTimeout(function () {
+      anim[1].classList.remove("activeAnim");
+      anim[2].classList.add("activeAnim");
+    }, num * 2);
+    setTimeout(function () {
+      anim[2].classList.remove("activeAnim");
+      anim[3].classList.add("activeAnim");
+    }, num * 3);
+    setTimeout(function () {
+      anim[3].classList.remove("activeAnim");
+      anim[0].classList.add("activeAnim");
+    }, num * 4);
+    setTimeout(function () {
+      anim[0].classList.remove("activeAnim");
+      anim[1].classList.add("activeAnim");
+    }, num * 5);
+    setTimeout(function () {
+      anim[1].classList.remove("activeAnim");
+      anim[2].classList.add("activeAnim");
+    }, num * 6);
+    setTimeout(function () {
+      anim[2].classList.remove("activeAnim");
+      anim[3].classList.add("activeAnim");
+    }, num * 7);
+    setTimeout(function () {
+      anim[3].classList.remove("activeAnim");
+      anim[0].classList.add("activeAnim");
+    }, num * 8);
+    setTimeout(function () {
+      anim[0].classList.remove("activeAnim");
+      anim[1].classList.add("activeAnim");
+    }, num * 9);
+    setTimeout(function () {
+      anim[1].classList.remove("activeAnim");
+      anim[2].classList.add("activeAnim");
+    }, num * 10);
+    setTimeout(function () {
+      anim[2].classList.remove("activeAnim");
+      anim[3].classList.add("activeAnim");
+    }, num * 11);
+    setTimeout(function () {
+      anim[3].classList.remove("activeAnim");
+      // anim[0].classList.add("activeAnim");
+      tank.classList.remove("none");
+    }, num * 12);
+  }, 500);
+}
 export function createBlocks(
   array,
   canvas,

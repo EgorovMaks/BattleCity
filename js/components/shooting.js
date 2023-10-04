@@ -37,7 +37,6 @@ export function shotFlight() {
 function shotDescription(shootingDirection) {
   let topPozCenter = Math.floor((parseFloat(tank1.style.top) / topBlok) * 4);
   let leftPozCenter = Math.floor((parseFloat(tank1.style.left) / topBlok) * 4);
-  console.log(topPozCenter,leftPozCenter)
   if (shootingDirection === "up" && stop === false) {
     stop = true;
     missile(

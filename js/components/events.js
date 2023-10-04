@@ -1,5 +1,4 @@
-import { levelMap } from "../data/levels.js";
-import { id, widthMrdgn } from "./elements.js";
+import { id } from "./elements.js";
 import { adjustment } from "./movement.js";
 import { shooting, stop } from "./shooting.js";
 // import { JoyStick } from "./joy.js";

@@ -38,10 +38,12 @@ h2 {
   pointer-events: none;
   z-index: 1;
 }
-.explosionAnimation{
+
+.explosionAnimation {
   z-index: 6;
 }
-.block{
+
+.block {
   z-index: 5;
 }
 
@@ -54,6 +56,21 @@ h2 {
 #explosion {
   pointer-events: none;
 }
+#createTank{
+  overflow: hidden;
+}
+
+.createTankAnim {
+  transform: translateX(100%);
+
+  display: block;
+}
+
+.activeAnim {
+  transform: translateX(0%);
+}
+
+
 
 /* #joyDiv{
   position: fixed;
@@ -65,11 +82,11 @@ h2 {
 #joyDivBtn{
   /* width: 50px;
   height: 50px; */
-  /* background: #C0C0C0; */
-  /* position: fixed;
+/* background: #C0C0C0; */
+/* position: fixed;
   top: 20px;
   right: 20px; */
-  /* border-radius: 50%; */
+/* border-radius: 50%; */
 /* } */
 
 
@@ -108,7 +125,7 @@ h2 {
   left: 50%;
 }
 
-#joyDivBtn{
+#joyDivBtn {
   width: 40px;
   height: 40px;
   background: #e74c3c;
@@ -300,7 +317,7 @@ div .active {
   /* background-color: #fff; */
 }
 
-.divMobil{
+.divMobil {
   transform: rotate(-90deg);
 }
 
@@ -320,4 +337,3 @@ div .active {
 .none {
   display: none;
 }
-
