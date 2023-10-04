@@ -36,6 +36,13 @@ h2 {
   -o-transition: top 0.1s ease, left 0.1s ease;
   transition: top 0.1s ease, left 0.1s ease;
   pointer-events: none;
+  z-index: 1;
+}
+.explosionAnimation{
+  z-index: 6;
+}
+.block{
+  z-index: 5;
 }
 
 .missileLeft {
@@ -171,6 +178,7 @@ div img {
 
 #tank1User {
   /* pointer-events: none; */
+  z-index: 4;
 }
 
 div .active {

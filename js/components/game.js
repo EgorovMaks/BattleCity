@@ -3,6 +3,7 @@
 // import { levelMapConstructorId } from "../data/levels.js";
 import { topBlok } from "../data/data.js";
 import { id } from "./elements.js";
+import { eventStart } from "./events.js";
 import { animation } from "./movement.js";
 import { movement } from "./movement.js";
 import { shotFlight } from "./shooting.js";
@@ -31,17 +32,13 @@ export let loopStart = setInterval(function () {
     tank1 = id("#tank1User");
     gameLoop();
     animation(tank1);
+    eventStart()
     clearInterval(loopStart);
-    
-    // levelMapConstructorId()
-    // shootingIdMap();
   }
 }, 10);
 
 async function gameLoop() {
   setInterval(function () {
-    // window();
-    // console.log(topBlok)
     movement(tank1);
     shotFlight();
   }, 50);

@@ -37,11 +37,12 @@ export function shotFlight() {
 function shotDescription(shootingDirection) {
   let topPozCenter = Math.floor((parseFloat(tank1.style.top) / topBlok) * 4);
   let leftPozCenter = Math.floor((parseFloat(tank1.style.left) / topBlok) * 4);
+  console.log(topPozCenter,leftPozCenter)
   if (shootingDirection === "up" && stop === false) {
     stop = true;
     missile(
       map,
-      [((leftPozCenter + 2) * topBlok) / 4, topPozCenter * (topBlok / 4)],
+      [((leftPozCenter + 2) * topBlok) / 4, (topPozCenter+1) * (topBlok / 4)],
       "up"
     );
     pozitionTop = true;
@@ -49,7 +50,7 @@ function shotDescription(shootingDirection) {
     stop = true;
     missile(
       map,
-      [((leftPozCenter + 2) * topBlok) / 4, ((topPozCenter + 5) * topBlok) / 4],
+      [((leftPozCenter + 2) * topBlok) / 4, ((topPozCenter + 4) * topBlok) / 4],
       "down"
     );
     pozitionDown = true;
@@ -57,7 +58,7 @@ function shotDescription(shootingDirection) {
     stop = true;
     missile(
       map,
-      [((leftPozCenter - 1) * topBlok) / 4, ((topPozCenter + 2) * topBlok) / 4],
+      [((leftPozCenter +1) * topBlok) / 4, ((topPozCenter + 2) * topBlok) / 4],
       "left"
     );
     pozitionLeft = true;
@@ -65,7 +66,7 @@ function shotDescription(shootingDirection) {
     stop = true;
     missile(
       map,
-      [((leftPozCenter + 4) * topBlok) / 4, ((topPozCenter + 2) * topBlok) / 4],
+      [((leftPozCenter + 3) * topBlok) / 4, ((topPozCenter + 2) * topBlok) / 4],
       "right"
     );
     pozitionRight = true;

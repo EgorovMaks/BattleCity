@@ -10,10 +10,6 @@ export let eventLeft = "";
 export let eventRight = "";
 export let shootingDirection = "up";
 
-// var joy = new JoyStick("joyDiv");
-
-let joystick = "";
-
 export let joystickFun = setInterval(function () {
   if (id("#joystickHandle") !== null) {
     const joystick = document.querySelector(".joystick");
@@ -127,45 +123,47 @@ function reassignment(e) {
   }
 }
 
-export const keyPress = document.addEventListener("keydown", function (e) {
-  if (e.code === "ArrowUp" || e.code === "KeyW") {
-    shootingDirection = "up";
-    reassignment(true);
-    eventUp = "up";
-  } else if (e.code === "ArrowDown" || e.code === "KeyS") {
-    shootingDirection = "down";
-    reassignment(true);
-    eventDown = "down";
-  } else if (e.code === "ArrowLeft" || e.code === "KeyA") {
-    shootingDirection = "left";
-    reassignment(true);
-    eventLeft = "left";
-  } else if (e.code === "ArrowRight" || e.code === "KeyD") {
-    shootingDirection = "right";
-    reassignment(true);
-    eventRight = "right";
-  } else if (e.code === "Space") {
-    document.querySelectorAll("#missileTrack").forEach((e) => e.remove());
-    shooting();
-  }
-});
+export function eventStart(params) {
+  const keyPress = document.addEventListener("keydown", function (e) {
+    if (e.code === "ArrowUp" || e.code === "KeyW") {
+      shootingDirection = "up";
+      reassignment(true);
+      eventUp = "up";
+    } else if (e.code === "ArrowDown" || e.code === "KeyS") {
+      shootingDirection = "down";
+      reassignment(true);
+      eventDown = "down";
+    } else if (e.code === "ArrowLeft" || e.code === "KeyA") {
+      shootingDirection = "left";
+      reassignment(true);
+      eventLeft = "left";
+    } else if (e.code === "ArrowRight" || e.code === "KeyD") {
+      shootingDirection = "right";
+      reassignment(true);
+      eventRight = "right";
+    } else if (e.code === "Space") {
+      document.querySelectorAll("#missileTrack").forEach((e) => e.remove());
+      shooting();
+    }
+  });
 
-export const keyup = document.addEventListener("keyup", function (e) {
-  if (e.code === "ArrowUp" || e.code === "KeyW") {
-    reassignment();
-    eventUp = "";
-    adjustment("top");
-  } else if (e.code === "ArrowDown" || e.code === "KeyS") {
-    reassignment();
-    eventDown = "";
-    adjustment("top");
-  } else if (e.code === "ArrowLeft" || e.code === "KeyA") {
-    reassignment();
-    eventLeft = "";
-    adjustment("left");
-  } else if (e.code === "ArrowRight" || e.code === "KeyD") {
-    reassignment();
-    eventRight = "";
-    adjustment("left");
-  }
-});
+  const keyup = document.addEventListener("keyup", function (e) {
+    if (e.code === "ArrowUp" || e.code === "KeyW") {
+      reassignment();
+      eventUp = "";
+      adjustment("top");
+    } else if (e.code === "ArrowDown" || e.code === "KeyS") {
+      reassignment();
+      eventDown = "";
+      adjustment("top");
+    } else if (e.code === "ArrowLeft" || e.code === "KeyA") {
+      reassignment();
+      eventLeft = "";
+      adjustment("left");
+    } else if (e.code === "ArrowRight" || e.code === "KeyD") {
+      reassignment();
+      eventRight = "";
+      adjustment("left");
+    }
+  });
+}
