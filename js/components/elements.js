@@ -20,9 +20,8 @@ export function createElement(
       Math.round(parseFloat(left) / (topBlok / 4))
     );
   }, 100);
-
   div.id = `${id}`;
-  div.classList.add(className);
+  div.classList.add(className, "tank");
   div.classList.add("none");
   div.innerHTML = `
   <img src=${urlUp} alt=${type} class="active up ${type}" style="width: 100%; height:  100%;"> 
@@ -37,26 +36,33 @@ export function createElement(
   const newDiv = canvas.appendChild(div);
 }
 
-const div = document.createElement("div");
-div.id = "createTank";
-div.classList.add("createTank");
+const tankAnim = document.createElement("div");
+tankAnim.id = "createTank";
+tankAnim.classList.add("createTank");
 
-div.innerHTML = `
+tankAnim.innerHTML = `
   <img src= "./img/createTankAnim/img-1.png" alt="img" class="createTankAnim activeAnim" style="width: 100%; height:  100%;">
   <img src= "./img/createTankAnim/img-2.png" alt="img" class="createTankAnim noneAnim" style="width: 100%; height:  100%;">
   <img src= "./img/createTankAnim/img-3.png" alt="img" class="createTankAnim noneAnim" style="width: 100%; height:  100%;">
   <img src= "./img/createTankAnim/img-4.png" alt="img" class="createTankAnim noneAnim" style="width: 100%; height:  100%;">`;
 
-export function createTankAnim(top, left, tank) {
-
-const num = 80;
-  div.style.cssText = `width: ${topBlok}px; height: ${topBlok}px; top: ${top}; left: ${left};`;
-  let newDiv = map.appendChild(div);
-  const anim = document.querySelectorAll(".createTankAnim");
+export async function createTankAnim(top, left, tank) {
+  const num = 100;
+  const tankClone = tankAnim.cloneNode(true);
+  const classRand = `id${randomNumber()}`;
+  const tankChild = tankClone.childNodes;
+  tankChild.forEach((e) => {
+    // console.log(e.classList);
+    if (e.classList !== undefined) {
+      e.id = classRand;
+    }
+  });
+  tankClone.style.cssText = `width: ${topBlok}px; height: ${topBlok}px; top: ${top}; left: ${left};`;
+  let newDiv = map.appendChild(tankClone);
+  const anim = document.querySelectorAll(`#${classRand}`);
   setTimeout(function () {
     setTimeout(function () {
       anim[0].classList.remove("activeAnim");
-      // anim[0].classList.add("noneAnim");
       anim[1].classList.add("activeAnim");
     }, num);
     setTimeout(function () {

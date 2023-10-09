@@ -56,7 +56,7 @@ h2 {
 #explosion {
   pointer-events: none;
 }
-#createTank{
+.createTank{
   overflow: hidden;
 }
 
@@ -193,7 +193,7 @@ div img {
   pointer-events: none;
 }
 
-#tank1User {
+.tank {
   /* pointer-events: none; */
   z-index: 4;
 }

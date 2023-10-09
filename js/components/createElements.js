@@ -3,25 +3,14 @@ import { id } from "./elements.js";
 import { animation } from "./movement.js";
 import { blocks, level1 } from "../data/levels.js";
 import { randomNumber, topBlok } from "../data/data.js";
+import { tanks } from "../data/tankAll.js";
+// import { tank1 } from "./game.js";
 
 export function createTank1User() {
-  createElement(
-    ["tank", map, `${topBlok * 13}px`, `${topBlok * 5}px`, "tank1User"],
-
-    // ["tank", map, "6%", "40%", "tank1User"],
-    [`${topBlok}px`, `${topBlok}px`],
-    // ["40%", "40%"],
-    [
-      "./img/tank1/tank1-up.png",
-      "./img/tank1/tank2-up.png",
-      "./img/tank1/tank1-down.png",
-      "./img/tank1/tank2-down.png",
-      "./img/tank1/tank1-left.png",
-      "./img/tank1/tank2-left.png",
-      "./img/tank1/tank1-right.png",
-      "./img/tank1/tank2-right.png",
-    ]
-  );
+  tanks.forEach((e) => {
+    createElement(e.tank[0], e.tank[1], e.tank[2]);
+    // console.log(e.tank[0], e.tank[1], e.tank[2]);
+  });
 }
 
 export function levelLoad() {
