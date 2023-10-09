@@ -9,7 +9,6 @@ import { tanks } from "../data/tankAll.js";
 export function createTank1User() {
   tanks.forEach((e) => {
     createElement(e.tank[0], e.tank[1], e.tank[2]);
-    // console.log(e.tank[0], e.tank[1], e.tank[2]);
   });
 }
 

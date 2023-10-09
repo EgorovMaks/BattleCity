@@ -1,11 +1,11 @@
 import { map } from "../components/elements.js";
-import { topBlok } from "./data.js";
+import { randomNumber, topBlok } from "./data.js";
 
 export let tanks = [
   {
     tank: [
       ["tank", map, `${topBlok * 13}px`, `${topBlok * 5}px`, "tank1User"],
-      [`${topBlok}px`, `${topBlok}px`],
+      [`${topBlok}px`, `${topBlok}px`, true],
       [
         "./img/tank1/tank1-up.png",
         "./img/tank1/tank2-up.png",
@@ -21,7 +21,7 @@ export let tanks = [
   {
     tank: [
       ["tank", map, `${topBlok * 1}px`, `${topBlok * 1}px`, "tank2"],
-      [`${topBlok}px`, `${topBlok}px`],
+      [`${topBlok}px`, `${topBlok}px`, false],
       [
         "./img/tank1/tank1-up.png",
         "./img/tank1/tank2-up.png",
@@ -33,11 +33,12 @@ export let tanks = [
         "./img/tank1/tank2-right.png",
       ],
     ],
+    numArr: randomNumber,
   },
   {
     tank: [
       ["tank", map, `${topBlok * 1}px`, `${topBlok * 7}px`, "tank3"],
-      [`${topBlok}px`, `${topBlok}px`],
+      [`${topBlok}px`, `${topBlok}px`, false],
       [
         "./img/tank1/tank1-up.png",
         "./img/tank1/tank2-up.png",

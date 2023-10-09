@@ -8,7 +8,7 @@ map.style.cssText = `width: ${topBlok * 15}px; height: ${topBlok * 15}px`;
 
 export function createElement(
   [type, canvas, top, left, id, className],
-  [width, height],
+  [width, height, desc],
   [urlUp, urlUp2, urlDown, urlDown2, urlLeft, urlLeft2, urlRight, urlRight2]
 ) {
   const div = document.createElement("div");
@@ -23,16 +23,20 @@ export function createElement(
   div.id = `${id}`;
   div.classList.add(className, "tank");
   div.classList.add("none");
+  const ranNum = `class${randomNumber()}`;
   div.innerHTML = `
-  <img src=${urlUp} alt=${type} class="active up ${type}" style="width: 100%; height:  100%;"> 
+  <img src=${urlUp} alt=${type} class="${
+    desc ? "active" : null
+  }  up ${type}" style="width: 100%; height:  100%;"> 
   <img src=${urlUp2} alt=${type} class="up ${type}" style="width: 100%; height:  100%;">
-  <img src=${urlDown} alt=${type} class=" down ${type}" style="width: 100%; height:  100%;">
+  <img src=${urlDown} alt=${type} class="${
+    desc ? null : "active"
+  } down ${type}" style="width: 100%; height:  100%;">
   <img src=${urlDown2} alt=${type} class="down ${type}" style="width: 100%; height:  100%;">
   <img src=${urlLeft} alt=${type} class=" left ${type}" style="width: 100%; height:  100%;">
   <img src=${urlLeft2} alt=${type} class="left ${type}" style="width: 100%; height:  100%;">
   <img src=${urlRight} alt=${type} class=" right ${type}" style="width: 100%; height:  100%;">
   <img src=${urlRight2} alt=${type} class="right ${type}" style="width: 100%; height:  100%;">`;
-
   const newDiv = canvas.appendChild(div);
 }
 
