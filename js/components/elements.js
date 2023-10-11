@@ -1,6 +1,7 @@
 import { randomNumber, topBlok } from "../data/data.js";
 import { levelMapMovement } from "../data/levels.js";
-import { heightMap, tank1 } from "./game.js";
+import { tank1 } from "./game.js";
+import { heightMap } from "../data/data.js";
 import { stopTrue } from "./shooting.js";
 
 export const map = document.querySelector("#BattleCity");

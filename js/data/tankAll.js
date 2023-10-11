@@ -1,5 +1,8 @@
-import { map } from "../components/elements.js";
+// import { map } from "../components/elements.js";
+import { id } from "../components/elements.js";
 import { randomNumber, topBlok } from "./data.js";
+
+const map = document.querySelector("#BattleCity");
 
 export let tanks = [
   {
@@ -33,7 +36,6 @@ export let tanks = [
         "./img/tank1/tank2-right.png",
       ],
     ],
-    numArr: randomNumber,
   },
   {
     tank: [
@@ -68,3 +70,11 @@ export let tanks = [
     ],
   },
 ];
+
+export function arrTanksAdd() {
+  tanks.forEach(e=>{
+    e["id"] = `#${e.tank[0][4]}`;
+    e["elDOM"]=id(e.id)
+    e["randomNum"]=randomNumber()
+  })
+}

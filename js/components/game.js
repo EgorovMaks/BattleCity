@@ -1,38 +1,21 @@
-// import { shootingIdMap } from "../data/levels.js";
-// import { levelMapConstructorId } from "../data/levels.js";
-// import { levelMapConstructorId } from "../data/levels.js";
-import { topBlok } from "../data/data.js";
+// import { topBlok } from "../data/data.js";
+// import { tanks } from "../data/tankAll.js";
+import { arrTanksAdd } from "../data/tankAll.js";
 import { id } from "./elements.js";
 import { eventStart } from "./events.js";
 import { animation } from "./movement.js";
 import { movement } from "./movement.js";
 import { shotFlight } from "./shooting.js";
 
-export let windowWidth = 16;
-export let heightMap = 0
-
-function window() {
-  const windowInnerWidth = document.documentElement.clientWidth;
-
-  const windowInnerHeight = document.documentElement.clientHeight;
-  if (windowInnerWidth <= windowInnerHeight) {
-    windowWidth = windowInnerWidth / 15;
-  } else {
-    windowWidth = windowInnerHeight / 15;
-  }
-  heightMap= windowInnerHeight
-}
-
-window();
-
 export let tank1 = "";
 
 export let loopStart = setInterval(function () {
   if (id("#tank1User") !== null) {
     tank1 = id("#tank1User");
+    arrTanksAdd();
     gameLoop();
     animation(tank1);
-    eventStart()
+    eventStart();
     clearInterval(loopStart);
   }
 }, 10);
@@ -43,5 +26,7 @@ async function gameLoop() {
     shotFlight();
   }, 50);
 }
+
+
 
 // 58
