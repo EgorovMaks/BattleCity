@@ -71,11 +71,4 @@ export let tanks = [
   },
 ];
 
-export function arrTanksAdd() {
-  tanks.forEach((e) => {
-    e["id"] = `#${e.tank[0][4]}`;
-    e["elDOM"] = id(e.id);
-    e["randomNum"] = randomNumber();
-    e.tank[1][2] ? (e["desc"] = true) : (e["desc"] = false);
-  });
-}
+

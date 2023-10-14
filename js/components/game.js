@@ -1,6 +1,6 @@
 // import { topBlok } from "../data/data.js";
 // import { tanks } from "../data/tankAll.js";
-import { arrTanksAdd, tanks } from "../data/tankAll.js";
+import { tanks } from "../data/tankAll.js";
 import { id } from "./elements.js";
 import { eventStart } from "./events.js";
 import { animation } from "./movement.js";
@@ -12,7 +12,6 @@ export let tank1 = "";
 export let loopStart = setInterval(function () {
   if (id("#tank1User") !== null) {
     tank1 = id("#tank1User");
-    arrTanksAdd();
     gameLoop();
     animation(tank1);
     eventStart();

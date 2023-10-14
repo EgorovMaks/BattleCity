@@ -50,7 +50,6 @@ export function movement(tanks, arr) {
 }
 
 export function adjustment(pozition, tanks, arr) {
-  // console.log(tanks);
   if (pozition === "top") {
     const up = parseFloat(tanks.style.top);
     tanks.style.top = `${(Math.round((up / topBlok) * 4) * topBlok) / 4}px`;
@@ -93,7 +92,7 @@ function movementUp(up, left, topPozition, leftPozition, tanks, arr) {
   } else if (b === false) {
     adjustment("top", tanks, arr);
   }
-  levelMapMovement(topPozition, leftPozition, eventUp);
+  levelMapMovement(topPozition, leftPozition, arr.randomNum);
   stop(tanks, arr);
 }
 function movementDown(up, left, topPozition, leftPozition, tanks, arr) {
@@ -122,7 +121,7 @@ function movementDown(up, left, topPozition, leftPozition, tanks, arr) {
   } else if (b === false) {
     adjustment("top", tanks, arr);
   }
-  levelMapMovement(topPozition, leftPozition, eventDown);
+  levelMapMovement(topPozition, leftPozition, arr.randomNum);
   console.log(1);
 }
 function movementLeft(up, left, topPozition, leftPozition, tanks, arr) {
@@ -151,7 +150,7 @@ function movementLeft(up, left, topPozition, leftPozition, tanks, arr) {
   } else if (b === false) {
     adjustment("left", tanks, arr);
   }
-  levelMapMovement(topPozition, leftPozition, eventLeft);
+  levelMapMovement(topPozition, leftPozition, arr.randomNum);
 }
 function movementRight(up, left, topPozition, leftPozition, tanks, arr) {
   let a = [];
@@ -179,5 +178,5 @@ function movementRight(up, left, topPozition, leftPozition, tanks, arr) {
   } else if (b === false) {
     adjustment("left", tanks, arr);
   }
-  levelMapMovement(topPozition, leftPozition, eventRight);
+  levelMapMovement(topPozition, leftPozition, arr.randomNum);
 }

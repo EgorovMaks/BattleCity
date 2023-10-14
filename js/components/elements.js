@@ -10,7 +10,8 @@ map.style.cssText = `width: ${topBlok * 15}px; height: ${topBlok * 15}px`;
 export function createElement(
   [type, canvas, top, left, id, className],
   [width, height, desc],
-  [urlUp, urlUp2, urlDown, urlDown2, urlLeft, urlLeft2, urlRight, urlRight2]
+  [urlUp, urlUp2, urlDown, urlDown2, urlLeft, urlLeft2, urlRight, urlRight2],
+  num
 ) {
   const div = document.createElement("div");
   createTankAnim(top, left, div);
@@ -18,7 +19,7 @@ export function createElement(
   setTimeout(() => {
     levelMapMovement(
       Math.round(parseFloat(top) / (topBlok / 4)),
-      Math.round(parseFloat(left) / (topBlok / 4))
+      Math.round(parseFloat(left) / (topBlok / 4)),
     );
   }, 100);
   div.id = `${id}`;

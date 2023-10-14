@@ -179,26 +179,25 @@ setTimeout(() => {
   levelMapConstructor(level1);
 }, 100);
 
-export function levelMapMovement(top, left, eraser) {
-  let num = 100;
+export function levelMapMovement(top, left, num) {
   const nums = [0, 1, 2, 3];
   nums.forEach((e) => {
-    if (levelMap[top + 4][left + e] === 100) {
+    if (levelMap[top + 4][left + e] === num) {
       levelMap[top + 4][left + e] = 0;
     }
   });
   nums.forEach((e) => {
-    if (levelMap[top - 1][left + e] === 100) {
+    if (levelMap[top - 1][left + e] === num) {
       levelMap[top - 1][left + e] = 0;
     }
   });
   nums.forEach((e) => {
-    if (levelMap[top + e][left + 4] === 100) {
+    if (levelMap[top + e][left + 4] === num) {
       levelMap[top + e][left + 4] = 0;
     }
   });
   nums.forEach((e) => {
-    if (levelMap[top + e][left - 1] === 100) {
+    if (levelMap[top + e][left - 1] === num) {
       levelMap[top + e][left - 1] = 0;
     }
   });
