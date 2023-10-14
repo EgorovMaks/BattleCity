@@ -71,4 +71,4 @@ export let tanks = [
   },
 ];
 
-
+export let tankNumAll={}
