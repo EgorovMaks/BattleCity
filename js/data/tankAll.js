@@ -10,14 +10,14 @@ export let tanks = [
       ["tank", map, `${topBlok * 13}px`, `${topBlok * 5}px`, "tank1User"],
       [`${topBlok}px`, `${topBlok}px`, true],
       [
-        "./img/tank1/tank1-up.png",
-        "./img/tank1/tank2-up.png",
-        "./img/tank1/tank1-down.png",
-        "./img/tank1/tank2-down.png",
-        "./img/tank1/tank1-left.png",
-        "./img/tank1/tank2-left.png",
-        "./img/tank1/tank1-right.png",
-        "./img/tank1/tank2-right.png",
+        "tank1Standard",
+        "tank1Standard",
+        "tank1Standard",
+        "tank1Standard",
+        "tank1Standard",
+        "tank1Standard",
+        "tank1Standard",
+        "tank1Standard",
       ],
     ],
   },
@@ -26,14 +26,14 @@ export let tanks = [
       ["tank", map, `${topBlok * 1}px`, `${topBlok * 1}px`, "tank2"],
       [`${topBlok}px`, `${topBlok}px`, false],
       [
-        "./img/tank1/tank1-up.png",
-        "./img/tank1/tank2-up.png",
-        "./img/tank1/tank1-down.png",
-        "./img/tank1/tank2-down.png",
-        "./img/tank1/tank1-left.png",
-        "./img/tank1/tank2-left.png",
-        "./img/tank1/tank1-right.png",
-        "./img/tank1/tank2-right.png",
+        "tankStandardEnemy",
+        "tankStandardEnemy",
+        "tankStandardEnemy",
+        "tankStandardEnemy",
+        "tankStandardEnemy",
+        "tankStandardEnemy",
+        "tankStandardEnemy",
+        "tankStandardEnemy",
       ],
     ],
   },
@@ -42,14 +42,14 @@ export let tanks = [
       ["tank", map, `${topBlok * 1}px`, `${topBlok * 7}px`, "tank3"],
       [`${topBlok}px`, `${topBlok}px`, false],
       [
-        "./img/tank1/tank1-up.png",
-        "./img/tank1/tank2-up.png",
-        "./img/tank1/tank1-down.png",
-        "./img/tank1/tank2-down.png",
-        "./img/tank1/tank1-left.png",
-        "./img/tank1/tank2-left.png",
-        "./img/tank1/tank1-right.png",
-        "./img/tank1/tank2-right.png",
+        "tankStandardEnemy",
+        "tankStandardEnemy",
+        "tankStandardEnemy",
+        "tankStandardEnemy",
+        "tankStandardEnemy",
+        "tankStandardEnemy",
+        "tankStandardEnemy",
+        "tankStandardEnemy",
       ],
     ],
   },
@@ -58,23 +58,24 @@ export let tanks = [
       ["tank", map, `${topBlok * 1}px`, `${topBlok * 13}px`, "tank4"],
       [`${topBlok}px`, `${topBlok}px`],
       [
-        "./img/tank1/tank1-up.png",
-        "./img/tank1/tank2-up.png",
-        "./img/tank1/tank1-down.png",
-        "./img/tank1/tank2-down.png",
-        "./img/tank1/tank1-left.png",
-        "./img/tank1/tank2-left.png",
-        "./img/tank1/tank1-right.png",
-        "./img/tank1/tank2-right.png",
+        "tankStandardEnemy",
+        "tankStandardEnemy",
+        "tankStandardEnemy",
+        "tankStandardEnemy",
+        "tankStandardEnemy",
+        "tankStandardEnemy",
+        "tankStandardEnemy",
+        "tankStandardEnemy",
       ],
     ],
   },
 ];
 
 export function arrTanksAdd() {
-  tanks.forEach(e=>{
+  tanks.forEach((e) => {
     e["id"] = `#${e.tank[0][4]}`;
-    e["elDOM"]=id(e.id)
-    e["randomNum"]=randomNumber()
-  })
+    e["elDOM"] = id(e.id);
+    e["randomNum"] = randomNumber();
+    e.tank[1][2] ? (e["desc"] = true) : (e["desc"] = false);
+  });
 }

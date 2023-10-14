@@ -1,4 +1,6 @@
+import { tanks } from "../data/tankAll.js";
 import { id } from "./elements.js";
+import { tank1 } from "./game.js";
 import { adjustment } from "./movement.js";
 import { shooting, stop } from "./shooting.js";
 // import { JoyStick } from "./joy.js";
@@ -150,19 +152,19 @@ export function eventStart(params) {
     if (e.code === "ArrowUp" || e.code === "KeyW") {
       reassignment();
       eventUp = "";
-      adjustment("top");
+      adjustment("top",tank1,tanks);
     } else if (e.code === "ArrowDown" || e.code === "KeyS") {
       reassignment();
       eventDown = "";
-      adjustment("top");
+      adjustment("top",tank1,tanks);
     } else if (e.code === "ArrowLeft" || e.code === "KeyA") {
       reassignment();
       eventLeft = "";
-      adjustment("left");
+      adjustment("left",tank1,tanks);
     } else if (e.code === "ArrowRight" || e.code === "KeyD") {
       reassignment();
       eventRight = "";
-      adjustment("left");
+      adjustment("left",tank1,tanks);
     }
   });
 }

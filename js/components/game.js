@@ -1,6 +1,6 @@
 // import { topBlok } from "../data/data.js";
 // import { tanks } from "../data/tankAll.js";
-import { arrTanksAdd } from "../data/tankAll.js";
+import { arrTanksAdd, tanks } from "../data/tankAll.js";
 import { id } from "./elements.js";
 import { eventStart } from "./events.js";
 import { animation } from "./movement.js";
@@ -22,11 +22,9 @@ export let loopStart = setInterval(function () {
 
 async function gameLoop() {
   setInterval(function () {
-    movement(tank1);
+    tanks.forEach((e => movement(e.elDOM, e)));
     shotFlight();
   }, 50);
 }
-
-
 
 // 58

@@ -3,6 +3,7 @@ import { animationDirection } from "./elements.js";
 import { tankSpeed, topBlok } from "../data/data.js";
 import { tank1 } from "./game.js";
 import { levelMap, levelMapMovement } from "../data/levels.js";
+import { tanks } from "../data/tankAll.js";
 
 export function animation(el) {
   const anim = el.querySelectorAll(".tank");
@@ -28,42 +29,44 @@ export function animation(el) {
   }, 60);
 }
 
+
 export let topLeft = {};
 
-export function movement(tanks) {
+export function movement(tanks, arr) {
   let up = parseFloat(tanks.style.top);
   let left = parseFloat(tanks.style.left);
-  let topPozition = Math.round(((up / topBlok) * 4));
-  let leftPozition = Math.round((left / topBlok) *  4);
+  let topPozition = Math.round((up / topBlok) * 4);
+  let leftPozition = Math.round((left / topBlok) * 4);
   // console.log(topPozition,leftPozition)
   if (eventUp === "up") {
-    movementUp(up, left, topPozition, leftPozition, tanks);
+    movementUp(up, left, topPozition, leftPozition, tanks, arr);
   } else if (eventDown === "down") {
-    movementDown(up, left, topPozition, leftPozition, tanks);
+    movementDown(up, left, topPozition, leftPozition, tanks, arr);
   } else if (eventLeft === "left") {
-    movementLeft(up, left, topPozition, leftPozition, tanks);
+    movementLeft(up, left, topPozition, leftPozition, tanks, arr);
   } else if (eventRight === "right") {
-    movementRight(up, left, topPozition, leftPozition, tanks);
+    movementRight(up, left, topPozition, leftPozition, tanks, arr);
   }
 }
 
-export function adjustment(pozition) {
+export function adjustment(pozition, tanks, arr) {
+  // console.log(tanks);
   if (pozition === "top") {
-    const up = parseFloat(tank1.style.top);
-    tank1.style.top = `${(Math.round((up / topBlok) * 4) * topBlok) / 4}px`;
+    const up = parseFloat(tanks.style.top);
+    tanks.style.top = `${(Math.round((up / topBlok) * 4) * topBlok) / 4}px`;
   } else if (pozition === "left") {
-    const left = parseFloat(tank1.style.left);
-    tank1.style.left = `${(Math.round((left / topBlok) * 4) * topBlok) / 4}px`;
+    const left = parseFloat(tanks.style.left);
+    tanks.style.left = `${(Math.round((left / topBlok) * 4) * topBlok) / 4}px`;
   } else if (pozition === "right") {
-    const left = parseFloat(tank1.style.left);
-    tank1.style.left = `${(Math.ceil((left / topBlok) * 2) * topBlok) / 2}px`;
+    const left = parseFloat(tanks.style.left);
+    tanks.style.left = `${(Math.ceil((left / topBlok) * 2) * topBlok) / 2}px`;
   } else if (pozition === "down") {
-    const up = parseFloat(tank1.style.top);
-    tank1.style.top = `${(Math.ceil((up / topBlok) * 2) * topBlok) / 2}px`;
+    const up = parseFloat(tanks.style.top);
+    tanks.style.top = `${(Math.ceil((up / topBlok) * 2) * topBlok) / 2}px`;
   }
 }
 
-function movementUp(up, left, topPozition, leftPozition, tanks) {
+function movementUp(up, left, topPozition, leftPozition, tanks, arr) {
   let a = [];
   let b = true;
   if (up > 0) {
@@ -88,11 +91,12 @@ function movementUp(up, left, topPozition, leftPozition, tanks) {
     }
     tanks.style.top = `${up}px`;
   } else if (b === false) {
-    adjustment("top");
+    adjustment("top", tanks, arr);
   }
   levelMapMovement(topPozition, leftPozition, eventUp);
-};
-function movementDown(up, left, topPozition, leftPozition, tanks) {
+  stop(tanks, arr);
+}
+function movementDown(up, left, topPozition, leftPozition, tanks, arr) {
   let a = [];
   let b = true;
   if (up < topBlok * 13 - topBlok / 8) {
@@ -116,11 +120,12 @@ function movementDown(up, left, topPozition, leftPozition, tanks) {
     }
     tanks.style.top = `${up}px`;
   } else if (b === false) {
-    adjustment("top");
+    adjustment("top", tanks, arr);
   }
   levelMapMovement(topPozition, leftPozition, eventDown);
+  console.log(1);
 }
-function movementLeft(up, left, topPozition, leftPozition, tanks) {
+function movementLeft(up, left, topPozition, leftPozition, tanks, arr) {
   let a = [];
   let b = true;
   if (left > 0) {
@@ -144,11 +149,11 @@ function movementLeft(up, left, topPozition, leftPozition, tanks) {
     }
     tanks.style.left = `${left}px`;
   } else if (b === false) {
-    adjustment("left");
+    adjustment("left", tanks, arr);
   }
   levelMapMovement(topPozition, leftPozition, eventLeft);
 }
-function movementRight(up, left, topPozition, leftPozition, tanks) {
+function movementRight(up, left, topPozition, leftPozition, tanks, arr) {
   let a = [];
   let b = true;
   if (left < topBlok * 13) {
@@ -172,7 +177,7 @@ function movementRight(up, left, topPozition, leftPozition, tanks) {
     }
     tanks.style.left = `${left}px`;
   } else if (b === false) {
-    adjustment("left");
+    adjustment("left", tanks, arr);
   }
   levelMapMovement(topPozition, leftPozition, eventRight);
 }

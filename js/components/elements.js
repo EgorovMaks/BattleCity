@@ -26,18 +26,18 @@ export function createElement(
   div.classList.add("none");
   const ranNum = `class${randomNumber()}`;
   div.innerHTML = `
-  <img src=${urlUp} alt=${type} class="${
+  <img src="./img/${urlUp}/tank1-up.png" alt=${type} class="${
     desc ? "active" : null
   }  up ${type}" style="width: 100%; height:  100%;"> 
-  <img src=${urlUp2} alt=${type} class="up ${type}" style="width: 100%; height:  100%;">
-  <img src=${urlDown} alt=${type} class="${
+  <img src="./img/${urlUp2}/tank2-up.png" alt=${type} class="up ${type}" style="width: 100%; height:  100%;">
+  <img src="./img/${urlDown}/tank1-down.png" alt=${type} class="${
     desc ? null : "active"
   } down ${type}" style="width: 100%; height:  100%;">
-  <img src=${urlDown2} alt=${type} class="down ${type}" style="width: 100%; height:  100%;">
-  <img src=${urlLeft} alt=${type} class=" left ${type}" style="width: 100%; height:  100%;">
-  <img src=${urlLeft2} alt=${type} class="left ${type}" style="width: 100%; height:  100%;">
-  <img src=${urlRight} alt=${type} class=" right ${type}" style="width: 100%; height:  100%;">
-  <img src=${urlRight2} alt=${type} class="right ${type}" style="width: 100%; height:  100%;">`;
+  <img src="./img/${urlDown2}/tank2-down.png" alt=${type} class="down ${type}" style="width: 100%; height:  100%;">
+  <img src="./img/${urlLeft}/tank1-left.png" alt=${type} class=" left ${type}" style="width: 100%; height:  100%;">
+  <img src="./img/${urlLeft2}/tank2-left.png" alt=${type} class="left ${type}" style="width: 100%; height:  100%;">
+  <img src="./img/${urlRight}/tank1-right.png" alt=${type} class=" right ${type}" style="width: 100%; height:  100%;">
+  <img src="./img/${urlRight2}/tank2-right.png" alt=${type} class="right ${type}" style="width: 100%; height:  100%;">`;
   const newDiv = canvas.appendChild(div);
 }
 
