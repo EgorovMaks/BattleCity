@@ -117,7 +117,8 @@ function movementUp(up, left, topPozition, leftPozition, tanks, arr) {
     adjustment("top", tanks, arr);
   }
   levelMapMovement(topPozition, leftPozition, arr.randomNum);
-  stop(tanks, arr);
+  
+  // stop(tanks, arr);
 }
 function movementDown(up, left, topPozition, leftPozition, tanks, arr) {
   let a = [];

@@ -21,7 +21,13 @@ export function createTank1User() {
     e["eventDown"] = "";
     e["eventLeft"] = "";
     e["eventRight"] = "";
-    console.log(e);
+    e["stop"] = false;
+    e["pozitionTop"]=false;
+    e["pozitionDown"] = false;
+    e["pozitionLeft"] = false;
+    e["pozitionRight"] = false;
+    e["arr"]=[]
+    // console.log(e);
   });
 }
 

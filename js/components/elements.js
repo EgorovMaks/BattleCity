@@ -1,8 +1,6 @@
 import { randomNumber, topBlok } from "../data/data.js";
 import { levelMapMovement } from "../data/levels.js";
-import { tank1 } from "./game.js";
 import { heightMap } from "../data/data.js";
-import { stopTrue } from "./shooting.js";
 
 export const map = document.querySelector("#BattleCity");
 map.style.cssText = `width: ${topBlok * 15}px; height: ${topBlok * 15}px`;
@@ -19,7 +17,7 @@ export function createElement(
   setTimeout(() => {
     levelMapMovement(
       Math.round(parseFloat(top) / (topBlok / 4)),
-      Math.round(parseFloat(left) / (topBlok / 4)),
+      Math.round(parseFloat(left) / (topBlok / 4))
     );
   }, 100);
   div.id = `${id}`;
@@ -153,11 +151,12 @@ export function createBlocks(
   });
 }
 
-export function missile(canvas, [x, y], poz) {
+export function missile(canvas, [x, y], poz,tank) {
   const div = document.createElement("div");
   const canvasMargin = parseFloat(window.getComputedStyle(canvas).marginLeft);
   const width = topBlok / 5.3;
   const height = topBlok / 4;
+  div.classList.add(`missile${tank.randomNum}`);
   div.id = "missile";
   if (poz === "up") {
     div.style.cssText = `width: ${width}px; height: ${height}px; top: ${y}px; left: ${x}px;`;
@@ -194,7 +193,7 @@ export function id(i) {
   return document.querySelector(i);
 }
 
-export function explosionAnimation(top, left, desc) {
+export function explosionAnimation(top, left, desc, tank) {
   let topPOz = top * (topBlok / 4);
   let leftPoz = left * (topBlok / 4);
   const div = document.createElement("div");
@@ -226,7 +225,7 @@ export function explosionAnimation(top, left, desc) {
     div.remove();
   }, 200);
   setTimeout(() => {
-    stopTrue();
+    tank.stop = false;
   }, 230);
 }
 

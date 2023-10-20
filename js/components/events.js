@@ -2,7 +2,7 @@ import { tankNumAll, tanks } from "../data/tankAll.js";
 import { id } from "./elements.js";
 import { tank1 } from "./game.js";
 import { adjustment } from "./movement.js";
-import { shooting, stop } from "./shooting.js";
+import { shooting } from "./shooting.js";
 // import { JoyStick } from "./joy.js";
 
 export let shootingDirection = "up";
@@ -123,32 +123,32 @@ function reassignment(e, tank) {
 export function eventStart(params) {
   const keyPress = document.addEventListener("keydown", function (e) {
     if (e.code === "ArrowUp" || e.code === "KeyW") {
-      shootingDirection = "up";
       tanks.forEach((e) => {
+        e.shootingDirection = "up";
         reassignment(true, e);
         e.eventUp = "up";
       });
     } else if (e.code === "ArrowDown" || e.code === "KeyS") {
-      shootingDirection = "down";
       tanks.forEach((e) => {
+        e.shootingDirection = "down";
         reassignment(true, e);
         e.eventDown = "down";
       });
     } else if (e.code === "ArrowLeft" || e.code === "KeyA") {
-      shootingDirection = "left";
       tanks.forEach((e) => {
+        e.shootingDirection = "left";
         reassignment(true, e);
         e.eventLeft = "left";
       });
     } else if (e.code === "ArrowRight" || e.code === "KeyD") {
-      shootingDirection = "right";
       tanks.forEach((e) => {
+        e.shootingDirection = "right";
         reassignment(true, e);
         e.eventRight = "right";
       });
     } else if (e.code === "Space") {
       document.querySelectorAll("#missileTrack").forEach((e) => e.remove());
-      shooting();
+      tanks.forEach((e) => shooting(e));
     }
   });
 

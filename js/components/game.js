@@ -13,7 +13,7 @@ export let loopStart = setInterval(function () {
   if (id("#tank1User") !== null) {
     tank1 = id("#tank1User");
     gameLoop();
-    tanks.forEach((e) => animation(tank1,e));
+    tanks.forEach((e) => animation(tank1, e));
     eventStart();
     clearInterval(loopStart);
   }
@@ -22,7 +22,7 @@ export let loopStart = setInterval(function () {
 async function gameLoop() {
   setInterval(function () {
     tanks.forEach((e) => movement(e.elDOM, e));
-    shotFlight();
+    tanks.forEach((e) => shotFlight(e));
   }, 50);
 }
 
