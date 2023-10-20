@@ -1,14 +1,10 @@
-import { tanks } from "../data/tankAll.js";
+import { tankNumAll, tanks } from "../data/tankAll.js";
 import { id } from "./elements.js";
 import { tank1 } from "./game.js";
 import { adjustment } from "./movement.js";
 import { shooting, stop } from "./shooting.js";
 // import { JoyStick } from "./joy.js";
 
-export let eventUp = "";
-export let eventDown = "";
-export let eventLeft = "";
-export let eventRight = "";
 export let shootingDirection = "up";
 
 export let joystickFun = setInterval(function () {
@@ -100,26 +96,26 @@ export let joystickFun = setInterval(function () {
   }
 }, 10);
 
-function reassignment(e) {
+function reassignment(e, tank) {
   if (e === true) {
-    if (eventDown === "down") {
-      eventDown = "press";
-    } else if (eventUp === "up") {
-      eventUp = "press";
-    } else if (eventLeft === "left") {
-      eventLeft = "press";
-    } else if (eventRight === "right") {
-      eventRight = "press";
+    if (tank.eventDown === "down") {
+      tank.eventDown = "press";
+    } else if (tank.eventUp === "up") {
+      tank.eventUp = "press";
+    } else if (tank.eventLeft === "left") {
+      tank.eventLeft = "press";
+    } else if (tank.eventRight === "right") {
+      tank.eventRight = "press";
     }
   } else {
-    if (eventDown === "press") {
-      eventDown = "down";
-    } else if (eventUp === "press") {
-      eventUp = "up";
-    } else if (eventLeft === "press") {
-      eventLeft = "left";
-    } else if (eventRight === "press") {
-      eventRight = "right";
+    if (tank.eventDown === "press") {
+      tank.eventDown = "down";
+    } else if (tank.eventUp === "press") {
+      tank.eventUp = "up";
+    } else if (tank.eventLeft === "press") {
+      tank.eventLeft = "left";
+    } else if (tank.eventRight === "press") {
+      tank.eventRight = "right";
     }
   }
 }
@@ -128,20 +124,28 @@ export function eventStart(params) {
   const keyPress = document.addEventListener("keydown", function (e) {
     if (e.code === "ArrowUp" || e.code === "KeyW") {
       shootingDirection = "up";
-      reassignment(true);
-      eventUp = "up";
+      tanks.forEach((e) => {
+        reassignment(true, e);
+        e.eventUp = "up";
+      });
     } else if (e.code === "ArrowDown" || e.code === "KeyS") {
       shootingDirection = "down";
-      reassignment(true);
-      eventDown = "down";
+      tanks.forEach((e) => {
+        reassignment(true, e);
+        e.eventDown = "down";
+      });
     } else if (e.code === "ArrowLeft" || e.code === "KeyA") {
       shootingDirection = "left";
-      reassignment(true);
-      eventLeft = "left";
+      tanks.forEach((e) => {
+        reassignment(true, e);
+        e.eventLeft = "left";
+      });
     } else if (e.code === "ArrowRight" || e.code === "KeyD") {
       shootingDirection = "right";
-      reassignment(true);
-      eventRight = "right";
+      tanks.forEach((e) => {
+        reassignment(true, e);
+        e.eventRight = "right";
+      });
     } else if (e.code === "Space") {
       document.querySelectorAll("#missileTrack").forEach((e) => e.remove());
       shooting();
@@ -150,21 +154,29 @@ export function eventStart(params) {
 
   const keyup = document.addEventListener("keyup", function (e) {
     if (e.code === "ArrowUp" || e.code === "KeyW") {
-      reassignment();
-      eventUp = "";
-      adjustment("top",tank1,tanks);
+      tanks.forEach((e) => {
+        reassignment(false, e);
+        e.eventUp = "";
+      });
+      adjustment("top", tank1, tanks);
     } else if (e.code === "ArrowDown" || e.code === "KeyS") {
-      reassignment();
-      eventDown = "";
-      adjustment("top",tank1,tanks);
+      tanks.forEach((e) => {
+        reassignment(false, e);
+        e.eventDown = "";
+      });
+      adjustment("top", tank1, tanks);
     } else if (e.code === "ArrowLeft" || e.code === "KeyA") {
-      reassignment();
-      eventLeft = "";
-      adjustment("left",tank1,tanks);
+      tanks.forEach((e) => {
+        reassignment(false, e);
+        e.eventLeft = "";
+      });
+      adjustment("left", tank1, tanks);
     } else if (e.code === "ArrowRight" || e.code === "KeyD") {
-      reassignment();
-      eventRight = "";
-      adjustment("left",tank1,tanks);
+      tanks.forEach((e) => {
+        reassignment(false, e);
+        e.eventRight = "";
+      });
+      adjustment("left", tank1, tanks);
     }
   });
 }

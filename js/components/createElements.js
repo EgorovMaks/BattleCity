@@ -14,7 +14,14 @@ export function createTank1User() {
     createElement(e.tank[0], e.tank[1], e.tank[2], e.randomNum);
     e["elDOM"] = id(e.id);
     tankNumAll[`${e.id}`] = e.randomNum;
-    console.log(tankNumAll);
+    e.tank[1][2]
+      ? (e["shootingDirection"] = "up")
+      : (e["shootingDirection"] = "down");
+    e["eventUp"] = "";
+    e["eventDown"] = "";
+    e["eventLeft"] = "";
+    e["eventRight"] = "";
+    console.log(e);
   });
 }
 

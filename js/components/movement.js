@@ -1,34 +1,58 @@
-import { eventDown, eventLeft, eventRight, eventUp } from "./events.js";
 import { animationDirection } from "./elements.js";
 import { tankSpeed, topBlok } from "../data/data.js";
 import { tank1 } from "./game.js";
 import { levelMap, levelMapMovement } from "../data/levels.js";
 import { tanks } from "../data/tankAll.js";
 
-export function animation(el) {
-  const anim = el.querySelectorAll(".tank");
-  const animUpMass = el.querySelectorAll(".up");
-  const animUp = el.querySelector(".up");
-  const animDownMass = el.querySelectorAll(".down");
-  const animDown = el.querySelector(".down");
-  const animLeftMass = el.querySelectorAll(".left");
-  const animLeft = el.querySelector(".left");
-  const animRightMass = el.querySelectorAll(".right");
-  const animRight = el.querySelector(".right");
+export function animation(el, tanks) {
+  const classAlls = tanks.elDOM.childNodes;
+  const classAll = [];
+  const a = [];
+
+  classAlls.forEach((e) => {
+    if (e.classList !== undefined) {
+      classAll.push(e);
+    }
+  });
+
+  function filter(el, className) {
+    classAll.forEach((e) => {
+      if (e.classList.contains(className)) {
+        el.push(e);
+      }
+    });
+    return el;
+  }
+
+  const anim = [];
+  const animUpMass = [];
+  const animDownMass = [];
+  const animLeftMass = [];
+  const animRightMass = [];
+
+  filter(anim,"tank")
+  filter(animUpMass, "up");
+  const animUp = animUpMass[0];
+  filter(animDownMass, "down");
+  const animDown = animDownMass[0];
+  filter(animLeftMass, "left");
+  const animLeft = animLeftMass[0];
+  filter(animRightMass, "right");
+  const animRight = animRightMass[0];
 
   setInterval(function () {
-    if (eventUp === "up") {
+    // console.log(tanks.eventUp);
+    if (tanks.eventUp === "up") {
       animationDirection(anim, animUp, animUpMass);
-    } else if (eventDown === "down") {
+    } else if (tanks.eventDown === "down") {
       animationDirection(anim, animDown, animDownMass);
-    } else if (eventLeft === "left") {
+    } else if (tanks.eventLeft === "left") {
       animationDirection(anim, animLeft, animLeftMass);
-    } else if (eventRight === "right") {
+    } else if (tanks.eventRight === "right") {
       animationDirection(anim, animRight, animRightMass);
     }
   }, 60);
 }
-
 
 export let topLeft = {};
 
@@ -38,13 +62,13 @@ export function movement(tanks, arr) {
   let topPozition = Math.round((up / topBlok) * 4);
   let leftPozition = Math.round((left / topBlok) * 4);
   // console.log(topPozition,leftPozition)
-  if (eventUp === "up") {
+  if (arr.eventUp === "up") {
     movementUp(up, left, topPozition, leftPozition, tanks, arr);
-  } else if (eventDown === "down") {
+  } else if (arr.eventDown === "down") {
     movementDown(up, left, topPozition, leftPozition, tanks, arr);
-  } else if (eventLeft === "left") {
+  } else if (arr.eventLeft === "left") {
     movementLeft(up, left, topPozition, leftPozition, tanks, arr);
-  } else if (eventRight === "right") {
+  } else if (arr.eventRight === "right") {
     movementRight(up, left, topPozition, leftPozition, tanks, arr);
   }
 }
@@ -122,7 +146,6 @@ function movementDown(up, left, topPozition, leftPozition, tanks, arr) {
     adjustment("top", tanks, arr);
   }
   levelMapMovement(topPozition, leftPozition, arr.randomNum);
-  console.log(1);
 }
 function movementLeft(up, left, topPozition, leftPozition, tanks, arr) {
   let a = [];
