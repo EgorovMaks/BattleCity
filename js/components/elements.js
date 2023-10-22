@@ -1,6 +1,7 @@
 import { randomNumber, topBlok } from "../data/data.js";
 import { levelMapMovement } from "../data/levels.js";
 import { heightMap } from "../data/data.js";
+import { enemyMovement } from "./events.js";
 
 export const map = document.querySelector("#BattleCity");
 map.style.cssText = `width: ${topBlok * 15}px; height: ${topBlok * 15}px`;
@@ -112,6 +113,7 @@ export async function createTankAnim(top, left, tank) {
     setTimeout(function () {
       anim[3].classList.remove("activeAnim");
       // anim[0].classList.add("activeAnim");
+      enemyMovement()
       tank.classList.remove("none");
     }, num * 12);
   }, 500);
@@ -151,12 +153,12 @@ export function createBlocks(
   });
 }
 
-export function missile(canvas, [x, y], poz,tank) {
+export function missile(canvas, [x, y], poz, tank) {
   const div = document.createElement("div");
   const canvasMargin = parseFloat(window.getComputedStyle(canvas).marginLeft);
   const width = topBlok / 5.3;
   const height = topBlok / 4;
-  div.classList.add(`missile${tank.randomNum}`);
+  div.classList.add(`missile${tank.randomNum + 100}`);
   div.id = "missile";
   if (poz === "up") {
     div.style.cssText = `width: ${width}px; height: ${height}px; top: ${y}px; left: ${x}px;`;

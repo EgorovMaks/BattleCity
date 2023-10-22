@@ -39,7 +39,7 @@ export let tanks = [
   },
   {
     tank: [
-      ["tank", map, `${topBlok * 1}px`, `${topBlok * 7}px`, "tank3"],
+      ["tank", map, `${topBlok * 1}px`, `${topBlok * 5}px`, "tank3"],
       [`${topBlok}px`, `${topBlok}px`, false],
       [
         "tankStandardEnemy",
@@ -71,4 +71,6 @@ export let tanks = [
   },
 ];
 
-export let tankNumAll={}
+export let tankNumAll=[]
+
+export let missileAll = [];

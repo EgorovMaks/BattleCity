@@ -72,6 +72,7 @@ export let level1 = [
   [19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
 ];
 
+
 export function mobileMap() {
   let arr = [];
   level1.forEach((elem) => arr.push([]));
@@ -206,3 +207,72 @@ export function levelMapMovement(top, left, num) {
   nums.forEach((e) => (levelMap[top + e][left + 2] = num));
   nums.forEach((e) => (levelMap[top + e][left + 3] = num));
 }
+
+export function shotShoting(topPoz, topLeft,tank) {
+  let numShot = tank.randomNum+100;
+  if (tank.shootingDirection === "up") {
+    shotArr(numShot, topPoz, topLeft);
+    shotArr(numShot, topPoz, topLeft + 1);
+    shotArr(numShot, topPoz - 1, topLeft);
+    shotArr(numShot, topPoz - 1, topLeft + 1);
+  } else if (tank.shootingDirection === "down") {
+    shotArr(numShot, topPoz, topLeft);
+    shotArr(numShot, topPoz, topLeft + 1);
+    shotArr(numShot, topPoz - 1, topLeft);
+    shotArr(numShot, topPoz - 1, topLeft + 1);
+  } else if (tank.shootingDirection === "left") {
+    shotArr(numShot, topPoz, topLeft);
+    shotArr(numShot, topPoz, topLeft + 1);
+    shotArr(numShot, topPoz + 1, topLeft);
+    shotArr(numShot, topPoz + 1, topLeft + 1);
+  } else if (tank.shootingDirection === "right") {
+    shotArr(numShot, topPoz, topLeft);
+    shotArr(numShot, topPoz, topLeft + 1);
+    shotArr(numShot, topPoz + 1, topLeft);
+    shotArr(numShot, topPoz + 1, topLeft + 1);
+  }
+  // console.log(levelMap);
+}
+
+export function shotShotingDel(topPoz, topLeft,tank) {
+
+  let numShot = tank.randomNum + 100;
+  const num = 9;
+  if (tank.shootingDirection === "up") {
+    shotArrDel(numShot, topPoz, topLeft);
+    shotArrDel(numShot, topPoz - 1, topLeft);
+    shotArrDel(numShot, topPoz - 1, topLeft + 1);
+    shotArrDel(numShot, topPoz, topLeft + 1);
+  } else if (tank.shootingDirection === "down") {
+    shotArrDel(numShot, topPoz, topLeft);
+    shotArrDel(numShot, topPoz, topLeft + 1);
+    shotArrDel(numShot, topPoz - 1, topLeft);
+    shotArrDel(numShot, topPoz - 1, topLeft + 1);
+  } else if (tank.shootingDirection === "left") {
+    shotArrDel(numShot, topPoz, topLeft);
+    shotArrDel(numShot, topPoz, topLeft + 1);
+    shotArrDel(numShot, topPoz + 1, topLeft);
+    shotArrDel(numShot, topPoz + 1, topLeft + 1);
+  } else if (tank.shootingDirection === "right") {
+    shotArrDel(numShot, topPoz, topLeft);
+    shotArrDel(numShot, topPoz, topLeft + 1);
+    shotArrDel(numShot, topPoz + 1, topLeft);
+    shotArrDel(numShot, topPoz + 1, topLeft + 1);
+  }
+  // console.log(levelMap);
+}
+
+function shotArr(numShot, topPoz, topLeft) {
+  if (levelMap[topPoz][topLeft] === 0) {
+    levelMap[topPoz][topLeft] = numShot;
+  }
+}
+
+function shotArrDel(numShot, topPoz, topLeft) {
+  if (levelMap[topPoz][topLeft] === numShot) {
+    levelMap[topPoz][topLeft] = 0;
+  }
+}
+
+
+

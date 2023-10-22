@@ -1,9 +1,12 @@
 import { topBlok } from "../data/data.js";
-import { levelMap } from "../data/levels.js";
+import { levelMap, shotShoting, shotShotingDel } from "../data/levels.js";
+import { tankNumAll, tanks } from "../data/tankAll.js";
 import { explosionAnimation, map, missile, missileTrack } from "./elements.js";
 
+export let shotNumsArr = [];
 
 export function shooting(tank) {
+  shotNumsArr.push(tank.randomNum + 100);
   if (tank.shootingDirection === "up") {
     shotDescription(tank.shootingDirection, tank);
   } else if (tank.shootingDirection === "down") {
@@ -86,7 +89,7 @@ function shotIntersection(tankDer, tank) {
 }
 
 function shot(plusTrueFalse, topLeftPoz, desc, tank) {
-  let missile = document.querySelector(`.missile${tank.randomNum}`);
+  let missile = document.querySelector(`.missile${tank.randomNum + 100}`);
   if (missile !== null) {
     let missilePozTop = parseFloat(missile.style.top);
     let missilePozLeft = parseFloat(missile.style.left);
@@ -101,6 +104,56 @@ function shot(plusTrueFalse, topLeftPoz, desc, tank) {
     let topPoz = Math.round(missilePozTop / (topBlok / 4) - 1);
     let topLeft = Math.round(missilePozLeft / (topBlok / 4) - 1);
     arrey(desc, topPoz, topLeft, tank);
+    if (tank.id === "#tank1User") {
+      // console.log(
+      //   tank.arr[0][1][0],
+      //   tank.arr[0][2][0],
+      //   tank.arr[1][1][0],
+      //   tank.arr[1][2][0]
+      // );
+    }
+
+    shotNumsArr.forEach((e) => {
+      if (
+        tank.arr[0][1][0] === e ||
+        tank.arr[0][2][0] === e ||
+        tank.arr[1][1][0] === e ||
+        tank.arr[1][2][0] === e
+      ) {
+        const b = document.querySelector(`.missile${tank.randomNum + 100}`);
+        if (e !== tank.randomNum + 100) {
+          const a = document.querySelector(`.missile${e}`);
+          if (a !== null || b !== null) {
+            a.remove();
+            b.remove();
+            explosionAnimation(topPoz+1, topLeft-1, tank.shootingDirection, tank);
+            tanks.forEach((el) => {
+              if (el.randomNum === e - 100 || el.randomNum === tank.randomNum) {
+                delArrShot(el.randomNum + 100);
+                el.stop = false;
+                el.pozitionTop = false;
+                el.pozitionDown = false;
+                el.pozitionLeft = false;
+                el.pozitionRight = false;
+              }
+            });
+          }
+        }
+      }
+    });
+    tankNumAll.forEach((e) => {
+      if (
+        tank.arr[0][1][0] === e ||
+        tank.arr[0][2][0] === e ||
+        tank.arr[1][1][0] === e ||
+        tank.arr[1][2][0] === e
+      ) {
+        if (e !== tank.randomNum) {
+          // delTank(tank, e);
+        }
+      }
+    });
+
     if (
       tank.arr[0][1][0] === 2 ||
       tank.arr[0][2][0] === 2 ||
@@ -108,6 +161,7 @@ function shot(plusTrueFalse, topLeftPoz, desc, tank) {
       tank.arr[1][2][0] === 2
     ) {
       missile.remove();
+      delArrShot(tank.randomNum + 100);
       tank.stop = false;
       tank.pozitionTop = false;
       tank.pozitionDown = false;
@@ -120,8 +174,8 @@ function shot(plusTrueFalse, topLeftPoz, desc, tank) {
       tank.arr[1][2][0] === 1
     ) {
       deletingBlocks(tank.arr, desc, tank);
+      delArrShot(tank.randomNum + 100);
       missile.remove();
-      // stop = false;
       tank.pozitionTop = false;
       tank.pozitionDown = false;
       tank.pozitionLeft = false;
@@ -133,17 +187,24 @@ function shot(plusTrueFalse, topLeftPoz, desc, tank) {
       tank.arr[1][2][0] === 19
     ) {
       missile.remove();
+      delArrShot(tank.randomNum + 100);
       tank.stop = false;
       tank.pozitionTop = false;
       tank.pozitionDown = false;
       tank.pozitionLeft = false;
       tank.pozitionRight = false;
     } else if (tank.arr[0][1] || tank.arr[0][2] === 0) {
+      shotShoting(topPoz, topLeft, tank);
       topLeftPoz
         ? (missile.style.top = `${missilePozNew}px`)
         : (missile.style.left = `${missilePozNew}px`);
+
+      setTimeout(() => {
+        shotShotingDel(topPoz, topLeft, tank);
+      }, 50);
     }
   }
+  // console.log(shotNumsArr)
 }
 
 function arrey(desc, topPoz, topLeft, tank) {
@@ -200,7 +261,7 @@ function arrey(desc, topPoz, topLeft, tank) {
 }
 
 function deletingBlocks(arr, desc, tank) {
-  // console.log(arr);
+  console.log(arr);
   const point01 = arr[0][1][1];
   const point02 = arr[0][2][1];
   const point00 = arr[0][0][1];
@@ -245,6 +306,27 @@ function delArrBlock(const1) {
       levelMap[const1.top][const1.left] = 0;
     }
   }
+}
+
+function delTank(tank, num) {
+  // console.log(num);
+  tanks.forEach((e) => {
+    if (num === e.randomNum) {
+      // console.log(e.randomNum);
+      e.elDOM.remove();
+    }
+  });
+}
+
+function delArrShot(num) {
+  let a = [];
+  shotNumsArr.forEach((e) => {
+    if (e !== num) {
+      a.push(e);
+    }
+  });
+  // console.log(a);
+  shotNumsArr = a;
 }
 
 // elementFromPoint(x, y);

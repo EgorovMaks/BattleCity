@@ -16,6 +16,7 @@ export let loopStart = setInterval(function () {
     tanks.forEach((e) => animation(tank1, e));
     eventStart();
     clearInterval(loopStart);
+    // enemyMovement()
   }
 }, 10);
 

@@ -3,6 +3,7 @@ import { tankSpeed, topBlok } from "../data/data.js";
 import { tank1 } from "./game.js";
 import { levelMap, levelMapMovement } from "../data/levels.js";
 import { tanks } from "../data/tankAll.js";
+import { enemyMovementTank } from "./events.js";
 
 export function animation(el, tanks) {
   const classAlls = tanks.elDOM.childNodes;
@@ -30,7 +31,7 @@ export function animation(el, tanks) {
   const animLeftMass = [];
   const animRightMass = [];
 
-  filter(anim,"tank")
+  filter(anim, "tank");
   filter(animUpMass, "up");
   const animUp = animUpMass[0];
   filter(animDownMass, "down");
@@ -73,7 +74,7 @@ export function movement(tanks, arr) {
   }
 }
 
-export function adjustment(pozition, tanks, arr) {
+export function adjustment(pozition, tanks) {
   if (pozition === "top") {
     const up = parseFloat(tanks.style.top);
     tanks.style.top = `${(Math.round((up / topBlok) * 4) * topBlok) / 4}px`;
@@ -101,8 +102,10 @@ function movementUp(up, left, topPozition, leftPozition, tanks, arr) {
     ];
 
     a.forEach((e) => {
-      if (e === 1 || e === 2) {
+      if (e === 1 || e === 2 || e === 19) {
         b = false;
+        adjustment("top", tanks);
+        enemyMovementTank(arr);
         return;
       }
     });
@@ -114,12 +117,10 @@ function movementUp(up, left, topPozition, leftPozition, tanks, arr) {
     }
     tanks.style.top = `${up}px`;
   } else if (b === false) {
-    adjustment("top", tanks, arr);
   }
   levelMapMovement(topPozition, leftPozition, arr.randomNum);
-  
-  // stop(tanks, arr);
 }
+
 function movementDown(up, left, topPozition, leftPozition, tanks, arr) {
   let a = [];
   let b = true;
@@ -133,6 +134,8 @@ function movementDown(up, left, topPozition, leftPozition, tanks, arr) {
     a.forEach((e) => {
       if (e === 1 || e === 2 || e == 19) {
         b = false;
+        adjustment("top", tanks);
+        enemyMovementTank(arr);
         return;
       }
     });
@@ -144,10 +147,10 @@ function movementDown(up, left, topPozition, leftPozition, tanks, arr) {
     }
     tanks.style.top = `${up}px`;
   } else if (b === false) {
-    adjustment("top", tanks, arr);
   }
   levelMapMovement(topPozition, leftPozition, arr.randomNum);
 }
+
 function movementLeft(up, left, topPozition, leftPozition, tanks, arr) {
   let a = [];
   let b = true;
@@ -162,6 +165,8 @@ function movementLeft(up, left, topPozition, leftPozition, tanks, arr) {
   a.forEach((e) => {
     if (e === 1 || e === 2 || e === 19) {
       b = false;
+      adjustment("left", tanks);
+      enemyMovementTank(arr);
       return;
     }
   });
@@ -172,10 +177,10 @@ function movementLeft(up, left, topPozition, leftPozition, tanks, arr) {
     }
     tanks.style.left = `${left}px`;
   } else if (b === false) {
-    adjustment("left", tanks, arr);
   }
   levelMapMovement(topPozition, leftPozition, arr.randomNum);
 }
+
 function movementRight(up, left, topPozition, leftPozition, tanks, arr) {
   let a = [];
   let b = true;
@@ -187,8 +192,10 @@ function movementRight(up, left, topPozition, leftPozition, tanks, arr) {
       levelMap[topPozition + 3][leftPozition + 4],
     ];
     a.forEach((e) => {
-      if (e === 1 || e === 2) {
+      if (e === 1 || e === 2 || e === 19) {
         b = false;
+        adjustment("left", tanks);
+        enemyMovementTank(arr);
         return;
       }
     });
@@ -200,7 +207,6 @@ function movementRight(up, left, topPozition, leftPozition, tanks, arr) {
     }
     tanks.style.left = `${left}px`;
   } else if (b === false) {
-    adjustment("left", tanks, arr);
   }
   levelMapMovement(topPozition, leftPozition, arr.randomNum);
 }

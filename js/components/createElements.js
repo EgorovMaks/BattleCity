@@ -13,7 +13,7 @@ export function createTank1User() {
     e["randomNum"] = randomNumber();
     createElement(e.tank[0], e.tank[1], e.tank[2], e.randomNum);
     e["elDOM"] = id(e.id);
-    tankNumAll[`${e.id}`] = e.randomNum;
+    tankNumAll.push(e.randomNum);
     e.tank[1][2]
       ? (e["shootingDirection"] = "up")
       : (e["shootingDirection"] = "down");
@@ -22,11 +22,11 @@ export function createTank1User() {
     e["eventLeft"] = "";
     e["eventRight"] = "";
     e["stop"] = false;
-    e["pozitionTop"]=false;
+    e["pozitionTop"] = false;
     e["pozitionDown"] = false;
     e["pozitionLeft"] = false;
     e["pozitionRight"] = false;
-    e["arr"]=[]
+    e["arr"] = [];
     // console.log(e);
   });
 }
