@@ -141,7 +141,7 @@ export function eventStart(params) {
       tanks[0].eventRight = "right";
     } else if (e.code === "Space") {
       document.querySelectorAll("#missileTrack").forEach((e) => e.remove());
-      tanks.forEach((e) => shooting(e));
+      shooting(tanks[0]);
     }
   });
 
@@ -201,33 +201,33 @@ export function enemyMovementTank(tank) {
   if (tank.id !== "#tank1User") {
     const random = getRandomArbitrary(0, desc.length - 1);
     if (desc[random] === "up") {
+      tank.shootingDirection = "up";
       tank.eventUp = "";
       tank.eventDown = "";
       tank.eventLeft = "";
       tank.eventRight = "";
       tank.eventUp = "up";
-      tank.shootingDirection = "up";
     } else if (desc[random] === "down") {
+      tank.shootingDirection = "down";
       tank.eventUp = "";
       tank.eventDown = "";
       tank.eventLeft = "";
       tank.eventRight = "";
       tank.eventDown = "down";
-      tank.shootingDirection = "down";
     } else if (desc[random] === "left") {
+      tank.shootingDirection = "left";
       tank.eventUp = "";
       tank.eventDown = "";
       tank.eventLeft = "";
       tank.eventRight = "";
       tank.eventLeft = "left";
-      tank.shootingDirection = "left";
     } else if (desc[random] === "right") {
+      tank.shootingDirection = "right";
       tank.eventUp = "";
       tank.eventDown = "";
       tank.eventLeft = "";
       tank.eventRight = "";
       tank.eventRight = "right";
-      tank.shootingDirection = "right";
     }
   }
 }
