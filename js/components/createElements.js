@@ -27,6 +27,7 @@ export function createTank1User() {
     e["pozitionLeft"] = false;
     e["pozitionRight"] = false;
     e["arr"] = [];
+    e["life"]=true;
     // console.log(e);
   });
 }

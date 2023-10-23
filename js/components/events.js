@@ -178,37 +178,22 @@ function enemyMovementTankAll(desc, tank) {
       if (desc[random] === "up") {
         // adjustment("top", e.elDOM, tanks);
         e.eventUp = "up";
-        e.eventDown = "";
-        e.eventLeft = "";
-        e.eventRight = "";
         e.shootingDirection = "up";
       } else if (desc[random] === "down") {
         // adjustment("top", e.elDOM, tanks);
-        e.eventUp = "";
         e.eventDown = "down";
-        e.eventLeft = "";
-        e.eventRight = "";
         e.shootingDirection = "down";
       } else if (desc[random] === "left") {
         // adjustment("left", e.elDOM, tanks);
-        e.eventUp = "";
-        e.eventDown = "";
         e.eventLeft = "left";
-        e.eventRight = "";
         e.shootingDirection = "left";
       } else if (desc[random] === "right") {
         // adjustment("left", e.elDOM, tanks);
-        e.eventUp = "";
-        e.eventDown = "";
-        e.eventLeft = "";
         e.eventRight = "right";
         e.shootingDirection = "right";
       }
     }
   });
-
-      // adjustment("left", tank1, tanks);
-      // adjustment("top", tank1, tanks);
 }
 
 export function enemyMovementTank(tank) {
@@ -216,38 +201,33 @@ export function enemyMovementTank(tank) {
   if (tank.id !== "#tank1User") {
     const random = getRandomArbitrary(0, desc.length - 1);
     if (desc[random] === "up") {
-      // adjustment("top", tank.elDOM);
-      tank.eventUp = "up";
+      tank.eventUp = "";
       tank.eventDown = "";
       tank.eventLeft = "";
       tank.eventRight = "";
+      tank.eventUp = "up";
       tank.shootingDirection = "up";
     } else if (desc[random] === "down") {
-      // adjustment("top", tank.elDOM);
       tank.eventUp = "";
-      tank.eventDown = "down";
+      tank.eventDown = "";
       tank.eventLeft = "";
       tank.eventRight = "";
+      tank.eventDown = "down";
       tank.shootingDirection = "down";
     } else if (desc[random] === "left") {
-      // adjustment("left", tank.elDOM);
-      tank.eventUp = "";
-      tank.eventDown = "";
-      tank.eventLeft = "left";
-      tank.eventRight = "";
-      tank.shootingDirection = "left";
-    } else if (desc[random] === "right") {
-      // adjustment("left", tank.elDOM);
       tank.eventUp = "";
       tank.eventDown = "";
       tank.eventLeft = "";
+      tank.eventRight = "";
+      tank.eventLeft = "left";
+      tank.shootingDirection = "left";
+    } else if (desc[random] === "right") {
+      tank.eventUp = "";
+      tank.eventDown = "";
+      tank.eventLeft = "";
+      tank.eventRight = "";
       tank.eventRight = "right";
       tank.shootingDirection = "right";
     }
   }
 }
-// export function getRandomArbitrary(min, max) {
-//   min = Math.ceil(min);
-//   max = Math.floor(max);
-//   return Math.floor(Math.random() * (max - min + 1)) + min;
-// }
