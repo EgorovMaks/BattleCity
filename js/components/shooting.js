@@ -261,7 +261,6 @@ function arrey(desc, topPoz, topLeft, tank) {
 }
 
 function deletingBlocks(arr, desc, tank) {
-  console.log(arr);
   const point01 = arr[0][1][1];
   const point02 = arr[0][2][1];
   const point00 = arr[0][0][1];
