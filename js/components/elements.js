@@ -2,6 +2,8 @@ import { randomNumber, topBlok } from "../data/data.js";
 import { levelMapMovement } from "../data/levels.js";
 import { heightMap } from "../data/data.js";
 import { enemyMovement } from "./events.js";
+import { tankNumAllEnemies } from "../data/tankAll.js";
+import { shooting } from "./shooting.js";
 
 export const map = document.querySelector("#BattleCity");
 map.style.cssText = `width: ${topBlok * 15}px; height: ${topBlok * 15}px`;
@@ -114,6 +116,7 @@ export async function createTankAnim(top, left, tank) {
       anim[3].classList.remove("activeAnim");
       // anim[0].classList.add("activeAnim");
       enemyMovement()
+      tankNumAllEnemies.forEach(e=>shooting(e))
       tank.classList.remove("none");
     }, num * 12);
   }, 500);

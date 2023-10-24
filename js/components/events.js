@@ -141,7 +141,8 @@ export function eventStart(params) {
       tanks[0].eventRight = "right";
     } else if (e.code === "Space") {
       document.querySelectorAll("#missileTrack").forEach((e) => e.remove());
-      shooting(tanks[0]);
+      // console.log(tanks[0].stop);
+      tanks[0].stop ? null : shooting(tanks[0]);
     }
   });
 

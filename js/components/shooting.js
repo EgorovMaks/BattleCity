@@ -6,27 +6,34 @@ import { explosionAnimation, map, missile, missileTrack } from "./elements.js";
 export let shotNumsArr = [];
 
 export function shooting(tank) {
-  shotNumsArr.push(tank.randomNum + 100);
-  if (tank.shootingDirection === "up") {
-    shotDescription(tank.shootingDirection, tank);
-  } else if (tank.shootingDirection === "down") {
-    shotDescription(tank.shootingDirection, tank);
-  } else if (tank.shootingDirection === "left") {
-    shotDescription(tank.shootingDirection, tank);
-  } else if (tank.shootingDirection === "right") {
-    shotDescription(tank.shootingDirection, tank);
+  if (tank.life === true) {
+    tank.shootingDirectionDesc = tank.shootingDirection;
+    shotNumsArr.push(tank.randomNum + 100);
+    if (tank.shootingDirectionDesc === "up") {
+      shotDescription(tank.shootingDirectionDesc, tank);
+    } else if (tank.shootingDirectionDesc === "down") {
+      shotDescription(tank.shootingDirectionDesc, tank);
+    } else if (tank.shootingDirectionDesc === "left") {
+      shotDescription(tank.shootingDirectionDesc, tank);
+    } else if (tank.shootingDirectionDesc === "right") {
+      shotDescription(tank.shootingDirectionDesc, tank);
+    }
   }
 }
 
 export function shotFlight(tank) {
   if (tank.pozitionTop === true) {
-    shotIntersection(tank.shootingDirection, tank);
+    shotIntersection(tank.shootingDirectionDesc, tank);
   } else if (tank.pozitionDown === true) {
-    shotIntersection(tank.shootingDirection, tank);
+    shotIntersection(tank.shootingDirectionDesc, tank);
   } else if (tank.pozitionLeft === true) {
-    shotIntersection(tank.shootingDirection, tank);
+    shotIntersection(tank.shootingDirectionDesc, tank);
   } else if (tank.pozitionRight === true) {
-    shotIntersection(tank.shootingDirection, tank);
+    shotIntersection(tank.shootingDirectionDesc, tank);
+  } else if (tank.stop === false) {
+    setTimeout(() => {
+      // shooting(tank);
+    }, 500);
   }
 }
 
@@ -78,13 +85,13 @@ function shotDescription(shootingDirection, tank) {
 
 function shotIntersection(tankDer, tank) {
   if (tank.pozitionTop === true) {
-    shot(true, true, tank.shootingDirection, tank);
+    shot(true, true, tank.shootingDirectionDesc, tank);
   } else if (tank.pozitionDown === true) {
-    shot(false, true, tank.shootingDirection, tank);
+    shot(false, true, tank.shootingDirectionDesc, tank);
   } else if (tank.pozitionLeft === true) {
-    shot(true, false, tank.shootingDirection, tank);
+    shot(true, false, tank.shootingDirectionDesc, tank);
   } else if (tank.pozitionRight === true) {
-    shot(false, false, tank.shootingDirection, tank);
+    shot(false, false, tank.shootingDirectionDesc, tank);
   }
 }
 
@@ -126,7 +133,12 @@ function shot(plusTrueFalse, topLeftPoz, desc, tank) {
           if (a !== null || b !== null) {
             a.remove();
             b.remove();
-            explosionAnimation(topPoz+1, topLeft-1, tank.shootingDirection, tank);
+            explosionAnimation(
+              topPoz + 1,
+              topLeft - 1,
+              tank.shootingDirectionDesc,
+              tank
+            );
             tanks.forEach((el) => {
               if (el.randomNum === e - 100 || el.randomNum === tank.randomNum) {
                 delArrShot(el.randomNum + 100);
@@ -186,9 +198,17 @@ function shot(plusTrueFalse, topLeftPoz, desc, tank) {
       tank.arr[1][1][0] === 19 ||
       tank.arr[1][2][0] === 19
     ) {
+      if (tank.shootingDirectionDesc === "left") {
+        explosionAnimation(topPoz - 1, 1, tank.shootingDirectionDesc, tank);
+      } else if (tank.shootingDirectionDesc === "right") {
+        explosionAnimation(topPoz - 1, 58, tank.shootingDirectionDesc, tank);
+      } else if (tank.shootingDirectionDesc === "up") {
+        explosionAnimation(1, topLeft - 1, tank.shootingDirectionDesc, tank);
+      } else if (tank.shootingDirectionDesc === "down") {
+        explosionAnimation(58, topLeft - 1, tank.shootingDirectionDesc, tank);
+      }
       missile.remove();
       delArrShot(tank.randomNum + 100);
-      tank.stop = false;
       tank.pozitionTop = false;
       tank.pozitionDown = false;
       tank.pozitionLeft = false;
@@ -199,12 +219,12 @@ function shot(plusTrueFalse, topLeftPoz, desc, tank) {
         ? (missile.style.top = `${missilePozNew}px`)
         : (missile.style.left = `${missilePozNew}px`);
 
-      setTimeout(() => {
-        shotShotingDel(topPoz, topLeft, tank);
-      }, 50);
+      // setTimeout(() => {
+      //   shotShotingDel(topPoz, topLeft, tank);
+      // }, 50);
     }
   }
-  // console.log(shotNumsArr)
+  // console.log(tank.desc);
 }
 
 function arrey(desc, topPoz, topLeft, tank) {

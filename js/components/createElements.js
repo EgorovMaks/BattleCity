@@ -3,7 +3,7 @@ import { id } from "./elements.js";
 import { animation } from "./movement.js";
 import { blocks, level1 } from "../data/levels.js";
 import { randomNumber, topBlok } from "../data/data.js";
-import { tankNumAll, tanks } from "../data/tankAll.js";
+import { tankNumAll, tankNumAllEnemies, tanks } from "../data/tankAll.js";
 // import { tank1 } from "./game.js";
 
 export function createTank1User() {
@@ -28,7 +28,8 @@ export function createTank1User() {
     e["pozitionRight"] = false;
     e["arr"] = [];
     e["life"]=true;
-    // console.log(e);
+    e["shootingDirectionDesc"] = '';
+    e.tank[1][2] ? null : tankNumAllEnemies.push(e);
   });
 }
 

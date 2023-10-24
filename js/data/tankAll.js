@@ -73,4 +73,6 @@ export let tanks = [
 
 export let tankNumAll=[]
 
+export let tankNumAllEnemies = [];
+
 export let missileAll = [];
