@@ -231,7 +231,7 @@ export function explosionAnimation(top, left, desc, tank) {
   }, 200);
   setTimeout(() => {
     tank.stop = false;
-  }, 230);
+  }, 500);
 }
 
 export function animationDirection(globalArray, firstValue, arrayDirection) {
