@@ -10,7 +10,7 @@ body {
   background: #636363;
 }
 
-h1{
+h1 {
   position: fixed;
   left: 40px;
   top: 40px;
@@ -36,7 +36,7 @@ h2 {
   /* text-orientation: upright; */
 }
 
-#missile {
+.missile {
   position: absolute;
   z-index: 10;
   background-color: #fff;
@@ -55,16 +55,34 @@ h2 {
   z-index: 5;
 }
 
+.missileUp {
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+.missileDown {
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
 .missileLeft {
-  -webkit-transform: translateX(-50%) translateY(-100%);
-  -ms-transform: translateX(-50%) translateY(-100%);
-  transform: translateX(-50%) translateY(-100%);
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.missileRight {
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 #explosion {
   pointer-events: none;
 }
-.createTank{
+
+.createTank {
   overflow: hidden;
 }
 
@@ -167,7 +185,7 @@ h2 {
   transform: translateX(-50%);
 }
 
-#missileLeft {
+/* #missileLeft {
   position: fixed;
   z-index: 10;
   background-color: #fff;
@@ -175,7 +193,7 @@ h2 {
   -ms-transform: translateX(50%) translateY(-50%) rotate(90deg);
   transform: translateX(50%) translateY(-50%) rotate(90deg);
   pointer-events: none;
-}
+} */
 
 #missileTrack {
   pointer-events: none;

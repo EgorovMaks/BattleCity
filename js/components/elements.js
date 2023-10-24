@@ -1,9 +1,6 @@
 import { randomNumber, topBlok } from "../data/data.js";
-import { levelMapMovement } from "../data/levels.js";
 import { heightMap } from "../data/data.js";
 import { enemyMovement } from "./events.js";
-import { tankNumAllEnemies } from "../data/tankAll.js";
-import { shooting } from "./shooting.js";
 
 export const map = document.querySelector("#BattleCity");
 map.style.cssText = `width: ${topBlok * 15}px; height: ${topBlok * 15}px`;
@@ -114,8 +111,7 @@ export async function createTankAnim(top, left, tank) {
     }, num * 11);
     setTimeout(function () {
       anim[3].classList.remove("activeAnim");
-      // anim[0].classList.add("activeAnim");
-      enemyMovement()
+      enemyMovement();
       tank.classList.remove("none");
     }, num * 12);
   }, 500);
@@ -155,28 +151,41 @@ export function createBlocks(
   });
 }
 
-export function missile(canvas, [x, y], poz, tank) {
+export function missile(canvas, poz, tank) {
   const div = document.createElement("div");
-  const canvasMargin = parseFloat(window.getComputedStyle(canvas).marginLeft);
+  let y = (tank.pozitionMap.top * topBlok) / 4;
+  let x = (tank.pozitionMap.left * topBlok) / 4;
   const width = topBlok / 5.3;
   const height = topBlok / 4;
-  div.classList.add(`missile${tank.randomNum + 100}`);
-  div.id = "missile";
+  div.classList.add(`missile${tank.randomNum + 100}`, `missile`);
+  div.id = `missile${tank.randomNum}`;
   if (poz === "up") {
+    y = ((tank.pozitionMap.top - 0) * topBlok) / 4;
+    x = ((tank.pozitionMap.left + 2) * topBlok) / 4;
     div.style.cssText = `width: ${width}px; height: ${height}px; top: ${y}px; left: ${x}px;`;
-    div.classList.add("missileLeft");
+    div.classList.add("missileUp");
   } else if (poz === "down") {
-    div.style.cssText = `width: ${width}px; height: ${height}px; top: ${y}px; left: ${x}px; transform: translateX(-50%) translateY(-100%);`;
+    y = ((tank.pozitionMap.top + 4) * topBlok) / 4;
+    x = ((tank.pozitionMap.left + 2) * topBlok) / 4;
+    div.style.cssText = `width: ${width}px; height: ${height}px; top: ${y}px; left: ${x}px;`;
+    div.classList.add("missileDown");
   } else if (poz === "left") {
-    div.style.cssText = `width: ${topBlok / 4}px; height: ${
-      topBlok / 5.3
-    }px; top: ${y}px; left: ${x}px; transform: translateX(0px) translateY(-50%);`;
+    y = ((tank.pozitionMap.top + 2) * topBlok) / 4;
+    x = (tank.pozitionMap.left * topBlok) / 4;
+    div.style.cssText = `width: ${height}px; height: ${width}px; top: ${y}px; left: ${x}px; transform: `;
+    div.classList.add("missileLeft");
   } else if (poz === "right") {
-    div.style.cssText = `width: ${topBlok / 4}px; height: ${
-      topBlok / 5.3
-    }px; top: ${y}px; left: ${x}px; transform: translateX(0px) translateY(-50%);`;
+    y = ((tank.pozitionMap.top + 2) * topBlok) / 4;
+    x = ((tank.pozitionMap.left + 4) * topBlok) / 4;
+    div.style.cssText = `width: ${height}px; height: ${width}px; top: ${y}px; left: ${x}px;`;
+    div.classList.add("missileRight");
   }
-  const newDiv = canvas.appendChild(div);
+  tank.shot["shotElDOM"] = div;
+  tank.shot["num"] = tank.randomNum + 100;
+  tank.shot["id"] = `missile${tank.randomNum}`;
+  tank.shot["pozition"] = [div.style.top, div.style.left];
+  tank.shot["pozitionMap"] = [(y / topBlok) * 4, (x / topBlok) * 4];
+  const newDiv = canvas.appendChild(tank.shot.shotElDOM);
 }
 export let divId = "";
 

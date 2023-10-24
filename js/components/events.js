@@ -142,6 +142,8 @@ export function eventStart(params) {
       tanks[0].eventRight = "right";
     } else if ( e.code === "KeyP") {
       // console.log(tanks[0])
+      // console.log(tanks[0].shot);
+
       console.log(levelMap)
     } else if (e.code === "Space") {
       document.querySelectorAll("#missileTrack").forEach((e) => e.remove());

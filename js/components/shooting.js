@@ -30,13 +30,13 @@ export function shooting(tank) {
 
 export function shotFlight(tank) {
   if (tank.pozitionTop === true) {
-    shotIntersection(tank.shootingDirectionDesc, tank);
+    shotIntersection(tank);
   } else if (tank.pozitionDown === true) {
-    shotIntersection(tank.shootingDirectionDesc, tank);
+    shotIntersection(tank);
   } else if (tank.pozitionLeft === true) {
-    shotIntersection(tank.shootingDirectionDesc, tank);
+    shotIntersection(tank);
   } else if (tank.pozitionRight === true) {
-    shotIntersection(tank.shootingDirectionDesc, tank);
+    shotIntersection(tank);
   } else if (tank.stop === false) {
     setTimeout(() => {
       // shooting(tank);
@@ -45,53 +45,26 @@ export function shotFlight(tank) {
 }
 
 function shotDescription(shootingDirection, tank) {
-  let topPozCenter = Math.floor(
-    (parseFloat(tank.elDOM.style.top) / topBlok) * 4
-  );
-  let leftPozCenter = Math.floor(
-    (parseFloat(tank.elDOM.style.left) / topBlok) * 4
-  );
-  console.log(topPozCenter,leftPozCenter)
   if (shootingDirection === "up" && tank.stop === false) {
     tank.stop = true;
-    missile(
-      map,
-      [((leftPozCenter + 2) * topBlok) / 4, (topPozCenter + 1) * (topBlok / 4)],
-      shootingDirection,
-      tank
-    );
+    missile(map, shootingDirection, tank);
     tank.pozitionTop = true;
   } else if (shootingDirection === "down" && tank.stop === false) {
     tank.stop = true;
-    missile(
-      map,
-      [((leftPozCenter + 2) * topBlok) / 4, ((topPozCenter + 4) * topBlok) / 4],
-      shootingDirection,
-      tank
-    );
+    missile(map, shootingDirection, tank);
     tank.pozitionDown = true;
   } else if (shootingDirection === "left" && tank.stop === false) {
     tank.stop = true;
-    missile(
-      map,
-      [((leftPozCenter + 1) * topBlok) / 4, ((topPozCenter + 2) * topBlok) / 4],
-      shootingDirection,
-      tank
-    );
+    missile(map, shootingDirection, tank);
     tank.pozitionLeft = true;
   } else if (shootingDirection === "right" && tank.stop === false) {
     tank.stop = true;
-    missile(
-      map,
-      [((leftPozCenter + 3) * topBlok) / 4, ((topPozCenter + 2) * topBlok) / 4],
-      shootingDirection,
-      tank
-    );
+    missile(map, shootingDirection, tank);
     tank.pozitionRight = true;
   }
 }
 
-function shotIntersection(tankDer, tank) {
+function shotIntersection(tank) {
   if (tank.pozitionTop === true) {
     shot(true, true, tank.shootingDirectionDesc, tank);
   } else if (tank.pozitionDown === true) {
@@ -104,10 +77,9 @@ function shotIntersection(tankDer, tank) {
 }
 
 function shot(plusTrueFalse, topLeftPoz, desc, tank) {
-  let missile = document.querySelector(`.missile${tank.randomNum + 100}`);
   if (missile !== null) {
-    let missilePozTop = parseFloat(missile.style.top);
-    let missilePozLeft = parseFloat(missile.style.left);
+    let missilePozTop = parseFloat(tank.shot.pozition[0]);
+    let missilePozLeft = parseFloat(tank.shot.pozition[1]);
 
     let missilePozNew = topLeftPoz
       ? plusTrueFalse
@@ -116,16 +88,8 @@ function shot(plusTrueFalse, topLeftPoz, desc, tank) {
       : plusTrueFalse
       ? missilePozLeft - topBlok / 2
       : missilePozLeft + topBlok / 2;
-    let topPoz = Math.round(missilePozTop / (topBlok / 4) - 1);
-    let topLeft = Math.round(missilePozLeft / (topBlok / 4) - 1);
-    arrey(desc, topPoz, topLeft, tank);
+    arrey(desc, tank.shot.pozitionMap, tank);
     if (tank.id === "#tank1User") {
-      // console.log(
-      //   tank.arr[0][1][0],
-      //   tank.arr[0][2][0],
-      //   tank.arr[1][1][0],
-      //   tank.arr[1][2][0]
-      // );
     }
 
     shotNumsArr.forEach((e) => {
@@ -180,8 +144,9 @@ function shot(plusTrueFalse, topLeftPoz, desc, tank) {
       tank.arr[1][1][0] === 2 ||
       tank.arr[1][2][0] === 2
     ) {
-      missile.remove();
+      tank.shot.shotElDOM.remove();
       delArrShot(tank.randomNum + 100);
+      tank.shot = [];
       tank.stop = false;
       tank.pozitionTop = false;
       tank.pozitionDown = false;
@@ -195,7 +160,8 @@ function shot(plusTrueFalse, topLeftPoz, desc, tank) {
     ) {
       deletingBlocks(tank.arr, desc, tank);
       delArrShot(tank.randomNum + 100);
-      missile.remove();
+      tank.shot.shotElDOM.remove();
+      tank.shot = [];
       tank.pozitionTop = false;
       tank.pozitionDown = false;
       tank.pozitionLeft = false;
@@ -206,39 +172,51 @@ function shot(plusTrueFalse, topLeftPoz, desc, tank) {
       tank.arr[1][1][0] === 19 ||
       tank.arr[1][2][0] === 19
     ) {
+      let pozTop = tank.shot.pozitionMap[1];
+      let pozLeft = tank.shot.pozitionMap[0];
       if (tank.shootingDirectionDesc === "left") {
-        explosionAnimation(topPoz - 1, 1, tank.shootingDirectionDesc, tank);
+        explosionAnimation(pozLeft - 2, 1, tank.shootingDirectionDesc, tank);
       } else if (tank.shootingDirectionDesc === "right") {
-        explosionAnimation(topPoz - 1, 58, tank.shootingDirectionDesc, tank);
+        explosionAnimation(pozLeft - 2, 58, tank.shootingDirectionDesc, tank);
       } else if (tank.shootingDirectionDesc === "up") {
-        explosionAnimation(1, topLeft - 1, tank.shootingDirectionDesc, tank);
+        console.log(tank);
+        explosionAnimation(1, pozTop - 2, tank.shootingDirectionDesc, tank);
       } else if (tank.shootingDirectionDesc === "down") {
-        explosionAnimation(58, topLeft - 1, tank.shootingDirectionDesc, tank);
+        explosionAnimation(58, pozTop - 2, tank.shootingDirectionDesc, tank);
       }
-      missile.remove();
+      tank.shot.shotElDOM.remove();
       delArrShot(tank.randomNum + 100);
+      tank.shot = [];
       tank.pozitionTop = false;
       tank.pozitionDown = false;
       tank.pozitionLeft = false;
       tank.pozitionRight = false;
+    } else if (
+      tank.arr[0][1][0] === 3 ||
+      tank.arr[0][2][0] === 3 ||
+      tank.arr[1][1][0] === 3||
+      tank.arr[1][2][0] === 3
+    ) {
+      console.log(1)
+      alert("Game Over")
     } else if (tank.arr[0][1] || tank.arr[0][2] === 0) {
-      shotShoting(topPoz, topLeft, tank);
+      shotShoting(tank.shot.pozitionMap, tank);
       topLeftPoz
-        ? (missile.style.top = `${missilePozNew}px`)
-        : (missile.style.left = `${missilePozNew}px`);
-
-      // setTimeout(() => {
-      //   shotShotingDel(topPoz, topLeft, tank);
-      // }, 50);
+        ? (tank.shot.pozition[0] = `${missilePozNew}px`)
+        : (tank.shot.pozition[1] = `${missilePozNew}px`);
+      topLeftPoz
+        ? (tank.shot.shotElDOM.style.top = `${missilePozNew}px`)
+        : (tank.shot.shotElDOM.style.left = `${missilePozNew}px`);
     }
   }
-  // console.log(tank.desc);
 }
 
-function arrey(desc, topPoz, topLeft, tank) {
+function arrey(desc, [topPoz, topLeft], tank) {
+  // console.log(tank)
   const numsArr = [0, 1, 2, 3, 4];
   if (desc === "up") {
-    const nums = [-1, 0, 1, 2];
+    tank.shot.pozitionMap[0] = Math.round(tank.shot.pozitionMap[0] - 2);
+    const nums = [-2, -1, 0, 1];
     const num = [0, 1, 2, 3, -1];
     tank.arr = [[], [], [], [], [], [], [], []];
     numsArr.forEach((el, k) => {
@@ -250,7 +228,8 @@ function arrey(desc, topPoz, topLeft, tank) {
       );
     });
   } else if (desc === "down") {
-    const nums = [-1, 0, 1, 2];
+    tank.shot.pozitionMap[0] = Math.round(tank.shot.pozitionMap[0] + 2);
+    const nums = [-2, -1, 0, 1];
     const num = [0, -1, -2, -3, 1];
     tank.arr = [[], [], [], [], [], [], [], []];
     numsArr.forEach((el, k) => {
@@ -262,7 +241,8 @@ function arrey(desc, topPoz, topLeft, tank) {
       );
     });
   } else if (desc === "left") {
-    const nums = [-1, 0, 1, 2];
+    tank.shot.pozitionMap[1] = Math.round(tank.shot.pozitionMap[1] - 2);
+    const nums = [-2, -1, 0, 1];
     const num = [0, 1, 2, 3, -1];
     tank.arr = [[], [], [], [], [], [], [], []];
     numsArr.forEach((el, k) => {
@@ -274,7 +254,8 @@ function arrey(desc, topPoz, topLeft, tank) {
       );
     });
   } else if (desc === "right") {
-    const nums = [-1, 0, 1, 2];
+    tank.shot.pozitionMap[1] = Math.round(tank.shot.pozitionMap[1] + 2);
+    const nums = [-2, -1, 0, 1];
     const num = [1, 0, -1, -2, 2];
     tank.arr = [[], [], [], [], [], [], [], []];
     numsArr.forEach((el, k) => {

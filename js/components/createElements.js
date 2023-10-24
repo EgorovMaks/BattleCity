@@ -46,6 +46,7 @@ export function createTank1User() {
     e["pozitionMapDown"] = [];
     e["pozitionMapLeft"] = [];
     e["pozitionMapRight"] = [];
+    e["shot"] = {};
     // console.log(e);
   });
 }
