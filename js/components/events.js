@@ -139,10 +139,13 @@ export function eventStart(params) {
       tanks[0].shootingDirection = "right";
       reassignment(true, e);
       tanks[0].eventRight = "right";
+    } else if ( e.code === "KeyP") {
+      console.log(tanks[0])
     } else if (e.code === "Space") {
       document.querySelectorAll("#missileTrack").forEach((e) => e.remove());
       // console.log(tanks[0].stop);
-      tanks[0].stop ? null : shooting(tanks[0]);
+      tanks.forEach((e) => (e.stop ? null : shooting(e)));
+      // tanks[0].stop ? null : shooting(tanks[0]);
     }
   });
 

@@ -161,7 +161,7 @@ function shot(plusTrueFalse, topLeftPoz, desc, tank) {
         tank.arr[1][2][0] === e
       ) {
         if (e !== tank.randomNum) {
-          // delTank(tank, e);
+          delTank(tank, e);
         }
       }
     });
@@ -331,8 +331,12 @@ function delTank(tank, num) {
   // console.log(num);
   tanks.forEach((e) => {
     if (num === e.randomNum) {
-      // console.log(e.randomNum);
-      e.elDOM.remove();
+      if (tank.id === "#tank1User") {
+        console.log(e);
+        e.elDOM.remove();
+        e.life = false;
+      }
+      // e.elDOM.remove();
     }
   });
 }

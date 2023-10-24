@@ -116,7 +116,6 @@ export async function createTankAnim(top, left, tank) {
       anim[3].classList.remove("activeAnim");
       // anim[0].classList.add("activeAnim");
       enemyMovement()
-      tankNumAllEnemies.forEach(e=>shooting(e))
       tank.classList.remove("none");
     }, num * 12);
   }, 500);

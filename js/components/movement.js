@@ -60,6 +60,9 @@ export function animation(el, tanks) {
 
 export function movement(tanks, arr) {
   if (arr.life === true) {
+    if (arr.id === "#tank1User") {
+      console.log(tanks);
+    }
     let up = parseFloat(tanks.style.top);
     let left = parseFloat(tanks.style.left);
     let topPozition = Math.round((up / topBlok) * 4);
