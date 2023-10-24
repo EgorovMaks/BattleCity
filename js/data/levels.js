@@ -72,7 +72,6 @@ export let level1 = [
   [19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19],
 ];
 
-
 export function mobileMap() {
   let arr = [];
   level1.forEach((elem) => arr.push([]));
@@ -180,36 +179,39 @@ setTimeout(() => {
   levelMapConstructor(level1);
 }, 100);
 
-export function levelMapMovement(top, left, num) {
+export function levelMapMovement(tank, topPozition, leftPozition) {
+  const top = topPozition;
+  const left = leftPozition;
+  // console.log(top,left)
   const nums = [0, 1, 2, 3];
   nums.forEach((e) => {
-    if (levelMap[top + 4][left + e] === num) {
+    if (levelMap[top + 4][left + e] === tank.randomNum) {
       levelMap[top + 4][left + e] = 0;
     }
   });
   nums.forEach((e) => {
-    if (levelMap[top - 1][left + e] === num) {
+    if (levelMap[top - 1][left + e] === tank.randomNum) {
       levelMap[top - 1][left + e] = 0;
     }
   });
   nums.forEach((e) => {
-    if (levelMap[top + e][left + 4] === num) {
+    if (levelMap[top + e][left + 4] === tank.randomNum) {
       levelMap[top + e][left + 4] = 0;
     }
   });
   nums.forEach((e) => {
-    if (levelMap[top + e][left - 1] === num) {
+    if (levelMap[top + e][left - 1] === tank.randomNum) {
       levelMap[top + e][left - 1] = 0;
     }
   });
-  nums.forEach((e) => (levelMap[top + e][left + 0] = num));
-  nums.forEach((e) => (levelMap[top + e][left + 1] = num));
-  nums.forEach((e) => (levelMap[top + e][left + 2] = num));
-  nums.forEach((e) => (levelMap[top + e][left + 3] = num));
+  nums.forEach((e) => (levelMap[top + e][left + 0] = tank.randomNum));
+  nums.forEach((e) => (levelMap[top + e][left + 1] = tank.randomNum));
+  nums.forEach((e) => (levelMap[top + e][left + 2] = tank.randomNum));
+  nums.forEach((e) => (levelMap[top + e][left + 3] = tank.randomNum));
 }
 
-export function shotShoting(topPoz, topLeft,tank) {
-  let numShot = tank.randomNum+100;
+export function shotShoting(topPoz, topLeft, tank) {
+  let numShot = tank.randomNum + 100;
   if (tank.shootingDirection === "up") {
     shotArr(numShot, topPoz, topLeft);
     shotArr(numShot, topPoz, topLeft + 1);
@@ -234,8 +236,7 @@ export function shotShoting(topPoz, topLeft,tank) {
   // console.log(levelMap);
 }
 
-export function shotShotingDel(topPoz, topLeft,tank) {
-
+export function shotShotingDel(topPoz, topLeft, tank) {
   let numShot = tank.randomNum + 100;
   const num = 9;
   if (tank.shootingDirection === "up") {
@@ -273,6 +274,3 @@ function shotArrDel(numShot, topPoz, topLeft) {
     levelMap[topPoz][topLeft] = 0;
   }
 }
-
-
-

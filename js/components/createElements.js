@@ -42,7 +42,11 @@ export function createTank1User() {
     const leftMap = (parseFloat(e.elDOM.style.left) / topBlok) * 4;
     e["pozition"] = { top: top, left: left };
     e["pozitionMap"] = { top: topMap, left: leftMap };
-    console.log(e);
+    e["pozitionMapTop"] = [];
+    e["pozitionMapDown"] = [];
+    e["pozitionMapLeft"] = [];
+    e["pozitionMapRight"] = [];
+    // console.log(e);
   });
 }
 

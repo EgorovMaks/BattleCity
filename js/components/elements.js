@@ -17,12 +17,12 @@ export function createElement(
   const div = document.createElement("div");
   createTankAnim(top, left, div);
   div.style.cssText = `width: ${width}; height: ${height}; top: ${top}; left: ${left}`;
-  setTimeout(() => {
-    levelMapMovement(
-      Math.round(parseFloat(top) / (topBlok / 4)),
-      Math.round(parseFloat(left) / (topBlok / 4))
-    );
-  }, 100);
+  // setTimeout(() => {
+  //   levelMapMovement(
+  //     Math.round(parseFloat(top) / (topBlok / 4)),
+  //     Math.round(parseFloat(left) / (topBlok / 4))
+  //   );
+  // }, 100);
   div.id = `${id}`;
   div.classList.add(className, "tank");
   div.classList.add("none");

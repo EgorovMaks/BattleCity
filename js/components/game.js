@@ -1,5 +1,6 @@
 // import { topBlok } from "../data/data.js";
 // import { tanks } from "../data/tankAll.js";
+import { levelMapMovement } from "../data/levels.js";
 import { tanks } from "../data/tankAll.js";
 import { id } from "./elements.js";
 import { eventStart } from "./events.js";
@@ -15,14 +16,19 @@ export let loopStart = setInterval(function () {
     gameLoop();
     tanks.forEach((e) => animation(tank1, e));
     eventStart();
+    setTimeout(() => {
+      tanks.forEach((e) => {
+        levelMapMovement(e, e.pozitionMap.top, e.pozitionMap.left);
+      });
+    }, 200);
     clearInterval(loopStart);
-    // enemyMovement()
   }
 }, 10);
 
 async function gameLoop() {
   setInterval(function () {
-    tanks.forEach((e) => movement(e.elDOM, e));
+    // tanks.forEach((e) => movement(e));
+    movement(tanks[0]);
     tanks.forEach((e) => shotFlight(e));
   }, 50);
 }

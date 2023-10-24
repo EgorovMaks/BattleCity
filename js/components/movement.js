@@ -58,188 +58,231 @@ export function animation(el, tanks) {
 
 // export let topLeft = {};
 
-export function movement(tanks, arr) {
-  if (arr.life === true) {
-    if (arr.id === "#tank1User") {
-      console.log(tanks);
-    }
-    let up = parseFloat(tanks.style.top);
-    let left = parseFloat(tanks.style.left);
-    let topPozition = Math.round((up / topBlok) * 4);
-    let leftPozition = Math.round((left / topBlok) * 4);
-    if (arr.eventUp === "up") {
-      movementUp(up, left, topPozition, leftPozition, tanks, arr);
-    } else if (arr.eventDown === "down") {
-      movementDown(up, left, topPozition, leftPozition, tanks, arr);
-    } else if (arr.eventLeft === "left") {
-      movementLeft(up, left, topPozition, leftPozition, tanks, arr);
-    } else if (arr.eventRight === "right") {
-      movementRight(up, left, topPozition, leftPozition, tanks, arr);
+export function movement(tank) {
+  if (tank.life === true) {
+    if (tank.eventUp === "up") {
+      movementUp(tank);
+    } else if (tank.eventDown === "down") {
+      movementDown(tank);
+    } else if (tank.eventLeft === "left") {
+      movementLeft(tank);
+    } else if (tank.eventRight === "right") {
+      movementRight(tank);
     }
   }
 }
 
-export function adjustment(pozition, tanks) {
-  if (pozition === "top") {
-    const up = parseFloat(tanks.style.top);
-    tanks.style.top = `${(Math.round((up / topBlok) * 4) * topBlok) / 4}px`;
-  } else if (pozition === "left") {
-    const left = parseFloat(tanks.style.left);
-    tanks.style.left = `${(Math.round((left / topBlok) * 4) * topBlok) / 4}px`;
-  } else if (pozition === "right") {
-    const left = parseFloat(tanks.style.left);
-    tanks.style.left = `${(Math.ceil((left / topBlok) * 2) * topBlok) / 2}px`;
-  } else if (pozition === "down") {
-    const up = parseFloat(tanks.style.top);
-    tanks.style.top = `${(Math.ceil((up / topBlok) * 2) * topBlok) / 2}px`;
+export function adjustment(desc, tank) {
+  let mapTop = tank.pozitionMap.top;
+  let mapLeft = tank.pozitionMap.left;
+  if (desc === "top") {
+    if (mapTop % 1 !== 0) {
+      let up = (mapTop * topBlok) / 4;
+      up = up - tankSpeed;
+      tank.elDOM.style.top = `${up}px`;
+      tank.pozition.top = `${up}px`;
+      tank.pozitionMap.top = (up / topBlok) * 4;
+      tankEnvironment(tank, Math.floor(mapTop), mapLeft);
+      levelMapMovement(tank, Math.floor(mapTop), mapLeft);
+    } else {
+      tankEnvironment(tank, mapTop, mapLeft);
+      levelMapMovement(tank, mapTop, mapLeft);
+    }
+  } else if (desc === "bottom") {
+    if (mapTop % 1 !== 0) {
+      let up = (mapTop * topBlok) / 4;
+      up = up + tankSpeed;
+      tank.elDOM.style.top = `${up}px`;
+      tank.pozition.top = `${up}px`;
+      tank.pozitionMap.top = (up / topBlok) * 4;
+      tankEnvironment(tank, Math.ceil(mapTop), mapLeft);
+      levelMapMovement(tank, Math.ceil(mapTop), mapLeft);
+    } else {
+      tankEnvironment(tank, mapTop, mapLeft);
+      levelMapMovement(tank, mapTop, mapLeft);
+    }
+  } else if (desc === "left") {
+    if (mapLeft % 1 !== 0) {
+      console.log(1)
+      let left = (mapLeft * topBlok) / 4;
+      left = left - tankSpeed;
+      tank.elDOM.style.left = `${left}px`;
+      tank.pozition.left = `${left}px`;
+      tank.pozitionMap.left = (left / topBlok) * 4;
+      tankEnvironment(tank, mapTop, Math.floor(mapLeft));
+      levelMapMovement(tank, mapTop, Math.floor(mapLeft));
+    } else {
+      tankEnvironment(tank, mapTop, mapLeft);
+      levelMapMovement(tank, mapTop, mapLeft);
+    }
+  } else if (desc === "right") {
+    if (mapLeft % 1 !== 0) {
+      let left = (mapLeft * topBlok) / 4;
+      left = left + tankSpeed;
+      tank.elDOM.style.left = `${left}px`;
+      tank.pozition.left = `${left}px`;
+      tank.pozitionMap.left = (left / topBlok) * 4;
+      tankEnvironment(tank, mapTop, Math.ceil(mapLeft));
+      levelMapMovement(tank, mapTop, Math.ceil(mapLeft));
+    } else {
+      tankEnvironment(tank, mapTop, mapLeft);
+      levelMapMovement(tank, mapTop, mapLeft);
+    }
   }
 }
 
-function movementUp(up, left, topPozition, leftPozition, tanks, arr) {
-  let a = [];
+function movementUp(tank) {
   let b = true;
-  a = [
-    levelMap[topPozition - 1][leftPozition],
-    levelMap[topPozition - 1][leftPozition + 1],
-    levelMap[topPozition - 1][leftPozition + 2],
-    levelMap[topPozition - 1][leftPozition + 3],
-  ];
-  a.forEach((e) => {
+  let upMap = tank.pozitionMap.top;
+  const topPozition = tank.pozitionMap.top;
+  const leftPozition = tank.pozitionMap.left;
+  if (upMap % 1 === 0) {
+    levelMapMovement(tank, topPozition, leftPozition);
+    tankEnvironment(tank, topPozition, leftPozition);
+  }
+
+  tank.pozitionMapTop.forEach((e) => {
     tankNumAll.forEach((el) => {
       if (e === el) {
         b = false;
-        adjustment("top", tanks);
-        enemyMovementTank(arr);
+        tank.desc ? null : enemyMovementTank(tank);
         return;
       }
     });
     if (e === 1 || e === 2 || e === 19) {
       b = false;
-      adjustment("top", tanks);
-      adjustment("left", tanks);
-      enemyMovementTank(arr);
+      tank.desc ? null : enemyMovementTank(tank);
       return;
     }
   });
   if (b === true) {
+    let up = (upMap * topBlok) / 4;
     up = up - tankSpeed;
-    if (up < topBlok) {
-      up = topBlok;
-    }
-    tanks.style.top = `${up}px`;
-  } else if (b === false) {
+    tank.elDOM.style.top = `${up}px`;
+    tank.pozition.top = `${up}px`;
+    tank.pozitionMap.top = (up / topBlok) * 4;
   }
-  levelMapMovement(topPozition, leftPozition, arr.randomNum);
 }
 
-function movementDown(up, left, topPozition, leftPozition, tanks, arr) {
-  let a = [];
+function movementDown(tank) {
   let b = true;
-  a = [
-    levelMap[topPozition + 4][leftPozition],
-    levelMap[topPozition + 4][leftPozition + 1],
-    levelMap[topPozition + 4][leftPozition + 2],
-    levelMap[topPozition + 4][leftPozition + 3],
-  ];
-  a.forEach((e) => {
+  let upMap = tank.pozitionMap.top;
+  const topPozition = tank.pozitionMap.top;
+  const leftPozition = tank.pozitionMap.left;
+  if (upMap % 1 === 0) {
+    levelMapMovement(tank, topPozition, leftPozition);
+    tankEnvironment(tank, topPozition, leftPozition);
+  }
+  tank.pozitionMapDown.forEach((e) => {
     tankNumAll.forEach((el) => {
       if (e === el) {
         b = false;
-        adjustment("top", tanks);
-        enemyMovementTank(arr);
+        tank.desc ? null : enemyMovementTank(tank);
         return;
       }
     });
     if (e === 1 || e === 2 || e == 19) {
       b = false;
-      adjustment("top", tanks);
-      adjustment("left", tanks);
-      enemyMovementTank(arr);
+      tank.desc ? null : enemyMovementTank(tank);
       return;
     }
   });
   if (b === true) {
+    let up = (upMap * topBlok) / 4;
     up = up + tankSpeed;
-    if (up >= topBlok * 13) {
-      up = topBlok * 13;
-    }
-    tanks.style.top = `${up}px`;
-  } else if (b === false) {
+    tank.elDOM.style.top = `${up}px`;
+    tank.pozition.top = `${up}px`;
+    tank.pozitionMap.top = (up / topBlok) * 4;
   }
-  levelMapMovement(topPozition, leftPozition, arr.randomNum);
 }
 
-function movementLeft(up, left, topPozition, leftPozition, tanks, arr) {
-  let a = [];
+function movementLeft(tank) {
   let b = true;
-  a = [
+  let leftMap = tank.pozitionMap.left;
+  const topPozition = tank.pozitionMap.top;
+  const leftPozition = tank.pozitionMap.left;
+  if (leftMap % 1 === 0) {
+    levelMapMovement(tank, topPozition, leftPozition);
+    tankEnvironment(tank, topPozition, leftPozition);
+  }
+  tank.pozitionMapLeft.forEach((e) => {
+    tankNumAll.forEach((el) => {
+      if (e === el) {
+        b = false;
+        tank.desc ? null : enemyMovementTank(tank);
+        return;
+      }
+    });
+    if (e === 1 || e === 2 || e == 19) {
+      b = false;
+      tank.desc ? null : enemyMovementTank(tank);
+      return;
+    }
+  });
+  if (b === true) {
+    let left = (leftMap * topBlok) / 4;
+    left = left - tankSpeed;
+    tank.elDOM.style.left = `${left}px`;
+    tank.pozition.left = `${left}px`;
+    tank.pozitionMap.left = (left / topBlok) * 4;
+  }
+}
+
+function movementRight(tank) {
+  let b = true;
+  let leftMap = tank.pozitionMap.left;
+  const topPozition = tank.pozitionMap.top;
+  const leftPozition = tank.pozitionMap.left;
+  if (leftMap % 1 === 0) {
+    levelMapMovement(tank, topPozition, leftPozition);
+    tankEnvironment(tank, topPozition, leftPozition);
+  }
+  tank.pozitionMapRight.forEach((e) => {
+    tankNumAll.forEach((el) => {
+      if (e === el) {
+        b = false;
+        tank.desc ? null : enemyMovementTank(tank);
+        return;
+      }
+    });
+    if (e === 1 || e === 2 || e == 19) {
+      b = false;
+      tank.desc ? null : enemyMovementTank(tank);
+      return;
+    }
+  });
+  if (b === true) {
+    let left = (leftMap * topBlok) / 4;
+    left = left + tankSpeed;
+    tank.elDOM.style.left = `${left}px`;
+    tank.pozition.left = `${left}px`;
+    tank.pozitionMap.left = (left / topBlok) * 4;
+  }
+}
+
+function tankEnvironment(tank, topPozition, leftPozition) {
+  tank.pozitionMapTop = [
+    levelMap[topPozition - 1][leftPozition],
+    levelMap[topPozition - 1][leftPozition + 1],
+    levelMap[topPozition - 1][leftPozition + 2],
+    levelMap[topPozition - 1][leftPozition + 3],
+  ];
+  tank.pozitionMapDown = [
+    levelMap[topPozition + 4][leftPozition],
+    levelMap[topPozition + 4][leftPozition + 1],
+    levelMap[topPozition + 4][leftPozition + 2],
+    levelMap[topPozition + 4][leftPozition + 3],
+  ];
+  tank.pozitionMapLeft = [
     levelMap[topPozition - 0][leftPozition - 1],
     levelMap[topPozition + 1][leftPozition - 1],
     levelMap[topPozition + 2][leftPozition - 1],
     levelMap[topPozition + 3][leftPozition - 1],
   ];
-  a.forEach((e) => {
-    tankNumAll.forEach((el) => {
-      if (e === el) {
-        b = false;
-        adjustment("left", tanks);
-        enemyMovementTank(arr);
-        return;
-      }
-    });
-    if (e === 1 || e === 2 || e === 19) {
-      b = false;
-      adjustment("top", tanks);
-      adjustment("left", tanks);
-      enemyMovementTank(arr);
-      return;
-    }
-  });
-  if (b === true) {
-    left = left - tankSpeed;
-    if (left <= topBlok) {
-      left = topBlok;
-    }
-    tanks.style.left = `${left}px`;
-  } else if (b === false) {
-  }
-  levelMapMovement(topPozition, leftPozition, arr.randomNum);
-}
-
-function movementRight(up, left, topPozition, leftPozition, tanks, arr) {
-  let a = [];
-  let b = true;
-  a = [
+  tank.pozitionMapRight = [
     levelMap[topPozition - 0][leftPozition + 4],
     levelMap[topPozition + 1][leftPozition + 4],
     levelMap[topPozition + 2][leftPozition + 4],
     levelMap[topPozition + 3][leftPozition + 4],
   ];
-
-  a.forEach((e) => {
-    tankNumAll.forEach((el) => {
-      if (e === el) {
-        b = false;
-        adjustment("left", tanks);
-        enemyMovementTank(arr);
-        return;
-      }
-    });
-    if (e === 1 || e === 2 || e === 19) {
-      b = false;
-      adjustment("top", tanks);
-      adjustment("left", tanks);
-      enemyMovementTank(arr);
-      return;
-    }
-  });
-  if (b === true) {
-    left = left + tankSpeed;
-    if (left >= topBlok * 13) {
-      left = topBlok * 13;
-    }
-    tanks.style.left = `${left}px`;
-  } else if (b === false) {
-  }
-  levelMapMovement(topPozition, leftPozition, arr.randomNum);
 }

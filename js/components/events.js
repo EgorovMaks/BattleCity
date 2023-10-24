@@ -1,4 +1,5 @@
 import { getRandomArbitrary } from "../data/data.js";
+import { levelMap } from "../data/levels.js";
 import { tankNumAll, tanks } from "../data/tankAll.js";
 import { id } from "./elements.js";
 import { tank1 } from "./game.js";
@@ -140,7 +141,8 @@ export function eventStart(params) {
       reassignment(true, e);
       tanks[0].eventRight = "right";
     } else if ( e.code === "KeyP") {
-      console.log(tanks[0])
+      // console.log(tanks[0])
+      console.log(levelMap)
     } else if (e.code === "Space") {
       document.querySelectorAll("#missileTrack").forEach((e) => e.remove());
       // console.log(tanks[0].stop);
@@ -153,19 +155,19 @@ export function eventStart(params) {
     if (e.code === "ArrowUp" || e.code === "KeyW") {
       reassignment(false, tanks[0]);
       tanks[0].eventUp = "";
-      adjustment("top", tank1);
+      adjustment("top", tanks[0]);
     } else if (e.code === "ArrowDown" || e.code === "KeyS") {
       reassignment(false, tanks[0]);
       tanks[0].eventDown = "";
-      adjustment("top", tank1);
+      adjustment("bottom", tanks[0]);
     } else if (e.code === "ArrowLeft" || e.code === "KeyA") {
       reassignment(false, tanks[0]);
       tanks[0].eventLeft = "";
-      adjustment("left", tank1);
+      adjustment("left", tanks[0]);
     } else if (e.code === "ArrowRight" || e.code === "KeyD") {
       reassignment(false, tanks[0]);
       tanks[0].eventRight = "";
-      adjustment("left", tank1);
+      adjustment("right", tanks[0]);
     }
   });
 }
