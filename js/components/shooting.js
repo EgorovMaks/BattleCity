@@ -51,6 +51,7 @@ function shotDescription(shootingDirection, tank) {
   let leftPozCenter = Math.floor(
     (parseFloat(tank.elDOM.style.left) / topBlok) * 4
   );
+  console.log(topPozCenter,leftPozCenter)
   if (shootingDirection === "up" && tank.stop === false) {
     tank.stop = true;
     missile(
