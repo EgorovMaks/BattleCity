@@ -103,7 +103,7 @@ export function adjustment(desc, tank) {
     }
   } else if (desc === "left") {
     if (mapLeft % 1 !== 0) {
-      console.log(1)
+      console.log(1);
       let left = (mapLeft * topBlok) / 4;
       left = left - tankSpeed;
       tank.elDOM.style.left = `${left}px`;
@@ -128,7 +128,7 @@ export function adjustment(desc, tank) {
       tankEnvironment(tank, mapTop, mapLeft);
       levelMapMovement(tank, mapTop, mapLeft);
     }
-  }
+  } 
 }
 
 function movementUp(tank) {

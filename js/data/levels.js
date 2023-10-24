@@ -236,6 +236,17 @@ export function shotShoting(topPoz, topLeft, tank) {
   // console.log(levelMap);
 }
 
+export function levelMapMovementDel(tank) {
+  let poz = tank.pozitionMap;
+  const arr = [0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3];
+  const arr2 = [0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3];
+  arr.forEach((e, k) => {
+    console.log(levelMap[poz.top + e][poz.left + arr2[k]]);
+    levelMap[poz.top + e][poz.left + arr2[k]] = 0;
+    console.log(levelMap[poz.top + e][poz.left + arr2[k]]);
+  });
+}
+
 export function shotShotingDel(topPoz, topLeft, tank) {
   let numShot = tank.randomNum + 100;
   const num = 9;

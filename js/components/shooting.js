@@ -1,7 +1,14 @@
 import { topBlok } from "../data/data.js";
-import { levelMap, shotShoting, shotShotingDel } from "../data/levels.js";
+import {
+  levelMap,
+  levelMapMovement,
+  levelMapMovementDel,
+  shotShoting,
+  shotShotingDel,
+} from "../data/levels.js";
 import { tankNumAll, tanks } from "../data/tankAll.js";
 import { explosionAnimation, map, missile, missileTrack } from "./elements.js";
+import { adjustment } from "./movement.js";
 
 export let shotNumsArr = [];
 
@@ -332,9 +339,10 @@ function delTank(tank, num) {
   tanks.forEach((e) => {
     if (num === e.randomNum) {
       if (tank.id === "#tank1User") {
-        console.log(e);
-        e.elDOM.remove();
         e.life = false;
+        adjustment("delete", e);
+        levelMapMovementDel(e);
+        e.elDOM.remove();
       }
       // e.elDOM.remove();
     }
