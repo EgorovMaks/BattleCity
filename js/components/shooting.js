@@ -199,7 +199,7 @@ function shot(plusTrueFalse, topLeftPoz, desc, tank) {
       console.log(1)
       alert("Game Over")
     } else if (tank.arr[0][1] || tank.arr[0][2] === 0) {
-      shotShoting(tank.shot.pozitionMap, tank);
+      shotShoting( tank);
       topLeftPoz
         ? (tank.shot.pozition[0] = `${missilePozNew}px`)
         : (tank.shot.pozition[1] = `${missilePozNew}px`);
