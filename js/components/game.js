@@ -27,8 +27,8 @@ export let loopStart = setInterval(function () {
 
 async function gameLoop() {
   setInterval(function () {
-    // tanks.forEach((e) => movement(e));
-    movement(tanks[0]);
+    tanks.forEach((e) => movement(e));
+    // movement(tanks[0]);
     tanks.forEach((e) => shotFlight(e));
   }, 50);
 }

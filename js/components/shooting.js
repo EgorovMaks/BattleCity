@@ -179,7 +179,6 @@ function shot(plusTrueFalse, topLeftPoz, desc, tank) {
       } else if (tank.shootingDirectionDesc === "right") {
         explosionAnimation(pozLeft - 2, 58, tank.shootingDirectionDesc, tank);
       } else if (tank.shootingDirectionDesc === "up") {
-        console.log(tank);
         explosionAnimation(1, pozTop - 2, tank.shootingDirectionDesc, tank);
       } else if (tank.shootingDirectionDesc === "down") {
         explosionAnimation(58, pozTop - 2, tank.shootingDirectionDesc, tank);

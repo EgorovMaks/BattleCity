@@ -237,12 +237,31 @@ export function shotShoting([topPoz, topLeft], tank) {
 }
 
 export function levelMapMovementDel(tank) {
-  let poz = tank.pozitionMap;
-  const arr = [0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3];
-  const arr2 = [0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3];
+  let pozTop = Math.floor(tank.pozitionMap.top);
+  let pozLeft = Math.floor(tank.pozitionMap.left);
+  const arr = [
+    [-1, 0, 1, 2, 3, 4],
+    [-1, 0, 1, 2, 3, 4],
+    [-1, 0, 1, 2, 3, 4],
+    [-1, 0, 1, 2, 3, 4],
+    [-1, 0, 1, 2, 3, 4],
+    [-1, 0, 1, 2, 3, 4],
+  ];
+  const arr2 = [
+    [-1, -1, -1, -1, -1, -1],
+    [0, 0, 0, 0, 0, 0],
+    [1, 1, 1, 1, 1, 1],
+    [2, 2, 2, 2, 2, 2],
+    [3, 3, 3, 3, 3, 3],
+    [4, 4, 4, 4, 4, 4],
+  ];
   arr.forEach((e, k) => {
-    // console.log(levelMap[poz.top + e][poz.left + arr2[k]]);
-    levelMap[poz.top + e][poz.left + arr2[k]] = 0;
+    e.forEach((el, key) => {
+      if (levelMap[pozTop + el][pozLeft + arr2[k][key]] === tank.randomNum) {
+        levelMap[pozTop + el][pozLeft + arr2[k][key]] = 0;
+      }
+    });
+
     // console.log(levelMap[poz.top + e][poz.left + arr2[k]]);
   });
 }
