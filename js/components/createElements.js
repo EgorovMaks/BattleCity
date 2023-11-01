@@ -26,6 +26,10 @@ export function createTank1User() {
     e["eventDown"] = "";
     e["eventLeft"] = "";
     e["eventRight"] = "";
+    e["eventUpPermission"] = true;
+    e["eventDownPermission"] = true;
+    e["eventLeftPermission"] = true;
+    e["eventRightPermission"] = true;
     e["stop"] = false;
     e["pozitionTop"] = false;
     e["pozitionDown"] = false;
@@ -36,8 +40,8 @@ export function createTank1User() {
     e["shootingDirectionDesc"] = "";
     e.tank[1][2] ? null : tankNumAllEnemies.push(e);
     e.tank[1][2] ? tankNumAllPlay.push(e) : null;
-    const top = e.elDOM.style.top;
-    const left = e.elDOM.style.left;
+    const top = parseFloat(e.elDOM.style.top);
+    const left = parseFloat(e.elDOM.style.left);
     const topMap = (parseFloat(e.elDOM.style.top) / topBlok) * 4;
     const leftMap = (parseFloat(e.elDOM.style.left) / topBlok) * 4;
     e["pozition"] = { top: top, left: left };
@@ -47,6 +51,9 @@ export function createTank1User() {
     e["pozitionMapLeft"] = [];
     e["pozitionMapRight"] = [];
     e["shot"] = {};
+    e["pozDesc"] = "";
+    e["startGame"] = true;
+    e["controlPress"]=false
     // console.log(e);
   });
 }

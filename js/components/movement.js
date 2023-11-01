@@ -1,9 +1,7 @@
-import { animationDirection } from "./elements.js";
 import { tankSpeed, topBlok } from "../data/data.js";
-import { tank1 } from "./game.js";
 import { levelMap, levelMapMovement } from "../data/levels.js";
-import { tankNumAll, tanks } from "../data/tankAll.js";
-import { enemyMovementTank } from "./events.js";
+import { tanks } from "../data/tankAll.js";
+import { animationDirection } from "./elements.js";
 
 export function animation(el, tanks) {
   if (tanks.life === true) {
@@ -56,232 +54,187 @@ export function animation(el, tanks) {
   }
 }
 
-// export let topLeft = {};
-
 export function movement(tank) {
   if (tank.life === true) {
+    if (tank.startGame === true) {
+      pozMapAll(tank);
+    }
+    if (tank.eventUp === "press" && tank.controlPress === false) {
+      adjustment(tank, "up");
+      tank.controlPress = true;
+    }
+    if (tank.eventDown === "press" && tank.controlPress === false) {
+      adjustment(tank, "down");
+      tank.controlPress = true;
+    }
+    if (tank.eventLeft === "press" && tank.controlPress === false) {
+      adjustment(tank, "left");
+      tank.controlPress = true;
+    }
+    if (tank.eventRight === "press" && tank.controlPress === false) {
+      adjustment(tank, "right");
+      tank.controlPress = true;
+    }
     if (tank.eventUp === "up") {
       movementUp(tank);
-    } else if (tank.eventDown === "down") {
+    }
+    if (tank.eventDown === "down") {
       movementDown(tank);
-    } else if (tank.eventLeft === "left") {
+    }
+    if (tank.eventLeft === "left") {
       movementLeft(tank);
-    } else if (tank.eventRight === "right") {
+    }
+    if (tank.eventRight === "right") {
       movementRight(tank);
     }
   }
 }
 
-export function adjustment(desc, tank) {
-  let mapTop = tank.pozitionMap.top;
-  let mapLeft = tank.pozitionMap.left;
-  if (desc === "top") {
-    if (mapTop % 1 !== 0) {
-      let up = (mapTop * topBlok) / 4;
-      up = up - tankSpeed;
-      tank.elDOM.style.top = `${up}px`;
-      tank.pozition.top = `${up}px`;
-      tank.pozitionMap.top = (up / topBlok) * 4;
-      tankEnvironment(tank, Math.floor(mapTop), mapLeft);
-      levelMapMovement(tank, Math.floor(mapTop), mapLeft);
-    } else {
-      tankEnvironment(tank, mapTop, mapLeft);
-      levelMapMovement(tank, mapTop, mapLeft);
+export function adjustment(tank, desc) {
+  if (desc === "up") {
+    let up = (tank.pozition.top / topBlok) * 4;
+    let upMap = tank.pozitionMap.top;
+    if (up % 1 !== 0) {
+      upMap = upMap - 1;
+      tank.pozitionMap.top = upMap;
+      tank.pozition.top = (upMap * topBlok) / 4;
+      tank.elDOM.style.top = `${tank.pozition.top}px`;
     }
-  } else if (desc === "bottom") {
-    if (mapTop % 1 !== 0) {
-      let up = (mapTop * topBlok) / 4;
-      up = up + tankSpeed;
-      tank.elDOM.style.top = `${up}px`;
-      tank.pozition.top = `${up}px`;
-      tank.pozitionMap.top = (up / topBlok) * 4;
-      tankEnvironment(tank, Math.ceil(mapTop), mapLeft);
-      levelMapMovement(tank, Math.ceil(mapTop), mapLeft);
-    } else {
-      tankEnvironment(tank, mapTop, mapLeft);
-      levelMapMovement(tank, mapTop, mapLeft);
+  }
+  if (desc === "down") {
+    let up = (tank.pozition.top / topBlok) * 4;
+    let upMap = tank.pozitionMap.top;
+    if (up % 1 !== 0) {
+      upMap = upMap + 1;
+      tank.pozitionMap.top = upMap;
+      tank.pozition.top = (upMap * topBlok) / 4;
+      tank.elDOM.style.top = `${tank.pozition.top}px`;
     }
-  } else if (desc === "left") {
-    if (mapLeft % 1 !== 0) {
-      let left = (mapLeft * topBlok) / 4;
-      left = left - tankSpeed;
-      tank.elDOM.style.left = `${left}px`;
-      tank.pozition.left = `${left}px`;
-      tank.pozitionMap.left = (left / topBlok) * 4;
-      tankEnvironment(tank, mapTop, Math.floor(mapLeft));
-      levelMapMovement(tank, mapTop, Math.floor(mapLeft));
-    } else {
-      tankEnvironment(tank, mapTop, mapLeft);
-      levelMapMovement(tank, mapTop, mapLeft);
+  }
+  if (desc === "left") {
+    let left = (tank.pozition.left / topBlok) * 4;
+    let upLeft = tank.pozitionMap.left;
+    if (left % 1 !== 0) {
+      upLeft = upLeft - 1;
+      tank.pozitionMap.left = upLeft;
+      tank.pozition.left = (upLeft * topBlok) / 4;
+      tank.elDOM.style.left = `${tank.pozition.left}px`;
     }
-  } else if (desc === "right") {
-    if (mapLeft % 1 !== 0) {
-      let left = (mapLeft * topBlok) / 4;
-      left = left + tankSpeed;
-      tank.elDOM.style.left = `${left}px`;
-      tank.pozition.left = `${left}px`;
-      tank.pozitionMap.left = (left / topBlok) * 4;
-      tankEnvironment(tank, mapTop, Math.ceil(mapLeft));
-      levelMapMovement(tank, mapTop, Math.ceil(mapLeft));
-    } else {
-      tankEnvironment(tank, mapTop, mapLeft);
-      levelMapMovement(tank, mapTop, mapLeft);
+  }
+  if (desc === "right") {
+    let left = (tank.pozition.left / topBlok) * 4;
+    let upLeft = tank.pozitionMap.left;
+    if (left % 1 !== 0) {
+      upLeft = upLeft + 1;
+      tank.pozitionMap.left = upLeft;
+      tank.pozition.left = (upLeft * topBlok) / 4;
+      tank.elDOM.style.left = `${tank.pozition.left}px`;
     }
-  } 
+  }
 }
 
-function movementUp(tank) {
-  let b = true;
-  let upMap = tank.pozitionMap.top;
-  const topPozition = tank.pozitionMap.top;
-  const leftPozition = tank.pozitionMap.left;
-  if (upMap % 1 === 0) {
-    levelMapMovement(tank, topPozition, leftPozition);
-    tankEnvironment(tank, topPozition, leftPozition);
+document.addEventListener("keyup", function (e) {
+  if (e.code === "KeyK") {
+    let up = tanks[0].pozition.top;
+    let upMap = tanks[0].pozitionMap.top;
   }
+});
 
+function movementUp(tank) {
+  tank.stop = false;
+  let up = tank.pozition.top;
+  pozMapAll(tank, "up");
   tank.pozitionMapTop.forEach((e) => {
-    tankNumAll.forEach((el) => {
-      if (e === el) {
-        b = false;
-        tank.desc ? null : enemyMovementTank(tank);
-        return;
-      }
-    });
-    if (e === 1 || e === 2 || e === 19) {
-      b = false;
-      tank.desc ? null : enemyMovementTank(tank);
-      return;
+    if (e === 1 || e === 19 || e === 2) {
+      tank.stop = true;
     }
   });
-  if (b === true) {
-    let up = (upMap * topBlok) / 4;
-    up = up - tankSpeed;
-    tank.elDOM.style.top = `${up}px`;
-    tank.pozition.top = `${up}px`;
-    tank.pozitionMap.top = (up / topBlok) * 4;
+  if (tank.stop === false) {
+    let newUp = up - tankSpeed;
+    tank.pozition.top = newUp;
+    tank.pozitionMap.top = Math.floor((up / topBlok) * 4);
+    tank.elDOM.style.top = `${newUp}px`;
   }
 }
 
 function movementDown(tank) {
-  let b = true;
-  let upMap = tank.pozitionMap.top;
-  const topPozition = tank.pozitionMap.top;
-  const leftPozition = tank.pozitionMap.left;
-  if (upMap % 1 === 0) {
-    levelMapMovement(tank, topPozition, leftPozition);
-    tankEnvironment(tank, topPozition, leftPozition);
-  }
+  tank.stop = false;
+  let up = tank.pozition.top;
+  pozMapAll(tank, "down");
   tank.pozitionMapDown.forEach((e) => {
-    tankNumAll.forEach((el) => {
-      if (e === el) {
-        b = false;
-        tank.desc ? null : enemyMovementTank(tank);
-        return;
-      }
-    });
-    if (e === 1 || e === 2 || e == 19) {
-      b = false;
-      tank.desc ? null : enemyMovementTank(tank);
-      return;
+    if (e === 1 || e === 19 || e === 2) {
+      tank.stop = true;
     }
   });
-  if (b === true) {
-    let up = (upMap * topBlok) / 4;
-    up = up + tankSpeed;
-    tank.elDOM.style.top = `${up}px`;
-    tank.pozition.top = `${up}px`;
-    tank.pozitionMap.top = (up / topBlok) * 4;
+  if (tank.stop === false) {
+    let newUp = up + tankSpeed;
+    tank.pozition.top = newUp;
+    tank.pozitionMap.top = Math.ceil((up / topBlok) * 4);
+    tank.elDOM.style.top = `${newUp}px`;
   }
 }
 
 function movementLeft(tank) {
-  let b = true;
-  let leftMap = tank.pozitionMap.left;
-  const topPozition = tank.pozitionMap.top;
-  const leftPozition = tank.pozitionMap.left;
-  if (leftMap % 1 === 0) {
-    levelMapMovement(tank, topPozition, leftPozition);
-    tankEnvironment(tank, topPozition, leftPozition);
-  }
+  tank.stop = false;
+  let left = tank.pozition.left;
+  pozMapAll(tank, "left");
   tank.pozitionMapLeft.forEach((e) => {
-    tankNumAll.forEach((el) => {
-      if (e === el) {
-        b = false;
-        tank.desc ? null : enemyMovementTank(tank);
-        return;
-      }
-    });
-    if (e === 1 || e === 2 || e == 19) {
-      b = false;
-      tank.desc ? null : enemyMovementTank(tank);
-      return;
+    if (e === 1 || e === 19 || e === 2) {
+      tank.stop = true;
     }
   });
-  if (b === true) {
-    let left = (leftMap * topBlok) / 4;
-    left = left - tankSpeed;
-    tank.elDOM.style.left = `${left}px`;
-    tank.pozition.left = `${left}px`;
-    tank.pozitionMap.left = (left / topBlok) * 4;
+  if (tank.stop === false) {
+    let newLeft = left - tankSpeed;
+    tank.pozition.left = newLeft;
+    tank.pozitionMap.left = Math.floor((left / topBlok) * 4);
+    tank.elDOM.style.left = `${newLeft}px`;
   }
 }
 
 function movementRight(tank) {
-  let b = true;
-  let leftMap = tank.pozitionMap.left;
-  const topPozition = tank.pozitionMap.top;
-  const leftPozition = tank.pozitionMap.left;
-  if (leftMap % 1 === 0) {
-    levelMapMovement(tank, topPozition, leftPozition);
-    tankEnvironment(tank, topPozition, leftPozition);
-  }
+  tank.stop = false;
+  let left = tank.pozition.left;
+  pozMapAll(tank, "right");
   tank.pozitionMapRight.forEach((e) => {
-    tankNumAll.forEach((el) => {
-      if (e === el) {
-        b = false;
-        tank.desc ? null : enemyMovementTank(tank);
-        return;
-      }
-    });
-    if (e === 1 || e === 2 || e == 19) {
-      b = false;
-      tank.desc ? null : enemyMovementTank(tank);
-      return;
+    if (e === 1 || e === 19 || e === 2) {
+      tank.stop = true;
     }
   });
-  if (b === true) {
-    let left = (leftMap * topBlok) / 4;
-    left = left + tankSpeed;
-    tank.elDOM.style.left = `${left}px`;
-    tank.pozition.left = `${left}px`;
-    tank.pozitionMap.left = (left / topBlok) * 4;
+  if (tank.stop === false) {
+    let newLeft = left + tankSpeed;
+    tank.pozition.left = newLeft;
+    tank.pozitionMap.left = Math.ceil((left / topBlok) * 4);
+    tank.elDOM.style.left = `${newLeft}px`;
   }
 }
 
-function tankEnvironment(tank, topPozition, leftPozition) {
+function pozMapAll(tank, desc) {
+  tank.startGame = false;
+  let top = tank.pozitionMap.top;
+  let left = tank.pozitionMap.left;
+
   tank.pozitionMapTop = [
-    levelMap[topPozition - 1][leftPozition],
-    levelMap[topPozition - 1][leftPozition + 1],
-    levelMap[topPozition - 1][leftPozition + 2],
-    levelMap[topPozition - 1][leftPozition + 3],
+    levelMap[top - 1][left + 0],
+    levelMap[top - 1][left + 1],
+    levelMap[top - 1][left + 2],
+    levelMap[top - 1][left + 3],
   ];
   tank.pozitionMapDown = [
-    levelMap[topPozition + 4][leftPozition],
-    levelMap[topPozition + 4][leftPozition + 1],
-    levelMap[topPozition + 4][leftPozition + 2],
-    levelMap[topPozition + 4][leftPozition + 3],
+    levelMap[top + 4][left + 0],
+    levelMap[top + 4][left + 1],
+    levelMap[top + 4][left + 2],
+    levelMap[top + 4][left + 3],
   ];
   tank.pozitionMapLeft = [
-    levelMap[topPozition - 0][leftPozition - 1],
-    levelMap[topPozition + 1][leftPozition - 1],
-    levelMap[topPozition + 2][leftPozition - 1],
-    levelMap[topPozition + 3][leftPozition - 1],
+    levelMap[top + 0][left - 1],
+    levelMap[top + 1][left - 1],
+    levelMap[top + 2][left - 1],
+    levelMap[top + 3][left - 1],
   ];
   tank.pozitionMapRight = [
-    levelMap[topPozition - 0][leftPozition + 4],
-    levelMap[topPozition + 1][leftPozition + 4],
-    levelMap[topPozition + 2][leftPozition + 4],
-    levelMap[topPozition + 3][leftPozition + 4],
+    levelMap[top + 0][left + 4],
+    levelMap[top + 1][left + 4],
+    levelMap[top + 2][left + 4],
+    levelMap[top + 3][left + 4],
   ];
 }

@@ -65,7 +65,7 @@ export let level1 = [
   [19, 3, 0, 3, 3, 0, 2, 0, 2, 0, 3, 3, 0, 3, 19],
   [19, 12, 0, 2, 2, 0, 3, 0, 3, 0, 2, 2, 0, 12, 19],
   [19, 0, 3, 0, 3, 0, 1, 1, 1, 0, 3, 0, 3, 0, 19],
-  [19, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 19],
+  [19, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 19],
   [19, 0, 1, 0, 1, 0, 2, 0, 2, 0, 1, 0, 1, 0, 19],
   [19, 0, 1, 0, 1, 0, 6, 3, 7, 0, 1, 0, 1, 0, 19],
   [19, 0, 0, 0, 0, 0, 4, 111, 5, 0, 0, 0, 0, 0, 19],
@@ -180,34 +180,57 @@ setTimeout(() => {
 }, 100);
 
 export function levelMapMovement(tank, topPozition, leftPozition) {
+  // levelMapMovement(e, e.pozitionMap.top, e.pozitionMap.left);
   const top = topPozition;
   const left = leftPozition;
-  // console.log(top,left)
-  const nums = [0, 1, 2, 3];
-  nums.forEach((e) => {
-    if (levelMap[top + 4][left + e] === tank.randomNum) {
-      levelMap[top + 4][left + e] = 0;
+  if (tank.id === "#tank1User") {
+    // console.log(top, left);
+  }
+  const numsTankMap = [0, 1, 2, 3];
+  const numsDelX = [
+    [-1, 0, 1, 2, 3, 4],
+    [-1, 0, 1, 2, 3, 4],
+    [-1, 0, 1, 2, 3, 4],
+    [-1, 0, 1, 2, 3, 4],
+    [-1, 0, 1, 2, 3, 4],
+    [-1, 0, 1, 2, 3, 4],
+  ];
+  const numsDelY = [
+    [-1, -1, -1, -1, -1, -1],
+    [0, 0, 0, 0, 0, 0],
+    [1, 1, 1, 1, 1, 1],
+    [2, 2, 2, 2, 2, 2],
+    [3, 3, 3, 3, 3, 3],
+    [4, 4, 4, 4, 4, 4],
+  ];
+  numsDelX.forEach((e, k) =>
+    e.forEach((el, key) => {
+      if (levelMap[top + el][left + numsDelY[k][key]] === tank.randomNum) {
+        levelMap[top + el][left + numsDelY[k][key]] = 0;
+      }
+    })
+  );
+
+  numsTankMap.forEach((e) => {
+    if (levelMap[top + e][left + 0] === 0) {
+      levelMap[top + e][left + 0] = tank.randomNum;
     }
   });
-  nums.forEach((e) => {
-    if (levelMap[top - 1][left + e] === tank.randomNum) {
-      levelMap[top - 1][left + e] = 0;
+  numsTankMap.forEach((e) => {
+    if (levelMap[top + e][left + 1] === 0) {
+      levelMap[top + e][left + 1] = tank.randomNum;
     }
   });
-  nums.forEach((e) => {
-    if (levelMap[top + e][left + 4] === tank.randomNum) {
-      levelMap[top + e][left + 4] = 0;
+  numsTankMap.forEach((e) => {
+    if (levelMap[top + e][left + 2] === 0) {
+      levelMap[top + e][left + 2] = tank.randomNum;
     }
   });
-  nums.forEach((e) => {
-    if (levelMap[top + e][left - 1] === tank.randomNum) {
-      levelMap[top + e][left - 1] = 0;
+  numsTankMap.forEach((e) => {
+    if (levelMap[top + e][left + 3] === 0) {
+      levelMap[top + e][left + 3] = tank.randomNum;
     }
   });
-  nums.forEach((e) => (levelMap[top + e][left + 0] = tank.randomNum));
-  nums.forEach((e) => (levelMap[top + e][left + 1] = tank.randomNum));
-  nums.forEach((e) => (levelMap[top + e][left + 2] = tank.randomNum));
-  nums.forEach((e) => (levelMap[top + e][left + 3] = tank.randomNum));
 }
 
 export function shotShoting(tank) {

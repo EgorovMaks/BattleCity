@@ -1,14 +1,13 @@
 import { topBlok } from "../data/data.js";
 import {
   levelMap,
-  levelMapMovement,
   levelMapMovementDel,
   shotShoting,
   shotShotingDel,
 } from "../data/levels.js";
 import { tankNumAll, tanks } from "../data/tankAll.js";
 import { explosionAnimation, map, missile, missileTrack } from "./elements.js";
-import { adjustment } from "./movement.js";
+// import { adjustment } from "./movement.js";
 
 export let shotNumsArr = [];
 
@@ -106,8 +105,8 @@ function shot(plusTrueFalse, topLeftPoz, desc, tank) {
             a.remove();
             b.remove();
             explosionAnimation(
-              topPoz + 1,
-              topLeft - 1,
+              tank.shot.pozitionMap[1],
+              1,
               tank.shootingDirectionDesc,
               tank
             );
@@ -193,13 +192,13 @@ function shot(plusTrueFalse, topLeftPoz, desc, tank) {
     } else if (
       tank.arr[0][1][0] === 3 ||
       tank.arr[0][2][0] === 3 ||
-      tank.arr[1][1][0] === 3||
+      tank.arr[1][1][0] === 3 ||
       tank.arr[1][2][0] === 3
     ) {
-      console.log(1)
-      alert("Game Over")
+      console.log(1);
+      alert("Game Over");
     } else if (tank.arr[0][1] || tank.arr[0][2] === 0) {
-      shotShoting( tank);
+      shotShoting(tank);
       topLeftPoz
         ? (tank.shot.pozition[0] = `${missilePozNew}px`)
         : (tank.shot.pozition[1] = `${missilePozNew}px`);
@@ -210,8 +209,9 @@ function shot(plusTrueFalse, topLeftPoz, desc, tank) {
   }
 }
 
-function arrey(desc, [topPoz, topLeft], tank) {
-  // console.log(tank)
+function arrey(desc, [topPozAd, topLeftAd], tank) {
+  const topPoz = Math.round(topPozAd);
+  const topLeft = Math.round(topLeftAd);
   const numsArr = [0, 1, 2, 3, 4];
   if (desc === "up") {
     tank.shot.pozitionMap[0] = Math.round(tank.shot.pozitionMap[0] - 2);
@@ -321,7 +321,6 @@ function delTank(tank, num) {
     if (num === e.randomNum) {
       if (tank.id === "#tank1User") {
         e.life = false;
-        adjustment("delete", e);
         levelMapMovementDel(e);
         e.elDOM.remove();
       }

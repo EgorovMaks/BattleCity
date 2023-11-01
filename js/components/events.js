@@ -4,6 +4,8 @@ import { tankNumAll, tanks } from "../data/tankAll.js";
 import { id } from "./elements.js";
 import { tank1 } from "./game.js";
 import { adjustment } from "./movement.js";
+// import { correction } from "./movement.js";
+// import { adjustment } from "./movement.js";
 import { shooting } from "./shooting.js";
 // import { JoyStick } from "./joy.js";
 
@@ -126,25 +128,22 @@ export function eventStart(params) {
   const keyPress = document.addEventListener("keydown", function (e) {
     if (e.code === "ArrowUp" || e.code === "KeyW") {
       tanks[0].shootingDirection = "up";
-      reassignment(true, e);
+      reassignment(true, tanks[0]);
       tanks[0].eventUp = "up";
     } else if (e.code === "ArrowDown" || e.code === "KeyS") {
       tanks[0].shootingDirection = "down";
-      reassignment(true, e);
+      reassignment(true, tanks[0]);
       tanks[0].eventDown = "down";
     } else if (e.code === "ArrowLeft" || e.code === "KeyA") {
       tanks[0].shootingDirection = "left";
-      reassignment(true, e);
+      reassignment(true, tanks[0]);
       tanks[0].eventLeft = "left";
     } else if (e.code === "ArrowRight" || e.code === "KeyD") {
       tanks[0].shootingDirection = "right";
-      reassignment(true, e);
+      reassignment(true, tanks[0]);
       tanks[0].eventRight = "right";
-    } else if ( e.code === "KeyP") {
-      // console.log(tanks[0])
-      // console.log(tanks[0].shot);
-
-      console.log(levelMap)
+    } else if (e.code === "KeyP") {
+      console.log(levelMap);
     } else if (e.code === "Space") {
       document.querySelectorAll("#missileTrack").forEach((e) => e.remove());
       // console.log(tanks[0].stop);
@@ -156,20 +155,24 @@ export function eventStart(params) {
   const keyup = document.addEventListener("keyup", function (e) {
     if (e.code === "ArrowUp" || e.code === "KeyW") {
       reassignment(false, tanks[0]);
+      adjustment(tanks[0],"up")
       tanks[0].eventUp = "";
-      adjustment("top", tanks[0]);
+      tanks[0].controlPress = false;
     } else if (e.code === "ArrowDown" || e.code === "KeyS") {
       reassignment(false, tanks[0]);
+      adjustment(tanks[0], "down");
       tanks[0].eventDown = "";
-      adjustment("bottom", tanks[0]);
+      tanks[0].controlPress = false;
     } else if (e.code === "ArrowLeft" || e.code === "KeyA") {
       reassignment(false, tanks[0]);
+      adjustment(tanks[0], "left");
       tanks[0].eventLeft = "";
-      adjustment("left", tanks[0]);
+      tanks[0].controlPress = false;
     } else if (e.code === "ArrowRight" || e.code === "KeyD") {
       reassignment(false, tanks[0]);
+      adjustment(tanks[0], "right");
       tanks[0].eventRight = "";
-      adjustment("right", tanks[0]);
+      tanks[0].controlPress = false;
     }
   });
 }
