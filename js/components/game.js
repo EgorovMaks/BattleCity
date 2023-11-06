@@ -25,6 +25,7 @@ export let loopStart = setInterval(function () {
       tanks.forEach((e) => {
         if (e.id !== "#tank1User") {
           tanks[0].stop ? null : shooting(e);
+          e.eventDown = "down";
         }
       });
     }, 2000);
