@@ -14,16 +14,16 @@ if (
 ) {
   mobileManagement();
   mobileMap();
-}
-else{
-
-    clearInterval(joystickFun);
+} else {
+  clearInterval(joystickFun);
 }
 
 async function gameStart() {
-  createTank1User();
   // surveillance()
-  levelLoad();
+  setTimeout(() => {
+    levelLoad();
+    createTank1User();
+  }, 2000);
   // gameLoop()
 }
 

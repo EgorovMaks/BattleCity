@@ -65,7 +65,7 @@ export let level1 = [
   [19, 3, 0, 3, 3, 0, 2, 0, 2, 0, 3, 3, 0, 3, 19],
   [19, 12, 0, 2, 2, 0, 3, 0, 3, 0, 2, 2, 0, 12, 19],
   [19, 0, 3, 0, 3, 0, 1, 1, 1, 0, 3, 0, 3, 0, 19],
-  [19, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 19],
+  [19, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 19],
   [19, 0, 1, 0, 1, 0, 2, 0, 2, 0, 1, 0, 1, 0, 19],
   [19, 0, 1, 0, 1, 0, 6, 3, 7, 0, 1, 0, 1, 0, 19],
   [19, 0, 0, 0, 0, 0, 4, 111, 5, 0, 0, 0, 0, 0, 19],
@@ -94,6 +94,8 @@ export function mobileMap() {
 function deg90(params) {}
 
 export const levelMap = [];
+
+export const levelMapIdBloks = [];
 
 export function levelMapConstructor(array) {
   function arrayCopy(array, num) {
@@ -174,15 +176,26 @@ export function levelMapConstructor(array) {
     d = [[]];
     a = [[]];
   });
+  levelMap.forEach((e, k) => {
+    levelMapIdBloks.push([])
+    e.forEach((el, key) => {
+      if (el === 19 || el === 0) {
+        levelMapIdBloks[k][key] = el;
+      } else {
+        levelMapIdBloks[k][key] = 0;
+      }
+    });
+  });
+
 }
 setTimeout(() => {
   levelMapConstructor(level1);
 }, 100);
 
-export function levelMapMovement(tank, topPozition, leftPozition) {
+export function levelMapMovement(tank) {
   // levelMapMovement(e, e.pozitionMap.top, e.pozitionMap.left);
-  const top = topPozition;
-  const left = leftPozition;
+  const top = tank.pozitionMap.top;
+  const left = tank.pozitionMap.left;
   if (tank.id === "#tank1User") {
     // console.log(top, left);
   }

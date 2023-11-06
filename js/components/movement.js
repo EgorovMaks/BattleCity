@@ -1,6 +1,6 @@
-import { tankSpeed, topBlok } from "../data/data.js";
+import { getRandomArbitrary, tankSpeed, topBlok } from "../data/data.js";
 import { levelMap, levelMapMovement } from "../data/levels.js";
-import { tanks } from "../data/tankAll.js";
+import { tankNumAllEnemies, tanks } from "../data/tankAll.js";
 import { animationDirection } from "./elements.js";
 
 export function animation(el, tanks) {
@@ -55,7 +55,8 @@ export function animation(el, tanks) {
 }
 
 export function movement(tank) {
-  if (tank.life === true) {
+  if (tank.life === true && tank.desc === true) {
+    levelMapMovement(tank);
     if (tank.startGame === true) {
       pozMapAll(tank);
     }
@@ -86,6 +87,25 @@ export function movement(tank) {
     }
     if (tank.eventRight === "right") {
       movementRight(tank);
+    }
+  }
+
+  if (tank.life === true && tank.desc === false) {
+    levelMapMovement(tank);
+    if (tank.startGame === true) {
+      pozMapAll(tank);
+    }
+    if (tank.eventUp === "up") {
+      movementEnemyUp(tank);
+    }
+    if (tank.eventDown === "down") {
+      movementEnemyDown(tank);
+    }
+    if (tank.eventLeft === "left") {
+      movementEnemyLeft(tank);
+    }
+    if (tank.eventRight === "right") {
+      movementEnemyRight(tank);
     }
   }
 }
@@ -141,15 +161,15 @@ document.addEventListener("keyup", function (e) {
 });
 
 function movementUp(tank) {
-  tank.stop = false;
+  tank.stopMovement = false;
   let up = tank.pozition.top;
   pozMapAll(tank, "up");
   tank.pozitionMapTop.forEach((e) => {
     if (e === 1 || e === 19 || e === 2) {
-      tank.stop = true;
+      tank.stopMovement = true;
     }
   });
-  if (tank.stop === false) {
+  if (tank.stopMovement === false) {
     let newUp = up - tankSpeed;
     tank.pozition.top = newUp;
     tank.pozitionMap.top = Math.floor((up / topBlok) * 4);
@@ -158,32 +178,34 @@ function movementUp(tank) {
 }
 
 function movementDown(tank) {
-  tank.stop = false;
+  tank.stopMovement = false;
   let up = tank.pozition.top;
   pozMapAll(tank, "down");
   tank.pozitionMapDown.forEach((e) => {
     if (e === 1 || e === 19 || e === 2) {
-      tank.stop = true;
+      tank.stopMovement = true;
     }
   });
-  if (tank.stop === false) {
+  if (tank.stopMovement === false) {
     let newUp = up + tankSpeed;
     tank.pozition.top = newUp;
     tank.pozitionMap.top = Math.ceil((up / topBlok) * 4);
     tank.elDOM.style.top = `${newUp}px`;
   }
+  if (tank.stopMovement === true) {
+  }
 }
 
 function movementLeft(tank) {
-  tank.stop = false;
+  tank.stopMovement = false;
   let left = tank.pozition.left;
   pozMapAll(tank, "left");
   tank.pozitionMapLeft.forEach((e) => {
     if (e === 1 || e === 19 || e === 2) {
-      tank.stop = true;
+      tank.stopMovement = true;
     }
   });
-  if (tank.stop === false) {
+  if (tank.stopMovement === false) {
     let newLeft = left - tankSpeed;
     tank.pozition.left = newLeft;
     tank.pozitionMap.left = Math.floor((left / topBlok) * 4);
@@ -192,15 +214,87 @@ function movementLeft(tank) {
 }
 
 function movementRight(tank) {
-  tank.stop = false;
+  tank.stopMovement = false;
   let left = tank.pozition.left;
   pozMapAll(tank, "right");
   tank.pozitionMapRight.forEach((e) => {
     if (e === 1 || e === 19 || e === 2) {
-      tank.stop = true;
+      tank.stopMovement = true;
     }
   });
-  if (tank.stop === false) {
+  if (tank.stopMovement === false) {
+    let newLeft = left + tankSpeed;
+    tank.pozition.left = newLeft;
+    tank.pozitionMap.left = Math.ceil((left / topBlok) * 4);
+    tank.elDOM.style.left = `${newLeft}px`;
+  }
+}
+
+function movementEnemyUp(tank) {
+  tank.stopMovement = false;
+  let up = tank.pozition.top;
+  pozMapAll(tank, "up");
+  tank.pozitionMapTop.forEach((e) => {
+    if (e === 1 || e === 19 || e === 2) {
+      movementEnemyUpDesc(tank);
+      tank.stopMovement = true;
+    }
+  });
+  if (tank.stopMovement === false) {
+    let newUp = up - tankSpeed;
+    tank.pozition.top = newUp;
+    tank.pozitionMap.top = Math.floor((up / topBlok) * 4);
+    tank.elDOM.style.top = `${newUp}px`;
+  }
+}
+
+function movementEnemyDown(tank) {
+  tank.stopMovement = false;
+  let up = tank.pozition.top;
+  pozMapAll(tank, "down");
+  tank.pozitionMapDown.forEach((e) => {
+    if (e === 1 || e === 19 || e === 2) {
+      movementEnemyDownDesc(tank);
+      tank.stopMovement = true;
+    }
+  });
+  if (tank.stopMovement === false) {
+    let newUp = up + tankSpeed;
+    tank.pozition.top = newUp;
+    tank.pozitionMap.top = Math.ceil((up / topBlok) * 4);
+    tank.elDOM.style.top = `${newUp}px`;
+  }
+}
+
+function movementEnemyLeft(tank) {
+  tank.stopMovement = false;
+  let left = tank.pozition.left;
+  pozMapAll(tank, "left");
+  tank.pozitionMapLeft.forEach((e) => {
+    if (e === 1 || e === 19 || e === 2) {
+      movementEnemyLeftDesc(tank);
+      tank.stopMovement = true;
+    }
+  });
+  if (tank.stopMovement === false) {
+    let newLeft = left - tankSpeed;
+    tank.pozition.left = newLeft;
+    tank.pozitionMap.left = Math.floor((left / topBlok) * 4);
+    tank.elDOM.style.left = `${newLeft}px`;
+  }
+}
+
+function movementEnemyRight(tank) {
+  tank.stopMovement = false;
+  let left = tank.pozition.left;
+  pozMapAll(tank, "right");
+  tank.pozitionMapRight.forEach((e) => {
+    if (e === 1 || e === 19 || e === 2) {
+      movementEnemyRightDesc(tank);
+      tank.stopMovement = true;
+    }
+  });
+  if (tank.stopMovement === false) {
     let newLeft = left + tankSpeed;
     tank.pozition.left = newLeft;
     tank.pozitionMap.left = Math.ceil((left / topBlok) * 4);
@@ -237,4 +331,50 @@ function pozMapAll(tank, desc) {
     levelMap[top + 2][left + 4],
     levelMap[top + 3][left + 4],
   ];
+}
+
+function movementEnemyUpDesc(tank) {
+  tank.eventUp = "";
+  const desc = ["down", "left", "right"];
+  const random = getRandomArbitrary(0, desc.length - 1);
+  randomDesc(tank, desc[random]);
+}
+
+function movementEnemyDownDesc(tank) {
+  tank.eventDown = "";
+  const desc = ["up", "left", "right"];
+  const random = getRandomArbitrary(0, desc.length - 1);
+  randomDesc(tank, desc[random]);
+}
+
+function movementEnemyLeftDesc(tank) {
+  tank.eventLeft = "";
+  const desc = ["down", "up", "right"];
+  const random = getRandomArbitrary(0, desc.length - 1);
+  randomDesc(tank, desc[random]);
+}
+function movementEnemyRightDesc(tank) {
+  tank.eventRight = "";
+  const desc = ["down", "up", "left"];
+  const random = getRandomArbitrary(0, desc.length - 1);
+  randomDesc(tank, desc[random]);
+}
+
+function randomDesc(tank, desc) {
+  tank.eventUp = "";
+  tank.eventDown = "";
+  tank.eventLeft = "";
+  tank.eventRight = "";
+  if (desc === "up") {
+    tank.eventUp = desc;
+  }
+  if (desc === "down") {
+    tank.eventDown = desc;
+  }
+  if (desc === "left") {
+    tank.eventLeft = desc;
+  }
+  if (desc === "right") {
+    tank.eventRight = desc;
+  }
 }

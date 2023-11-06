@@ -360,6 +360,10 @@ div .active {
   background: #636363;
 }
 
+.bcgr img {
+  display: none;
+}
+
 .none {
   display: none;
 }

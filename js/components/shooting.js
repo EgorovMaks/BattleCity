@@ -1,12 +1,13 @@
 import { topBlok } from "../data/data.js";
 import {
   levelMap,
+  levelMapIdBloks,
   levelMapMovementDel,
   shotShoting,
   shotShotingDel,
 } from "../data/levels.js";
 import { tankNumAll, tanks } from "../data/tankAll.js";
-import { explosionAnimation, map, missile, missileTrack } from "./elements.js";
+import { explosionAnimation, map, missile } from "./elements.js";
 // import { adjustment } from "./movement.js";
 
 export let shotNumsArr = [];
@@ -195,7 +196,6 @@ function shot(plusTrueFalse, topLeftPoz, desc, tank) {
       tank.arr[1][1][0] === 3 ||
       tank.arr[1][2][0] === 3
     ) {
-      console.log(1);
       alert("Game Over");
     } else if (tank.arr[0][1] || tank.arr[0][2] === 0) {
       shotShoting(tank);
@@ -281,37 +281,46 @@ function deletingBlocks(arr, desc, tank) {
     levelMap[point11.top][point11.left] === 1 ||
     levelMap[point12.top][point12.left] === 1
   ) {
+    delBlock(arr, "10");
     explosionAnimation(point10.top, point10.left, desc, tank);
-    delArrBlock(point11);
-    delArrBlock(point10);
-    delArrBlock(point12);
-    delArrBlock(point13);
-  } else {
+  } else if (
+    levelMap[point01.top][point01.left] === 1 ||
+    levelMap[point02.top][point02.left] === 1
+  ) {
+    delBlock(arr, "01");
     explosionAnimation(point00.top, point00.left, desc, tank);
-    delArrBlock(point01);
-    delArrBlock(point00);
-    delArrBlock(point02);
-    delArrBlock(point03);
   }
-
-  const track = document.querySelectorAll("#missileTrack");
-  track.forEach((e) => {
-    const x = e.getBoundingClientRect().x;
-    const y = e.getBoundingClientRect().y;
-    const delBlock = document.elementFromPoint(x, y);
-    // console.log(delBlock)
-    if (delBlock.classList.contains("block")) {
-      delBlock.remove();
-    }
-  });
 }
 
-function delArrBlock(const1) {
-  if (levelMap[const1.top][const1.left] === 1) {
-    missileTrack(const1.top, const1.left);
-    if ((levelMap[const1.top][const1.left] = 1)) {
-      levelMap[const1.top][const1.left] = 0;
-    }
+function delBlock(arr, code) {
+  const point01 = arr[0][1][1];
+  const point02 = arr[0][2][1];
+  const point00 = arr[0][0][1];
+  const point03 = arr[0][3][1];
+  const point11 = arr[1][1][1];
+  const point12 = arr[1][2][1];
+  const point10 = arr[1][0][1];
+  const point13 = arr[1][3][1];
+  if (code === "10") {
+    const arrBlock = [point11, point12, point10, point13];
+    arrBlock.forEach((e) => {
+      if (levelMap[e.top][e.left] === 1) {
+        levelMap[e.top][e.left] = 0;
+        const id = levelMapIdBloks[e.top][e.left];
+        document.querySelector(`#${id}`).remove();
+        levelMapIdBloks[e.top][e.left] = 0;
+      }
+    });
+  } else if (code === "01") {
+    const arrBlock = [point01, point02, point00, point03];
+    arrBlock.forEach((e) => {
+      if (levelMap[e.top][e.left] === 1) {
+        levelMap[e.top][e.left] = 0;
+        const id = levelMapIdBloks[e.top][e.left];
+        document.querySelector(`#${id}`).remove();
+        levelMapIdBloks[e.top][e.left] = 0;
+      }
+    });
   }
 }
 

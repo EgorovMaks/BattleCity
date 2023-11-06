@@ -31,10 +31,7 @@ export function createTank1User() {
     e["eventLeftPermission"] = true;
     e["eventRightPermission"] = true;
     e["stop"] = false;
-    e["pozitionTop"] = false;
-    e["pozitionDown"] = false;
-    e["pozitionLeft"] = false;
-    e["pozitionRight"] = false;
+    e["stopMovement"] = false;
     e["arr"] = [];
     e["life"] = true;
     e["shootingDirectionDesc"] = "";
@@ -54,7 +51,7 @@ export function createTank1User() {
     e["pozDesc"] = "";
     e["startGame"] = true;
     e["controlPress"]=false
-    // console.log(e);
+    // console.log(tankNumAllEnemies);
   });
 }
 

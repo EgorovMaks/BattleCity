@@ -1,5 +1,5 @@
 import { getRandomArbitrary } from "../data/data.js";
-import { levelMap } from "../data/levels.js";
+import { levelMap, levelMapIdBloks } from "../data/levels.js";
 import { tankNumAll, tanks } from "../data/tankAll.js";
 import { id } from "./elements.js";
 import { tank1 } from "./game.js";
@@ -143,12 +143,14 @@ export function eventStart(params) {
       reassignment(true, tanks[0]);
       tanks[0].eventRight = "right";
     } else if (e.code === "KeyP") {
-      console.log(levelMap);
+      console.log(levelMapIdBloks);
     } else if (e.code === "Space") {
-      document.querySelectorAll("#missileTrack").forEach((e) => e.remove());
+      // document.querySelectorAll("#missileTrack").forEach((e) => e.remove());
       // console.log(tanks[0].stop);
       // tanks.forEach((e) => (e.stop ? null : shooting(e)));
-      tanks[0].stop ? null : shooting(tanks[0]);
+      // console.log(1)
+      shooting(tanks[0]);
+      // tanks[0].stop ? null : shooting(tanks[0]);
     }
   });
 
@@ -177,10 +179,10 @@ export function eventStart(params) {
   });
 }
 
-export function enemyMovement(tank) {
-  const desc = ["up", "down", "left", "right"];
-  enemyMovementTankAll(desc, tank);
-}
+// export function enemyMovement(tank) {
+//   const desc = ["up", "down", "left", "right"];
+//   enemyMovementTankAll(desc, tank);
+// }
 
 function enemyMovementTankAll(desc, tank) {
   tanks.forEach((e, k) => {
@@ -207,38 +209,38 @@ function enemyMovementTankAll(desc, tank) {
   });
 }
 
-export function enemyMovementTank(tank) {
-  const desc = ["up", "down", "left", "right"];
-  if (tank.id !== "#tank1User") {
-    const random = getRandomArbitrary(0, desc.length - 1);
-    if (desc[random] === "up") {
-      tank.shootingDirection = "up";
-      tank.eventUp = "";
-      tank.eventDown = "";
-      tank.eventLeft = "";
-      tank.eventRight = "";
-      tank.eventUp = "up";
-    } else if (desc[random] === "down") {
-      tank.shootingDirection = "down";
-      tank.eventUp = "";
-      tank.eventDown = "";
-      tank.eventLeft = "";
-      tank.eventRight = "";
-      tank.eventDown = "down";
-    } else if (desc[random] === "left") {
-      tank.shootingDirection = "left";
-      tank.eventUp = "";
-      tank.eventDown = "";
-      tank.eventLeft = "";
-      tank.eventRight = "";
-      tank.eventLeft = "left";
-    } else if (desc[random] === "right") {
-      tank.shootingDirection = "right";
-      tank.eventUp = "";
-      tank.eventDown = "";
-      tank.eventLeft = "";
-      tank.eventRight = "";
-      tank.eventRight = "right";
-    }
-  }
-}
+// export function enemyMovementTank(tank) {
+//   const desc = ["up", "down", "left", "right"];
+//   if (tank.id !== "#tank1User") {
+//     const random = getRandomArbitrary(0, desc.length - 1);
+//     if (desc[random] === "up") {
+//       tank.shootingDirection = "up";
+//       tank.eventUp = "";
+//       tank.eventDown = "";
+//       tank.eventLeft = "";
+//       tank.eventRight = "";
+//       tank.eventUp = "up";
+//     } else if (desc[random] === "down") {
+//       tank.shootingDirection = "down";
+//       tank.eventUp = "";
+//       tank.eventDown = "";
+//       tank.eventLeft = "";
+//       tank.eventRight = "";
+//       tank.eventDown = "down";
+//     } else if (desc[random] === "left") {
+//       tank.shootingDirection = "left";
+//       tank.eventUp = "";
+//       tank.eventDown = "";
+//       tank.eventLeft = "";
+//       tank.eventRight = "";
+//       tank.eventLeft = "left";
+//     } else if (desc[random] === "right") {
+//       tank.shootingDirection = "right";
+//       tank.eventUp = "";
+//       tank.eventDown = "";
+//       tank.eventLeft = "";
+//       tank.eventRight = "";
+//       tank.eventRight = "right";
+//     }
+//   }
+// }

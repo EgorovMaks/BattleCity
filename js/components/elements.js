@@ -1,6 +1,7 @@
 import { randomNumber, topBlok } from "../data/data.js";
 import { heightMap } from "../data/data.js";
-import { enemyMovement } from "./events.js";
+import { levelMapIdBloks } from "../data/levels.js";
+// import { enemyMovement } from "./events.js";
 
 export const map = document.querySelector("#BattleCity");
 map.style.cssText = `width: ${topBlok * 15}px; height: ${topBlok * 15}px`;
@@ -111,7 +112,7 @@ export async function createTankAnim(top, left, tank) {
     }, num * 11);
     setTimeout(function () {
       anim[3].classList.remove("activeAnim");
-      enemyMovement();
+      // enemyMovement();
       tank.classList.remove("none");
     }, num * 12);
   }, 500);
@@ -131,21 +132,34 @@ export function createBlocks(
   div.classList.add(`box${element}`);
   div.style.cssText = `width: ${topBlok}px; height: ${topBlok}px; top:${topPozBox}px; left:${leftPozBox}px`;
   const newDiv = canvas.appendChild(div);
-  div.id = `${randomNumber()}`;
+  div.id = `a${randomNumber()}a`;
   array.forEach((el, key) => {
     el.forEach((e, k) => {
       if (e === 1) {
+        const id = `id${randomNumber()}id`;
         let topPoz = key * height;
         let leftPoz = k * width;
-        div.innerHTML += `<div id=${randomNumber()} class="block ${className}" style=" left:${leftPoz}px; top:${topPoz}px; width:${width}px; height:${height}px">
+        div.innerHTML += `<div id=${id} class="test block ${className}" style=" left:${leftPoz}px; top:${topPoz}px; width:${width}px; height:${height}px">
         <img src=${url} alt="img" class="active style="width: 100%; height:  100%;">
         </div>`;
+        if (className === "shooting") {
+          const x = ((topPozBox + topPoz) / topBlok) * 4;
+          const y = ((leftPozBox + leftPoz) / topBlok) * 4;
+          levelMapIdBloks[x][y] = id;
+        }
       } else if (e === 2) {
+        const id = `id${randomNumber()}id`;
         let topPoz = key * height;
         let leftPoz = k * width;
-        div.innerHTML += `<div id=${randomNumber()} class="block ${className}" style=" left:${leftPoz}px; top:${topPoz}px; width:${width}px; height:${height}px">
+
+        div.innerHTML += `<div id=${id} class="block ${className}" style=" left:${leftPoz}px; top:${topPoz}px; width:${width}px; height:${height}px">
         <img src=${url2} alt="img" class="active style="width: 100%; height:  100%;">
         </div>`;
+        if (className === "shooting") {
+          const x = ((topPozBox + topPoz) / topBlok) * 4;
+          const y = ((leftPozBox + leftPoz) / topBlok) * 4;
+          levelMapIdBloks[x][y] = id;
+        }
       }
     });
   });
@@ -188,19 +202,6 @@ export function missile(canvas, poz, tank) {
   const newDiv = canvas.appendChild(tank.shot.shotElDOM);
 }
 export let divId = "";
-
-export function missileTrack(x, y) {
-  const div = document.createElement("div");
-  div.id = "missileTrack";
-  div.style.cssText = `width: 1px; height: 1px; top: ${
-    x * (topBlok / 4)
-  }px; left: ${y * (topBlok / 4)}px`;
-  let newDiv = map.appendChild(div);
-  divId = document.elementFromPoint(
-    div.getBoundingClientRect().x,
-    div.getBoundingClientRect().y
-  );
-}
 
 export function id(i) {
   return document.querySelector(i);
