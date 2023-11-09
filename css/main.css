@@ -72,6 +72,7 @@ h2 {
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
+
 .missileRight {
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
@@ -230,36 +231,21 @@ div .active {
   height: 100%;
 }
 
-.track1 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 1px;
-  height: 1px;
+.shootUp {
+  transform: translate(80%, 100%);
 }
 
-.track2 {
-  position: absolute;
-  top: 0;
-  left: 100%;
-  width: 1px;
-  height: 1px;
+.shootDown {
+
+  transform: translateX(80%);
 }
 
-.track3 {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 1px;
-  height: 1px;
+.shootLeft {
+  transform: translate(80%, 100%);
 }
 
-.track4 {
-  position: absolute;
-  top: 100%;
-  left: 100%;
-  width: 1px;
-  height: 1px;
+.shootRight {
+  transform: translateY(80%);
 }
 
 .trackTank {

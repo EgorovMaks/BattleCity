@@ -165,41 +165,34 @@ export function createBlocks(
   });
 }
 
-export function missile(canvas, poz, tank) {
+export function missile(tank, missileDate) {
   const div = document.createElement("div");
-  let y = (tank.pozitionMap.top * topBlok) / 4;
-  let x = (tank.pozitionMap.left * topBlok) / 4;
-  const width = topBlok / 5.3;
-  const height = topBlok / 4;
-  div.classList.add(`missile${tank.randomNum + 100}`, `missile`);
-  div.id = `missile${tank.randomNum}`;
-  if (poz === "up") {
-    y = ((tank.pozitionMap.top - 0) * topBlok) / 4;
-    x = ((tank.pozitionMap.left + 2) * topBlok) / 4;
-    div.style.cssText = `width: ${width}px; height: ${height}px; top: ${y}px; left: ${x}px;`;
-    div.classList.add("missileUp");
-  } else if (poz === "down") {
-    y = ((tank.pozitionMap.top + 4) * topBlok) / 4;
-    x = ((tank.pozitionMap.left + 2) * topBlok) / 4;
-    div.style.cssText = `width: ${width}px; height: ${height}px; top: ${y}px; left: ${x}px;`;
-    div.classList.add("missileDown");
-  } else if (poz === "left") {
-    y = ((tank.pozitionMap.top + 2) * topBlok) / 4;
-    x = (tank.pozitionMap.left * topBlok) / 4;
-    div.style.cssText = `width: ${height}px; height: ${width}px; top: ${y}px; left: ${x}px; transform: `;
-    div.classList.add("missileLeft");
-  } else if (poz === "right") {
-    y = ((tank.pozitionMap.top + 2) * topBlok) / 4;
-    x = ((tank.pozitionMap.left + 4) * topBlok) / 4;
-    div.style.cssText = `width: ${height}px; height: ${width}px; top: ${y}px; left: ${x}px;`;
-    div.classList.add("missileRight");
+  div.id = `${missileDate.idShoot}`;
+  const widthHeight = topBlok / 5.3333;
+  const heightWidth = topBlok / 4;
+  const top = (missileDate.pozTop * topBlok) / 4;
+  const left = (missileDate.pozLeft * topBlok) / 4;
+  if (missileDate.desc === "up") {
+    div.style.cssText = `width: ${widthHeight}px; height: ${heightWidth}px; top: ${top}px; left: ${left}px;`;
+    div.classList.add("shootUp");
+    div.innerHTML = `<img src= "./img/shot/shootUp.png" alt="img" class="active"  style="width: 100%; height:  100%;">`;
   }
-  tank.shot["shotElDOM"] = div;
-  tank.shot["num"] = tank.randomNum + 100;
-  tank.shot["id"] = `missile${tank.randomNum}`;
-  tank.shot["pozition"] = [div.style.top, div.style.left];
-  tank.shot["pozitionMap"] = [(y / topBlok) * 4, (x / topBlok) * 4];
-  const newDiv = canvas.appendChild(tank.shot.shotElDOM);
+  if (missileDate.desc === "down") {
+    div.style.cssText = `width: ${widthHeight}px; height: ${heightWidth}px; top: ${top}px; left: ${left}px;`;
+    div.classList.add("shootDown");
+    div.innerHTML = `<img src= "./img/shot/shootDown.png" alt="img" class="active"  style="width: 100%; height:  100%;">`;
+  }
+  if (missileDate.desc === "left") {
+    div.style.cssText = `width: ${heightWidth}px; height: ${widthHeight}px; top: ${top}px; left: ${left}px;`;
+    div.classList.add("shootLeft");
+    div.innerHTML = `<img src= "./img/shot/shootLeft.png" alt="img" class="active"  style="width: 100%; height:  100%;">`;
+  }
+  if (missileDate.desc === "right") {
+    div.style.cssText = `width: ${heightWidth}px; height: ${widthHeight}px; top: ${top}px; left: ${left}px;`;
+    div.classList.add("shootRight");
+    div.innerHTML = `<img src= "./img/shot/shootRight.png" alt="img" class="active"  style="width: 100%; height:  100%;">`;
+  }
+  map.appendChild(div);
 }
 export let divId = "";
 
@@ -207,7 +200,7 @@ export function id(i) {
   return document.querySelector(i);
 }
 
-export function explosionAnimation(top, left, desc, tank) {
+export function explosionAnimation([top, left], desc) {
   let topPOz = top * (topBlok / 4);
   let leftPoz = left * (topBlok / 4);
   const div = document.createElement("div");
@@ -239,7 +232,7 @@ export function explosionAnimation(top, left, desc, tank) {
     div.remove();
   }, 200);
   setTimeout(() => {
-    tank.stop = false;
+    // tank.stop = false;
   }, 500);
 }
 

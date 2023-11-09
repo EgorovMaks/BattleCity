@@ -149,8 +149,8 @@ export function eventStart(params) {
       // console.log(tanks[0].stop);
       // tanks.forEach((e) => (e.stop ? null : shooting(e)));
       // console.log(1)
-      shooting(tanks[0]);
-      // tanks[0].stop ? null : shooting(tanks[0]);
+      // shooting(tanks[0]);
+      tanks[0].stop ? null : shooting(tanks[0]);
     }
   });
 

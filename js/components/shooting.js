@@ -1,11 +1,5 @@
-import { topBlok } from "../data/data.js";
-import {
-  levelMap,
-  levelMapIdBloks,
-  levelMapMovementDel,
-  shotShoting,
-  shotShotingDel,
-} from "../data/levels.js";
+import { missileAll, randomNumber, tankSpeed, topBlok } from "../data/data.js";
+import { blocks, levelMap, levelMapIdBloks } from "../data/levels.js";
 import { tankNumAll, tanks } from "../data/tankAll.js";
 import { explosionAnimation, map, missile } from "./elements.js";
 // import { adjustment } from "./movement.js";
@@ -17,336 +11,227 @@ export function shooting(tank) {
     tank.shootingDirectionDesc = tank.shootingDirection;
     shotNumsArr.push(tank.randomNum + 100);
     if (tank.shootingDirectionDesc === "up") {
-      shotDescription(tank.shootingDirectionDesc, tank);
+      shoot(tank, "up");
     } else if (tank.shootingDirectionDesc === "down") {
-      shotDescription(tank.shootingDirectionDesc, tank);
+      shoot(tank, "down");
     } else if (tank.shootingDirectionDesc === "left") {
-      shotDescription(tank.shootingDirectionDesc, tank);
+      shoot(tank, "left");
     } else if (tank.shootingDirectionDesc === "right") {
-      shotDescription(tank.shootingDirectionDesc, tank);
+      shoot(tank, "right");
     }
   }
 }
 
-export function shotFlight(tank) {
-  if (tank.pozitionTop === true) {
-    shotIntersection(tank);
-  } else if (tank.pozitionDown === true) {
-    shotIntersection(tank);
-  } else if (tank.pozitionLeft === true) {
-    shotIntersection(tank);
-  } else if (tank.pozitionRight === true) {
-    shotIntersection(tank);
-  } else if (tank.stop === false) {
-    setTimeout(() => {
-      // shooting(tank);
-    }, 500);
-  }
-}
-
-function shotDescription(shootingDirection, tank) {
-  if (shootingDirection === "up" && tank.stop === false) {
-    tank.stop = true;
-    missile(map, shootingDirection, tank);
-    tank.pozitionTop = true;
-  } else if (shootingDirection === "down" && tank.stop === false) {
-    tank.stop = true;
-    missile(map, shootingDirection, tank);
-    tank.pozitionDown = true;
-  } else if (shootingDirection === "left" && tank.stop === false) {
-    tank.stop = true;
-    missile(map, shootingDirection, tank);
-    tank.pozitionLeft = true;
-  } else if (shootingDirection === "right" && tank.stop === false) {
-    tank.stop = true;
-    missile(map, shootingDirection, tank);
-    tank.pozitionRight = true;
-  }
-}
-
-function shotIntersection(tank) {
-  if (tank.pozitionTop === true) {
-    shot(true, true, tank.shootingDirectionDesc, tank);
-  } else if (tank.pozitionDown === true) {
-    shot(false, true, tank.shootingDirectionDesc, tank);
-  } else if (tank.pozitionLeft === true) {
-    shot(true, false, tank.shootingDirectionDesc, tank);
-  } else if (tank.pozitionRight === true) {
-    shot(false, false, tank.shootingDirectionDesc, tank);
-  }
-}
-
-function shot(plusTrueFalse, topLeftPoz, desc, tank) {
-  if (missile !== null) {
-    let missilePozTop = parseFloat(tank.shot.pozition[0]);
-    let missilePozLeft = parseFloat(tank.shot.pozition[1]);
-
-    let missilePozNew = topLeftPoz
-      ? plusTrueFalse
-        ? missilePozTop - topBlok / 2
-        : missilePozTop + topBlok / 2
-      : plusTrueFalse
-      ? missilePozLeft - topBlok / 2
-      : missilePozLeft + topBlok / 2;
-    arrey(desc, tank.shot.pozitionMap, tank);
-    if (tank.id === "#tank1User") {
-    }
-
-    shotNumsArr.forEach((e) => {
-      if (
-        tank.arr[0][1][0] === e ||
-        tank.arr[0][2][0] === e ||
-        tank.arr[1][1][0] === e ||
-        tank.arr[1][2][0] === e
-      ) {
-        const b = document.querySelector(`.missile${tank.randomNum + 100}`);
-        if (e !== tank.randomNum + 100) {
-          const a = document.querySelector(`.missile${e}`);
-          if (a !== null || b !== null) {
-            a.remove();
-            b.remove();
-            explosionAnimation(
-              tank.shot.pozitionMap[1],
-              1,
-              tank.shootingDirectionDesc,
-              tank
-            );
-            tanks.forEach((el) => {
-              if (el.randomNum === e - 100 || el.randomNum === tank.randomNum) {
-                delArrShot(el.randomNum + 100);
-                el.stop = false;
-                el.pozitionTop = false;
-                el.pozitionDown = false;
-                el.pozitionLeft = false;
-                el.pozitionRight = false;
-              }
-            });
-          }
-        }
-      }
-    });
-    tankNumAll.forEach((e) => {
-      if (
-        tank.arr[0][1][0] === e ||
-        tank.arr[0][2][0] === e ||
-        tank.arr[1][1][0] === e ||
-        tank.arr[1][2][0] === e
-      ) {
-        if (e !== tank.randomNum) {
-          delTank(tank, e);
-        }
-      }
-    });
-
-    if (
-      tank.arr[0][1][0] === 2 ||
-      tank.arr[0][2][0] === 2 ||
-      tank.arr[1][1][0] === 2 ||
-      tank.arr[1][2][0] === 2
-    ) {
-      tank.shot.shotElDOM.remove();
-      delArrShot(tank.randomNum + 100);
-      tank.shot = [];
-      tank.stop = false;
-      tank.pozitionTop = false;
-      tank.pozitionDown = false;
-      tank.pozitionLeft = false;
-      tank.pozitionRight = false;
-    } else if (
-      tank.arr[0][1][0] === 1 ||
-      tank.arr[0][2][0] === 1 ||
-      tank.arr[1][1][0] === 1 ||
-      tank.arr[1][2][0] === 1
-    ) {
-      deletingBlocks(tank.arr, desc, tank);
-      delArrShot(tank.randomNum + 100);
-      tank.shot.shotElDOM.remove();
-      tank.shot = [];
-      tank.pozitionTop = false;
-      tank.pozitionDown = false;
-      tank.pozitionLeft = false;
-      tank.pozitionRight = false;
-    } else if (
-      tank.arr[0][1][0] === 19 ||
-      tank.arr[0][2][0] === 19 ||
-      tank.arr[1][1][0] === 19 ||
-      tank.arr[1][2][0] === 19
-    ) {
-      let pozTop = tank.shot.pozitionMap[1];
-      let pozLeft = tank.shot.pozitionMap[0];
-      if (tank.shootingDirectionDesc === "left") {
-        explosionAnimation(pozLeft - 2, 1, tank.shootingDirectionDesc, tank);
-      } else if (tank.shootingDirectionDesc === "right") {
-        explosionAnimation(pozLeft - 2, 58, tank.shootingDirectionDesc, tank);
-      } else if (tank.shootingDirectionDesc === "up") {
-        explosionAnimation(1, pozTop - 2, tank.shootingDirectionDesc, tank);
-      } else if (tank.shootingDirectionDesc === "down") {
-        explosionAnimation(58, pozTop - 2, tank.shootingDirectionDesc, tank);
-      }
-      tank.shot.shotElDOM.remove();
-      delArrShot(tank.randomNum + 100);
-      tank.shot = [];
-      tank.pozitionTop = false;
-      tank.pozitionDown = false;
-      tank.pozitionLeft = false;
-      tank.pozitionRight = false;
-    } else if (
-      tank.arr[0][1][0] === 3 ||
-      tank.arr[0][2][0] === 3 ||
-      tank.arr[1][1][0] === 3 ||
-      tank.arr[1][2][0] === 3
-    ) {
-      alert("Game Over");
-    } else if (tank.arr[0][1] || tank.arr[0][2] === 0) {
-      shotShoting(tank);
-      topLeftPoz
-        ? (tank.shot.pozition[0] = `${missilePozNew}px`)
-        : (tank.shot.pozition[1] = `${missilePozNew}px`);
-      topLeftPoz
-        ? (tank.shot.shotElDOM.style.top = `${missilePozNew}px`)
-        : (tank.shot.shotElDOM.style.left = `${missilePozNew}px`);
-    }
-  }
-}
-
-function arrey(desc, [topPozAd, topLeftAd], tank) {
-  const topPoz = Math.round(topPozAd);
-  const topLeft = Math.round(topLeftAd);
-  const numsArr = [0, 1, 2, 3, 4];
+function shoot(tank, desc) {
+  tank.stop = true;
+  const random = `id${randomNumber()}`;
+  let missileDate = {};
   if (desc === "up") {
-    tank.shot.pozitionMap[0] = Math.round(tank.shot.pozitionMap[0] - 2);
-    const nums = [-2, -1, 0, 1];
-    const num = [0, 1, 2, 3, -1];
-    tank.arr = [[], [], [], [], [], [], [], []];
-    numsArr.forEach((el, k) => {
-      nums.forEach((e) =>
-        tank.arr[el].push([
-          levelMap[topPoz + num[k]][topLeft + e],
-          { top: topPoz + num[k], left: topLeft + e },
-        ])
-      );
-    });
-  } else if (desc === "down") {
-    tank.shot.pozitionMap[0] = Math.round(tank.shot.pozitionMap[0] + 2);
-    const nums = [-2, -1, 0, 1];
-    const num = [0, -1, -2, -3, 1];
-    tank.arr = [[], [], [], [], [], [], [], []];
-    numsArr.forEach((el, k) => {
-      nums.forEach((e) =>
-        tank.arr[el].push([
-          levelMap[topPoz + num[k]][topLeft + e],
-          { top: topPoz + num[k], left: topLeft + e },
-        ])
-      );
-    });
-  } else if (desc === "left") {
-    tank.shot.pozitionMap[1] = Math.round(tank.shot.pozitionMap[1] - 2);
-    const nums = [-2, -1, 0, 1];
-    const num = [0, 1, 2, 3, -1];
-    tank.arr = [[], [], [], [], [], [], [], []];
-    numsArr.forEach((el, k) => {
-      nums.forEach((e) =>
-        tank.arr[el].push([
-          levelMap[topPoz + e][topLeft + num[k]],
-          { top: topPoz + e, left: topLeft + num[k] },
-        ])
-      );
-    });
-  } else if (desc === "right") {
-    tank.shot.pozitionMap[1] = Math.round(tank.shot.pozitionMap[1] + 2);
-    const nums = [-2, -1, 0, 1];
-    const num = [1, 0, -1, -2, 2];
-    tank.arr = [[], [], [], [], [], [], [], []];
-    numsArr.forEach((el, k) => {
-      nums.forEach((e) =>
-        tank.arr[el].push([
-          levelMap[topPoz + e][topLeft + num[k]],
-          { top: topPoz + e, left: topLeft + num[k] },
-        ])
-      );
-    });
+    missileDate = {
+      desc: "up",
+      pozTop: tank.pozitionMap.top - 1,
+      pozTop2: tank.pozitionMap.top - 2,
+      pozLeft: tank.pozitionMap.left + 1,
+      pozLeft2: tank.pozitionMap.left + 2,
+      idShoot: random,
+      idTank: tank.id,
+      controlDesc: true,
+      conflict: [],
+    };
   }
+  if (desc === "down") {
+    missileDate = {
+      desc: "down",
+      pozTop: tank.pozitionMap.top + 4,
+      pozTop2: tank.pozitionMap.top + 5,
+      pozLeft: tank.pozitionMap.left + 1,
+      pozLeft2: tank.pozitionMap.left + 2,
+      idShoot: random,
+      idTank: tank.id,
+      controlDesc: true,
+      conflict: [],
+    };
+  }
+  if (desc === "left") {
+    missileDate = {
+      desc: "left",
+      pozTop: tank.pozitionMap.top + 1,
+      pozTop2: tank.pozitionMap.top + 2,
+      pozLeft: tank.pozitionMap.left - 1,
+      pozLeft2: tank.pozitionMap.left - 2,
+      idShoot: random,
+      idTank: tank.id,
+      controlDesc: true,
+      conflict: [],
+    };
+  }
+  if (desc === "right") {
+    missileDate = {
+      desc: "right",
+      pozTop: tank.pozitionMap.top + 1,
+      pozTop2: tank.pozitionMap.top + 2,
+      pozLeft: tank.pozitionMap.left + 4,
+      pozLeft2: tank.pozitionMap.left + 5,
+      idShoot: random,
+      idTank: tank.id,
+      controlDesc: true,
+      conflict: [],
+    };
+  }
+  missile(tank, missileDate);
+  missileDate["elDom"] = document.querySelector(`#${missileDate.idShoot}`);
+  missileAll.push(missileDate);
 }
 
-function deletingBlocks(arr, desc, tank) {
-  const point01 = arr[0][1][1];
-  const point02 = arr[0][2][1];
-  const point00 = arr[0][0][1];
-  const point03 = arr[0][3][1];
-  const point11 = arr[1][1][1];
-  const point12 = arr[1][2][1];
-  const point10 = arr[1][0][1];
-  const point13 = arr[1][3][1];
-  if (
-    levelMap[point11.top][point11.left] === 1 ||
-    levelMap[point12.top][point12.left] === 1
-  ) {
-    delBlock(arr, "10");
-    explosionAnimation(point10.top, point10.left, desc, tank);
-  } else if (
-    levelMap[point01.top][point01.left] === 1 ||
-    levelMap[point02.top][point02.left] === 1
-  ) {
-    delBlock(arr, "01");
-    explosionAnimation(point00.top, point00.left, desc, tank);
-  }
-}
-
-function delBlock(arr, code) {
-  const point01 = arr[0][1][1];
-  const point02 = arr[0][2][1];
-  const point00 = arr[0][0][1];
-  const point03 = arr[0][3][1];
-  const point11 = arr[1][1][1];
-  const point12 = arr[1][2][1];
-  const point10 = arr[1][0][1];
-  const point13 = arr[1][3][1];
-  if (code === "10") {
-    const arrBlock = [point11, point12, point10, point13];
-    arrBlock.forEach((e) => {
-      if (levelMap[e.top][e.left] === 1) {
-        levelMap[e.top][e.left] = 0;
-        const id = levelMapIdBloks[e.top][e.left];
-        document.querySelector(`#${id}`).remove();
-        levelMapIdBloks[e.top][e.left] = 0;
+export function shootFlight() {
+  missileAll.forEach((e, k, arr) => {
+    const id = e.idShoot;
+    const section10 = levelMap[e.pozTop][e.pozLeft];
+    const section11 = levelMap[e.pozTop][e.pozLeft2];
+    const section20 = levelMap[e.pozTop2][e.pozLeft];
+    const section21 = levelMap[e.pozTop2][e.pozLeft2];
+    const sectionAll = [section10, section11, section20, section21];
+    let el = e.elDom.style;
+    let top = parseFloat(el.top);
+    let left = parseFloat(el.left);
+    if (
+      sectionAll[0] === 1 ||
+      sectionAll[1] === 1 ||
+      sectionAll[2] === 1 ||
+      sectionAll[3] === 1
+    ) {
+      e.controlDesc = false;
+      map1(e, [arr, k]);
+    }
+    sectionAll.forEach((el) => {
+      if (el === 19) {
+        map19(e, [arr, k]);
       }
     });
-  } else if (code === "01") {
-    const arrBlock = [point01, point02, point00, point03];
-    arrBlock.forEach((e) => {
-      if (levelMap[e.top][e.left] === 1) {
-        levelMap[e.top][e.left] = 0;
-        const id = levelMapIdBloks[e.top][e.left];
-        document.querySelector(`#${id}`).remove();
-        levelMapIdBloks[e.top][e.left] = 0;
+    if (e.desc === "up") {
+      let topNew = top - topBlok / 2;
+      e.elDom.style.top = `${topNew}px`;
+      if (e.controlDesc === true) {
+        e.pozTop = e.pozTop - 2;
+        e.pozTop2 = e.pozTop2 - 2;
       }
-    });
-  }
-}
-
-function delTank(tank, num) {
-  // console.log(num);
-  tanks.forEach((e) => {
-    if (num === e.randomNum) {
-      if (tank.id === "#tank1User") {
-        e.life = false;
-        levelMapMovementDel(e);
-        e.elDOM.remove();
+    }
+    if (e.desc === "down") {
+      let topNew = top + topBlok / 2;
+      e.elDom.style.top = `${topNew}px`;
+      if (e.controlDesc === true) {
+        e.pozTop = e.pozTop + 2;
+        e.pozTop2 = e.pozTop2 + 2;
       }
-      // e.elDOM.remove();
+    }
+    if (e.desc === "left") {
+      let leftNew = left - topBlok / 2;
+      e.elDom.style.left = `${leftNew}px`;
+      if (e.controlDesc === true) {
+        e.pozLeft = e.pozLeft - 2;
+        e.pozLeft2 = e.pozLeft2 - 2;
+      }
+    }
+    if (e.desc === "right") {
+      let leftNew = left + topBlok / 2;
+      e.elDom.style.left = `${leftNew}px`;
+      if (e.controlDesc === true) {
+        e.pozLeft = e.pozLeft + 2;
+        e.pozLeft2 = e.pozLeft2 + 2;
+      }
     }
   });
 }
 
-function delArrShot(num) {
-  let a = [];
-  shotNumsArr.forEach((e) => {
-    if (e !== num) {
-      a.push(e);
+function map1(e, [arr, k]) {
+  if (e.desc === "up" || e.desc === "down") {
+    if (
+      levelMap[e.pozTop][e.pozLeft] === 1 ||
+      levelMap[e.pozTop][e.pozLeft2] === 1
+    ) {
+    e["pozAnim"] = [e.pozTop, e.pozLeft-1];
+      conflict(e, e.pozTop, e.pozLeft);
+      delBlock(e);
+      removeShotAddArr(e, [arr, k]);
+    } else if (
+      levelMap[e.pozTop2][e.pozLeft] === 1 ||
+      levelMap[e.pozTop2][e.pozLeft2] === 1
+    ) {
+    e["pozAnim"] = [e.pozTop2, e.pozLeft-1];
+      conflict(e, e.pozTop2, e.pozLeft2);
+      delBlock(e);
+      removeShotAddArr(e, [arr, k]);
     }
-  });
-  // console.log(a);
-  shotNumsArr = a;
+  } else if (e.desc === "left" || e.desc === "right") {
+    if (
+      levelMap[e.pozTop][e.pozLeft] === 1 ||
+      levelMap[e.pozTop2][e.pozLeft] === 1
+    ) {
+    e["pozAnim"] = [e.pozTop-1, e.pozLeft];
+      conflict(e, e.pozTop, e.pozLeft);
+      delBlock(e);
+      removeShotAddArr(e, [arr, k]);
+    } else if (
+      levelMap[e.pozTop][e.pozLeft2] === 1 ||
+      levelMap[e.pozTop2][e.pozLeft2] === 1
+    ) {
+    e["pozAnim"] = [e.pozTop-1, e.pozLeft];
+      conflict(e, e.pozTop2, e.pozLeft2);
+      delBlock(e);
+      removeShotAddArr(e, [arr, k]);
+    }
+  }
 }
 
-// elementFromPoint(x, y);
+function map19(e, [arr, k]) {
+  removeShotAddArr(e, [arr, k]);
+}
+
+function removeShotAddArr(e, [arr, k]) {
+  setTimeout(() => {
+    e.elDom.remove();
+  }, 50);
+  setTimeout(() => {
+    tanks.forEach((el) => {
+      if (el.id === e.idTank) {
+        el.stop = false;
+        e.controlDesc = false;
+      }
+    });
+  }, 500);
+  arr.splice(k, 1);
+}
+
+function conflict(e, pozTop, pozLeft) {
+  if (e.desc === "up" || e.desc === "down") {
+    e.conflict = [
+      [pozTop, e.pozLeft - 1],
+      [pozTop, e.pozLeft - 0],
+      [pozTop, e.pozLeft + 1],
+      [pozTop, e.pozLeft + 2],
+    ];
+  }
+  if (e.desc === "right" || e.desc === "left") {
+    e.conflict = [
+      [e.pozTop - 1, pozLeft],
+      [e.pozTop - 0, pozLeft],
+      [e.pozTop + 1, pozLeft],
+      [e.pozTop + 2, pozLeft],
+    ];
+  }
+}
+
+function delBlock(el) {
+  console.log(el);
+  el.conflict.forEach((e) => {
+    if (levelMap[e[0]][e[1]] === 1) {
+      const block = document.querySelector(`#${levelMapIdBloks[e[0]][e[1]]}`);
+      setTimeout(() => {
+        block.remove();
+        levelMap[e[0]][e[1]] = 0;
+        levelMapIdBloks[e[0]][e[1]] = 0;
+        explosionAnimation(el.pozAnim, el.desc);
+      }, 50);
+    }
+  });
+}

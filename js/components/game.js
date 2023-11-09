@@ -6,7 +6,7 @@ import { id } from "./elements.js";
 import { eventStart } from "./events.js";
 import { animation } from "./movement.js";
 import { movement } from "./movement.js";
-import { shooting, shotFlight } from "./shooting.js";
+import { shootFlight, shooting } from "./shooting.js";
 
 export let tank1 = "";
 
@@ -24,7 +24,7 @@ export let loopStart = setInterval(function () {
     setTimeout(() => {
       tanks.forEach((e) => {
         if (e.id !== "#tank1User") {
-          tanks[0].stop ? null : shooting(e);
+          // tanks[0].stop ? null : shooting(e);
           e.eventDown = "down";
         }
       });
@@ -36,7 +36,7 @@ export let loopStart = setInterval(function () {
 async function gameLoop() {
   setInterval(function () {
     tanks.forEach((e) => movement(e));
-    tanks.forEach((e) => shotFlight(e));
+    shootFlight()
   }, 50);
 }
 

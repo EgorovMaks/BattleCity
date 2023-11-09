@@ -1,8 +1,7 @@
 import { map, createElement, createBlocks } from "./elements.js";
 import { id } from "./elements.js";
-import { animation } from "./movement.js";
 import { blocks, level1 } from "../data/levels.js";
-import { randomNumber, topBlok } from "../data/data.js";
+import { randomNumber, stopMovement, topBlok } from "../data/data.js";
 import {
   tankNumAll,
   tankNumAllEnemies,
@@ -19,6 +18,7 @@ export function createTank1User() {
     createElement(e.tank[0], e.tank[1], e.tank[2], e.randomNum);
     e["elDOM"] = id(e.id);
     tankNumAll.push(e.randomNum);
+    stopMovement.push(e.randomNum);
     e.tank[1][2]
       ? (e["shootingDirection"] = "up")
       : (e["shootingDirection"] = "down");
@@ -47,11 +47,9 @@ export function createTank1User() {
     e["pozitionMapDown"] = [];
     e["pozitionMapLeft"] = [];
     e["pozitionMapRight"] = [];
-    e["shot"] = {};
     e["pozDesc"] = "";
     e["startGame"] = true;
-    e["controlPress"]=false
-    // console.log(tankNumAllEnemies);
+    e["controlPress"] = false;
   });
 }
 

@@ -1,6 +1,6 @@
-// import { windowWidth } from "../components/game.js";
+export let stopMovement = [1, 2, 19];
 
-// import { tanks } from "./tankAll.js";
+export let missileAll=[]
 
 export let windowWidth = 16;
 export let heightMap = 0;
@@ -27,7 +27,6 @@ export function getRandomArbitrary(min, max) {
 window();
 
 export let topBlok = Math.floor(windowWidth);
-
 
 export let tankSpeed = topBlok / 8;
 

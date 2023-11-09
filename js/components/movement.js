@@ -1,4 +1,9 @@
-import { getRandomArbitrary, tankSpeed, topBlok } from "../data/data.js";
+import {
+  getRandomArbitrary,
+  stopMovement,
+  tankSpeed,
+  topBlok,
+} from "../data/data.js";
 import { levelMap, levelMapMovement } from "../data/levels.js";
 import { tankNumAllEnemies, tanks } from "../data/tankAll.js";
 import { animationDirection } from "./elements.js";
@@ -165,9 +170,11 @@ function movementUp(tank) {
   let up = tank.pozition.top;
   pozMapAll(tank, "up");
   tank.pozitionMapTop.forEach((e) => {
-    if (e === 1 || e === 19 || e === 2) {
-      tank.stopMovement = true;
-    }
+    stopMovement.forEach((el) => {
+      if (e === el) {
+        tank.stopMovement = true;
+      }
+    });
   });
   if (tank.stopMovement === false) {
     let newUp = up - tankSpeed;
@@ -182,9 +189,11 @@ function movementDown(tank) {
   let up = tank.pozition.top;
   pozMapAll(tank, "down");
   tank.pozitionMapDown.forEach((e) => {
-    if (e === 1 || e === 19 || e === 2) {
-      tank.stopMovement = true;
-    }
+    stopMovement.forEach((el) => {
+      if (e === el) {
+        tank.stopMovement = true;
+      }
+    });
   });
   if (tank.stopMovement === false) {
     let newUp = up + tankSpeed;
@@ -201,9 +210,11 @@ function movementLeft(tank) {
   let left = tank.pozition.left;
   pozMapAll(tank, "left");
   tank.pozitionMapLeft.forEach((e) => {
-    if (e === 1 || e === 19 || e === 2) {
-      tank.stopMovement = true;
-    }
+    stopMovement.forEach((el) => {
+      if (e === el) {
+        tank.stopMovement = true;
+      }
+    });
   });
   if (tank.stopMovement === false) {
     let newLeft = left - tankSpeed;
@@ -218,9 +229,11 @@ function movementRight(tank) {
   let left = tank.pozition.left;
   pozMapAll(tank, "right");
   tank.pozitionMapRight.forEach((e) => {
-    if (e === 1 || e === 19 || e === 2) {
-      tank.stopMovement = true;
-    }
+    stopMovement.forEach((el) => {
+      if (e === el) {
+        tank.stopMovement = true;
+      }
+    });
   });
   if (tank.stopMovement === false) {
     let newLeft = left + tankSpeed;
@@ -235,10 +248,12 @@ function movementEnemyUp(tank) {
   let up = tank.pozition.top;
   pozMapAll(tank, "up");
   tank.pozitionMapTop.forEach((e) => {
-    if (e === 1 || e === 19 || e === 2) {
-      movementEnemyUpDesc(tank);
-      tank.stopMovement = true;
-    }
+    stopMovement.forEach((el) => {
+      if (e === el) {
+        movementEnemyUpDesc(tank);
+        tank.stopMovement = true;
+      }
+    });
   });
   if (tank.stopMovement === false) {
     let newUp = up - tankSpeed;
@@ -253,10 +268,12 @@ function movementEnemyDown(tank) {
   let up = tank.pozition.top;
   pozMapAll(tank, "down");
   tank.pozitionMapDown.forEach((e) => {
-    if (e === 1 || e === 19 || e === 2) {
-      movementEnemyDownDesc(tank);
-      tank.stopMovement = true;
-    }
+    stopMovement.forEach((el) => {
+      if (e === el) {
+        movementEnemyDownDesc(tank);
+        tank.stopMovement = true;
+      }
+    });
   });
   if (tank.stopMovement === false) {
     let newUp = up + tankSpeed;
@@ -271,10 +288,12 @@ function movementEnemyLeft(tank) {
   let left = tank.pozition.left;
   pozMapAll(tank, "left");
   tank.pozitionMapLeft.forEach((e) => {
-    if (e === 1 || e === 19 || e === 2) {
-      movementEnemyLeftDesc(tank);
-      tank.stopMovement = true;
-    }
+    stopMovement.forEach((el) => {
+      if (e === el) {
+        movementEnemyLeftDesc(tank);
+        tank.stopMovement = true;
+      }
+    });
   });
   if (tank.stopMovement === false) {
     let newLeft = left - tankSpeed;
@@ -289,10 +308,12 @@ function movementEnemyRight(tank) {
   let left = tank.pozition.left;
   pozMapAll(tank, "right");
   tank.pozitionMapRight.forEach((e) => {
-    if (e === 1 || e === 19 || e === 2) {
-      movementEnemyRightDesc(tank);
-      tank.stopMovement = true;
-    }
+    stopMovement.forEach((el) => {
+      if (e === el) {
+        movementEnemyRightDesc(tank);
+        tank.stopMovement = true;
+      }
+    });
   });
   if (tank.stopMovement === false) {
     let newLeft = left + tankSpeed;
@@ -342,7 +363,7 @@ function movementEnemyUpDesc(tank) {
 
 function movementEnemyDownDesc(tank) {
   tank.eventDown = "";
-  const desc = ["up", "left", "right"];
+  const desc = ["left", "up", "right"];
   const random = getRandomArbitrary(0, desc.length - 1);
   randomDesc(tank, desc[random]);
 }
