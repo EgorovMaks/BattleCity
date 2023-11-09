@@ -201,6 +201,7 @@ export function id(i) {
 }
 
 export function explosionAnimation([top, left], desc) {
+  console.log(top, left);
   let topPOz = top * (topBlok / 4);
   let leftPoz = left * (topBlok / 4);
   const div = document.createElement("div");
@@ -218,6 +219,9 @@ export function explosionAnimation([top, left], desc) {
   if (desc === "right") {
     div.classList.add("explosionRight");
   }
+  if (desc === "tank") {
+    div.classList.add("explosionTank");
+  }
   div.style.cssText = `width: ${topBlok}px; height: ${topBlok}px; top: ${topPOz}px; left: ${leftPoz}px;`;
 
   div.innerHTML = `<img src= "./img/shot/shot-1.png" alt="img" class="active"  style="width: 100%; height:  100%;">`;
@@ -227,13 +231,30 @@ export function explosionAnimation([top, left], desc) {
   setTimeout(function () {
     div.innerHTML = `<img src= "./img/shot/shot-3.png" alt="img" class="active" style="width: 100%; height:  100%;">`;
   }, 160);
-  let newDiv = map.appendChild(div);
-  setTimeout(function () {
-    div.remove();
-  }, 200);
-  setTimeout(() => {
-    // tank.stop = false;
-  }, 500);
+  if (desc === "tank") {
+    let newDiv = map.appendChild(div);
+    setTimeout(function () {
+      div.style.cssText = `width: ${topBlok * 2}px; height: ${
+        topBlok * 2
+      }px; top: ${topPOz - topBlok / 2}px; left: ${leftPoz - topBlok / 2}px;`;
+      div.innerHTML = `<img src= "./img/shot/shot-4.png" alt="img" class="active" style="width: 100%; height:  100%;">`;
+    }, 200);
+    setTimeout(function () {
+      div.style.cssText = `width: ${topBlok * 2}px; height: ${
+        topBlok * 2
+      }px; top: ${topPOz - topBlok / 2}px; left: ${leftPoz - topBlok / 2}px;`;
+      div.innerHTML = `<img src= "./img/shot/shot-5.png" alt="img" class="active" style="width: 100%; height:  100%;">`;
+    }, 350);
+    setTimeout(function () {
+      div.remove();
+    }, 550);
+  }
+  if (desc !== "tank") {
+    let newDiv = map.appendChild(div);
+    setTimeout(function () {
+      div.remove();
+    }, 200);
+  }
 }
 
 export function animationDirection(globalArray, firstValue, arrayDirection) {

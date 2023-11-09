@@ -1,6 +1,11 @@
 import { missileAll, randomNumber, tankSpeed, topBlok } from "../data/data.js";
-import { blocks, levelMap, levelMapIdBloks } from "../data/levels.js";
-import { tankNumAll, tanks } from "../data/tankAll.js";
+import {
+  blocks,
+  levelMap,
+  levelMapIdBloks,
+  levelMapMovement,
+} from "../data/levels.js";
+import { tankNumAll, tankNumAllEnemies, tanks } from "../data/tankAll.js";
 import { explosionAnimation, map, missile } from "./elements.js";
 // import { adjustment } from "./movement.js";
 
@@ -94,6 +99,17 @@ export function shootFlight() {
     let el = e.elDom.style;
     let top = parseFloat(el.top);
     let left = parseFloat(el.left);
+    tanks.forEach((tank) => {
+      if (
+        sectionAll[0] === tank.randomNum ||
+        sectionAll[1] === tank.randomNum ||
+        sectionAll[2] === tank.randomNum ||
+        sectionAll[3] === tank.randomNum
+      ) {
+        e.controlDesc = false;
+        conflictTank(e, tank, [arr, k]);
+      }
+    });
     if (
       sectionAll[0] === 1 ||
       sectionAll[1] === 1 ||
@@ -149,7 +165,7 @@ function map1(e, [arr, k]) {
       levelMap[e.pozTop][e.pozLeft] === 1 ||
       levelMap[e.pozTop][e.pozLeft2] === 1
     ) {
-    e["pozAnim"] = [e.pozTop, e.pozLeft-1];
+      e["pozAnim"] = [e.pozTop, e.pozLeft - 1];
       conflict(e, e.pozTop, e.pozLeft);
       delBlock(e);
       removeShotAddArr(e, [arr, k]);
@@ -157,7 +173,7 @@ function map1(e, [arr, k]) {
       levelMap[e.pozTop2][e.pozLeft] === 1 ||
       levelMap[e.pozTop2][e.pozLeft2] === 1
     ) {
-    e["pozAnim"] = [e.pozTop2, e.pozLeft-1];
+      e["pozAnim"] = [e.pozTop2, e.pozLeft - 1];
       conflict(e, e.pozTop2, e.pozLeft2);
       delBlock(e);
       removeShotAddArr(e, [arr, k]);
@@ -167,7 +183,7 @@ function map1(e, [arr, k]) {
       levelMap[e.pozTop][e.pozLeft] === 1 ||
       levelMap[e.pozTop2][e.pozLeft] === 1
     ) {
-    e["pozAnim"] = [e.pozTop-1, e.pozLeft];
+      e["pozAnim"] = [e.pozTop - 1, e.pozLeft];
       conflict(e, e.pozTop, e.pozLeft);
       delBlock(e);
       removeShotAddArr(e, [arr, k]);
@@ -175,7 +191,7 @@ function map1(e, [arr, k]) {
       levelMap[e.pozTop][e.pozLeft2] === 1 ||
       levelMap[e.pozTop2][e.pozLeft2] === 1
     ) {
-    e["pozAnim"] = [e.pozTop-1, e.pozLeft];
+      e["pozAnim"] = [e.pozTop - 1, e.pozLeft2];
       conflict(e, e.pozTop2, e.pozLeft2);
       delBlock(e);
       removeShotAddArr(e, [arr, k]);
@@ -184,6 +200,18 @@ function map1(e, [arr, k]) {
 }
 
 function map19(e, [arr, k]) {
+  if (e.desc === "up") {
+    explosionAnimation([1, e.pozLeft - 1], e.desc);
+  }
+  if (e.desc === "down") {
+    explosionAnimation([58, e.pozLeft - 1], e.desc);
+  }
+  if (e.desc === "left") {
+    explosionAnimation([e.pozTop - 1, 1], e.desc);
+  }
+  if (e.desc === "right") {
+    explosionAnimation([e.pozTop - 1, 58], e.desc);
+  }
   removeShotAddArr(e, [arr, k]);
 }
 
@@ -221,8 +249,18 @@ function conflict(e, pozTop, pozLeft) {
   }
 }
 
+function conflictTank(e, tank, [arr, k]) {
+  console.log(tank.elDOM);
+  tank.elDOM.remove();
+  tank.life = false;
+  levelMapMovement(tank);
+  console.log(tank.pozitionMap);
+  explosionAnimation([tank.pozitionMap.top, tank.pozitionMap.left], "tank");
+  removeShotAddArr(e, [arr, k]);
+}
+// levelMapMovement(e, e.pozitionMap.top, e.pozitionMap.left);
+
 function delBlock(el) {
-  console.log(el);
   el.conflict.forEach((e) => {
     if (levelMap[e[0]][e[1]] === 1) {
       const block = document.querySelector(`#${levelMapIdBloks[e[0]][e[1]]}`);

@@ -247,6 +247,9 @@ div .active {
 .shootRight {
   transform: translateY(80%);
 }
+.explosionTank{
+  transition: none;
+}
 
 .trackTank {
   width: 1px;

@@ -177,7 +177,7 @@ export function levelMapConstructor(array) {
     a = [[]];
   });
   levelMap.forEach((e, k) => {
-    levelMapIdBloks.push([])
+    levelMapIdBloks.push([]);
     e.forEach((el, key) => {
       if (el === 19 || el === 0) {
         levelMapIdBloks[k][key] = el;
@@ -186,14 +186,12 @@ export function levelMapConstructor(array) {
       }
     });
   });
-
 }
 setTimeout(() => {
   levelMapConstructor(level1);
 }, 100);
 
 export function levelMapMovement(tank) {
-  // levelMapMovement(e, e.pozitionMap.top, e.pozitionMap.left);
   const top = tank.pozitionMap.top;
   const left = tank.pozitionMap.left;
   if (tank.id === "#tank1User") {
@@ -224,26 +222,28 @@ export function levelMapMovement(tank) {
     })
   );
 
-  numsTankMap.forEach((e) => {
-    if (levelMap[top + e][left + 0] === 0) {
-      levelMap[top + e][left + 0] = tank.randomNum;
-    }
-  });
-  numsTankMap.forEach((e) => {
-    if (levelMap[top + e][left + 1] === 0) {
-      levelMap[top + e][left + 1] = tank.randomNum;
-    }
-  });
-  numsTankMap.forEach((e) => {
-    if (levelMap[top + e][left + 2] === 0) {
-      levelMap[top + e][left + 2] = tank.randomNum;
-    }
-  });
-  numsTankMap.forEach((e) => {
-    if (levelMap[top + e][left + 3] === 0) {
-      levelMap[top + e][left + 3] = tank.randomNum;
-    }
-  });
+  if (tank.life === true) {
+    numsTankMap.forEach((e) => {
+      if (levelMap[top + e][left + 0] === 0) {
+        levelMap[top + e][left + 0] = tank.randomNum;
+      }
+    });
+    numsTankMap.forEach((e) => {
+      if (levelMap[top + e][left + 1] === 0) {
+        levelMap[top + e][left + 1] = tank.randomNum;
+      }
+    });
+    numsTankMap.forEach((e) => {
+      if (levelMap[top + e][left + 2] === 0) {
+        levelMap[top + e][left + 2] = tank.randomNum;
+      }
+    });
+    numsTankMap.forEach((e) => {
+      if (levelMap[top + e][left + 3] === 0) {
+        levelMap[top + e][left + 3] = tank.randomNum;
+      }
+    });
+  }
 }
 
 // export function shotShoting(tank) {
