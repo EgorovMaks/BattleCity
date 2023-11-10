@@ -250,11 +250,9 @@ function conflict(e, pozTop, pozLeft) {
 }
 
 function conflictTank(e, tank, [arr, k]) {
-  console.log(tank.elDOM);
   tank.elDOM.remove();
   tank.life = false;
   levelMapMovement(tank);
-  console.log(tank.pozitionMap);
   explosionAnimation([tank.pozitionMap.top, tank.pozitionMap.left], "tank");
   removeShotAddArr(e, [arr, k]);
 }

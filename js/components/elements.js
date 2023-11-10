@@ -1,6 +1,7 @@
 import { randomNumber, topBlok } from "../data/data.js";
 import { heightMap } from "../data/data.js";
 import { levelMapIdBloks } from "../data/levels.js";
+import { eventStart } from "./events.js";
 // import { enemyMovement } from "./events.js";
 
 export const map = document.querySelector("#BattleCity");
@@ -113,6 +114,7 @@ export async function createTankAnim(top, left, tank) {
     setTimeout(function () {
       anim[3].classList.remove("activeAnim");
       // enemyMovement();
+      eventStart()
       tank.classList.remove("none");
     }, num * 12);
   }, 500);
@@ -201,7 +203,6 @@ export function id(i) {
 }
 
 export function explosionAnimation([top, left], desc) {
-  console.log(top, left);
   let topPOz = top * (topBlok / 4);
   let leftPoz = left * (topBlok / 4);
   const div = document.createElement("div");

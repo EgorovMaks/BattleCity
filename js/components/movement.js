@@ -82,15 +82,19 @@ export function movement(tank) {
       tank.controlPress = true;
     }
     if (tank.eventUp === "up") {
+      tanks[0].shootingDirection = "up";
       movementUp(tank);
     }
     if (tank.eventDown === "down") {
+      tanks[0].shootingDirection = "down";
       movementDown(tank);
     }
     if (tank.eventLeft === "left") {
+      tanks[0].shootingDirection = "left";
       movementLeft(tank);
     }
     if (tank.eventRight === "right") {
+      tanks[0].shootingDirection = "right";
       movementRight(tank);
     }
   }

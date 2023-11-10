@@ -15,7 +15,7 @@ export let loopStart = setInterval(function () {
     tank1 = id("#tank1User");
     gameLoop();
     tanks.forEach((e) => animation(tank1, e));
-    eventStart();
+    // eventStart();
     setTimeout(() => {
       tanks.forEach((e) => {
         levelMapMovement(e);

@@ -127,19 +127,19 @@ function reassignment(e, tank) {
 export function eventStart(params) {
   const keyPress = document.addEventListener("keydown", function (e) {
     if (e.code === "ArrowUp" || e.code === "KeyW") {
-      tanks[0].shootingDirection = "up";
+      // tanks[0].shootingDirection = "up";
       reassignment(true, tanks[0]);
       tanks[0].eventUp = "up";
     } else if (e.code === "ArrowDown" || e.code === "KeyS") {
-      tanks[0].shootingDirection = "down";
+      // tanks[0].shootingDirection = "down";
       reassignment(true, tanks[0]);
       tanks[0].eventDown = "down";
     } else if (e.code === "ArrowLeft" || e.code === "KeyA") {
-      tanks[0].shootingDirection = "left";
+      // tanks[0].shootingDirection = "left";
       reassignment(true, tanks[0]);
       tanks[0].eventLeft = "left";
     } else if (e.code === "ArrowRight" || e.code === "KeyD") {
-      tanks[0].shootingDirection = "right";
+      // tanks[0].shootingDirection = "right";
       reassignment(true, tanks[0]);
       tanks[0].eventRight = "right";
     } else if (e.code === "KeyP") {
