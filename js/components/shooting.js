@@ -31,6 +31,15 @@ function shoot(tank, desc) {
   tank.stop = true;
   const random = `id${randomNumber()}`;
   let missileDate = {};
+  function arrAdd(arr) {
+    arr["tankNum"] = tank.randomNum;
+    arr["idShoot"] = random;
+    arr["idTank"] = tank.id;
+    arr["controlDesc"] = true;
+    arr["conflict"] = [];
+    arr["stop"] = false;
+    tank.enemies ? (arr["enimies"] = true) : (arr["enimies"] = false);
+  }
   if (desc === "up") {
     missileDate = {
       desc: "up",
@@ -38,11 +47,8 @@ function shoot(tank, desc) {
       pozTop2: tank.pozitionMap.top - 2,
       pozLeft: tank.pozitionMap.left + 1,
       pozLeft2: tank.pozitionMap.left + 2,
-      idShoot: random,
-      idTank: tank.id,
-      controlDesc: true,
-      conflict: [],
     };
+    arrAdd(missileDate);
   }
   if (desc === "down") {
     missileDate = {
@@ -51,11 +57,8 @@ function shoot(tank, desc) {
       pozTop2: tank.pozitionMap.top + 5,
       pozLeft: tank.pozitionMap.left + 1,
       pozLeft2: tank.pozitionMap.left + 2,
-      idShoot: random,
-      idTank: tank.id,
-      controlDesc: true,
-      conflict: [],
     };
+    arrAdd(missileDate);
   }
   if (desc === "left") {
     missileDate = {
@@ -64,11 +67,8 @@ function shoot(tank, desc) {
       pozTop2: tank.pozitionMap.top + 2,
       pozLeft: tank.pozitionMap.left - 1,
       pozLeft2: tank.pozitionMap.left - 2,
-      idShoot: random,
-      idTank: tank.id,
-      controlDesc: true,
-      conflict: [],
     };
+    arrAdd(missileDate);
   }
   if (desc === "right") {
     missileDate = {
@@ -77,12 +77,10 @@ function shoot(tank, desc) {
       pozTop2: tank.pozitionMap.top + 2,
       pozLeft: tank.pozitionMap.left + 4,
       pozLeft2: tank.pozitionMap.left + 5,
-      idShoot: random,
-      idTank: tank.id,
-      controlDesc: true,
-      conflict: [],
     };
+    arrAdd(missileDate);
   }
+  // console.log(tank.enemies, missileDate.enimies);
   missile(tank, missileDate);
   missileDate["elDom"] = document.querySelector(`#${missileDate.idShoot}`);
   missileAll.push(missileDate);
@@ -90,70 +88,110 @@ function shoot(tank, desc) {
 
 export function shootFlight() {
   missileAll.forEach((e, k, arr) => {
-    const id = e.idShoot;
-    const section10 = levelMap[e.pozTop][e.pozLeft];
-    const section11 = levelMap[e.pozTop][e.pozLeft2];
-    const section20 = levelMap[e.pozTop2][e.pozLeft];
-    const section21 = levelMap[e.pozTop2][e.pozLeft2];
-    const sectionAll = [section10, section11, section20, section21];
-    let el = e.elDom.style;
-    let top = parseFloat(el.top);
-    let left = parseFloat(el.left);
-    tanks.forEach((tank) => {
+    if (e.stop === false) {
+      const section10 = levelMap[e.pozTop][e.pozLeft];
+      const section11 = levelMap[e.pozTop][e.pozLeft2];
+      const section20 = levelMap[e.pozTop2][e.pozLeft];
+      const section21 = levelMap[e.pozTop2][e.pozLeft2];
+      const sectionAll = [section10, section11, section20, section21];
+      let el = e.elDom.style;
+      let top = parseFloat(el.top);
+      let left = parseFloat(el.left);
+      missileAll.forEach((el2) => {
+        if (e.pozLeft === el2.pozLeft && e.tankNum !== el2.tankNum) {
+          if (
+            e.pozTop === el2.pozTop ||
+            e.pozTop === el2.pozTop - 1 ||
+            e.pozTop - 1 === el2.pozTop
+          ) {
+            e.controlDesc = false;
+            removeShotAddArr(e, [arr]);
+            removeShotAddArr(el2, [arr]);
+          }
+        }
+        if (e.pozTop === el2.pozTop && e.tankNum !== el2.tankNum) {
+          if (
+            e.pozLeft === el2.pozLeft ||
+            e.pozLeft === el2.pozLeft - 1 ||
+            e.pozLeft - 1 === el2.pozLeft
+          ) {
+            e.controlDesc = false;
+            removeShotAddArr(e, [arr]);
+            removeShotAddArr(el2, [arr]);
+          }
+        }
+      });
+      tanks.forEach((tank) => {
+        if (
+          sectionAll[0] === tank.randomNum ||
+          sectionAll[1] === tank.randomNum ||
+          sectionAll[2] === tank.randomNum ||
+          sectionAll[3] === tank.randomNum
+        ) {
+            console.log(e.enimies, tank.enemies);
+          if (e.enimies === tank.enemies) {
+            e.controlDesc = false;
+            removeShotAddArr(e, [arr]);
+          } else if (e.enimies !== tank.enemies) {
+            e.controlDesc = false;
+            conflictTank(e, tank, [arr, k]);
+          }
+        }
+      });
       if (
-        sectionAll[0] === tank.randomNum ||
-        sectionAll[1] === tank.randomNum ||
-        sectionAll[2] === tank.randomNum ||
-        sectionAll[3] === tank.randomNum
+        sectionAll[0] === 1 ||
+        sectionAll[1] === 1 ||
+        sectionAll[2] === 1 ||
+        sectionAll[3] === 1
       ) {
         e.controlDesc = false;
-        conflictTank(e, tank, [arr, k]);
+        map1(e, [arr, k]);
       }
-    });
-    if (
-      sectionAll[0] === 1 ||
-      sectionAll[1] === 1 ||
-      sectionAll[2] === 1 ||
-      sectionAll[3] === 1
-    ) {
-      e.controlDesc = false;
-      map1(e, [arr, k]);
-    }
-    sectionAll.forEach((el) => {
-      if (el === 19) {
-        map19(e, [arr, k]);
+      if (
+        sectionAll[0] === 2 ||
+        sectionAll[1] === 2 ||
+        sectionAll[2] === 2 ||
+        sectionAll[3] === 2
+      ) {
+        e.controlDesc = false;
+        removeShotAddArr(e, [arr]);
       }
-    });
-    if (e.desc === "up") {
-      let topNew = top - topBlok / 2;
-      e.elDom.style.top = `${topNew}px`;
-      if (e.controlDesc === true) {
-        e.pozTop = e.pozTop - 2;
-        e.pozTop2 = e.pozTop2 - 2;
+      sectionAll.forEach((el) => {
+        if (el === 19) {
+          map19(e, [arr, k]);
+        }
+      });
+      if (e.desc === "up") {
+        let topNew = top - topBlok / 2;
+        e.elDom.style.top = `${topNew}px`;
+        if (e.controlDesc === true) {
+          e.pozTop = e.pozTop - 2;
+          e.pozTop2 = e.pozTop2 - 2;
+        }
       }
-    }
-    if (e.desc === "down") {
-      let topNew = top + topBlok / 2;
-      e.elDom.style.top = `${topNew}px`;
-      if (e.controlDesc === true) {
-        e.pozTop = e.pozTop + 2;
-        e.pozTop2 = e.pozTop2 + 2;
+      if (e.desc === "down") {
+        let topNew = top + topBlok / 2;
+        e.elDom.style.top = `${topNew}px`;
+        if (e.controlDesc === true) {
+          e.pozTop = e.pozTop + 2;
+          e.pozTop2 = e.pozTop2 + 2;
+        }
       }
-    }
-    if (e.desc === "left") {
-      let leftNew = left - topBlok / 2;
-      e.elDom.style.left = `${leftNew}px`;
-      if (e.controlDesc === true) {
-        e.pozLeft = e.pozLeft - 2;
-        e.pozLeft2 = e.pozLeft2 - 2;
+      if (e.desc === "left") {
+        let leftNew = left - topBlok / 2;
+        e.elDom.style.left = `${leftNew}px`;
+        if (e.controlDesc === true) {
+          e.pozLeft = e.pozLeft - 2;
+          e.pozLeft2 = e.pozLeft2 - 2;
+        }
       }
-    }
-    if (e.desc === "right") {
-      let leftNew = left + topBlok / 2;
-      e.elDom.style.left = `${leftNew}px`;
-      if (e.controlDesc === true) {
-        e.pozLeft = e.pozLeft + 2;
-        e.pozLeft2 = e.pozLeft2 + 2;
+      if (e.desc === "right") {
+        let leftNew = left + topBlok / 2;
+        e.elDom.style.left = `${leftNew}px`;
+        if (e.controlDesc === true) {
+          e.pozLeft = e.pozLeft + 2;
+          e.pozLeft2 = e.pozLeft2 + 2;
+        }
       }
     }
   });
@@ -168,7 +206,7 @@ function map1(e, [arr, k]) {
       e["pozAnim"] = [e.pozTop, e.pozLeft - 1];
       conflict(e, e.pozTop, e.pozLeft);
       delBlock(e);
-      removeShotAddArr(e, [arr, k]);
+      removeShotAddArr(e, [arr]);
     } else if (
       levelMap[e.pozTop2][e.pozLeft] === 1 ||
       levelMap[e.pozTop2][e.pozLeft2] === 1
@@ -176,7 +214,7 @@ function map1(e, [arr, k]) {
       e["pozAnim"] = [e.pozTop2, e.pozLeft - 1];
       conflict(e, e.pozTop2, e.pozLeft2);
       delBlock(e);
-      removeShotAddArr(e, [arr, k]);
+      removeShotAddArr(e, [arr]);
     }
   } else if (e.desc === "left" || e.desc === "right") {
     if (
@@ -186,7 +224,7 @@ function map1(e, [arr, k]) {
       e["pozAnim"] = [e.pozTop - 1, e.pozLeft];
       conflict(e, e.pozTop, e.pozLeft);
       delBlock(e);
-      removeShotAddArr(e, [arr, k]);
+      removeShotAddArr(e, [arr]);
     } else if (
       levelMap[e.pozTop][e.pozLeft2] === 1 ||
       levelMap[e.pozTop2][e.pozLeft2] === 1
@@ -194,7 +232,7 @@ function map1(e, [arr, k]) {
       e["pozAnim"] = [e.pozTop - 1, e.pozLeft2];
       conflict(e, e.pozTop2, e.pozLeft2);
       delBlock(e);
-      removeShotAddArr(e, [arr, k]);
+      removeShotAddArr(e, [arr]);
     }
   }
 }
@@ -215,7 +253,7 @@ function map19(e, [arr, k]) {
   removeShotAddArr(e, [arr, k]);
 }
 
-function removeShotAddArr(e, [arr, k]) {
+function removeShotAddArr(e, [arr]) {
   setTimeout(() => {
     e.elDom.remove();
   }, 50);
@@ -227,7 +265,19 @@ function removeShotAddArr(e, [arr, k]) {
       }
     });
   }, 500);
-  arr.splice(k, 1);
+  setTimeout(() => {
+    tanks.forEach((el) => {
+      if (el.id === e.idTank && el.id !== "#tank1User") {
+        el.stop ? null : shooting(el);
+      }
+    });
+  }, 1000);
+  e.stop = true;
+  arr.forEach((el, key) => {
+    if (el.stop === true) {
+      arr.splice(key, 1);
+    }
+  });
 }
 
 function conflict(e, pozTop, pozLeft) {

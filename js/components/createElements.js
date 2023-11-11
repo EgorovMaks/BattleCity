@@ -14,6 +14,11 @@ export function createTank1User() {
   tanks.forEach((e, k) => {
     e["id"] = `#${e.tank[0][4]}`;
     e.tank[1][2] ? (e["desc"] = true) : (e["desc"] = false);
+    if(e.id === "#tank1User"){
+      e["enemies"] = false
+    } else if(e.id !== "#tank1User"){
+      e["enemies"] = true
+    };
     e["randomNum"] = randomNumber();
     createElement(e.tank[0], e.tank[1], e.tank[2], e.randomNum);
     e["elDOM"] = id(e.id);

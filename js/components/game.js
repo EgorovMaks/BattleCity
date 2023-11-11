@@ -15,7 +15,6 @@ export let loopStart = setInterval(function () {
     tank1 = id("#tank1User");
     gameLoop();
     tanks.forEach((e) => animation(tank1, e));
-    // eventStart();
     setTimeout(() => {
       tanks.forEach((e) => {
         levelMapMovement(e);
@@ -24,7 +23,7 @@ export let loopStart = setInterval(function () {
     setTimeout(() => {
       tanks.forEach((e) => {
         if (e.id !== "#tank1User") {
-          // tanks[0].stop ? null : shooting(e);
+          tanks[0].stop ? null : shooting(e);
           e.eventDown = "down";
         }
       });
@@ -35,8 +34,10 @@ export let loopStart = setInterval(function () {
 
 async function gameLoop() {
   setInterval(function () {
-    tanks.forEach((e) => movement(e));
-    shootFlight()
+    tanks.forEach((e) => {
+      movement(e);
+    });
+    shootFlight();
   }, 50);
 }
 

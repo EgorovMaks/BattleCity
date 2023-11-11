@@ -82,19 +82,19 @@ export function movement(tank) {
       tank.controlPress = true;
     }
     if (tank.eventUp === "up") {
-      tanks[0].shootingDirection = "up";
+      tank.shootingDirection = "up";
       movementUp(tank);
     }
     if (tank.eventDown === "down") {
-      tanks[0].shootingDirection = "down";
+      tank.shootingDirection = "down";
       movementDown(tank);
     }
     if (tank.eventLeft === "left") {
-      tanks[0].shootingDirection = "left";
+      tank.shootingDirection = "left";
       movementLeft(tank);
     }
     if (tank.eventRight === "right") {
-      tanks[0].shootingDirection = "right";
+      tank.shootingDirection = "right";
       movementRight(tank);
     }
   }
@@ -105,15 +105,19 @@ export function movement(tank) {
       pozMapAll(tank);
     }
     if (tank.eventUp === "up") {
+      tank.shootingDirection = "up";
       movementEnemyUp(tank);
     }
     if (tank.eventDown === "down") {
+      tank.shootingDirection = "down";
       movementEnemyDown(tank);
     }
     if (tank.eventLeft === "left") {
+      tank.shootingDirection = "left";
       movementEnemyLeft(tank);
     }
     if (tank.eventRight === "right") {
+      tank.shootingDirection = "right";
       movementEnemyRight(tank);
     }
   }

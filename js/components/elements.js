@@ -113,8 +113,7 @@ export async function createTankAnim(top, left, tank) {
     }, num * 11);
     setTimeout(function () {
       anim[3].classList.remove("activeAnim");
-      // enemyMovement();
-      eventStart()
+      eventStart();
       tank.classList.remove("none");
     }, num * 12);
   }, 500);
