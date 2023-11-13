@@ -64,8 +64,8 @@ export function createTank1User() {
   });
 }
 
-export function levelLoad() {
-  level1.forEach((element, key) => {
+export function levelLoad(arr) {
+  arr.forEach((element, key) => {
     element.forEach((el, k) => {
       if (el === 1) {
         createBlocks(
@@ -129,6 +129,24 @@ export function levelLoad() {
           [key, k, el],
           ["./img/block/brick(4*4)-1.png", "./img/block/brick(4*4)-2.png"],
           ["shooting"]
+        );
+      } else if (el === 10) {
+        createBlocks(
+          blocks.block10,
+          map,
+          [topBlok / 2, topBlok / 2],
+          [key, k, el],
+          ["./img/block/concrete(8x8).png", "./img/block/concrete(8x8).png"],
+          []
+        );
+      } else if (el === 15) {
+        createBlocks(
+          blocks.block15,
+          map,
+          [topBlok / 2, topBlok / 2],
+          [key, k, el],
+          ["./img/grass/grass.png"],
+          []
         );
       } else if (el === 12) {
         createBlocks(
