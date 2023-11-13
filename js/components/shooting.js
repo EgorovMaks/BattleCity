@@ -128,13 +128,16 @@ export function shootFlight() {
           sectionAll[2] === tank.randomNum ||
           sectionAll[3] === tank.randomNum
         ) {
-            console.log(e.enimies, tank.enemies);
           if (e.enimies === tank.enemies) {
             e.controlDesc = false;
             removeShotAddArr(e, [arr]);
           } else if (e.enimies !== tank.enemies) {
-            e.controlDesc = false;
-            conflictTank(e, tank, [arr, k]);
+            if (tank.invulnerability === true) {
+              removeShotAddArr(e, [arr]);
+            } else {
+              e.controlDesc = false;
+              conflictTank(e, tank, [arr, k]);
+            }
           }
         }
       });
@@ -306,7 +309,6 @@ function conflictTank(e, tank, [arr, k]) {
   explosionAnimation([tank.pozitionMap.top, tank.pozitionMap.left], "tank");
   removeShotAddArr(e, [arr, k]);
 }
-// levelMapMovement(e, e.pozitionMap.top, e.pozitionMap.left);
 
 function delBlock(el) {
   el.conflict.forEach((e) => {

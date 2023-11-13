@@ -1,6 +1,7 @@
 import { randomNumber, topBlok } from "../data/data.js";
 import { heightMap } from "../data/data.js";
 import { levelMapIdBloks } from "../data/levels.js";
+import { tanks } from "../data/tankAll.js";
 import { eventStart } from "./events.js";
 // import { enemyMovement } from "./events.js";
 
@@ -11,17 +12,11 @@ export function createElement(
   [type, canvas, top, left, id, className],
   [width, height, desc],
   [urlUp, urlUp2, urlDown, urlDown2, urlLeft, urlLeft2, urlRight, urlRight2],
-  num
+  [num, invulnerability]
 ) {
   const div = document.createElement("div");
-  createTankAnim(top, left, div);
+  createTankAnim(top, left, div, invulnerability);
   div.style.cssText = `width: ${width}; height: ${height}; top: ${top}; left: ${left}`;
-  // setTimeout(() => {
-  //   levelMapMovement(
-  //     Math.round(parseFloat(top) / (topBlok / 4)),
-  //     Math.round(parseFloat(left) / (topBlok / 4))
-  //   );
-  // }, 100);
   div.id = `${id}`;
   div.classList.add(className, "tank");
   div.classList.add("none");
@@ -52,7 +47,42 @@ tankAnim.innerHTML = `
   <img src= "./img/createTankAnim/img-3.png" alt="img" class="createTankAnim noneAnim" style="width: 100%; height:  100%;">
   <img src= "./img/createTankAnim/img-4.png" alt="img" class="createTankAnim noneAnim" style="width: 100%; height:  100%;">`;
 
-export async function createTankAnim(top, left, tank) {
+const invulnerabilityDiv = document.createElement("div");
+
+invulnerabilityDiv.classList.add("invulnerability");
+
+invulnerabilityDiv.innerHTML = `<img src= "./img/invulnerability/invulnerability-1.png" alt="img" class="invulnerabilityActive invulnerabilityDivinvulnerabilityImg" style="width: 100%; height:  100%;">
+<img src= "./img/invulnerability/invulnerability-2.png" alt="img" class="invulnerabilityNoActive invulnerabilityDivinvulnerabilityImg" style="width: 100%; height:  100%;">`;
+
+function invulnerability(tank) {
+  const elInvul = [];
+  tank.appendChild(invulnerabilityDiv);
+  invulnerabilityDiv.childNodes.forEach((e) => {
+    if (e.classList !== undefined) {
+      elInvul.push(e);
+    }
+  });
+  let loopAnim = setInterval(() => {
+    elInvul.forEach((e) => {
+      e.classList.toggle("invulnerabilityActive");
+      e.classList.toggle("invulnerabilityNoActive");
+    });
+  }, 50);
+  setTimeout(() => {
+    const img = document.querySelector(".invulnerabilityActive");
+    img.classList.toggle("invulnerabilityActive");
+    img.classList.toggle("invulnerabilityNoActive");
+    clearInterval(loopAnim);
+    tanks.forEach((e) => {
+      console.log(e);
+      if (`#${tank.id}` === e.id) {
+        e.invulnerability=false
+      }
+    });
+  }, 4000);
+}
+
+export async function createTankAnim(top, left, tank, invulnerabilityConst) {
   const num = 100;
   const tankClone = tankAnim.cloneNode(true);
   const classRand = `id${randomNumber()}`;
@@ -114,10 +144,14 @@ export async function createTankAnim(top, left, tank) {
     setTimeout(function () {
       anim[3].classList.remove("activeAnim");
       eventStart();
+      if (invulnerabilityConst === true) {
+        invulnerability(tank);
+      }
       tank.classList.remove("none");
     }, num * 12);
   }, 500);
 }
+
 export function createBlocks(
   array,
   canvas,
