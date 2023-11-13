@@ -16,24 +16,24 @@ export function createElement(
 ) {
   const div = document.createElement("div");
   createTankAnim(top, left, div, invulnerability);
-  div.style.cssText = `width: ${width}; height: ${height}; top: ${top}; left: ${left}`;
   div.id = `${id}`;
-  div.classList.add(className, "tank");
-  div.classList.add("none");
-  const ranNum = `class${randomNumber()}`;
+  div.classList.add(className, "tank", "none");
+  div.style.cssText = `width: ${width}; height: ${height}; top: ${top}; left: ${left}`;
+
+  const imageClasses = desc
+    ? { active: "active", inactive: null }
+    : { active: null, inactive: "active" };
+
   div.innerHTML = `
-  <img src="./img/${urlUp}/tank1-up.png" alt=${type} class="${
-    desc ? "active" : null
-  }  up ${type}" style="width: 100%; height:  100%;"> 
+  <img src="./img/${urlUp}/tank1-up.png" alt=${type} class="${imageClasses.active} up ${type}" style="width: 100%; height:  100%;"> 
   <img src="./img/${urlUp2}/tank2-up.png" alt=${type} class="up ${type}" style="width: 100%; height:  100%;">
-  <img src="./img/${urlDown}/tank1-down.png" alt=${type} class="${
-    desc ? null : "active"
-  } down ${type}" style="width: 100%; height:  100%;">
+  <img src="./img/${urlDown}/tank1-down.png" alt=${type} class="${imageClasses.inactive} down ${type}" style="width: 100%; height:  100%;">
   <img src="./img/${urlDown2}/tank2-down.png" alt=${type} class="down ${type}" style="width: 100%; height:  100%;">
-  <img src="./img/${urlLeft}/tank1-left.png" alt=${type} class=" left ${type}" style="width: 100%; height:  100%;">
+  <img src="./img/${urlLeft}/tank1-left.png" alt=${type} class="left ${type}" style="width: 100%; height:  100%;">
   <img src="./img/${urlLeft2}/tank2-left.png" alt=${type} class="left ${type}" style="width: 100%; height:  100%;">
-  <img src="./img/${urlRight}/tank1-right.png" alt=${type} class=" right ${type}" style="width: 100%; height:  100%;">
+  <img src="./img/${urlRight}/tank1-right.png" alt=${type} class="right ${type}" style="width: 100%; height:  100%;">
   <img src="./img/${urlRight2}/tank2-right.png" alt=${type} class="right ${type}" style="width: 100%; height:  100%;">`;
+
   const newDiv = canvas.appendChild(div);
 }
 
@@ -76,81 +76,51 @@ function invulnerability(tank) {
     tanks.forEach((e) => {
       console.log(e);
       if (`#${tank.id}` === e.id) {
-        e.invulnerability=false
+        e.invulnerability = false;
       }
     });
   }, 4000);
 }
 
 export async function createTankAnim(top, left, tank, invulnerabilityConst) {
-  const num = 100;
+  const num = 10;
   const tankClone = tankAnim.cloneNode(true);
   const classRand = `id${randomNumber()}`;
   const tankChild = tankClone.childNodes;
+
   tankChild.forEach((e) => {
-    // console.log(e.classList);
     if (e.classList !== undefined) {
       e.id = classRand;
     }
   });
+
   tankClone.style.cssText = `width: ${topBlok}px; height: ${topBlok}px; top: ${top}; left: ${left};`;
   let newDiv = map.appendChild(tankClone);
   const anim = document.querySelectorAll(`#${classRand}`);
-  setTimeout(function () {
-    setTimeout(function () {
-      anim[0].classList.remove("activeAnim");
-      anim[1].classList.add("activeAnim");
-    }, num);
-    setTimeout(function () {
-      anim[1].classList.remove("activeAnim");
-      anim[2].classList.add("activeAnim");
-    }, num * 2);
-    setTimeout(function () {
-      anim[2].classList.remove("activeAnim");
-      anim[3].classList.add("activeAnim");
-    }, num * 3);
-    setTimeout(function () {
-      anim[3].classList.remove("activeAnim");
-      anim[0].classList.add("activeAnim");
-    }, num * 4);
-    setTimeout(function () {
-      anim[0].classList.remove("activeAnim");
-      anim[1].classList.add("activeAnim");
-    }, num * 5);
-    setTimeout(function () {
-      anim[1].classList.remove("activeAnim");
-      anim[2].classList.add("activeAnim");
-    }, num * 6);
-    setTimeout(function () {
-      anim[2].classList.remove("activeAnim");
-      anim[3].classList.add("activeAnim");
-    }, num * 7);
-    setTimeout(function () {
-      anim[3].classList.remove("activeAnim");
-      anim[0].classList.add("activeAnim");
-    }, num * 8);
-    setTimeout(function () {
-      anim[0].classList.remove("activeAnim");
-      anim[1].classList.add("activeAnim");
-    }, num * 9);
-    setTimeout(function () {
-      anim[1].classList.remove("activeAnim");
-      anim[2].classList.add("activeAnim");
-    }, num * 10);
-    setTimeout(function () {
-      anim[2].classList.remove("activeAnim");
-      anim[3].classList.add("activeAnim");
-    }, num * 11);
-    setTimeout(function () {
-      anim[3].classList.remove("activeAnim");
-      eventStart();
-      if (invulnerabilityConst === true) {
-        invulnerability(tank);
-      }
-      tank.classList.remove("none");
-    }, num * 12);
-  }, 500);
+
+  for (let i = 0; i < 12; i++) {
+    await delay(num * i);
+    anim[i % 4].classList.remove("activeAnim");
+    anim[(i + 1) % 4].classList.add("activeAnim");
+  }
+
+  await delay(num * 12);
+  anim.forEach(e=>{
+    e.classList.remove("activeAnim");
+  })
+  eventStart();
+
+  if (invulnerabilityConst === true) {
+    invulnerability(tank);
+  }
+
+  tank.classList.remove("none");
 }
+
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 
 export function createBlocks(
   array,
