@@ -38,21 +38,22 @@ export function createElement(
 }
 
 const tankAnim = document.createElement("div");
-tankAnim.id = "createTank";
-tankAnim.classList.add("createTank");
+const invulnerabilityDiv = document.createElement("div");
+(() => {
+  tankAnim.id = "createTank";
+  tankAnim.classList.add("createTank");
 
-tankAnim.innerHTML = `
+  tankAnim.innerHTML = `
   <img src= "./img/createTankAnim/img-1.png" alt="img" class="createTankAnim activeAnim" style="width: 100%; height:  100%;">
   <img src= "./img/createTankAnim/img-2.png" alt="img" class="createTankAnim noneAnim" style="width: 100%; height:  100%;">
   <img src= "./img/createTankAnim/img-3.png" alt="img" class="createTankAnim noneAnim" style="width: 100%; height:  100%;">
   <img src= "./img/createTankAnim/img-4.png" alt="img" class="createTankAnim noneAnim" style="width: 100%; height:  100%;">`;
 
-const invulnerabilityDiv = document.createElement("div");
+  invulnerabilityDiv.classList.add("invulnerability");
 
-invulnerabilityDiv.classList.add("invulnerability");
-
-invulnerabilityDiv.innerHTML = `<img src= "./img/invulnerability/invulnerability-1.png" alt="img" class="invulnerabilityActive invulnerabilityDivinvulnerabilityImg" style="width: 100%; height:  100%;">
+  invulnerabilityDiv.innerHTML = `<img src= "./img/invulnerability/invulnerability-1.png" alt="img" class="invulnerabilityActive invulnerabilityDivinvulnerabilityImg" style="width: 100%; height:  100%;">
 <img src= "./img/invulnerability/invulnerability-2.png" alt="img" class="invulnerabilityNoActive invulnerabilityDivinvulnerabilityImg" style="width: 100%; height:  100%;">`;
+})();
 
 function invulnerability(tank) {
   const elInvul = [];
@@ -99,15 +100,15 @@ export async function createTankAnim(top, left, tank, invulnerabilityConst) {
   const anim = document.querySelectorAll(`#${classRand}`);
 
   for (let i = 0; i < 12; i++) {
-    await delay(num * i);
+    await delayFunc(num * i);
     anim[i % 4].classList.remove("activeAnim");
     anim[(i + 1) % 4].classList.add("activeAnim");
   }
 
-  await delay(num * 12);
-  anim.forEach(e=>{
+  await delayFunc(num * 12);
+  anim.forEach((e) => {
     e.classList.remove("activeAnim");
-  })
+  });
   eventStart();
 
   if (invulnerabilityConst === true) {
@@ -117,11 +118,6 @@ export async function createTankAnim(top, left, tank, invulnerabilityConst) {
   tank.classList.remove("none");
 }
 
-function delay(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-
 export function createBlocks(
   array,
   canvas,
@@ -130,36 +126,37 @@ export function createBlocks(
   [url, url2],
   [className]
 ) {
+  function createBlockHTML(
+    [id, className, top],
+    [left, width, height, imageUrl]
+  ) {
+    return `
+    <div id=${id} class="block ${className}" style="left: ${left}px; top: ${top}px; width: ${width}px; height: ${height}px;">
+      <img src=${imageUrl} alt="img" class="active" style="width: 100%; height: 100%;">
+    </div>
+  `;
+  }
   const div = document.createElement("div");
-  let topPozBox = top * topBlok;
-  let leftPozBox = left * topBlok;
-  div.classList.add(`wrap`);
-  div.classList.add(`box${element}`);
-  div.style.cssText = `width: ${topBlok}px; height: ${topBlok}px; top:${topPozBox}px; left:${leftPozBox}px`;
-  const newDiv = canvas.appendChild(div);
-  div.id = `a${randomNumber()}a`;
-  array.forEach((el, key) => {
-    el.forEach((e, k) => {
-      if (e === 1) {
-        const id = `id${randomNumber()}id`;
-        let topPoz = key * height;
-        let leftPoz = k * width;
-        div.innerHTML += `<div id=${id} class="test block ${className}" style=" left:${leftPoz}px; top:${topPoz}px; width:${width}px; height:${height}px">
-        <img src=${url} alt="img" class="active style="width: 100%; height:  100%;">
-        </div>`;
-        if (className === "shooting") {
-          const x = ((topPozBox + topPoz) / topBlok) * 4;
-          const y = ((leftPozBox + leftPoz) / topBlok) * 4;
-          levelMapIdBloks[x][y] = id;
-        }
-      } else if (e === 2) {
-        const id = `id${randomNumber()}id`;
-        let topPoz = key * height;
-        let leftPoz = k * width;
+  const topPozBox = top * topBlok;
+  const leftPozBox = left * topBlok;
 
-        div.innerHTML += `<div id=${id} class="block ${className}" style=" left:${leftPoz}px; top:${topPoz}px; width:${width}px; height:${height}px">
-        <img src=${url2} alt="img" class="active style="width: 100%; height:  100%;">
-        </div>`;
+  div.classList.add("wrap");
+  div.classList.add(`box${element}`);
+  div.style.cssText = `width: ${topBlok}px; height: ${topBlok}px; top: ${topPozBox}px; left: ${leftPozBox}px;`;
+
+  array.forEach((row, rowIndex) => {
+    row.forEach((cell, colIndex) => {
+      if (cell === 1 || cell === 2) {
+        const id = `id${randomNumber()}id`;
+        const topPoz = rowIndex * height;
+        const leftPoz = colIndex * width;
+        const imageUrl = cell === 1 ? url : url2;
+
+        div.innerHTML += createBlockHTML(
+          [id, className, topPoz],
+          [leftPoz, width, height, imageUrl]
+        );
+
         if (className === "shooting") {
           const x = ((topPozBox + topPoz) / topBlok) * 4;
           const y = ((leftPozBox + leftPoz) / topBlok) * 4;
@@ -168,35 +165,31 @@ export function createBlocks(
       }
     });
   });
+
+  canvas.appendChild(div);
 }
 
 export function missile(tank, missileDate) {
   const div = document.createElement("div");
-  div.id = `${missileDate.idShoot}`;
+  const { idShoot, desc, pozTop, pozLeft } = missileDate;
   const widthHeight = topBlok / 5.3333;
   const heightWidth = topBlok / 4;
-  const top = (missileDate.pozTop * topBlok) / 4;
-  const left = (missileDate.pozLeft * topBlok) / 4;
-  if (missileDate.desc === "up") {
-    div.style.cssText = `width: ${widthHeight}px; height: ${heightWidth}px; top: ${top}px; left: ${left}px;`;
-    div.classList.add("shootUp");
-    div.innerHTML = `<img src= "./img/shot/shootUp.png" alt="img" class="active"  style="width: 100%; height:  100%;">`;
-  }
-  if (missileDate.desc === "down") {
-    div.style.cssText = `width: ${widthHeight}px; height: ${heightWidth}px; top: ${top}px; left: ${left}px;`;
-    div.classList.add("shootDown");
-    div.innerHTML = `<img src= "./img/shot/shootDown.png" alt="img" class="active"  style="width: 100%; height:  100%;">`;
-  }
-  if (missileDate.desc === "left") {
-    div.style.cssText = `width: ${heightWidth}px; height: ${widthHeight}px; top: ${top}px; left: ${left}px;`;
-    div.classList.add("shootLeft");
-    div.innerHTML = `<img src= "./img/shot/shootLeft.png" alt="img" class="active"  style="width: 100%; height:  100%;">`;
-  }
-  if (missileDate.desc === "right") {
-    div.style.cssText = `width: ${heightWidth}px; height: ${widthHeight}px; top: ${top}px; left: ${left}px;`;
-    div.classList.add("shootRight");
-    div.innerHTML = `<img src= "./img/shot/shootRight.png" alt="img" class="active"  style="width: 100%; height:  100%;">`;
-  }
+  const top = (pozTop * topBlok) / 4;
+  const left = (pozLeft * topBlok) / 4;
+
+  div.id = idShoot;
+  div.style.cssText = `width: ${widthHeight}px; height: ${heightWidth}px; top: ${top}px; left: ${left}px;`;
+
+  const directionClasses = {
+    up: "shootUp",
+    down: "shootDown",
+    left: "shootLeft",
+    right: "shootRight",
+  };
+
+  div.classList.add(directionClasses[desc]);
+  div.innerHTML = `<img src="./img/shot/${directionClasses[desc]}.png" alt="img" class="active"  style="width: 100%; height:  100%;">`;
+
   map.appendChild(div);
 }
 export let divId = "";
@@ -206,59 +199,60 @@ export function id(i) {
 }
 
 export function explosionAnimation([top, left], desc) {
-  let topPOz = top * (topBlok / 4);
-  let leftPoz = left * (topBlok / 4);
-  const div = document.createElement("div");
-  div.id = "explosion";
-  div.classList.add("explosionAnimation");
-  if (desc === "up") {
-    div.classList.add("explosionUp");
+  const EXPLOSION_IMAGES = [
+    "./img/shot/shot-1.png",
+    "./img/shot/shot-2.png",
+    "./img/shot/shot-3.png",
+    "./img/shot/shot-4.png",
+    "./img/shot/shot-5.png",
+  ];
+  const EXPLOSION_DURATION_SHORT = 80;
+  const EXPLOSION_DURATION_LONG = 200;
+  const topPOz = top * (topBlok / 4);
+  const leftPoz = left * (topBlok / 4);
+  const div = createExplosionDiv(topPOz, leftPoz, desc);
+  function createExplosionDiv(top, left, desc) {
+    const div = document.createElement("div");
+    div.id = "explosion";
+    div.classList.add(
+      "explosionAnimation",
+      `explosion${desc.charAt(0).toUpperCase() + desc.slice(1)}`
+    );
+    div.style.cssText = `width: ${topBlok}px; height: ${topBlok}px; top: ${top}px; left: ${left}px;`;
+    map.appendChild(div);
+    return div;
   }
-  if (desc === "down") {
-    div.classList.add("explosionDown");
+  async function playAnimationWithDelay(div, images, delay) {
+    for (let i = 0; i < images.length; i++) {
+      div.innerHTML = `<img src="${images[i]}" alt="img" class="active" style="width: 100%; height:  100%;">`;
+      await delayFunc(delay);
+    }
   }
-  if (desc === "left") {
-    div.classList.add("explosionLeft");
-  }
-  if (desc === "right") {
-    div.classList.add("explosionRight");
-  }
-  if (desc === "tank") {
-    div.classList.add("explosionTank");
-  }
-  div.style.cssText = `width: ${topBlok}px; height: ${topBlok}px; top: ${topPOz}px; left: ${leftPoz}px;`;
 
-  div.innerHTML = `<img src= "./img/shot/shot-1.png" alt="img" class="active"  style="width: 100%; height:  100%;">`;
-  setTimeout(function () {
-    div.innerHTML = `<img src= "./img/shot/shot-2.png" alt="img" class="active" style="width: 100%; height:  100%;">`;
-  }, 80);
-  setTimeout(function () {
-    div.innerHTML = `<img src= "./img/shot/shot-3.png" alt="img" class="active" style="width: 100%; height:  100%;">`;
-  }, 160);
-  if (desc === "tank") {
-    let newDiv = map.appendChild(div);
-    setTimeout(function () {
+  (async () => {
+    await playAnimationWithDelay(
+      div,
+      EXPLOSION_IMAGES,
+      EXPLOSION_DURATION_SHORT
+    );
+
+    if (desc === "tank") {
       div.style.cssText = `width: ${topBlok * 2}px; height: ${
         topBlok * 2
       }px; top: ${topPOz - topBlok / 2}px; left: ${leftPoz - topBlok / 2}px;`;
-      div.innerHTML = `<img src= "./img/shot/shot-4.png" alt="img" class="active" style="width: 100%; height:  100%;">`;
-    }, 200);
-    setTimeout(function () {
-      div.style.cssText = `width: ${topBlok * 2}px; height: ${
-        topBlok * 2
-      }px; top: ${topPOz - topBlok / 2}px; left: ${leftPoz - topBlok / 2}px;`;
-      div.innerHTML = `<img src= "./img/shot/shot-5.png" alt="img" class="active" style="width: 100%; height:  100%;">`;
-    }, 350);
-    setTimeout(function () {
-      div.remove();
-    }, 550);
-  }
-  if (desc !== "tank") {
-    let newDiv = map.appendChild(div);
-    setTimeout(function () {
-      div.remove();
-    }, 200);
-  }
+      await playAnimationWithDelay(
+        div,
+        EXPLOSION_IMAGES.slice(3),
+        EXPLOSION_DURATION_LONG
+      );
+    }
+
+    div.remove();
+  })();
+}
+
+function delayFunc(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 export function animationDirection(globalArray, firstValue, arrayDirection) {
